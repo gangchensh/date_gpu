@@ -1,0 +1,72 @@
+% =============================================================================
+% PROOF EXCERPT — Finding I-25 (CTA2warp completion-response tag read one
+% transaction late; a recycled warp ID misattributes a workgroup completion)
+% Verbatim extraction from the Lean 4 proof tree (toolchain v4.31.0), released
+% with this package under lean/Ventus/.
+% Source file: lean/Ventus/CTA/CTA2warp.lean lines 281-292 and 458-489
+% In-code comments are in Chinese in the engineering tree and are reproduced
+% verbatim.
+%
+% NOTE on naming: the in-code comment marks the T7 witness with the historical
+% candidate number "I-23"; the final finding ID is I-25 (renumbered when the
+% finding registry was consolidated). This is the witness the reproduction
+% suite CTA2warpTagBugRepro.scala matches bit-exactly (tag 0x11 vs 0x08).
+% =============================================================================
+
+% ----- [1] T7 witness trace (CTA2warp.lean:281-292) -------------------------
+% Cycle 1: dispatch WG A warp (wid0, tag 0x08). Cycle 2: warp0 endprg (response
+% enqueued; CTArsp backpressured, not consumed). Cycle 3: wid0 is recycled by
+% WG B (tag 0x11), overwriting data(0). Cycle 4: the stale response is consumed
+% - the tag read out is 0x11 (WG B), not 0x08 (WG A).
+
+-- T7 【I-23 候选 witness】tag 迟读污染（Q1）：
+--   拍1: CTAreq 派发 WG A 的 warp（wid0，tag=0b001000=0x08，slot1/wf0）
+--   拍2: warp0 endprg（响应入队；CTArsp 反压不消费）
+--   拍3: wid0 被 WG B 复用（tag=0b010001=0x11，slot2/wf1），data(0) 被覆写
+--   拍4: 消费旧响应 —— 读到的 tag 是 0x11（WG B 的），不是 0x08（WG A 的）
+def c2wT7s1 : C2wState := c2wStep c2wInit (c2wInReq 0x08#6)
+def c2wT7s2 : C2wState := c2wStep c2wT7s1 (c2wInRsp 0#3 false)
+def c2wT7s3 : C2wState := c2wStep c2wT7s2 (c2wInReq 0x11#6)
+example : (c2wOut c2wT7s3 c2wInConsume).ctaRspValid = true := by native_decide
+example : (c2wOut c2wT7s3 c2wInConsume).ctaRspTag = 0x11#6 := by native_decide  -- ≠ 0x08：污染
+-- 对照：拍3 若立即消费（复用当拍的写尚未生效），tag 正确
+example : (c2wOut c2wT7s2 c2wInConsume).ctaRspTag = 0x08#6 := by native_decide
+
+% ----- [2] Safety-boundary theorem (CTA2warp.lean:458-489) ------------------
+% c2w7_tag_safe_next_cycle: if the response is consumed on the cycle
+% immediately following its enqueue, the late-read tag is still correct - the
+% defect needs a full cycle of backpressure to manifest. c2wOut_tag_cons:
+% the tag output is the combinationally late-read data(fifo.head.wid).
+
+theorem c2wOut_tag_cons (u : BitVec 8) (d : Fin 8 → BitVec 6) (w : BitVec 3)
+    (ws : List (BitVec 3)) (i : C2wInputs) :
+    (c2wOut ⟨u, d, w :: ws⟩ i).ctaRspTag = d (c2wFin w) := rfl
+
+/-- C2W7b tag 安全的充分条件（Q1 边界）：响应入队后**一拍内**消费必正确——
+    入队当拍若有新分配，写的是别的槽（c2w1_no_clash，前提：响应 wid 在册）；
+    下一拍的分配写下下拍才生效。T7 表明滞留 ≥2 拍即可被污染。 -/
+theorem c2w7_tag_safe_next_cycle (u : BitVec 8) (d : Fin 8 → BitVec 6)
+    (i1 i2 : C2wInputs)
+    (hbit : ((u >>> i1.warpRspWid.zeroExtend 8) &&& 1#8) = 1#8)
+    (hrsp : c2wEnqFire ⟨u, d, []⟩ i1 = true)
+    (hdeq : c2wDeqFire (c2wStep ⟨u, d, []⟩ i1) i2 = true) :
+    (c2wOut (c2wStep ⟨u, d, []⟩ i1) i2).ctaRspTag = d (c2wFin i1.warpRspWid) := by
+  have hdeq1 : c2wDeqFire ⟨u, d, []⟩ i1 = false := by simp [c2wDeqFire]
+  have hfifo : (c2wStep ⟨u, d, []⟩ i1).fifo = [i1.warpRspWid] := by
+    rw [c2wStep_fifo]; simp [c2wStepFifo, hdeq1, hrsp]
+  have hdata : (c2wStep ⟨u, d, []⟩ i1).data (c2wFin i1.warpRspWid) =
+      d (c2wFin i1.warpRspWid) := by
+    rw [c2wStep_data]
+    by_cases hr : c2wReqFire ⟨u, d, []⟩ i1 = true
+    · rw [if_pos hr]
+      have hready : u ≠ BitVec.allOnes 8 := by
+        simp only [c2wReqFire, c2wReqReady, Bool.and_eq_true, bne_iff_ne] at hr
+        exact hr.2
+      have hne : c2wFin (c2wAllocIdx ⟨u, d, []⟩) ≠ c2wFin i1.warpRspWid := by
+        intro heq
+        exact c2w1_alloc_rsp_no_clash u i1.warpRspWid hready hbit (c2wFin_inj heq)
+      exact rf_read_write_diff d _ _ _ hne
+    · rw [if_neg hr]
+  rw [c2wOut_ctaRspTag, hfifo]
+  exact hdata
+

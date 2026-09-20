@@ -1,0 +1,66 @@
+% =============================================================================
+% PROOF EXCERPT — Finding I-12 (masked vector instructions deadlock)
+% Verbatim extraction from the Lean 4 proof tree (toolchain v4.31.0), released
+% with this package under lean/Ventus/.
+% Source files:
+%   [1] lean/Ventus/Schedule/CollectorUnit.lean    lines 1133-1152
+%   [2] lean/Ventus/Schedule/OperandCollector.lean lines 962-978
+% In-code comments are in Chinese in the engineering tree and are reproduced
+% verbatim; an English paraphrase precedes each block.
+%
+% MD5 of the full source files: see docs-evidence/LEAN_TREE_MD5.txt
+% (Ventus/Schedule/CollectorUnit.lean, Ventus/Schedule/OperandCollector.lean).
+% =============================================================================
+
+% ----- [1] CU-level deadlock theorem (CollectorUnit.lean:1133-1152) ---------
+% English paraphrase of the doc comment: once a masked instruction
+% (ctrl.mask = true) is accepted from cuInit, if no bank ever returns a
+% response with regOrder = 3 (guaranteed at the top level by the arbiters,
+% operandCollector.scala:362-365), the CU stays in s_add forever and
+% control.ready never recovers - the warp occupying this CU is deadlocked.
+
+/-- W-mask 死锁（完整链的 CU 段）：从 cuInit 接受一条 masked 指令后，只要
+    regOrder=3 的返回从不出现（顶层 :362-365 保证），CU 永久滞留 s_add，
+    control.ready 永不恢复（该 warp 的 CU 不再接受新指令）。 -/
+theorem cuWmask_deadlock (i0 : CuInputs) (ins : List CuInputs)
+    (hv0 : i0.controlValid = true) (hm : i0.ctrl.mask = true)
+    (h3 : ∀ j ∈ (i0 :: ins), ∀ k, j.bankV k = true → (j.bankB k).regOrder ≠ 3#2) :
+    (cuRun (cuStep cuInit i0) ins).state = cuSAdd ∧
+      cuControlRdy (cuRun (cuStep cuInit i0) ins) = false := by
+  have hfi : cuControlFire cuInit i0 = true := by
+    simp [cuControlFire, cuControlRdy, hv0, cuInit]
+  have h30 : ∀ k, cuBankFireK cuInit i0 k = true → (i0.bankB k).regOrder ≠ 3#2 :=
+    fun k hf => h3 i0 List.mem_cons_self k (cuBankFireK_bankV cuInit i0 k hf)
+  have hinv : cuWmaskInv (cuStep cuInit i0) := cuWmask_accept cuInit i0 hfi hm h30
+  have h3' : ∀ j ∈ ins, ∀ k, j.bankV k = true → (j.bankB k).regOrder ≠ 3#2 :=
+    fun j hj k hv => h3 j (List.mem_cons_of_mem i0 hj) k hv
+  have hrun := cuWmask_run (cuStep cuInit i0) ins hinv h3'
+  refine ⟨hrun.1, ?_⟩
+  have hsi : ((cuRun (cuStep cuInit i0) ins).state == cuSIdle) = false := by
+    rw [hrun.1]; decide
+  simp [cuControlRdy, hsi]
+
+% ----- [2] System-level closure (OperandCollector.lean:962-978) -------------
+% English paraphrase of the doc comment: the closed-loop system theorem.
+% Under the system facts that all bank inputs are driven by the crossbar
+% (ocXSourced) and that no arbiter ever grants slot 3 (proved separately as
+% ocI12_slot3_rt0 + ocA_no_grant3 + ocI12_xbar_hyp_of_arb), the CU-level
+% deadlock theorem instantiates to the whole operand collector.
+
+/-- **I-12 系统死锁链（完整闭环定理）**：masked 指令（control.mask=1）被 CU
+    接受后，若系统内 bankIn 全部由 crossbar 驱动（ocXSourced，:559）且所有
+    bank 的仲裁器不授予 slot-3（由 ocI12_slot3_rt0 + ocA_no_grant3 +
+    ocI12_xbar_hyp_of_arb 保证的"slot-3 请求 rsType≡0"事实），则 CU 永久滞留
+    s_add、control.ready 永不恢复——该 warp 的 CU 死锁，instDemux 亦不再向它
+    分配新指令。定理即 cuWmask_deadlock 在系统事实下的实例化。 -/
+theorem ocI12_deadlock_system (i0 : CuInputs) (ins : List CuInputs)
+    (hv0 : i0.controlValid = true) (hm : i0.ctrl.mask = true)
+    (hx : ∀ c ∈ (i0 :: ins), ∃ (x : OcXbarIn) (j : Nat),
+      (∀ i : Fin 4, x.validS i = true → (x.chosenS i % 4#5) ≠ 3#5) ∧
+      (∀ i : Fin 4, x.validV i = true → (x.chosenV i % 4#5) ≠ 3#5) ∧
+      ocXSourced x c j) :
+    (cuRun (cuStep cuInit i0) ins).state = cuSAdd ∧
+      cuControlRdy (cuRun (cuStep cuInit i0) ins) = false := by
+  apply cuWmask_deadlock i0 ins hv0 hm
+  intro c hc k hbk
+  obtain ⟨x, j, hS, hV, hs⟩ := hx c hc

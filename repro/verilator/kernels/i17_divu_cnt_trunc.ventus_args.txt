@@ -1,0 +1,4 @@
+# i17_divu_cnt_trunc — sim-VentusRTL command-line arguments (cmdarg.cpp parse_arg format, everything after '#' is ignored)
+--kernel name=i17_divu_cnt_trunc,metafile=i17_divu_cnt_trunc.metadata,datafile=i17_divu_cnt_trunc.data
+--sim-time-max 200000
+--dump-mem 0x90000000,0x9000003F

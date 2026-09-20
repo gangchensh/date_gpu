@@ -1,0 +1,16 @@
+[RTL     info]@0 SNAPSHOT created, pid=114382
+[RTL    trace]@20 Hardware reset ok
+[2026-09-07 04:33:53.319] [trace] kernel0 i16_amo_nop data loaded from file
+[RTL    trace]@30 kernel 0 i16_amo_nop activate
+[RTL    debug]@185 block0  dispatched to GPU (kernel0  i16_amo_nop block0 )
+[L1C] #     65 SM 0 CACHE 0 ADDR 80000000
+sm   0 warp 0 0x80000000 0x90000fb7 x 31  90000000
+sm   0 warp 0 0x80000004 0x010f8513 x 10  90000010
+sm   0 warp 0 0x80000008 0x00500093 x  1  00000005
+sm   0 warp 0 0x8000000c 0x00152023 lsu.w x   1 op 0 00000005 @ 90000010+00000000
+sm   0 warp 0 0x80000010 0x00700113 x  2  00000007
+[1055] %Error: dut.v:118022: Assertion failed in TOP.GPGPU_SimTop.gpgpu.GPU.SM_wrapper.pipe: Assertion failed: UNDEFINED INSTRUCTION @ SM 0 warp 0 PC 0x80000014: 0x002521af
+    at pipe.scala:277 assert(ctrl.alu_fn =/= 63.U,
+
+%Error: dut.v:118022: Verilog $stop
+Aborting...

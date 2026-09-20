@@ -1,0 +1,43 @@
+[RTL     info]@0 SNAPSHOT created, pid=114198
+[RTL    trace]@20 Hardware reset ok
+[2026-09-07 04:33:52.095] [trace] kernel0 k00_smoke data loaded from file
+[RTL    trace]@30 kernel 0 k00_smoke activate
+[RTL    debug]@185 block0  dispatched to GPU (kernel0  k00_smoke block0 )
+[L1C] #     65 SM 0 CACHE 0 ADDR 80000000
+sm   0 warp 0 0x80000000 0x90000fb7 x 31  90000000
+sm   0 warp 0 0x80000004 0x600d60b7 x  1  600d6000
+sm   0 warp 0 0x80000008 0x00d08093 x  1  600d600d
+sm   0 warp 0 0x8000000c 0x001fa023 lsu.w x   1 op 0 600d600d @ 90000000+00000000
+sm   0 warp 0 0x80000010 0x0000400b endprg
+[RTL    debug]@1025 block0  finished (kernel0  k00_smoke block0 )
+[RTL     info]@1025 kernel0  k00_smoke finished
+sm   0 warp 0 0x8000000c 0x001fa023 lsu.w finish
+[L1C] #    260 SM 0 CACHE 1 ADDR 90000000
+[L1C] #    277 SM 0 CACHE 1 ADDR 5ce1ff80
+[RTL    debug]@10000 
+[L1C] #   1308 SM 0 CACHE 1 ADDR 5ce1ff80
+[RTL    debug]@20000 
+[RTL    debug]@30000 
+[RTL    debug]@40000 
+[RTL    debug]@50000 
+dump-mem: mem[0x90000000 +: 4] = 0x600D600D
+dump-mem: mem[0x90000004 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000008 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x9000000C +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000010 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000014 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000018 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x9000001C +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000020 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000024 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000028 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x9000002C +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000030 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000034 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000038 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x9000003C +: 4] = 0xEEEEEEEE
+[RTL     info]@51025 Simulation finished in 51025 unit time
+- S i m u l a t i o n   R e p o r t: Verilator 5.034 2025-02-24
+- Verilator: end at 51ns; walltime 0.430 s; speed 16.517 ns/s
+- Verilator: cpu 3.089 s on 8 threads; alloced 123 MB
+[RTL    debug]@51025 All snapshot process are cleared, OK

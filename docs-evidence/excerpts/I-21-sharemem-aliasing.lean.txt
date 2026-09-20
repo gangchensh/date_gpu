@@ -1,0 +1,106 @@
+% =============================================================================
+% PROOF EXCERPT — Finding I-21 (shared-memory setIdx aliasing: upper 96 KB of
+% LDS aliases the lower 32 KB byte-for-byte; 96 KB of dead SRAM)
+% Verbatim extraction from the Lean 4 proof tree (toolchain v4.31.0), released
+% with this package under lean/Ventus/.
+% Source file: lean/Ventus/Mem/ShareMem.lean lines 421-504
+% In-code comments are in Chinese in the engineering tree and are reproduced
+% verbatim; English paraphrases precede the blocks.
+%
+% Contents:
+%   smI21_alias          - two addresses agreeing on the low 15 bits produce
+%                          identical ShareMem addressing fields (by bv_decide)
+%   smI21_dead_rows      - the top two set-index bits are identically zero:
+%                          only 256 of 1024 SRAM rows per bank are reachable
+%   smI21_window         - all four witness addresses pass the is_shared bound
+%   smI21_true_rows_differ - the witness addresses SHOULD differ in row
+%   smI21_witness_fields - the witness addresses alias concretely
+%   smW2s1..smW2s8       - the 8-cycle end-to-end witness trace
+%   smI21_witness        - after a high-region write of 0x22222222, reading
+%                          the low region returns 0x22222222, not 0x11111111
+% =============================================================================
+
+/-- 别名（切片级，符号）：两个地址若低 15 位相同（即仅 addr(31:15) 可不同，
+    含关键位 addr(16,15)），则经 LSU 切片 + GPGPU_top 零扩展后，ShareMem
+    可见的全部寻址字段（setIdx/bank=blockOffset/字节使能）完全相同。 -/
+theorem smI21_alias (a b : BitVec 32) (whb : BitVec 2)
+    (h : a &&& 0x00007FFF#32 = b &&& 0x00007FFF#32) :
+    smSetIdxOfAddr a = smSetIdxOfAddr b ∧
+    lsuBlkOf a = lsuBlkOf b ∧
+    lsuWordOff1H whb a = lsuWordOff1H whb b := by
+  simp only [smSetIdxOfAddr, lsuSetOf, lsuBlkOf, lsuWordOff1H,
+    lsuMemW, lsuMemH, lsuMemB]
+  bv_decide
+
+/-- 死区（符号）：零扩展后的 setIdx 高 2 位恒 0 —— 每 bank 1024 行 SRAM
+    中仅低 256 行可达，3/4 容量（96KB）硬件上永远无法寻址。 -/
+theorem smI21_dead_rows (a : BitVec 32) :
+    smSetIdxOfAddr a &&& 0x300#10 = 0#10 := by
+  simp only [smSetIdxOfAddr, lsuSetOf]; bv_decide
+
+/-- witness 地址：同 bank(16)、同 LSU-setIdx(0)、同字节，真实行址
+    （addr(16,7)）分别为 0 / 0x100 / 0x200 / 0x300 —— 恰差 32KB/64KB/96KB。 -/
+def smAlo  : BitVec 32 := 0x70000040   -- LDS_BASE + 0x00040
+def smAhi  : BitVec 32 := 0x70008040   -- LDS_BASE + 0x08040（bit15）
+def smAhi2 : BitVec 32 := 0x70010040   -- LDS_BASE + 0x10040（bit16）
+def smAhi3 : BitVec 32 := 0x70018040   -- LDS_BASE + 0x18040（bit16+15）
+
+/-- 四个 witness 地址都通过 is_shared 判界（LSU.scala:162，smax=128KB）：
+    高区访问不会被路由去 DCache，别名畅通。 -/
+theorem smI21_window :
+    smIsShared smAlo = true ∧ smIsShared smAhi = true ∧
+    smIsShared smAhi2 = true ∧ smIsShared smAhi3 = true := by
+  native_decide
+
+/-- witness 地址的"正确"行址互不相同（若硬件按 addr(16,7) 寻址本不该混）。 -/
+theorem smI21_true_rows_differ :
+    smAlo.extractLsb' 7 10 ≠ smAhi.extractLsb' 7 10 ∧
+    smAlo.extractLsb' 7 10 ≠ smAhi2.extractLsb' 7 10 ∧
+    smAlo.extractLsb' 7 10 ≠ smAhi3.extractLsb' 7 10 := by
+  native_decide
+
+/-- witness 地址经 LSU+对接后的 ShareMem 寻址字段完全相同（smI21_alias 的
+    具体实例）。 -/
+theorem smI21_witness_fields :
+    smSetIdxOfAddr smAlo = smSetIdxOfAddr smAhi ∧
+    smSetIdxOfAddr smAlo = smSetIdxOfAddr smAhi2 ∧
+    smSetIdxOfAddr smAlo = smSetIdxOfAddr smAhi3 ∧
+    lsuBlkOf smAlo = lsuBlkOf smAhi := by
+  native_decide
+
+/-- 由 LSU 侧地址构造函数装配的单 lane 请求（lane0 活跃，字访问）。
+    setIdx 走 GPGPU_top.scala:488 的零扩展对接。 -/
+def smReqOfAddr (a : BitVec 32) (wr : Bool) (iid : BitVec 3) (d : BitVec 32) :
+    SmCoreReq :=
+  { instrId := iid
+    isWrite := wr
+    setIdx := smSetIdxOfAddr a
+    perLaneAddr := fun l => ⟨l.val == 0, lsuBlkOf a, lsuWordOff1H lsuMemW a⟩
+    data := fun _ => d }
+
+def smInNop : SmIn := ⟨false, smCoreReqZero, true⟩
+def smInOf (r : SmCoreReq) : SmIn := ⟨true, r, true⟩
+
+/-- I-21 端到端 witness 轨迹：
+    t0 写低区 smAlo ← 0x11111111；t3 写高区 smAhi ← 0x22222222；
+    t6 读低区 smAlo。t8 拍（状态 smW2s8）核心读响应。 -/
+def smW2s1  := smStep smInit  (smInOf (smReqOfAddr smAlo true 5#3 0x11111111#32))
+def smW2s2  := smStep smW2s1 smInNop
+def smW2s3  := smStep smW2s2 smInNop
+def smW2s4  := smStep smW2s3 (smInOf (smReqOfAddr smAhi true 6#3 0x22222222#32))
+def smW2s5  := smStep smW2s4 smInNop
+def smW2s6  := smStep smW2s5 smInNop
+def smW2s7  := smStep smW2s6 (smInOf (smReqOfAddr smAlo false 7#3 0#32))
+def smW2s8  := smStep smW2s7 smInNop   -- t8 拍：读响应（vR2=1）
+
+/-- **I-21 witness 定理**：高区（LDS_BASE+32KB 处）写入后，读低区返回的是
+    高区写入值 0x22222222，而不是低区自己写入的 0x11111111 —— 高区写
+    静默覆盖了低区数据。物理位置：bank16、SRAM 行 0、4 字节全使能，
+    两笔请求在 ShareMem 内不可区分。 -/
+theorem smI21_witness :
+    smRspValid smW2s8 = true ∧
+    (smRspBits smW2s8).isWrite = false ∧
+    (smRspBits smW2s8).instrId = 7#3 ∧
+    (smRspBits smW2s8).data ⟨0, by decide⟩ = 0x22222222#32 ∧
+    (smRspBits smW2s8).data ⟨0, by decide⟩ ≠ 0x11111111#32 := by
+  native_decide

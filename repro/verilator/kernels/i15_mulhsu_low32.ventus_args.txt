@@ -1,0 +1,4 @@
+# i15_mulhsu_low32 — sim-VentusRTL command-line arguments (cmdarg.cpp parse_arg format, everything after '#' is ignored)
+--kernel name=i15_mulhsu_low32,metafile=i15_mulhsu_low32.metadata,datafile=i15_mulhsu_low32.data
+--sim-time-max 200000
+--dump-mem 0x90000000,0x9000003F

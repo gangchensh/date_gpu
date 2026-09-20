@@ -1,0 +1,4 @@
+# i16_amo_nop — sim-VentusRTL command-line arguments (cmdarg.cpp parse_arg format, everything after '#' is ignored)
+--kernel name=i16_amo_nop,metafile=i16_amo_nop.metadata,datafile=i16_amo_nop.data
+--sim-time-max 200000
+--dump-mem 0x90000000,0x9000003F

@@ -1,0 +1,4 @@
+# i33_vl_dead — sim-VentusRTL command-line arguments (cmdarg.cpp parse_arg format, everything after '#' is ignored)
+--kernel name=i33_vl_dead,metafile=i33_vl_dead.metadata,datafile=i33_vl_dead.data
+--sim-time-max 200000
+--dump-mem 0x90000000,0x9000003F

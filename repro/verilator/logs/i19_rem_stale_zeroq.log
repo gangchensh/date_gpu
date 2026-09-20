@@ -1,0 +1,54 @@
+[RTL     info]@0 SNAPSHOT created, pid=114565
+[RTL    trace]@20 Hardware reset ok
+[2026-09-07 04:33:55.109] [trace] kernel0 ιλΔd data loaded from file
+[RTL    trace]@30 kernel 0 i19_rem_stale_zeroq activate
+[RTL    debug]@185 block0  dispatched to GPU (kernel0  i19_rem_stale_zeroq block0 )
+[L1C] #     65 SM 0 CACHE 0 ADDR 80000000
+sm   0 warp 0 0x80000000 0x90000fb7 x 31  90000000
+sm   0 warp 0 0x80000004 0x00300093 x  1  00000003
+sm   0 warp 0 0x80000008 0x00500113 x  2  00000005
+sm   0 warp 0 0x80000010 0x800000b7 x  1  80000000
+sm   0 warp 0 0x80000014 0xfff00113 x  2  ffffffff
+sm   0 warp 0 0x8000000c 0x0220e233 x  4  00000003
+sm   0 warp 0 0x80000018 0x0220e2b3 x  5  80000000
+sm   0 warp 0 0x80000020 0x004fa023 lsu.w x   4 op 0 00000003 @ 90000000+00000000
+sm   0 warp 0 0x8000001c 0x0220c333 x  6  80000000
+sm   0 warp 0 0x80000024 0x005fa223 lsu.w x   5 op 0 80000000 @ 90000000+00000004
+sm   0 warp 0 0x8000002c 0x0000400b endprg
+sm   0 warp 0 0x80000020 0x004fa023 lsu.w finish
+[L1C] #    260 SM 0 CACHE 1 ADDR 90000000
+[RTL    debug]@2635 block0  finished (kernel0  i19_rem_stale_zeroq block0 )
+[RTL     info]@2635 kernel0  i19_rem_stale_zeroq finished
+sm   0 warp 0 0x80000024 0x005fa223 lsu.w finish
+[L1C] #    263 SM 0 CACHE 1 ADDR 90000000
+sm   0 warp 0 0x80000028 0x006fa423 lsu.w x   6 op 0 80000000 @ 90000000+00000008
+[L1C] #    279 SM 0 CACHE 1 ADDR 5ce1ff80
+[RTL    debug]@10000 
+[L1C] #   1310 SM 0 CACHE 1 ADDR 5ce1ff80
+sm   0 warp 0 0x80000028 0x006fa423 lsu.w finish
+[RTL    debug]@20000 
+[RTL    debug]@30000 
+[L1C] #   3361 SM 0 CACHE 1 ADDR 90000000
+[RTL    debug]@40000 
+[RTL    debug]@50000 
+dump-mem: mem[0x90000000 +: 4] = 0x00000003
+dump-mem: mem[0x90000004 +: 4] = 0x80000000
+dump-mem: mem[0x90000008 +: 4] = 0x80000000
+dump-mem: mem[0x9000000C +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000010 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000014 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000018 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x9000001C +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000020 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000024 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000028 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x9000002C +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000030 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000034 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000038 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x9000003C +: 4] = 0xEEEEEEEE
+[RTL     info]@52635 Simulation finished in 52635 unit time
+- S i m u l a t i o n   R e p o r t: Verilator 5.034 2025-02-24
+- Verilator: end at 53ns; walltime 0.447 s; speed 17.185 ns/s
+- Verilator: cpu 3.063 s on 8 threads; alloced 123 MB
+[RTL    debug]@52635 All snapshot process are cleared, OK

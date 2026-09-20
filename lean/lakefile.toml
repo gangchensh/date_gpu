@@ -1,0 +1,7 @@
+name = "Ventus"
+version = "0.1.0"
+defaultTargets = ["Ventus"]
+
+[[lean_lib]]
+name = "Ventus"
+precompileModules = true

@@ -1,0 +1,4 @@
+# i19_rem_stale_zeroq — sim-VentusRTL command-line arguments (cmdarg.cpp parse_arg format, everything after '#' is ignored)
+--kernel name=i19_rem_stale_zeroq,metafile=i19_rem_stale_zeroq.metadata,datafile=i19_rem_stale_zeroq.data
+--sim-time-max 200000
+--dump-mem 0x90000000,0x9000003F

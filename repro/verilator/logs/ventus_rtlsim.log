@@ -1,0 +1,112 @@
+[RTL     info]@0 SNAPSHOT created, pid=114198
+[RTL    trace]@20 Hardware reset ok
+[RTL    trace]@30 kernel 0 k00_smoke activate
+[RTL    debug]@185 block0  dispatched to GPU (kernel0  k00_smoke block0 )
+[RTL    debug]@1025 block0  finished (kernel0  k00_smoke block0 )
+[RTL     info]@1025 kernel0  k00_smoke finished
+[RTL    debug]@10000 
+[RTL    debug]@20000 
+[RTL    debug]@30000 
+[RTL    debug]@40000 
+[RTL    debug]@50000 
+[RTL     info]@51025 Simulation finished in 51025 unit time
+[RTL    debug]@51025 All snapshot process are cleared, OK
+[RTL     info]@0 SNAPSHOT created, pid=114258
+[RTL    trace]@20 Hardware reset ok
+[RTL    trace]@30 kernel 0 i12_vmerge_deadlock activate
+[RTL    debug]@185 block0  dispatched to GPU (kernel0  i12_vmerge_deadlock block0 )
+[RTL    debug]@10000 
+[RTL    debug]@20000 
+[RTL     info]@20000 Simulation finished in 20000 unit time
+[RTL    debug]@20000 All snapshot process are cleared, OK
+[RTL     info]@0 SNAPSHOT created, pid=114322
+[RTL    trace]@20 Hardware reset ok
+[RTL    trace]@30 kernel 0 i15_mulhsu_low32 activate
+[RTL    debug]@185 block0  dispatched to GPU (kernel0  i15_mulhsu_low32 block0 )
+[RTL    debug]@1115 block0  finished (kernel0  i15_mulhsu_low32 block0 )
+[RTL     info]@1115 kernel0  i15_mulhsu_low32 finished
+[RTL    debug]@10000 
+[RTL    debug]@20000 
+[RTL    debug]@30000 
+[RTL    debug]@40000 
+[RTL    debug]@50000 
+[RTL     info]@51115 Simulation finished in 51115 unit time
+[RTL    debug]@51115 All snapshot process are cleared, OK
+[RTL     info]@0 SNAPSHOT created, pid=114445
+[RTL    trace]@20 Hardware reset ok
+[RTL    trace]@30 kernel 0 i17_divu_cnt_trunc activate
+[RTL    debug]@185 block0  dispatched to GPU (kernel0  i17_divu_cnt_trunc block0 )
+[RTL    debug]@1135 block0  finished (kernel0  i17_divu_cnt_trunc block0 )
+[RTL     info]@1135 kernel0  i17_divu_cnt_trunc finished
+[RTL    debug]@10000 
+[RTL    debug]@20000 
+[RTL    debug]@30000 
+[RTL    debug]@40000 
+[RTL    debug]@50000 
+[RTL     info]@51135 Simulation finished in 51135 unit time
+[RTL    debug]@51135 All snapshot process are cleared, OK
+[RTL     info]@0 SNAPSHOT created, pid=114505
+[RTL    trace]@20 Hardware reset ok
+[RTL    trace]@30 kernel 0 i18_rem_recovery activate
+[RTL    debug]@185 block0  dispatched to GPU (kernel0  i18_rem_recovery block0 )
+[RTL    debug]@1245 block0  finished (kernel0  i18_rem_recovery block0 )
+[RTL     info]@1245 kernel0  i18_rem_recovery finished
+[RTL    debug]@10000 
+[RTL    debug]@20000 
+[RTL    debug]@30000 
+[RTL    debug]@40000 
+[RTL    debug]@50000 
+[RTL     info]@51245 Simulation finished in 51245 unit time
+[RTL    debug]@51245 All snapshot process are cleared, OK
+[RTL     info]@0 SNAPSHOT created, pid=114565
+[RTL    trace]@20 Hardware reset ok
+[RTL    trace]@30 kernel 0 i19_rem_stale_zeroq activate
+[RTL    debug]@185 block0  dispatched to GPU (kernel0  i19_rem_stale_zeroq block0 )
+[RTL    debug]@2635 block0  finished (kernel0  i19_rem_stale_zeroq block0 )
+[RTL     info]@2635 kernel0  i19_rem_stale_zeroq finished
+[RTL    debug]@10000 
+[RTL    debug]@20000 
+[RTL    debug]@30000 
+[RTL    debug]@40000 
+[RTL    debug]@50000 
+[RTL     info]@52635 Simulation finished in 52635 unit time
+[RTL    debug]@52635 All snapshot process are cleared, OK
+[RTL     info]@0 SNAPSHOT created, pid=114625
+[RTL    trace]@20 Hardware reset ok
+[RTL    trace]@30 kernel 0 i21_lds_alias activate
+[RTL    debug]@185 block0  dispatched to GPU (kernel0  i21_lds_alias block0 )
+[RTL    debug]@1395 block0  finished (kernel0  i21_lds_alias block0 )
+[RTL     info]@1395 kernel0  i21_lds_alias finished
+[RTL    debug]@10000 
+[RTL    debug]@20000 
+[RTL    debug]@30000 
+[RTL    debug]@40000 
+[RTL    debug]@50000 
+[RTL     info]@51395 Simulation finished in 51395 unit time
+[RTL    debug]@51395 All snapshot process are cleared, OK
+[RTL     info]@0 SNAPSHOT created, pid=114685
+[RTL    trace]@20 Hardware reset ok
+[RTL    trace]@30 kernel 0 i32_fcsr_write_dropped activate
+[RTL    debug]@185 block0  dispatched to GPU (kernel0  i32_fcsr_write_dropped block0 )
+[RTL    debug]@1095 block0  finished (kernel0  i32_fcsr_write_dropped block0 )
+[RTL     info]@1095 kernel0  i32_fcsr_write_dropped finished
+[RTL    debug]@10000 
+[RTL    debug]@20000 
+[RTL    debug]@30000 
+[RTL    debug]@40000 
+[RTL    debug]@50000 
+[RTL     info]@51095 Simulation finished in 51095 unit time
+[RTL    debug]@51095 All snapshot process are cleared, OK
+[RTL     info]@0 SNAPSHOT created, pid=114745
+[RTL    trace]@20 Hardware reset ok
+[RTL    trace]@30 kernel 0 i33_vl_dead activate
+[RTL    debug]@185 block0  dispatched to GPU (kernel0  i33_vl_dead block0 )
+[RTL    debug]@1125 block0  finished (kernel0  i33_vl_dead block0 )
+[RTL     info]@1125 kernel0  i33_vl_dead finished
+[RTL    debug]@10000 
+[RTL    debug]@20000 
+[RTL    debug]@30000 
+[RTL    debug]@40000 
+[RTL    debug]@50000 
+[RTL     info]@51125 Simulation finished in 51125 unit time
+[RTL    debug]@51125 All snapshot process are cleared, OK

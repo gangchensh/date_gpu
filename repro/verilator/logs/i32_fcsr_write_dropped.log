@@ -1,0 +1,44 @@
+[RTL     info]@0 SNAPSHOT created, pid=114685
+[RTL    trace]@20 Hardware reset ok
+[2026-09-07 04:33:56.065] [trace] kernel0 ±".c data loaded from file
+[RTL    trace]@30 kernel 0 i32_fcsr_write_dropped activate
+[RTL    debug]@185 block0  dispatched to GPU (kernel0  i32_fcsr_write_dropped block0 )
+[L1C] #     65 SM 0 CACHE 0 ADDR 80000000
+sm   0 warp 0 0x80000000 0x90000fb7 x 31  90000000
+sm   0 warp 0 0x80000004 0x0e500093 x  1  000000e5
+sm   0 warp 0 0x80000008 0x00309173 x  2  00000000
+sm   0 warp 0 0x8000000c 0x003021f3 x  3  00000000
+sm   0 warp 0 0x80000010 0x003fa023 lsu.w x   3 op 0 00000000 @ 90000000+00000000
+sm   0 warp 0 0x80000014 0x0000400b endprg
+[RTL    debug]@1095 block0  finished (kernel0  i32_fcsr_write_dropped block0 )
+[RTL     info]@1095 kernel0  i32_fcsr_write_dropped finished
+[L1C] #    260 SM 0 CACHE 1 ADDR 90000000
+sm   0 warp 0 0x80000010 0x003fa023 lsu.w finish
+[L1C] #    277 SM 0 CACHE 1 ADDR 5ce1ff80
+[RTL    debug]@10000 
+[L1C] #   1308 SM 0 CACHE 1 ADDR 5ce1ff80
+[RTL    debug]@20000 
+[RTL    debug]@30000 
+[RTL    debug]@40000 
+[RTL    debug]@50000 
+dump-mem: mem[0x90000000 +: 4] = 0x00000000
+dump-mem: mem[0x90000004 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000008 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x9000000C +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000010 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000014 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000018 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x9000001C +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000020 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000024 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000028 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x9000002C +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000030 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000034 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000038 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x9000003C +: 4] = 0xEEEEEEEE
+[RTL     info]@51095 Simulation finished in 51095 unit time
+- S i m u l a t i o n   R e p o r t: Verilator 5.034 2025-02-24
+- Verilator: end at 51ns; walltime 0.419 s; speed 17.820 ns/s
+- Verilator: cpu 2.867 s on 8 threads; alloced 123 MB
+[RTL    debug]@51095 All snapshot process are cleared, OK

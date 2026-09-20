@@ -1,0 +1,4 @@
+# i12_vmerge_deadlock — deadlock case; sim-time-max is set small for a quick timeout verdict
+--kernel name=i12_vmerge_deadlock,metafile=i12_vmerge_deadlock.metadata,datafile=i12_vmerge_deadlock.data
+--sim-time-max 20000
+--dump-mem 0x90000000,0x9000003F

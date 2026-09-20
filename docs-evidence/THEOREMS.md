@@ -1,0 +1,3982 @@
+# Key Theorem Index (complete statements, auto-extracted)
+
+> Source: the Lean 4 development (Lean v4.31.0). The discovery-side `Ventus/`
+> tree ships with this package under `lean/`; the repair-side `VentusF/` tree
+> is not part of this release. Total: 3662 theorems across 106 files.
+> Each entry gives the theorem name, file:line, and the **complete statement**
+> (all binder and conclusion lines up to `:=`), verbatim. Proof bodies of the
+> released `Ventus/` tree are in `lean/`; repair-side proofs are not released.
+
+### `Ventus/Arith/CSR.lean`
+
+- **csrWdata_w** (line 725): `theorem csrWdata_w (r x : BitVec 32) : csrWdata csrOpW r x = x :=`
+- **csrWdata_s** (line 728): `theorem csrWdata_s (r x : BitVec 32) : csrWdata csrOpS r x = r ||| x :=`
+- **csrWdata_c** (line 731): `theorem csrWdata_c (r x : BitVec 32) : csrWdata csrOpC r x = r &&& ~~~x :=`
+- **csrWdata_n** (line 734): `theorem csrWdata_n (r x : BitVec 32) : csrWdata csrOpN r x = 0#32 :=`
+- **csr_read_mstatus_bits** (line 740): `theorem csr_read_mstatus_bits (s : CsrState) : (csrRead s csrAddrMstatus).getLsbD 3 = s.mie ∧ (csrRead s csrAddrMstatus).getLsbD 7 = s.mpie ∧ (csrRead s csrAddrMstatus).getLsbD 11 = true ∧ (csrRead s csrAddrMstatus).getLsbD 12 = true ∧ (csrRead s csrAddrMstatus).getLsbD 0 = false ∧ (csrRead s csrAddrMstatus).getLsbD 31 = false :=`
+- **csr_read_mip_bits** (line 750): `theorem csr_read_mip_bits (s : CsrState) : (csrRead s csrAddrMip).getLsbD 3 = s.msip ∧ (csrRead s csrAddrMip).getLsbD 7 = s.mtip ∧ (csrRead s csrAddrMip).getLsbD 11 = s.meip ∧ (csrRead s csrAddrMip).getLsbD 0 = false :=`
+- **csr_read_mie_bits** (line 758): `theorem csr_read_mie_bits (s : CsrState) : (csrRead s csrAddrMie).getLsbD 3 = s.msie ∧ (csrRead s csrAddrMie).getLsbD 7 = s.mtie ∧ (csrRead s csrAddrMie).getLsbD 11 = s.meie ∧ (csrRead s csrAddrMie).getLsbD 0 = false :=`
+- **csr_read_fflags_bits** (line 766): `theorem csr_read_fflags_bits (s : CsrState) : (csrRead s csrAddrFflags).getLsbD 0 = s.nx ∧ (csrRead s csrAddrFflags).getLsbD 1 = s.uf ∧ (csrRead s csrAddrFflags).getLsbD 2 = s.of ∧ (csrRead s csrAddrFflags).getLsbD 3 = s.dz ∧ (csrRead s csrAddrFflags).getLsbD 4 = s.nv ∧ (csrRead s csrAddrFflags).getLsbD 5 = false :=`
+- **csr_read_fcsr_bits** (line 776): `theorem csr_read_fcsr_bits (s : CsrState) : (csrRead s csrAddrFcsr).getLsbD 0 = s.nx ∧ (csrRead s csrAddrFcsr).getLsbD 4 = s.nv ∧ (csrRead s csrAddrFcsr).getLsbD 5 = s.frm.getLsbD 0 ∧ (csrRead s csrAddrFcsr).getLsbD 6 = s.frm.getLsbD 1 ∧ (csrRead s csrAddrFcsr).getLsbD 7 = s.frm.getLsbD 2 ∧ (csrRead s csrAddrFcsr).getLsbD 8 = false :=`
+- **csr_read_vtype_bits** (line 786): `theorem csr_read_vtype_bits (s : CsrState) : (csrRead s csrAddrVtype).getLsbD 31 = s.vill ∧ (csrRead s csrAddrVtype).getLsbD 7 = s.vma ∧ (csrRead s csrAddrVtype).getLsbD 6 = s.vta ∧ (csrRead s csrAddrVtype).extractLsb' 3 3 = s.vsew ∧ (csrRead s csrAddrVtype).extractLsb' 0 3 = s.vlmul :=`
+- **csr_mscratch_rw** (line 796): `theorem csr_mscratch_rw (s : CsrState) (v : BitVec 32) : csrRead (csrStep s (csrInWrite csrOpW csrAddrMscratch v)) csrAddrMscratch = v :=`
+- **csr_mscratch_rs** (line 800): `theorem csr_mscratch_rs (s : CsrState) (v : BitVec 32) : csrRead (csrStep s (csrInWrite csrOpS csrAddrMscratch v)) csrAddrMscratch = s.mscratch ||| v :=`
+- **csr_mscratch_rc** (line 805): `theorem csr_mscratch_rc (s : CsrState) (v : BitVec 32) : csrRead (csrStep s (csrInWrite csrOpC csrAddrMscratch v)) csrAddrMscratch = s.mscratch &&& ~~~v :=`
+- **csr_mepc_rw** (line 810): `theorem csr_mepc_rw (s : CsrState) (v : BitVec 32) : csrRead (csrStep s (csrInWrite csrOpW csrAddrMepc v)) csrAddrMepc = v :=`
+- **csr_mcause_rw** (line 814): `theorem csr_mcause_rw (s : CsrState) (v : BitVec 32) : csrRead (csrStep s (csrInWrite csrOpW csrAddrMcause v)) csrAddrMcause = v :=`
+- **csr_mtval_rw** (line 818): `theorem csr_mtval_rw (s : CsrState) (v : BitVec 32) : csrRead (csrStep s (csrInWrite csrOpW csrAddrMtval v)) csrAddrMtval = v :=`
+- **csr_print_rw** (line 822): `theorem csr_print_rw (s : CsrState) (v : BitVec 32) : csrRead (csrStep s (csrInWrite csrOpW csrAddrCsrPrint v)) csrAddrCsrPrint = v :=`
+- **csr_mstatus_write_mask** (line 829): `theorem csr_mstatus_write_mask (s : CsrState) (v : BitVec 32) : csrRead (csrStep s (csrInWrite csrOpW csrAddrMstatus v)) csrAddrMstatus = 0x1800#32 ||| (v &&& 0x88#32) :=`
+- **csr_mip_write_mask** (line 835): `theorem csr_mip_write_mask (s : CsrState) (v : BitVec 32) : csrRead (csrStep s (csrInWrite csrOpW csrAddrMip v)) csrAddrMip = v &&& 0x888#32 :=`
+- **csr_mie_write_mask** (line 840): `theorem csr_mie_write_mask (s : CsrState) (v : BitVec 32) : csrRead (csrStep s (csrInWrite csrOpW csrAddrMie v)) csrAddrMie = v &&& 0x888#32 :=`
+- **csr_frm_write_low3** (line 845): `theorem csr_frm_write_low3 (s : CsrState) (v : BitVec 32) : csrRead (csrStep s (csrInWrite csrOpW csrAddrFrm v)) csrAddrFrm = v &&& 7#32 :=`
+- **csr_fflags_write_mask** (line 850): `theorem csr_fflags_write_mask (s : CsrState) (v : BitVec 32) : csrRead (csrStep s (csrInWrite csrOpW csrAddrFflags v)) csrAddrFflags = v &&& 0x1F#32 :=`
+- **csr_frm_set_narrow** (line 855): `theorem csr_frm_set_narrow (s : CsrState) (v : BitVec 32) : csrRead (csrStep s (csrInWrite csrOpS csrAddrFrm v)) csrAddrFrm = (BitVec.zeroExtend 32 s.frm ||| v) &&& 7#32 :=`
+- **csr_fcsr_write_ignored** (line 863): `theorem csr_fcsr_write_ignored (s : CsrState) (v : BitVec 32) : csrStep s (csrInWrite csrOpW csrAddrFcsr v) = s :=`
+- **csr_threadid_write_ignored** (line 868): `theorem csr_threadid_write_ignored (s : CsrState) (v : BitVec 32) : csrStep s (csrInWrite csrOpW csrAddrThreadid v) = s :=`
+- **csr_vtype_write_ignored** (line 873): `theorem csr_vtype_write_ignored (s : CsrState) (v : BitVec 32) : csrStep s (csrInWrite csrOpW csrAddrVtype v) = s :=`
+- **csr_vl_write_ignored** (line 878): `theorem csr_vl_write_ignored (s : CsrState) (v : BitVec 32) : csrStep s (csrInWrite csrOpW csrAddrVl v) = s :=`
+- **csr_vl_read_zero** (line 883): `theorem csr_vl_read_zero (s : CsrState) : csrRead s csrAddrVl = 0#32 :=`
+- **csr_isvec_no_state** (line 887): `theorem csr_isvec_no_state (s : CsrState) (i : CsrInputs) (hc : i.custom0 = false) (hv : i.isvec = true) (hcta : i.ctaValid = false) : csrStep s i = s :=`
+- **csr_custom0_rpc** (line 893): `theorem csr_custom0_rpc (s : CsrState) (i : CsrInputs) (hwen : csrWen i.csrOp i.write = true) (hc : i.custom0 = true) (hcta : i.ctaValid = false) : csrStep s i = { s with rpc :=`
+- **csr_wb_default** (line 902): `theorem csr_wb_default (s : CsrState) (op : BitVec 2) (addr : BitVec 12) (v : BitVec 32) (write custom0 isvec : Bool) (hw : csrWen op write = false) : csrWbWxdRd s op addr v write custom0 isvec = csrRead s addr :=`
+- **csr_wb_custom0** (line 908): `theorem csr_wb_custom0 (s : CsrState) (op : BitVec 2) (addr : BitVec 12) (v : BitVec 32) (write custom0 isvec : Bool) (hw : csrWen op write = true) (hc : custom0 = true) : csrWbWxdRd s op addr v write custom0 isvec = v :=`
+- **csr_wb_isvec_min** (line 914): `theorem csr_wb_isvec_min (s : CsrState) (op : BitVec 2) (addr : BitVec 12) (v : BitVec 32) (write isvec : Bool) (hw : csrWen op write = true) (hv : isvec = true) : csrWbWxdRd s op addr v write false isvec = (if BitVec.ult v csrVLMAX then v else csrVLMAX) :=`
+- **csr_write_preserves_cta_regs** (line 923): `theorem csr_write_preserves_cta_regs (s : CsrState) (i : CsrInputs) (hcta : i.ctaValid = false) : (csrStep s i).knlBase = s.knlBase ∧ (csrStep s i).wgWfCount = s.wgWfCount ∧ (csrStep s i).threadid = s.threadid ∧ (csrStep s i).wfTagDispatch = s.wfTagDispatch ∧ (csrStep s i).sgprBase = s.sgprBase ∧ (csrStep s i).vgprBase = s.vgprBase ∧ (csrStep s i).ldsBaseDispatch = s.ldsBaseDispatch ∧ (csrStep s i).pdsBaseaddr = s.pdsBaseaddr :=`
+- **csr_cta_preserves_write_regs** (line 934): `theorem csr_cta_preserves_write_regs (s : CsrState) (i : CsrInputs) (hcta : i.ctaValid = true) (hw : i.write = false) : (csrStep s i).mscratch = s.mscratch ∧ (csrStep s i).mie = s.mie ∧ (csrStep s i).mpie = s.mpie ∧ (csrStep s i).frm = s.frm ∧ (csrStep s i).nx = s.nx ∧ (csrStep s i).csrPrint = s.csrPrint :=`
+- **csr_step_dead_vcsr** (line 943): `theorem csr_step_dead_vcsr (s : CsrState) (i : CsrInputs) : (csrStep s i).vsew = s.vsew ∧ (csrStep s i).vlmul = s.vlmul ∧ (csrStep s i).vill = s.vill ∧ (csrStep s i).vma = s.vma ∧ (csrStep s i).vta = s.vta ∧ (csrStep s i).vstart = s.vstart ∧ (csrStep s i).vl = s.vl ∧ (csrStep s i).vcsr = s.vcsr ∧ (csrStep s i).vlenb = s.vlenb ∧ (csrStep s i).vxrm = s.vxrm ∧ (csrStep s i).vxsat = s.vxsat :=`
+- **csr_cta_threadid** (line 960): `theorem csr_cta_threadid (s : CsrState) (i : CsrInputs) (hcta : i.ctaValid = true) (hw : i.write = false) : (csrStep s i).threadid = BitVec.zeroExtend 32 (i.ctaWfTag.extractLsb' 0 3) <<< 5#32 :=`
+- **csr_cta_wftag** (line 967): `theorem csr_cta_wftag (s : CsrState) (i : CsrInputs) (hcta : i.ctaValid = true) (hw : i.write = false) : (csrStep s i).wfTagDispatch = BitVec.zeroExtend 6 (i.ctaWfTag.extractLsb' 0 3) :=`
+- **csrLdsCat_eq** (line 973): `theorem csrLdsCat_eq (x : BitVec 18) : csrLdsCat x = 0x70000000#32 ||| BitVec.zeroExtend 32 x :=`
+- **csr_lsu_tid_mul** (line 978): `theorem csr_lsu_tid_mul (s : CsrState) : csrOutLsuTid s = BitVec.zeroExtend 32 s.wfTagDispatch * 32#32 :=`
+- **csr_lsu_tid_bound** (line 983): `theorem csr_lsu_tid_bound (s : CsrState) : BitVec.ult (csrOutLsuTid s) 2048#32 = true :=`
+- **csrStep_nop** (line 990): `theorem csrStep_nop (s : CsrState) (i : CsrInputs) (hw : i.write = false) (hcta : i.ctaValid = false) : csrStep s i = s :=`
+- **csrExe_untouched** (line 996): `theorem csrExe_untouched (f : Fin 8 → CsrState) (fire : Bool) (wid ctaWid : BitVec 3) (i : CsrInputs) (k : Fin 8) (h1 : (wid == BitVec.ofNat 3 k.val) = false) (h2 : (ctaWid == BitVec.ofNat 3 k.val) = false) : csrExeStep f fire wid ctaWid i k = f k :=`
+- **csrExe_touched** (line 1005): `theorem csrExe_touched (f : Fin 8 → CsrState) (ctaWid : BitVec 3) (i : CsrInputs) (k : Fin 8) (wid : BitVec 3) (hk : wid = BitVec.ofNat 3 k.val) : csrExeStep f true wid ctaWid i k = csrStep (f k) { i with write :=`
+
+### `Ventus/Arith/Classify.lean`
+
+- **cls_t1_negInf_pairwise** (line 255): `theorem cls_t1_negInf_pairwise (x : BitVec 32) : let o :=`
+- **cls_t1_negNormal_pairwise** (line 264): `theorem cls_t1_negNormal_pairwise (x : BitVec 32) : let o :=`
+- **cls_t1_negSubnormal_pairwise** (line 272): `theorem cls_t1_negSubnormal_pairwise (x : BitVec 32) : let o :=`
+- **cls_t1_negZero_pairwise** (line 280): `theorem cls_t1_negZero_pairwise (x : BitVec 32) : let o :=`
+- **cls_t1_posZero_pairwise** (line 287): `theorem cls_t1_posZero_pairwise (x : BitVec 32) : let o :=`
+- **cls_t1_posSubnormal_pairwise** (line 294): `theorem cls_t1_posSubnormal_pairwise (x : BitVec 32) : let o :=`
+- **cls_t1_posNormal_pairwise** (line 300): `theorem cls_t1_posNormal_pairwise (x : BitVec 32) : let o :=`
+- **cls_t1_posInf_pairwise** (line 306): `theorem cls_t1_posInf_pairwise (x : BitVec 32) : let o :=`
+- **cls_t1_sNaN_pairwise** (line 311): `theorem cls_t1_sNaN_pairwise (x : BitVec 32) : let o :=`
+- **cls_t2_exhaustive** (line 318): `theorem cls_t2_exhaustive (x : BitVec 32) : let o :=`
+- **cls_t3_isNaN** (line 326): `theorem cls_t3_isNaN (x : BitVec 32) : let o :=`
+- **cls_t3_isInf** (line 331): `theorem cls_t3_isInf (x : BitVec 32) : let o :=`
+- **cls_t3_isInfOrNaN** (line 336): `theorem cls_t3_isInfOrNaN (x : BitVec 32) : let o :=`
+- **cls_t3_isZero** (line 341): `theorem cls_t3_isZero (x : BitVec 32) : let o :=`
+- **cls_t3_isSubnormal** (line 346): `theorem cls_t3_isSubnormal (x : BitVec 32) : let o :=`
+- **cls_t3_isSubnormalOrZero** (line 351): `theorem cls_t3_isSubnormalOrZero (x : BitVec 32) : let o :=`
+- **cls_t4_sign** (line 357): `theorem cls_t4_sign (x : BitVec 32) : clsSign (e :=`
+- **cls_t4_exp** (line 360): `theorem cls_t4_exp (x : BitVec 32) : clsExp (e :=`
+- **cls_t4_frac** (line 363): `theorem cls_t4_frac (x : BitVec 32) : clsFrac (e :=`
+- **cls_t4_isPosInf** (line 367): `theorem cls_t4_isPosInf (x : BitVec 32) : (clsClassify32 x).isPosInf = (!x.msb && (x.extractLsb' 23 8 == 0xFF#8) && (x.extractLsb' 0 23 == 0#23)) :=`
+- **cls_t4_isNegInf** (line 372): `theorem cls_t4_isNegInf (x : BitVec 32) : (clsClassify32 x).isNegInf = (x.msb && (x.extractLsb' 23 8 == 0xFF#8) && (x.extractLsb' 0 23 == 0#23)) :=`
+- **cls_t4_isPosNormal** (line 377): `theorem cls_t4_isPosNormal (x : BitVec 32) : (clsClassify32 x).isPosNormal = (!x.msb && (x.extractLsb' 23 8 != 0#8) && (x.extractLsb' 23 8 != 0xFF#8)) :=`
+- **cls_t4_isNegNormal** (line 382): `theorem cls_t4_isNegNormal (x : BitVec 32) : (clsClassify32 x).isNegNormal = (x.msb && (x.extractLsb' 23 8 != 0#8) && (x.extractLsb' 23 8 != 0xFF#8)) :=`
+- **cls_t4_isPosSubnormal** (line 387): `theorem cls_t4_isPosSubnormal (x : BitVec 32) : (clsClassify32 x).isPosSubnormal = (!x.msb && (x.extractLsb' 23 8 == 0#8) && (x.extractLsb' 0 23 != 0#23)) :=`
+- **cls_t4_isNegSubnormal** (line 392): `theorem cls_t4_isNegSubnormal (x : BitVec 32) : (clsClassify32 x).isNegSubnormal = (x.msb && (x.extractLsb' 23 8 == 0#8) && (x.extractLsb' 0 23 != 0#23)) :=`
+- **cls_t4_isPosZero** (line 397): `theorem cls_t4_isPosZero (x : BitVec 32) : (clsClassify32 x).isPosZero = (!x.msb && (x.extractLsb' 23 8 == 0#8) && (x.extractLsb' 0 23 == 0#23)) :=`
+- **cls_t4_isNegZero** (line 402): `theorem cls_t4_isNegZero (x : BitVec 32) : (clsClassify32 x).isNegZero = (x.msb && (x.extractLsb' 23 8 == 0#8) && (x.extractLsb' 0 23 == 0#23)) :=`
+- **cls_t4_isSNaN** (line 408): `theorem cls_t4_isSNaN (x : BitVec 32) : (clsClassify32 x).isSNaN = ((x.extractLsb' 23 8 == 0xFF#8) && (x.extractLsb' 0 23 != 0#23) && !x.getLsbD 22) :=`
+- **cls_t4_isQNaN** (line 414): `theorem cls_t4_isQNaN (x : BitVec 32) : (clsClassify32 x).isQNaN = ((x.extractLsb' 23 8 == 0xFF#8) && (x.extractLsb' 0 23 != 0#23) && x.getLsbD 22) :=`
+- **cls_t4_isNaN** (line 421): `theorem cls_t4_isNaN (x : BitVec 32) : (clsClassify32 x).isNaN = ((x.extractLsb' 23 8 == 0xFF#8) && (x.extractLsb' 0 23 != 0#23)) :=`
+- **cls_t4_isInf** (line 426): `theorem cls_t4_isInf (x : BitVec 32) : (clsClassify32 x).isInf = ((x.extractLsb' 23 8 == 0xFF#8) && (x.extractLsb' 0 23 == 0#23)) :=`
+- **cls_t4_isInfOrNaN** (line 431): `theorem cls_t4_isInfOrNaN (x : BitVec 32) : (clsClassify32 x).isInfOrNaN = (x.extractLsb' 23 8 == 0xFF#8) :=`
+- **cls_t4_isSubnormal** (line 435): `theorem cls_t4_isSubnormal (x : BitVec 32) : (clsClassify32 x).isSubnormal = ((x.extractLsb' 23 8 == 0#8) && (x.extractLsb' 0 23 != 0#23)) :=`
+- **cls_t4_isZero** (line 440): `theorem cls_t4_isZero (x : BitVec 32) : (clsClassify32 x).isZero = ((x.extractLsb' 23 8 == 0#8) && (x.extractLsb' 0 23 == 0#23)) :=`
+- **cls_t4_isSubnormalOrZero** (line 445): `theorem cls_t4_isSubnormalOrZero (x : BitVec 32) : (clsClassify32 x).isSubnormalOrZero = (x.extractLsb' 23 8 == 0#8) :=`
+
+### `Ventus/Arith/DecodeUnit.lean`
+
+- **dec_overlap_imf** (line 486): `theorem dec_overlap_imf : decOverlapPairs decTableIMF = [] :=`
+- **dec_overlap_v** (line 487): `theorem dec_overlap_v : decOverlapPairs decTableV = [] :=`
+- **dec_overlap_vl** (line 488): `theorem dec_overlap_vl : decOverlapPairs decTableVL = [] :=`
+- **dec_overlap_vc** (line 489): `theorem dec_overlap_vc : decOverlapPairs decTableVC = [] :=`
+- **dec_default_safe** (line 496): `theorem dec_default_safe : decDefaultRow.wxd = false ∧ decDefaultRow.wvd = false ∧ decDefaultRow.memCmd = 0#2 ∧ decDefaultRow.branch = 0#2 ∧ decDefaultRow.simtStack = false ∧ decDefaultRow.csr = 0#2 ∧ decDefaultRow.barrier = false ∧ decDefaultRow.atomic = false ∧ decDefaultRow.mul = false ∧ decDefaultRow.sfu = false ∧ decDefaultRow.fence = false ∧ decDefaultRow.tc = false ∧ decDefaultRow.custom0 = false ∧ decDefaultRow.isvec = false ∧ decDefaultRow.fp = false ∧ decDefaultRow.readmask = false ∧ decDefaultRow.disableMask = false ∧ decDefaultRow.memUnsigned = false ∧ decDefaultRow.aluFn = decFN_X :=`
+- **decLookupEntry_mem** (line 509): `theorem decLookupEntry_mem (x : BitVec 32) (t : List DecEntry) : decLookupEntry x t = decDefaultRow ∨ decLookupEntry x t ∈ t.map DecEntry.row :=`
+- **decDecode_mem** (line 524): `theorem decDecode_mem (inst : BitVec 32) : decDecode inst = decDefaultRow ∨ decDecode inst ∈ decTableIMF.map DecEntry.row ∨ decDecode inst ∈ decTableV.map DecEntry.row ∨ decDecode inst ∈ decTableVL.map DecEntry.row ∨ decDecode inst ∈ decTableVC.map DecEntry.row :=`
+- **dec_fn_ge32_implies_vec_or_fp** (line 666): `theorem dec_fn_ge32_implies_vec_or_fp : decAllTables.all (fun e => e.row.aluFn < 32#6 || e.row.isvec || e.row.fp) = true :=`
+- **dec_mul_fn_lt32** (line 671): `theorem dec_mul_fn_lt32 : decAllTables.all (fun e => !e.row.mul || e.row.aluFn ≤ 27#6) = true :=`
+- **dec_regidx1_noext** (line 698): `theorem dec_regidx1_noext (inst : BitVec 32) : decRegIdx1 0#3 inst = BitVec.zeroExtend 8 (inst.extractLsb' 15 5) :=`
+- **dec_regidx2_noext** (line 701): `theorem dec_regidx2_noext (inst : BitVec 32) : decRegIdx2 0#3 inst = BitVec.zeroExtend 8 (inst.extractLsb' 20 5) :=`
+- **dec_regidxw_noext** (line 704): `theorem dec_regidxw_noext (inst : BitVec 32) : decRegIdxw 0#3 inst = BitVec.zeroExtend 8 (inst.extractLsb' 7 5) :=`
+- **dec_regidx3_scalar_fp** (line 709): `theorem dec_regidx3_scalar_fp (inst : BitVec 32) : decRegIdx3 true false 0#3 inst = BitVec.zeroExtend 8 (inst.extractLsb' 27 5) :=`
+- **dec_regidx3_noext** (line 712): `theorem dec_regidx3_noext (inst : BitVec 32) : decRegIdx3 false false 0#3 inst = BitVec.zeroExtend 8 (inst.extractLsb' 7 5) :=`
+- **dec_regidx3_vec** (line 715): `theorem dec_regidx3_vec (inst : BitVec 32) : decRegIdx3 false true 0#3 inst = BitVec.zeroExtend 8 (inst.extractLsb' 7 5) :=`
+- **dec_regidx3_vec_fp** (line 718): `theorem dec_regidx3_vec_fp (inst : BitVec 32) : decRegIdx3 true true 0#3 inst = BitVec.zeroExtend 8 (inst.extractLsb' 7 5) :=`
+- **dec_mop_readmask** (line 723): `theorem dec_mop_readmask (inst : BitVec 32) : decMop true inst = 3#2 :=`
+- **dec_mop_passthru** (line 725): `theorem dec_mop_passthru (inst : BitVec 32) : decMop false inst = inst.extractLsb' 26 2 :=`
+- **dec_mask_vm0** (line 730): `theorem dec_mask_vm0 (inst : BitVec 32) (aluFn : BitVec 6) (h : inst.extractLsb' 25 1 = 0#1) : decMaskEn inst aluFn true false = true :=`
+- **dec_mask_vmerge** (line 734): `theorem dec_mask_vmerge (inst : BitVec 32) (h : inst.extractLsb' 25 1 = 1#1) : decMaskEn inst decFN_VMERGE true false = true :=`
+- **dec_mask_scalar_off** (line 738): `theorem dec_mask_scalar_off (inst : BitVec 32) (aluFn : BitVec 6) : decMaskEn inst aluFn false false = false :=`
+- **dec_mask_disable** (line 741): `theorem dec_mask_disable (inst : BitVec 32) (aluFn : BitVec 6) : decMaskEn inst aluFn true true = false :=`
+- **dec_force_rm_rtz_spec** (line 746): `theorem dec_force_rm_rtz_spec (inst : BitVec 32) : decForceRmRtz inst = true ↔ (inst &&& 0xFC0FF07F#32) == 0x48039057#32 ∨ (inst &&& 0xFC0FF07F#32) == 0x48031057#32 :=`
+- **dec_aq_spec** (line 753): `theorem dec_aq_spec (inst : BitVec 32) : decAq true inst = (inst.extractLsb' 26 1 == 1#1) :=`
+- **dec_rl_spec** (line 756): `theorem dec_rl_spec (inst : BitVec 32) : decRl true inst = (inst.extractLsb' 25 1 == 1#1) :=`
+- **dec_aq_nonatomic** (line 759): `theorem dec_aq_nonatomic (inst : BitVec 32) : decAq false inst = false :=`
+- **dec_rl_nonatomic** (line 761): `theorem dec_rl_nonatomic (inst : BitVec 32) : decRl false inst = false :=`
+- **dec_isvls12_spec** (line 765): `theorem dec_isvls12_spec (aluFn : BitVec 6) : decIsVls12 aluFn = (aluFn == 30#6) :=`
+
+### `Ventus/Arith/DecodeUnitProps.lean`
+
+- **decH1aRows_all** (line 46): `theorem decH1aRows_all : (decAllTables.map DecEntry.row).all decH1aRowOk = true :=`
+- **decH1a_default** (line 50): `theorem decH1a_default : decH1aRowOk decDefaultRow = true :=`
+- **decH1cRows_all** (line 53): `theorem decH1cRows_all : (decAllTables.map DecEntry.row).all decH1cRowOk = true :=`
+- **decH1c_default** (line 57): `theorem decH1c_default : decH1cRowOk decDefaultRow = true :=`
+- **decH_mem_allTables** (line 64): `theorem decH_mem_allTables {r : DecCtrlRow} (h : r ∈ decTableIMF.map DecEntry.row ∨ r ∈ decTableV.map DecEntry.row ∨ r ∈ decTableVL.map DecEntry.row ∨ r ∈ decTableVC.map DecEntry.row) : r ∈ decAllTables.map DecEntry.row :=`
+- **decH_rowOf_decode** (line 76): `theorem decH_rowOf_decode {P : DecCtrlRow → Bool} (inst : BitVec 32) (hall : (decAllTables.map DecEntry.row).all P = true) (hdef : P decDefaultRow = true) : P (decDecode inst) = true :=`
+- **decH1a_row** (line 87): `theorem decH1a_row {r : DecCtrlRow} (hok : decH1aRowOk r = true) (h : r.sfu = true) : r.isvec = r.wvd ∧ (r.isvec = false → r.wxd = true) ∧ (r.wvd = true → r.wxd = false) :=`
+- **decH1c_row** (line 93): `theorem decH1c_row {r : DecCtrlRow} (hok : decH1cRowOk r = true) (h : r.fp = true) : r.wvd ≠ r.wxd :=`
+- **decH1a** (line 105): `theorem decH1a (inst : BitVec 32) (h : (decDecode inst).sfu = true) : (decDecode inst).isvec = (decDecode inst).wvd ∧ ((decDecode inst).isvec = false → (decDecode inst).wxd = true) ∧ ((decDecode inst).wvd = true → (decDecode inst).wxd = false) :=`
+- **decH1b_maskEn_off** (line 114): `theorem decH1b_maskEn_off (inst : BitVec 32) (aluFn : BitVec 6) (dm : Bool) : decMaskEn inst aluFn false dm = false :=`
+- **decH1b** (line 122): `theorem decH1b (inst : BitVec 32) (h : (decDecode inst).isvec = false) : decMaskEn inst (decDecode inst).aluFn (decDecode inst).isvec (decDecode inst).disableMask = false ∧ decHColMask (decDecode inst).isvec = 1#32 :=`
+- **decH1c** (line 133): `theorem decH1c (inst : BitVec 32) (h : (decDecode inst).fp = true) : (decDecode inst).wvd ≠ (decDecode inst).wxd :=`
+- **decH1_sfu_specOk** (line 140): `theorem decH1_sfu_specOk (inst : BitVec 32) (h : (decDecode inst).sfu = true) : (decDecode inst).isvec = (decDecode inst).wvd ∧ ((decDecode inst).isvec = false → (decDecode inst).wxd = true) ∧ ((decDecode inst).isvec = false → decHColMask (decDecode inst).isvec = 1#32) ∧ ((decDecode inst).wvd = true → (decDecode inst).wxd = false) :=`
+
+### `Ventus/Arith/ExeMul.lean`
+
+- **exmQStep_enq_empty** (line 193): `theorem exmQStep_enq_empty {α : Type} (b : α) (r : Bool) : exmQStep none true b r = some b :=`
+- **exmQStep_hold** (line 197): `theorem exmQStep_hold {α : Type} (a : α) (b : α) : exmQStep (some a) false b false = some a :=`
+- **exmQStep_deq** (line 201): `theorem exmQStep_deq {α : Type} (a : α) (b : α) : exmQStep (some a) false b true = none :=`
+- **exmQStep_pipe** (line 206): `theorem exmQStep_pipe {α : Type} (a : α) (b : α) : exmQStep (some a) true b true = some b :=`
+- **exmQStep_stall** (line 211): `theorem exmQStep_stall {α : Type} (a : α) (b : α) : exmQStep (some a) true b false = some a :=`
+- **exmPipe2_two_cycles** (line 265): `theorem exmPipe2_two_cycles {C In D1 D2 : Type} (prep : C → In → D1) (f : C → D1 → D2) (s : ExmPipe2 C D1 D2) (c yc : C) (i y : In) (yv : Bool) : let s2 :=`
+- **exmPipe2_stall_hold** (line 273): `theorem exmPipe2_stall_hold {C In D1 D2 : Type} (prep : C → In → D1) (f : C → D1 → D2) (s : ExmPipe2 C D1 D2) (inV : Bool) (inC : C) (inp : In) (hs2 : s.v2 = true) : let s' :=`
+- **exmAluInRdy_bN** (line 335): `theorem exmAluInRdy_bN (rR bR : Bool) : exmAluInRdy exmB_N rR bR = rR :=`
+- **exmAluInRdy_bB** (line 336): `theorem exmAluInRdy_bB (rR bR : Bool) : exmAluInRdy exmB_B rR bR = bR :=`
+- **exmAluInRdy_bJ** (line 337): `theorem exmAluInRdy_bJ (rR bR : Bool) : exmAluInRdy exmB_J rR bR = (bR && rR) :=`
+- **exmAluInRdy_bR** (line 338): `theorem exmAluInRdy_bR (rR bR : Bool) : exmAluInRdy exmB_R rR bR = (bR && rR) :=`
+- **exmAluBrEnqOK_bN** (line 340): `theorem exmAluBrEnqOK_bN (rR : Bool) : exmAluBrEnqOK exmB_N rR = false :=`
+- **exmAluBrEnqOK_bB** (line 341): `theorem exmAluBrEnqOK_bB (rR : Bool) : exmAluBrEnqOK exmB_B rR = true :=`
+- **exmAluBrEnqOK_bJ** (line 342): `theorem exmAluBrEnqOK_bJ (rR : Bool) : exmAluBrEnqOK exmB_J rR = rR :=`
+- **exmAluBrEnqOK_bR** (line 343): `theorem exmAluBrEnqOK_bR (rR : Bool) : exmAluBrEnqOK exmB_R rR = rR :=`
+- **exmAluREnqOK_bN** (line 345): `theorem exmAluREnqOK_bN (bR : Bool) : exmAluREnqOK exmB_N bR = true :=`
+- **exmAluREnqOK_bB** (line 346): `theorem exmAluREnqOK_bB (bR : Bool) : exmAluREnqOK exmB_B bR = false :=`
+- **exmAluREnqOK_bJ** (line 347): `theorem exmAluREnqOK_bJ (bR : Bool) : exmAluREnqOK exmB_J bR = bR :=`
+- **exmAluREnqOK_bR** (line 348): `theorem exmAluREnqOK_bR (bR : Bool) : exmAluREnqOK exmB_R bR = bR :=`
+- **exmAluJump_bN** (line 350): `theorem exmAluJump_bN (c : Bool) : exmAluJump exmB_N c = false :=`
+- **exmAluJump_bB** (line 351): `theorem exmAluJump_bB (c : Bool) : exmAluJump exmB_B c = c :=`
+- **exmAluJump_bJ** (line 352): `theorem exmAluJump_bJ (c : Bool) : exmAluJump exmB_J c = true :=`
+- **exmAluJump_bR** (line 353): `theorem exmAluJump_bR (c : Bool) : exmAluJump exmB_R c = true :=`
+- **exmAluExe_latency_bN** (line 410): `theorem exmAluExe_latency_bN (din : ExmSExeIn) (hbr : din.ctrl.branch = exmB_N) (hwxd : din.ctrl.wxd = true) : let s1 :=`
+- **exmAluExe_latency_bB** (line 423): `theorem exmAluExe_latency_bB (din : ExmSExeIn) (hbr : din.ctrl.branch = exmB_B) : let s1 :=`
+- **exmAluExe_latency_bJ** (line 437): `theorem exmAluExe_latency_bJ (din : ExmSExeIn) (hbr : din.ctrl.branch = exmB_J) (hwxd : din.ctrl.wxd = true) : let s1 :=`
+- **exmMulExec_prep** (line 536): `theorem exmMulExec_prep (ctrl : ExmCtrl) (inp : Nat → BitVec 32 × BitVec 32 × BitVec 32) (x : Nat) : exmMulExec ctrl (exmMulPrep ctrl inp) x = exmMulLaneOut (ctrl.aluFn.extractLsb' 0 5) ctrl.reverse (inp x).1 (inp x).2.1 (inp x).2.2 :=`
+- **exmMulLaneOut_mulhsu** (line 545): `theorem exmMulLaneOut_mulhsu (a b c : BitVec 32) : exmMulLaneOut mulFN_MULHSU false a b c = ((BitVec.signExtend 66 a) * (BitVec.zeroExtend 66 b)).extractLsb' 0 32 :=`
+- **exmMulLaneOut_mulhsu_witness** (line 553): `theorem exmMulLaneOut_mulhsu_witness : exmMulLaneOut mulFN_MULHSU false 0xFFFFFFFF#32 0xFFFFFFFF#32 0#32 = 1#32 ∧ ((BitVec.signExtend 66 0xFFFFFFFF#32) * (BitVec.zeroExtend 66 0xFFFFFFFF#32)).extractLsb' 32 32 = 0xFFFFFFFF#32 :=`
+- **exmVMulExe_latency_wvd** (line 628): `theorem exmVMulExe_latency_wvd (din : ExmVExeIn) (hwvd : din.ctrl.wvd = true) (hwxd : din.ctrl.wxd = false) (x : Nat) : let s1 :=`
+- **exmVMulExe_latency_wxd** (line 645): `theorem exmVMulExe_latency_wxd (din : ExmVExeIn) (hwvd : din.ctrl.wvd = false) (hwxd : din.ctrl.wxd = true) : let s1 :=`
+- **exmVMulExe_test_vmul** (line 719): `theorem exmVMulExe_test_vmul : let ins :=`
+- **exmVMulExe_test_vmul_stall** (line 729): `theorem exmVMulExe_test_vmul_stall : let ins :=`
+- **exmVMulExe_test_smulhu** (line 739): `theorem exmVMulExe_test_smulhu : let ins :=`
+- **exmVMulExe_test_mulhsu_low32** (line 753): `theorem exmVMulExe_test_mulhsu_low32 : let ins :=`
+- **exmVMulExe_test_reverse** (line 763): `theorem exmVMulExe_test_reverse : let ins :=`
+- **exmShiftN_spec** (line 787): `theorem exmShiftN_spec (S H : Nat) (v : Nat → BitVec 32) : ∀ (k i : Nat), i + k * H < S → exmShiftN S H k v i = v (i + k * H) :=`
+- **exmRRAssembleN_spec** (line 817): `theorem exmRRAssembleN_spec (S H : Nat) (b : Nat → Nat → BitVec 32) : ∀ (k : Nat), k * H ≤ S → ∀ (t j : Nat), t < k → j < H → exmRRAssembleN S H k b (S - k * H + t * H + j) = b t j :=`
+- **exmV2_result_spec** (line 857): `theorem exmV2_result_spec (S H m : Nat) (hH : 0 < H) (hm : S = m * H) (f : BitVec 5) (r : Bool) (d1 d2 d3 : Nat → BitVec 32) (i : Nat) (hi : i < S) : exmRRAssembleN S H m (fun t x => exmMulLaneOut f r (d1 (t * H + x)) (d2 (t * H + x)) (d3 (t * H + x))) i = exmMulLaneOut f r (d1 i) (d2 i) (d3 i) :=`
+- **exmV2_test_vmul_m2** (line 1011): `theorem exmV2_test_vmul_m2 : let ins :=`
+- **exmV2_test_vmul_m3** (line 1026): `theorem exmV2_test_vmul_m3 : let ins :=`
+- **exmV2_test_smacc_m2** (line 1036): `theorem exmV2_test_smacc_m2 : let ins :=`
+- **exmV2_test_continuous** (line 1069): `theorem exmV2_test_continuous : exmV2ChkSeq 4 exmV2T1In exmV2T4B (exmV2Run 4 2 exmV2Init ((true, exmV2T1In, true, true) :: (false, exmVMulIdle, true, true) :: (true, exmV2T4B, true, true) :: List.replicate 14 (false, exmVMulIdle, true, true))) = true :=`
+- **exmV2_test_stall** (line 1078): `theorem exmV2_test_stall : let ins :=`
+- **exmV2_test_mulhsu_low32** (line 1090): `theorem exmV2_test_mulhsu_low32 : let ins :=`
+- **exmV2_test_reverse** (line 1106): `theorem exmV2_test_reverse : let ins :=`
+
+### `Ventus/Arith/ExeSFU.lean`
+
+- **exsPrioEnc_lt** (line 212): `theorem exsPrioEnc_lt : ∀ mg : BitVec 4, (exsPrioEnc mg).toNat < 4 :=`
+- **exsPrioEnc_mem** (line 215): `theorem exsPrioEnc_mem : ∀ mg : BitVec 4, mg ≠ 0 → mg.getLsbD (exsPrioEnc mg).toNat = true :=`
+- **exsMaskGrp_getLsbD** (line 219): `theorem exsMaskGrp_getLsbD (m : BitVec 32) (g : Nat) (hg : g < 4) : (exsMaskGrp m).getLsbD g = exsGrpAt m g :=`
+- **exsMaskGrp_eq_zero_iff** (line 225): `theorem exsMaskGrp_eq_zero_iff (m : BitVec 32) : exsMaskGrp m = 0#4 ↔ m = 0#32 :=`
+- **exsMaskGrp_clear** (line 229): `theorem exsMaskGrp_clear (m : BitVec 32) (g : Nat) (hg : g < 4) : exsMaskGrp (exsGrpClear m g) = exsGrpClear4 (exsMaskGrp m) g :=`
+- **exsGrpBits_getLsbD** (line 236): `theorem exsGrpBits_getLsbD : ∀ g, g < 4 → ∀ l, l < 32 → ((0xFF#32) <<< (g * 8)).getLsbD l = decide (l / 8 = g) :=`
+- **exsGrpClear_getLsbD** (line 240): `theorem exsGrpClear_getLsbD (m : BitVec 32) (g l : Nat) (hg : g < 4) (hl : l < 32) : (exsGrpClear m g).getLsbD l = (m.getLsbD l && !decide (l / 8 = g)) :=`
+- **exsGrpAt_of_getLsbD** (line 247): `theorem exsGrpAt_of_getLsbD (m : BitVec 32) (l : Nat) (hl : l < 32) (h : m.getLsbD l = true) : exsGrpAt m (l / 8) = true :=`
+- **exsGrpSeqMg_nodup** (line 259): `theorem exsGrpSeqMg_nodup : ∀ mg : BitVec 4, (exsGrpSeqMg mg).Nodup :=`
+- **exsGrpSeqMg_complete** (line 262): `theorem exsGrpSeqMg_complete : ∀ mg : BitVec 4, ∀ g, g < 4 → mg.getLsbD g = true → g ∈ exsGrpSeqMg mg :=`
+- **exsGrpSeqMg_sound** (line 266): `theorem exsGrpSeqMg_sound : ∀ mg : BitVec 4, ∀ g ∈ exsGrpSeqMg mg, g < 4 ∧ mg.getLsbD g = true :=`
+- **exsGrpSeqMg_sorted** (line 271): `theorem exsGrpSeqMg_sorted : ∀ mg : BitVec 4, ∀ (i : Nat) (_ : i < (exsGrpSeqMg mg).length - 1), (exsGrpSeqMg mg).getD i 0 < (exsGrpSeqMg mg).getD (i + 1) 0 :=`
+- **exsGrpSeqMg_length** (line 276): `theorem exsGrpSeqMg_length : ∀ mg : BitVec 4, (exsGrpSeqMg mg).length ≤ 4 :=`
+- **exsGrpSeq_covers** (line 281): `theorem exsGrpSeq_covers (m : BitVec 32) (l : Nat) (hl : l < 32) (h : m.getLsbD l = true) : l / 8 ∈ exsGrpSeq m :=`
+- **exsGrpSeq_lane_exactly_once** (line 291): `theorem exsGrpSeq_lane_exactly_once (m : BitVec 32) (l : Nat) (hl : l < 32) (h : m.getLsbD l = true) : (exsGrpSeq m).Nodup ∧ l / 8 ∈ exsGrpSeq m :=`
+- **exs_test_vec_finish** (line 566): `theorem exs_test_vec_finish : exsTestVecFinal.phase = .finish :=`
+- **exs_test_vec_mask_cleared** (line 567): `theorem exs_test_vec_mask_cleared : exsTestVecFinal.mask = 0#32 :=`
+- **exs_test_vec_mask_fidelity** (line 569): `theorem exs_test_vec_mask_fidelity : (exsSfuEnqBitsV exsTestVecFinal).wvdMask = 0x0000FFFF#32 :=`
+- **exs_test_vec_enq_valid** (line 571): `theorem exs_test_vec_enq_valid : exsSfuEnqValidV exsTestVecFinal = true :=`
+- **exs_test_vec_lane3** (line 574): `theorem exs_test_vec_lane3 : (exsSfuEnqBitsV exsTestVecFinal).wb 3 = 4#32 :=`
+- **exs_test_vec_lane9** (line 576): `theorem exs_test_vec_lane9 : (exsSfuEnqBitsV exsTestVecFinal).wb 9 = 10#32 :=`
+- **exs_test_vec_lane20_unserved** (line 580): `theorem exs_test_vec_lane20_unserved : (exsSfuEnqBitsV exsTestVecFinal).wb 20 = 0#32 :=`
+- **exs_test_vec_ctrl_passthrough** (line 583): `theorem exs_test_vec_ctrl_passthrough : (exsSfuEnqBitsV exsTestVecFinal).regIdxw = 5#8 ∧ (exsSfuEnqBitsV exsTestVecFinal).wid = 2#3 ∧ (exsSfuEnqBitsV exsTestVecFinal).wvd = true :=`
+- **exs_test_vec_pop** (line 589): `theorem exs_test_vec_pop : let fin :=`
+- **exs_test_vec_stall_stable** (line 596): `theorem exs_test_vec_stall_stable : let s1 :=`
+- **exs_test_bug1_lane3** (line 616): `theorem exs_test_bug1_lane3 : (exsSfuEnqBitsV exsTestBug1Final).wb 3 = 1#32 :=`
+- **exs_test_bug1_ne_spec** (line 618): `theorem exs_test_bug1_ne_spec : (exsSfuEnqBitsV exsTestBug1Final).wb 3 ≠ divSpecQ (0x80000000 : BitVec 32) 1 false :=`
+- **exs_test_bug1_lane0_dummy** (line 622): `theorem exs_test_bug1_lane0_dummy : (exsSfuEnqBitsV exsTestBug1Final).wb 0 = 1#32 :=`
+- **exs_test_scalar_result** (line 638): `theorem exs_test_scalar_result : exsSfuWbX exsTestScalarFinal = 0xFFFFFFFD#32 :=`
+- **exs_test_scalar_valid** (line 640): `theorem exs_test_scalar_valid : exsSfuEnqValidX exsTestScalarFinal = true ∧ exsSfuEnqValidV exsTestScalarFinal = false :=`
+- **exs_test_reverse** (line 660): `theorem exs_test_reverse : (exsSfuEnqBitsV exsTestRevFinal).wb 5 = 6#32 :=`
+- **exs_test_reverse_eq_spec** (line 662): `theorem exs_test_reverse_eq_spec : (exsSfuEnqBitsV exsTestRevFinal).wb 5 = divSpecR (20 : BitVec 32) 7 false :=`
+- **exs_test_zero_mask** (line 674): `theorem exs_test_zero_mask : exsTestZeroMaskFinal.phase = .finish ∧ (exsSfuEnqBitsV exsTestZeroMaskFinal).wvdMask = 0#32 :=`
+- **exs_test_in_ready** (line 679): `theorem exs_test_in_ready : exsSfuInReady exsSfuInit = true ∧ exsSfuInReady exsTestVecFinal = false :=`
+- **exsMgFire4** (line 698): `theorem exsMgFire4 : ∀ mg : BitVec 4, exsMgFire (exsMgFire (exsMgFire (exsMgFire mg))) = 0#4 :=`
+- **exsSfu_enqBitsV_mask** (line 702): `theorem exsSfu_enqBitsV_mask (s : ExsSfuState) : (exsSfuEnqBitsV s).wvdMask = s.buf.mask :=`
+- **exsSfu_enqValidV_iff** (line 706): `theorem exsSfu_enqValidV_iff (s : ExsSfuState) : exsSfuEnqValidV s = true ↔ s.phase = .finish ∧ s.buf.ctrl.wvd = true :=`
+- **exsSfu_enqValidX_iff** (line 711): `theorem exsSfu_enqValidX_iff (s : ExsSfuState) : exsSfuEnqValidX s = true ↔ s.phase = .finish ∧ s.buf.ctrl.wxd = true :=`
+- **exsSfu_finish_stable** (line 716): `theorem exsSfu_finish_stable (cfg : ExsSfuCfg) (s : ExsSfuState) (e : ExsSfuEnv) (hfin : s.phase = .finish) (ho : exsSfuORdy s e.rdyV e.rdyX = false) : exsSfuStep cfg s e = s :=`
+- **exsSfuStep_buf_of_not_idle** (line 722): `theorem exsSfuStep_buf_of_not_idle (cfg : ExsSfuCfg) (s : ExsSfuState) (e : ExsSfuEnv) (h : s.phase ≠ .idle) : (exsSfuStep cfg s e).buf = s.buf :=`
+- **exsSfuStep_busy_vec** (line 734): `theorem exsSfuStep_busy_vec (cfg : ExsSfuCfg) (s : ExsSfuState) (e : ExsSfuEnv) (hbusy : s.phase = .busy) (hvec : s.buf.ctrl.isvec = true) (hfire : e.grpFire = true) : exsSfuStep cfg s e = { s with mask :=`
+- **exsSfuStep_busy_vec_char** (line 749): `theorem exsSfuStep_busy_vec_char (cfg : ExsSfuCfg) (s : ExsSfuState) (e : ExsSfuEnv) (hbusy : s.phase = .busy) (hvec : s.buf.ctrl.isvec = true) (hfire : e.grpFire = true) : (exsSfuStep cfg s e).phase = .finish ∨ ((exsSfuStep cfg s e).phase = .busy ∧ exsMaskGrp (exsSfuStep cfg s e).mask = exsMgFire (exsMaskGrp s.mask)) :=`
+- **exsSfuServedOk_accept** (line 782): `theorem exsSfuServedOk_accept (cfg : ExsSfuCfg) (s : ExsSfuState) (e : ExsSfuEnv) (h : s.phase = .idle) (hv : e.inValid = true) (hf : s.bufFull = false) : exsSfuServedOk cfg e.inData (exsSfuStep cfg s e) :=`
+- **exsSfuServedOk_step** (line 797): `theorem exsSfuServedOk_step (cfg : ExsSfuCfg) (d : ExsVExeData) (s : ExsSfuState) (e : ExsSfuEnv) (h : exsSfuServedOk cfg d s) (hphase : s.phase ≠ .idle) (hnext : (exsSfuStep cfg s e).phase ≠ .idle) : exsSfuServedOk cfg d (exsSfuStep cfg s e) :=`
+- **exsSfuServedOk_run** (line 870): `theorem exsSfuServedOk_run (cfg : ExsSfuCfg) (d : ExsVExeData) (s : ExsSfuState) (envs : List ExsSfuEnv) (h : exsSfuServedOk cfg d s) (hphase : s.phase ≠ .idle) (hstay : ∀ pre suf : List ExsSfuEnv, pre ++ suf = envs → (exsSfuRun cfg s pre).phase ≠ .idle) : exsSfuServedOk cfg d (exsSfuRun cfg s envs) :=`
+- **exsSfu_vec_lane_correct** (line 889): `theorem exsSfu_vec_lane_correct (cfg : ExsSfuCfg) (d : ExsVExeData) (s : ExsSfuState) (envs : List ExsSfuEnv) (h : exsSfuServedOk cfg d s) (hphase : s.phase ≠ .idle) (hstay : ∀ pre suf : List ExsSfuEnv, pre ++ suf = envs → (exsSfuRun cfg s pre).phase ≠ .idle) (hfin : (exsSfuRun cfg s envs).phase = .finish) (hvec : d.ctrl.isvec = true) (l : Nat) (hl : l < 32) (hact : d.mask.getLsbD l = true) : (exsSfuRun cfg s envs).outData l = cfg.grpResult (l / 8) (l % 8) :=`
+- **exsSfu_mask_fidelity** (line 905): `theorem exsSfu_mask_fidelity (cfg : ExsSfuCfg) (s : ExsSfuState) (e : ExsSfuEnv) (es : List ExsSfuEnv) (h : s.phase = .idle) (hv : e.inValid = true) (hf : s.bufFull = false) (hstay : ∀ pre suf : List ExsSfuEnv, pre ++ suf = es → (exsSfuRun cfg (exsSfuStep cfg s e) pre).phase ≠ .idle) : (exsSfuEnqBitsV (exsSfuRun cfg (exsSfuStep cfg s e) es)).wvdMask = e.inData.mask :=`
+- **exsSfu_not_busy_absorb** (line 919): `theorem exsSfu_not_busy_absorb (cfg : ExsSfuCfg) (s : ExsSfuState) (es : List ExsSfuEnv) (hnb : s.phase ≠ .busy) (hnoin : ∀ e ∈ es, e.inValid = false) : (exsSfuRun cfg s es).phase ≠ .busy :=`
+- **exsSfuStep_busy_vec_maskGrp_ne** (line 936): `theorem exsSfuStep_busy_vec_maskGrp_ne (cfg : ExsSfuCfg) (s : ExsSfuState) (e : ExsSfuEnv) (hbusy : s.phase = .busy) (hvec : s.buf.ctrl.isvec = true) (hfire : e.grpFire = true) (hb : (exsSfuStep cfg s e).phase = .busy) : exsMaskGrp (exsSfuStep cfg s e).mask ≠ 0 :=`
+- **exsSfu_vec_terminates_aux** (line 959): `theorem exsSfu_vec_terminates_aux (cfg : ExsSfuCfg) (s : ExsSfuState) (es : List ExsSfuEnv) (hvec : s.buf.ctrl.isvec = true) (hpre : s.phase = .busy → exsMaskGrp s.mask ≠ 0) (hfire : ∀ e ∈ es, e.grpFire = true) (hnoin : ∀ e ∈ es, e.inValid = false) (hfin : (exsSfuRun cfg s es).phase = .busy) : exsMgFireN es.length (exsMaskGrp s.mask) ≠ 0 :=`
+- **exsSfu_vec_terminates** (line 1011): `theorem exsSfu_vec_terminates (cfg : ExsSfuCfg) (s : ExsSfuState) (es : List ExsSfuEnv) (hbusy : s.phase = .busy) (hvec : s.buf.ctrl.isvec = true) (hlen : es.length = 4) (hfire : ∀ e ∈ es, e.grpFire = true) (hnoin : ∀ e ∈ es, e.inValid = false) : (exsSfuRun cfg s es).phase ≠ .busy :=`
+- **exsSfu_q3_silent_drop** (line 1060): `theorem exsSfu_q3_silent_drop (s : ExsSfuState) (hp : s.phase = .finish) (hvec : s.buf.ctrl.isvec = true) (hwvd : s.buf.ctrl.wvd = false) (hwxd : s.buf.ctrl.wxd = false) (rdyV rdyX : Bool) : exsSfuORdy s rdyV rdyX = rdyV ∧ exsSfuEnqValidV s = false ∧ exsSfuEnqValidX s = false :=`
+- **exs_test_q4_bad_mask** (line 1080): `theorem exs_test_q4_bad_mask : let fin :=`
+- **exsFpu_wvMask** (line 1152): `theorem exsFpu_wvMask (o : ExsFpuOut) : (exsFpuWbV o).wvdMask = o.vecMask :=`
+- **exsFpu_mask_fidelity** (line 1155): `theorem exsFpu_mask_fidelity (o : ExsFpuOut) (m : BitVec 32) (h : o.vecMask = m) : (exsFpuWbV o).wvdMask = m :=`
+- **exsFpu_q12_drop** (line 1160): `theorem exsFpu_q12_drop (o : ExsFpuOut) (rdyV rdyX : Bool) (hv : o.wvd = false) (hx : o.wxd = false) : exsFpuOutVValid o = false ∧ exsFpuOutXValid o = false ∧ exsFpuOutRdy o rdyV rdyX = rdyX :=`
+- **exsFpu_q12_double** (line 1168): `theorem exsFpu_q12_double (o : ExsFpuOut) (rdyV rdyX : Bool) (hv : o.wvd = true) (hx : o.wxd = true) : exsFpuOutRdy o rdyV rdyX = rdyV ∧ exsFpuOutVValid o = o.valid ∧ exsFpuOutXValid o = o.valid :=`
+- **exsTc_in_passthrough** (line 1249): `theorem exsTc_in_passthrough (v r : Bool) : v = v ∧ r = r :=`
+- **exsTc_wvdMask_allOnes** (line 1252): `theorem exsTc_wvdMask_allOnes (o : ExsTcOut) : (exsTcEnqBits o).wvdMask = BitVec.allOnes 32 :=`
+- **exsTc_enqValid** (line 1256): `theorem exsTc_enqValid (o : ExsTcOut) : exsTcEnqValid o = o.valid ∧ (exsTcEnqBits o).wvd = o.valid :=`
+- **exsTc_ctrl_passthrough** (line 1260): `theorem exsTc_ctrl_passthrough (o : ExsTcOut) (r : BitVec 8) (w : BitVec 3) (h : o.ctrl = ⟨r, w⟩) : (exsTcEnqBits o).regIdxw = r ∧ (exsTcEnqBits o).wid = w :=`
+
+### `Ventus/Arith/ExeVALU.lean`
+
+- **exv_vmandnot_spec** (line 317): `theorem exv_vmandnot_spec (m : Bool) (in1 in2 in3 lane : BitVec 32) : exvLaneRdV2 exvFN_VMANDNOT false m in1 in2 in3 lane = ~~~in1 &&& in2 :=`
+- **exv_vmornot_spec** (line 321): `theorem exv_vmornot_spec (m : Bool) (in1 in2 in3 lane : BitVec 32) : exvLaneRdV2 exvFN_VMORNOT false m in1 in2 in3 lane = ~~~in1 ||| in2 :=`
+- **exv_vmnand_spec** (line 325): `theorem exv_vmnand_spec (m : Bool) (in1 in2 in3 lane : BitVec 32) : exvLaneRdV2 exvFN_VMNAND false m in1 in2 in3 lane = ~~~(in1 &&& in2) :=`
+- **exv_vmnor_spec** (line 329): `theorem exv_vmnor_spec (m : Bool) (in1 in2 in3 lane : BitVec 32) : exvLaneRdV2 exvFN_VMNOR false m in1 in2 in3 lane = ~~~(in1 ||| in2) :=`
+- **exv_vmxnor_spec** (line 333): `theorem exv_vmxnor_spec (m : Bool) (in1 in2 in3 lane : BitVec 32) : exvLaneRdV2 exvFN_VMXNOR false m in1 in2 in3 lane = ~~~(in1 ^^^ in2) :=`
+- **exv_vmandnot_rev_spec** (line 338): `theorem exv_vmandnot_rev_spec (m : Bool) (in1 in2 in3 lane : BitVec 32) : exvLaneRdV2 exvFN_VMANDNOT true m in1 in2 in3 lane = ~~~in1 &&& in1 :=`
+- **exv_vid_spec** (line 343): `theorem exv_vid_spec (rev m : Bool) (in1 in2 in3 lane : BitVec 32) : exvLaneRdV2 exvFN_VID rev m in1 in2 in3 lane = lane :=`
+- **exv_vmerge_spec** (line 348): `theorem exv_vmerge_spec (rev m : Bool) (in1 in2 in3 lane : BitVec 32) : exvLaneRdV2 exvFN_VMERGE rev m in1 in2 in3 lane = (if m then in1 else in2) :=`
+- **exv_seq_cmp_spec** (line 353): `theorem exv_seq_cmp_spec (rev m : Bool) (in1 in2 in3 lane : BitVec 32) : exvLaneRdV2 exvFN_SEQ rev m in1 in2 in3 lane = (if exvAluIn2 exvFN_SEQ rev in1 in2 = exvAluIn1 exvFN_SEQ rev in1 in2 then 1#32 else 0#32) :=`
+- **exv_slt_cmp_spec** (line 359): `theorem exv_slt_cmp_spec (m : Bool) (in1 in2 in3 lane : BitVec 32) : exvLaneRdV2 exvFN_SLT false m in1 in2 in3 lane = (if BitVec.slt in1 in2 then 1#32 else 0#32) :=`
+- **exv_sltu_cmp_spec** (line 364): `theorem exv_sltu_cmp_spec (m : Bool) (in1 in2 in3 lane : BitVec 32) : exvLaneRdV2 exvFN_SLTU false m in1 in2 in3 lane = (if BitVec.ult in1 in2 then 1#32 else 0#32) :=`
+- **exv_sge_cmp_spec** (line 370): `theorem exv_sge_cmp_spec (m : Bool) (in1 in2 in3 lane : BitVec 32) : exvLaneRdV2 exvFN_SGE false m in1 in2 in3 lane = (if BitVec.sle in2 in1 then 1#32 else 0#32) :=`
+- **exv_sgeu_cmp_spec** (line 375): `theorem exv_sgeu_cmp_spec (m : Bool) (in1 in2 in3 lane : BitVec 32) : exvLaneRdV2 exvFN_SGEU false m in1 in2 in3 lane = (if BitVec.ule in2 in1 then 1#32 else 0#32) :=`
+- **exv_v1_sge_out_spec** (line 381): `theorem exv_v1_sge_out_spec (m : Bool) (in1 in2 in3 lane : BitVec 32) : exvLaneRdV1 exvFN_SGE false m in1 in2 in3 lane = (if BitVec.slt in1 in2 then 1#32 else 0#32) :=`
+- **exv_sge_rev_cmp_spec** (line 387): `theorem exv_sge_rev_cmp_spec (m : Bool) (in1 in2 in3 lane : BitVec 32) : exvLaneRdV2 exvFN_SGE true m in1 in2 in3 lane = (if BitVec.sle in1 in2 then 1#32 else 0#32) :=`
+- **exv_add_rev_spec** (line 393): `theorem exv_add_rev_spec (m : Bool) (in1 in2 in3 lane : BitVec 32) : exvLaneRdV2 exvFN_ADD true m in1 in2 in3 lane = in2 + in1 :=`
+- **exv_v2_eq_v1_of_not_cmp** (line 398): `theorem exv_v2_eq_v1_of_not_cmp (fn : BitVec 6) (rev m : Bool) (in1 in2 in3 lane : BitVec 32) (h : exvIsCmpFn fn = false) : exvLaneRdV2 fn rev m in1 in2 in3 lane = exvLaneRdV1 fn rev m in1 in2 in3 lane :=`
+- **exv_pack_spec** (line 404): `theorem exv_pack_spec (fn : BitVec 6) (alu0 m o : BitVec 32) (h : exvIsVmNegOut fn = false) : exvWrRd0 fn false alu0 m o = m &&& o :=`
+- **exv_pack_neg_spec** (line 410): `theorem exv_pack_neg_spec (rm : Bool) (alu0 m o : BitVec 32) : exvWrRd0 exvFN_VMNAND rm alu0 m o = m &&& ~~~o :=`
+- **exv_wvdMask_final** (line 416): `theorem exv_wvdMask_final (m : BitVec 32) : exvWvdMask m = m :=`
+- **exv_ifmask_spec** (line 419): `theorem exv_ifmask_spec (c : BitVec 32) : exvIfMask c = ~~~c :=`
+- **exv_ifmask_step_8_4** (line 635): `theorem exv_ifmask_step_8_4 (c : BitVec 4) (o : BitVec 8) : exvSplitIfMaskStep (soft :=`
+- **exv_ifmask_two_batch_correct** (line 641): `theorem exv_ifmask_two_batch_correct (c1 c2 : BitVec 4) : exvSplitIfMaskStep (soft :=`
+- **exv_ifmask_maxIter3_broken** (line 649): `theorem exv_ifmask_maxIter3_broken (c1 c2 c3 : BitVec 2) : exvSplitIfMaskStep (soft :=`
+- **exv_ifmask_maxIter3_witness** (line 656): `theorem exv_ifmask_maxIter3_witness : exvSplitIfMaskStep (soft :=`
+- **exvSplit_add_trace** (line 715): `theorem exvSplit_add_trace : let st1 :=`
+- **exvSplit_seq_simt_trace** (line 757): `theorem exvSplit_seq_simt_trace : let st1 :=`
+- **exvSplit_vid_trace** (line 768): `theorem exvSplit_vid_trace : let inp : ExvSplitIn 8 :=`
+- **exvSplit_simt_ifMask_broken_trace** (line 817): `theorem exvSplit_simt_ifMask_broken_trace : let st1 :=`
+- **exvSplit_vmerge_mask_not_shifted_trace** (line 849): `theorem exvSplit_vmerge_mask_not_shifted_trace : let st1 :=`
+- **exvSplit_simt_drop_witness_trace** (line 864): `theorem exvSplit_simt_drop_witness_trace : let st1 :=`
+
+### `Ventus/Arith/IntDivMod.lean`
+
+- **div_test_xlen4_exhaustive** (line 487): `theorem div_test_xlen4_exhaustive : divCheckAll 4 = true :=`
+- **div_test_xlen4_corners** (line 490): `theorem div_test_xlen4_corners : divCountCorners 4 = 9 :=`
+- **div_test_xlen8_exhaustive** (line 493): `theorem div_test_xlen8_exhaustive : divCheckAll 8 = true :=`
+- **div_test_xlen8_corners** (line 496): `theorem div_test_xlen8_corners : divCountCorners 8 = 129 :=`
+- **div_test_32_div_by_zero_u** (line 500): `theorem div_test_32_div_by_zero_u : divExec (5 : BitVec 32) 0 false = (0xFFFFFFFF#32, 5#32) :=`
+- **div_test_32_div_by_zero_s** (line 502): `theorem div_test_32_div_by_zero_s : divExec (0xFFFFFFF9 : BitVec 32) 0 true = (0xFFFFFFFF#32, 0xFFFFFFF9#32) :=`
+- **div_test_32_zero_div_zero** (line 504): `theorem div_test_32_zero_div_zero : divExec (0 : BitVec 32) 0 false = (0xFFFFFFFF#32, 0#32) :=`
+- **div_test_32_overflow_fresh** (line 506): `theorem div_test_32_overflow_fresh : divExec (0x80000000 : BitVec 32) 0xFFFFFFFF true = (0x80000000#32, 0#32) :=`
+- **div_test_32_zero_dividend** (line 508): `theorem div_test_32_zero_dividend : divExec (0 : BitVec 32) 5 false = (0#32, 0#32) :=`
+- **div_test_32_zeroq** (line 510): `theorem div_test_32_zeroq : divExec (1 : BitVec 32) 0x80000000 false = (0#32, 1#32) :=`
+- **div_test_32_div_x1** (line 514): `theorem div_test_32_div_x1 : divExec (5 : BitVec 32) 1 false = (5#32, 0#32) :=`
+- **div_test_32_basic_u** (line 516): `theorem div_test_32_basic_u : divExec (7 : BitVec 32) 2 false = (3#32, 1#32) :=`
+- **div_test_32_neg_pos** (line 518): `theorem div_test_32_neg_pos : divExec (0xFFFFFFF9 : BitVec 32) 2 true = (0xFFFFFFFD#32, 0xFFFFFFFF#32) :=`
+- **div_test_32_pos_neg** (line 520): `theorem div_test_32_pos_neg : divExec (7 : BitVec 32) 0xFFFFFFFE true = (0xFFFFFFFD#32, 1#32) :=`
+- **div_test_32_neg_neg** (line 522): `theorem div_test_32_neg_neg : divExec (0xFFFFFFF9 : BitVec 32) 0xFFFFFFFE true = (3#32, 0xFFFFFFFF#32) :=`
+- **div_test_32_intmin_div2** (line 524): `theorem div_test_32_intmin_div2 : divExec (0x80000000 : BitVec 32) 2 true = (0xC0000000#32, 0#32) :=`
+- **div_test_32_big_div2_u** (line 526): `theorem div_test_32_big_div2_u : divExec (0xFFFFFFFD : BitVec 32) 2 false = (0x7FFFFFFE#32, 1#32) :=`
+- **div_test_32_random_u** (line 528): `theorem div_test_32_random_u : divExec (0xDEADBEEF : BitVec 32) 0x1234 false = (0xC3BA5#32, 0x76B#32) :=`
+- **div_test_32_random_s** (line 530): `theorem div_test_32_random_s : divExec (0xDEADBEEF : BitVec 32) 0x1234 true = (0xFFFE2B63#32, 0xFFFFF8D3#32) :=`
+- **div_test_32_recovery_unsigned** (line 535): `theorem div_test_32_recovery_unsigned : divExec (4 : BitVec 32) 3 false = (1#32, 1#32) :=`
+- **div_test_32_recovery_signed** (line 537): `theorem div_test_32_recovery_signed : divExec (0xFFFFFFFC : BitVec 32) 3 true = (0xFFFFFFFF#32, 0xFFFFFFFF#32) :=`
+- **div_test_32_recovery_eq_spec** (line 539): `theorem div_test_32_recovery_eq_spec : divExec (4 : BitVec 32) 3 false = (divSpecQ (4 : BitVec 32) 3 false, divSpecR (4 : BitVec 32) 3 false) :=`
+- **div_test_32_bug1_unsigned** (line 544): `theorem div_test_32_bug1_unsigned : divExec (0x80000000 : BitVec 32) 1 false = (1#32, 0#32) :=`
+- **div_test_32_bug1_unsigned_max** (line 546): `theorem div_test_32_bug1_unsigned_max : divExec (0xFFFFFFFF : BitVec 32) 1 false = (1#32, 0#32) :=`
+- **div_test_32_bug1_signed** (line 548): `theorem div_test_32_bug1_signed : divExec (0x80000000 : BitVec 32) 1 true = (0xFFFFFFFF#32, 0#32) :=`
+- **div_test_32_bug1_ne_spec** (line 550): `theorem div_test_32_bug1_ne_spec : divExec (0x80000000 : BitVec 32) 1 false ≠ (divSpecQ (0x80000000 : BitVec 32) 1 false, divSpecR (0x80000000 : BitVec 32) 1 false) :=`
+- **div_test_stale_zeroQ_bug2** (line 561): `theorem div_test_stale_zeroQ_bug2 : divOutQ divBug2Seq = 0x80000000#32 ∧ divOutR divBug2Seq = 0x80000000#32 :=`
+- **div_test_stale_zeroQ_ne_spec** (line 563): `theorem div_test_stale_zeroQ_ne_spec : divOutR divBug2Seq ≠ divSpecR (0x80000000 : BitVec 32) 0xFFFFFFFF true :=`
+- **div_t1_divByZero** (line 574): `theorem div_t1_divByZero {xLen : Nat} (s : DivState xLen) (i : DivInputs xLen) (h : s.phase = .idle) (hv : i.in_valid = true) (hdz : i.d = 0) : (divStep s i).phase = .finish ∧ divOutQ (divStep s i) = BitVec.allOnes xLen ∧ divOutR (divStep s i) = i.a :=`
+- **div_t1_overflow** (line 584): `theorem div_t1_overflow {xLen : Nat} (s : DivState xLen) (i : DivInputs xLen) (h : s.phase = .idle) (hv : i.in_valid = true) (hovf : divOvfDet i.a i.d i.signed = true) (hndz : i.d ≠ 0) : (divStep s i).phase = .finish ∧ divOutQ (divStep s i) = divIntMin xLen ∧ divOutR (divStep s i) = (if s.zeroQ then i.a else 0) :=`
+- **div_t1_overflow_r_zero** (line 595): `theorem div_t1_overflow_r_zero {xLen : Nat} (s : DivState xLen) (i : DivInputs xLen) (h : s.phase = .idle) (hv : i.in_valid = true) (hovf : divOvfDet i.a i.d i.signed = true) (hndz : i.d ≠ 0) (hzq : s.zeroQ = false) : divOutR (divStep s i) = 0 :=`
+- **div_t1_overflow_r_stale** (line 604): `theorem div_t1_overflow_r_stale {xLen : Nat} (s : DivState xLen) (i : DivInputs xLen) (h : s.phase = .idle) (hv : i.in_valid = true) (hovf : divOvfDet i.a i.d i.signed = true) (hndz : i.d ≠ 0) (hzq : s.zeroQ = true) : divOutR (divStep s i) = i.a :=`
+- **div_t1_zeroQ** (line 614): `theorem div_t1_zeroQ {xLen : Nat} (s : DivState xLen) (i j : DivInputs xLen) (h : s.phase = .idle) (hv : i.in_valid = true) (hnovf : divOvfDet i.a i.d i.signed = false) (hndz : i.d ≠ 0) (hlt : BitVec.ult (divAbs i.a i.signed) (divAbs i.d i.signed) = true) : (divStep (divStep s i) j).phase = .finish ∧ divOutQ (divStep (divStep s i) j) = 0 ∧ divOutR (divStep (divStep s i) j) = i.a :=`
+- **divRunTo_finish** (line 629): `theorem divRunTo_finish {xLen : Nat} (s : DivState xLen) (i : DivInputs xLen) (h : s.phase = .finish) : ∀ n, (divRunTo s i n).phase = .finish :=`
+- **divRunTo_step** (line 634): `theorem divRunTo_step {xLen : Nat} (s : DivState xLen) (i : DivInputs xLen) (h : s.phase ≠ .finish) (n : Nat) : divRunTo s i (n + 1) = divRunTo (divStep s i) i n :=`
+- **divRunTo_recovery_finish** (line 640): `theorem divRunTo_recovery_finish {xLen : Nat} (s : DivState xLen) (i : DivInputs xLen) (h : s.phase = .recovery) {n : Nat} (hn : 1 ≤ n) : (divRunTo s i n).phase = .finish :=`
+- **div_toNat_eq_zero** (line 652): `theorem div_toNat_eq_zero {w : Nat} {c : BitVec w} (h : c.toNat = 0) : c = 0 :=`
+- **div_toNat_sub_one** (line 656): `theorem div_toNat_sub_one {w : Nat} (hw : 1 ≤ w) {c : BitVec w} (h : c ≠ 0) : (c - 1).toNat = c.toNat - 1 :=`
+- **div_compute_finish** (line 673): `theorem div_compute_finish {xLen : Nat} (s : DivState xLen) (i : DivInputs xLen) : ∀ k : Nat, s.phase = .compute → s.cnt.toNat ≤ k → (divRunTo s i (k + 2)).phase = .finish :=`
+- **div_terminates** (line 723): `theorem div_terminates {xLen : Nat} (s : DivState xLen) (i : DivInputs xLen) (h : s.phase = .idle) (hv : i.in_valid = true) : (divRunTo s i (2 ^ divW xLen + 4)).phase = .finish :=`
+- **div_in_ready_iff** (line 755): `theorem div_in_ready_iff {xLen : Nat} (s : DivState xLen) : divInReady s = true ↔ s.phase = .idle :=`
+- **div_out_valid_iff** (line 760): `theorem div_out_valid_iff {xLen : Nat} (s : DivState xLen) : divOutValid s = true ↔ s.phase = .finish :=`
+- **div_finish_stable** (line 767): `theorem div_finish_stable {xLen : Nat} (s : DivState xLen) (i : DivInputs xLen) (h : s.phase = .finish) (hr : i.out_ready = false) : (divStep s i).phase = .finish ∧ divOutQ (divStep s i) = divOutQ s ∧ divOutR (divStep s i) = divOutR s ∧ divOutValid (divStep s i) = true :=`
+
+### `Ventus/Arith/IntDivModFixed.lean`
+
+- **dvfT_i17_unsigned** (line 245): `theorem dvfT_i17_unsigned : dvfExec (0x80000000 : BitVec 32) 1 false = (0x80000000#32, 0#32) :=`
+- **dvfT_i17_unsigned_max** (line 247): `theorem dvfT_i17_unsigned_max : dvfExec (0xFFFFFFFF : BitVec 32) 1 false = (0xFFFFFFFF#32, 0#32) :=`
+- **dvfT_i17_signed** (line 249): `theorem dvfT_i17_signed : dvfExec (0x80000000 : BitVec 32) 1 true = (0x80000000#32, 0#32) :=`
+- **dvfT_i17_eq_spec** (line 251): `theorem dvfT_i17_eq_spec : dvfExec (0x80000000 : BitVec 32) 1 false = (divSpecQ (0x80000000 : BitVec 32) 1 false, divSpecR (0x80000000 : BitVec 32) 1 false) :=`
+- **dvfT_i18_unsigned** (line 257): `theorem dvfT_i18_unsigned : dvfExec (4 : BitVec 32) 3 false = (1#32, 1#32) :=`
+- **dvfT_i18_signed** (line 259): `theorem dvfT_i18_signed : dvfExec (0xFFFFFFFC : BitVec 32) 3 true = (0xFFFFFFFF#32, 0xFFFFFFFF#32) :=`
+- **dvfT_i18_random_u** (line 261): `theorem dvfT_i18_random_u : dvfExec (0xDEADBEEF : BitVec 32) 0x1234 false = (0xC3BA5#32, 0x76B#32) :=`
+- **dvfT_i18_random_s** (line 263): `theorem dvfT_i18_random_s : dvfExec (0xDEADBEEF : BitVec 32) 0x1234 true = (0xFFFE2B63#32, 0xFFFFF8D3#32) :=`
+- **dvfT_i18_eq_spec** (line 266): `theorem dvfT_i18_eq_spec : dvfExec (4 : BitVec 32) 3 false = (divSpecQ (4 : BitVec 32) 3 false, divSpecR (4 : BitVec 32) 3 false) :=`
+- **dvfT_i19_fixed** (line 277): `theorem dvfT_i19_fixed : dvfOutQ dvfBug2Seq = 0x80000000#32 ∧ dvfOutR dvfBug2Seq = 0#32 :=`
+- **dvfT_i19_eq_spec** (line 279): `theorem dvfT_i19_eq_spec : dvfOutR dvfBug2Seq = divSpecR (0x80000000 : BitVec 32) 0xFFFFFFFF true :=`
+- **dvf_t1_divByZero** (line 290): `theorem dvf_t1_divByZero {xLen : Nat} (s : DvfState xLen) (i : DivInputs xLen) (h : s.phase = .idle) (hv : i.in_valid = true) (hdz : i.d = 0) : (dvfStep s i).phase = .finish ∧ dvfOutQ (dvfStep s i) = BitVec.allOnes xLen ∧ dvfOutR (dvfStep s i) = i.a :=`
+- **dvf_t1_overflow** (line 300): `theorem dvf_t1_overflow {xLen : Nat} (s : DvfState xLen) (i : DivInputs xLen) (h : s.phase = .idle) (hv : i.in_valid = true) (hovf : divOvfDet i.a i.d i.signed = true) (hndz : i.d ≠ 0) : (dvfStep s i).phase = .finish ∧ dvfOutQ (dvfStep s i) = divIntMin xLen ∧ dvfOutR (dvfStep s i) = 0 :=`
+- **dvf_t1_zeroQ** (line 310): `theorem dvf_t1_zeroQ {xLen : Nat} (s : DvfState xLen) (i j : DivInputs xLen) (h : s.phase = .idle) (hv : i.in_valid = true) (hnovf : divOvfDet i.a i.d i.signed = false) (hndz : i.d ≠ 0) (hlt : BitVec.ult (divAbs i.a i.signed) (divAbs i.d i.signed) = true) : (dvfStep (dvfStep s i) j).phase = .finish ∧ dvfOutQ (dvfStep (dvfStep s i) j) = 0 ∧ dvfOutR (dvfStep (dvfStep s i) j) = i.a :=`
+- **dvf_pre_cnt_full** (line 322): `theorem dvf_pre_cnt_full {xLen : Nat} (s : DvfState xLen) (i : DivInputs xLen) (h : s.phase = .pre) (hzq : BitVec.ult s.unsignedA s.unsignedD = false) : (dvfStep s i).cnt = divIter (divLez s.unsignedA) (divLez s.unsignedD) :=`
+- **dvfRunTo_finish** (line 337): `theorem dvfRunTo_finish {xLen : Nat} (s : DvfState xLen) (i : DivInputs xLen) (h : s.phase = .finish) : ∀ n, (dvfRunTo s i n).phase = .finish :=`
+- **dvfRunTo_step** (line 342): `theorem dvfRunTo_step {xLen : Nat} (s : DvfState xLen) (i : DivInputs xLen) (h : s.phase ≠ .finish) (n : Nat) : dvfRunTo s i (n + 1) = dvfRunTo (dvfStep s i) i n :=`
+- **dvfRunTo_recovery_finish** (line 348): `theorem dvfRunTo_recovery_finish {xLen : Nat} (s : DvfState xLen) (i : DivInputs xLen) (h : s.phase = .recovery) {n : Nat} (hn : 1 ≤ n) : (dvfRunTo s i n).phase = .finish :=`
+- **dvf_compute_finish** (line 360): `theorem dvf_compute_finish {xLen : Nat} (s : DvfState xLen) (i : DivInputs xLen) : ∀ k : Nat, s.phase = .compute → s.cnt.toNat ≤ k → (dvfRunTo s i (k + 2)).phase = .finish :=`
+- **dvf_terminates** (line 408): `theorem dvf_terminates {xLen : Nat} (s : DvfState xLen) (i : DivInputs xLen) (h : s.phase = .idle) (hv : i.in_valid = true) : (dvfRunTo s i (2 ^ (divW xLen + 1) + 4)).phase = .finish :=`
+- **dvf_selPos_ne_selNeg** (line 441): `theorem dvf_selPos_ne_selNeg {xLen : Nat} (a : BitVec (xLen + 2)) : ¬(divSelPos a = true ∧ divSelNeg a = true) :=`
+- **dvf_compute_Q** (line 450): `theorem dvf_compute_Q {xLen : Nat} (s : DvfState xLen) (i : DivInputs xLen) (h : s.phase = .compute) : (dvfStep s i).Q = ((s.Q <<< 1) ||| (if divSelPos s.aReg then 1 else 0)) :=`
+- **dvf_compute_QN** (line 456): `theorem dvf_compute_QN {xLen : Nat} (s : DvfState xLen) (i : DivInputs xLen) (h : s.phase = .compute) : (dvfStep s i).QN = ((s.QN <<< 1) ||| (if divSelNeg s.aReg then 1 else 0)) :=`
+- **dvf_compute_aReg** (line 462): `theorem dvf_compute_aReg {xLen : Nat} (s : DvfState xLen) (i : DivInputs xLen) (h : s.phase = .compute) : (dvfStep s i).aReg = divANext s.aReg (divDNorm s.unsignedD (divLez s.unsignedD)) (divDNegNorm s.unsignedD (divLez s.unsignedD)) :=`
+- **dvf_test_xlen4_exhaustive** (line 478): `theorem dvf_test_xlen4_exhaustive : dvfCheckAll 4 = true :=`
+- **dvf_test_xlen8_exhaustive** (line 482): `theorem dvf_test_xlen8_exhaustive : dvfCheckAll 8 = true :=`
+- **dvf_test_32_div_by_zero_u** (line 485): `theorem dvf_test_32_div_by_zero_u : dvfExec (5 : BitVec 32) 0 false = (0xFFFFFFFF#32, 5#32) :=`
+- **dvf_test_32_div_by_zero_s** (line 487): `theorem dvf_test_32_div_by_zero_s : dvfExec (0xFFFFFFF9 : BitVec 32) 0 true = (0xFFFFFFFF#32, 0xFFFFFFF9#32) :=`
+- **dvf_test_32_zero_div_zero** (line 490): `theorem dvf_test_32_zero_div_zero : dvfExec (0 : BitVec 32) 0 false = (0xFFFFFFFF#32, 0#32) :=`
+- **dvf_test_32_overflow_fresh** (line 492): `theorem dvf_test_32_overflow_fresh : dvfExec (0x80000000 : BitVec 32) 0xFFFFFFFF true = (0x80000000#32, 0#32) :=`
+- **dvf_test_32_zero_dividend** (line 495): `theorem dvf_test_32_zero_dividend : dvfExec (0 : BitVec 32) 5 false = (0#32, 0#32) :=`
+- **dvf_test_32_zeroq** (line 497): `theorem dvf_test_32_zeroq : dvfExec (1 : BitVec 32) 0x80000000 false = (0#32, 1#32) :=`
+- **dvf_test_32_div_x1** (line 501): `theorem dvf_test_32_div_x1 : dvfExec (5 : BitVec 32) 1 false = (5#32, 0#32) :=`
+- **dvf_test_32_basic_u** (line 503): `theorem dvf_test_32_basic_u : dvfExec (7 : BitVec 32) 2 false = (3#32, 1#32) :=`
+- **dvf_test_32_neg_pos** (line 505): `theorem dvf_test_32_neg_pos : dvfExec (0xFFFFFFF9 : BitVec 32) 2 true = (0xFFFFFFFD#32, 0xFFFFFFFF#32) :=`
+- **dvf_test_32_pos_neg** (line 508): `theorem dvf_test_32_pos_neg : dvfExec (7 : BitVec 32) 0xFFFFFFFE true = (0xFFFFFFFD#32, 1#32) :=`
+- **dvf_test_32_neg_neg** (line 510): `theorem dvf_test_32_neg_neg : dvfExec (0xFFFFFFF9 : BitVec 32) 0xFFFFFFFE true = (3#32, 0xFFFFFFFF#32) :=`
+- **dvf_test_32_intmin_div2** (line 513): `theorem dvf_test_32_intmin_div2 : dvfExec (0x80000000 : BitVec 32) 2 true = (0xC0000000#32, 0#32) :=`
+- **dvf_test_32_big_div2_u** (line 515): `theorem dvf_test_32_big_div2_u : dvfExec (0xFFFFFFFD : BitVec 32) 2 false = (0x7FFFFFFE#32, 1#32) :=`
+- **dvf_test_32_spec_random_u** (line 519): `theorem dvf_test_32_spec_random_u : dvfExec (0xDEADBEEF : BitVec 32) 0x1234 false = (divSpecQ (0xDEADBEEF : BitVec 32) 0x1234 false, divSpecR (0xDEADBEEF : BitVec 32) 0x1234 false) :=`
+- **dvf_test_32_spec_random_s** (line 523): `theorem dvf_test_32_spec_random_s : dvfExec (0xDEADBEEF : BitVec 32) 0x1234 true = (divSpecQ (0xDEADBEEF : BitVec 32) 0x1234 true, divSpecR (0xDEADBEEF : BitVec 32) 0x1234 true) :=`
+- **dvf_test_32_spec_intmin_1_s** (line 527): `theorem dvf_test_32_spec_intmin_1_s : dvfExec (0x80000000 : BitVec 32) 1 true = (divSpecQ (0x80000000 : BitVec 32) 1 true, divSpecR (0x80000000 : BitVec 32) 1 true) :=`
+- **div_setWidth_ushiftRight** (line 539): `theorem div_setWidth_ushiftRight {xLen : Nat} (e : BitVec xLen) (s : Nat) : ((e.setWidth (xLen + 1)) >>> s).setWidth xLen = e >>> s :=`
+- **dvf_commonR_eq_orig_of_not_neg** (line 556): `theorem dvf_commonR_eq_orig_of_not_neg {xLen : Nat} (aReg dReg : BitVec (xLen + 2)) (dL : BitVec (divW xLen)) (h : aReg.msb = false) : dvfCommonRNext aReg dReg dL = divCommonRNext aReg dReg dL :=`
+- **dvf_match_out** (line 570): `theorem dvf_match_out {xLen : Nat} {s : DivState xLen} {t : DvfState xLen} (hm : dvfMatch s t) : divOutQ s = dvfOutQ t ∧ divOutR s = dvfOutR t :=`
+- **dvf_beq_zero_iff** (line 593): `theorem dvf_beq_zero_iff {w : Nat} (c : BitVec w) : (c == 0) = decide (c.toNat = 0) :=`
+- **dvf_cntNext_toNat** (line 609): `theorem dvf_cntNext_toNat {w w' : Nat} (hw : 1 ≤ w) (hw' : 1 ≤ w') (c : BitVec w) (c' : BitVec w') (h : c.toNat = c'.toNat) : (divCntNext c).toNat = (divCntNext c').toNat :=`
+- **dvf_cntNext_beq_zero** (line 624): `theorem dvf_cntNext_beq_zero {w w' : Nat} (c : BitVec w) (c' : BitVec w') (h : c.toNat = c'.toNat) : (divCntNext c == 0) = (divCntNext c' == 0) :=`
+- **dvf_step_match** (line 649): `theorem dvf_step_match {xLen : Nat} (s : DivState xLen) (t : DvfState xLen) (i : DivInputs xLen) (hm : dvfMatch s t) (hs : dvfSafeStep s) : dvfMatch (divStep s i) (dvfStep t i) :=`
+- **dvf_run_match** (line 716): `theorem dvf_run_match {xLen : Nat} (s : DivState xLen) (t : DvfState xLen) (i : DivInputs xLen) (n : Nat) (hm : dvfMatch s t) (hsafe : ∀ k, k ≤ n → dvfSafeStep (divRunTo s i k)) : dvfMatch (divRunTo s i n) (dvfRunTo t i n) :=`
+- **dvf_exec_eq_orig_of_safe** (line 741): `theorem dvf_exec_eq_orig_of_safe {xLen : Nat} (a d : BitVec xLen) (sgn : Bool) (hsafe : ∀ k, k ≤ 2 * xLen + 8 → dvfSafeStep (divRunTo (divStep (divInit xLen) ⟨true, a, d, sgn, true⟩) (divNop xLen) k)) : divExec a d sgn = dvfExec a d sgn :=`
+- **dvf_test_regr_xlen4** (line 769): `theorem dvf_test_regr_xlen4 : dvfRegrAll 4 = true :=`
+- **dvf_test_regr_xlen8** (line 772): `theorem dvf_test_regr_xlen8 : dvfRegrAll 8 = true :=`
+- **dvf_test_regr_full_xlen4** (line 787): `theorem dvf_test_regr_full_xlen4 : dvfRegrAllFull 4 = true :=`
+- **dvf_test_regr_full_xlen8** (line 788): `theorem dvf_test_regr_full_xlen8 : dvfRegrAllFull 8 = true :=`
+- **dvfT_regr_7_2** (line 791): `theorem dvfT_regr_7_2 : divExec (7 : BitVec 32) 2 false = dvfExec (7 : BitVec 32) 2 false :=`
+- **dvfT_regr_multitxn** (line 807): `theorem dvfT_regr_multitxn : dvfOutQ dvfSeqClean = divOutQ divSeqClean ∧ dvfOutR dvfSeqClean = divOutR divSeqClean ∧ dvfOutR dvfSeqClean = 0#32 :=`
+
+### `Ventus/Arith/Multiplier.lean`
+
+- **mulC22_spec** (line 176): `theorem mulC22_spec (a b : Bool) : (mulC22 a b).1.toNat + 2 * (mulC22 a b).2.toNat = a.toNat + b.toNat :=`
+- **mulC32_spec** (line 181): `theorem mulC32_spec (a b cin : Bool) : (mulC32 a b cin).1.toNat + 2 * (mulC32 a b cin).2.toNat = a.toNat + b.toNat + cin.toNat :=`
+- **mulC53_spec** (line 187): `theorem mulC53_spec (i0 i1 i2 i3 i4 : Bool) : (mulC53 i0 i1 i2 i3 i4).1.toNat + 2 * ((mulC53 i0 i1 i2 i3 i4).2.1.toNat + (mulC53 i0 i1 i2 i3 i4).2.2.toNat) = i0.toNat + i1.toNat + i2.toNat + i3.toNat + i4.toNat :=`
+- **mulShiftAdd** (line 360): `theorem mulShiftAdd (X Y : BitVec 66) (i : Nat) : (X + Y) <<< i = X <<< i + Y <<< i :=`
+- **mulShiftSub** (line 366): `theorem mulShiftSub (X Y : BitVec 66) (i : Nat) : (X - Y) <<< i = X <<< i - Y <<< i :=`
+- **mulShiftComm** (line 373): `theorem mulShiftComm (v B : BitVec 66) (i : Nat) : (v <<< i) * B = (v * B) <<< i :=`
+- **mulB3cases** (line 379): `theorem mulB3cases (x : BitVec 3) : x = 0#3 ∨ x = 1#3 ∨ x = 2#3 ∨ x = 3#3 ∨ x = 4#3 ∨ x = 5#3 ∨ x = 6#3 ∨ x = 7#3 :=`
+- **mulB2cases** (line 388): `theorem mulB2cases (x : BitVec 2) : x = 0#2 ∨ x = 1#2 ∨ x = 2#2 ∨ x = 3#2 :=`
+- **mulBoothA0** (line 395): `theorem mulBoothA0 (x : BitVec 3) (B : BitVec 66) : mulDigitVec x * B = mulBoothB x B :=`
+- **mulBoothA0Shift** (line 418): `theorem mulBoothA0Shift (x : BitVec 3) (B : BitVec 66) (i : Nat) : (mulDigitVec x <<< i) * B = mulBoothB x B <<< i :=`
+- **mulToNat_append** (line 425): `theorem mulToNat_append {m n : Nat} (x : BitVec m) (y : BitVec n) : (x ++ y).toNat = x.toNat * 2 ^ n + y.toNat :=`
+- **mulFidRow0** (line 432): `theorem mulFidRow0 (ppt : BitVec 34) : BitVec.zeroExtend 66 (mulPpRow0 (len :=`
+- **mulFidMid** (line 453): `theorem mulFidMid (ppt : BitVec 34) (t : BitVec 2) : BitVec.zeroExtend 66 (mulPpRowMid (len :=`
+- **mulFidLast** (line 475): `theorem mulFidLast (ppt : BitVec 34) (t : BitVec 2) : BitVec.zeroExtend 66 (mulPpRowLast (len :=`
+- **mulRow0Sext** (line 499): `theorem mulRow0Sext (b : BitVec 33) : BitVec.zeroExtend 66 (BitVec.signExtend 34 b) + (if (BitVec.signExtend 34 b).msb then (1#66 <<< 34) + (1#66 <<< 35) else (1#66 <<< 36)) = BitVec.signExtend 66 b - 0#66 + (1#66 <<< 36) :=`
+- **mulRow0Bx2** (line 526): `theorem mulRow0Bx2 (b : BitVec 33) : BitVec.zeroExtend 66 (BitVec.signExtend 34 b <<< 1) + (if (BitVec.signExtend 34 b <<< 1).msb then (1#66 <<< 34) + (1#66 <<< 35) else (1#66 <<< 36)) = (BitVec.signExtend 66 b <<< 1) - 0#66 + (1#66 <<< 36) :=`
+- **mulRow0NegBx2** (line 563): `theorem mulRow0NegBx2 (b : BitVec 33) : BitVec.zeroExtend 66 ((~~~(BitVec.signExtend 34 b)) <<< 1) + (if ((~~~(BitVec.signExtend 34 b)) <<< 1).msb then (1#66 <<< 34) + (1#66 <<< 35) else (1#66 <<< 36)) = -((BitVec.signExtend 66 b) <<< 1) - 2#66 + (1#66 <<< 36) :=`
+- **mulRow0NegB** (line 601): `theorem mulRow0NegB (b : BitVec 33) : BitVec.zeroExtend 66 (~~~(BitVec.signExtend 34 b)) + (if (~~~(BitVec.signExtend 34 b)).msb then (1#66 <<< 34) + (1#66 <<< 35) else (1#66 <<< 36)) = -(BitVec.signExtend 66 b) - 1#66 + (1#66 <<< 36) :=`
+- **mulBaseRow0** (line 639): `theorem mulBaseRow0 (x : BitVec 3) (b : BitVec 33) : BitVec.zeroExtend 66 (mulPpTemp x b) + (if (mulPpTemp x b).msb then (1#66 <<< 34) + (1#66 <<< 35) else (1#66 <<< 36)) = mulBoothB x (BitVec.signExtend 66 b) - mulCorrBV x + (1#66 <<< 36) :=`
+- **mulMidSext** (line 683): `theorem mulMidSext (b : BitVec 33) : BitVec.zeroExtend 66 (BitVec.signExtend 34 b) + (if (BitVec.signExtend 34 b).msb then 0#66 else (1#66 <<< 34)) + (1#66 <<< 35) = BitVec.signExtend 66 b - 0#66 + 3#66 * (1#66 <<< 34) :=`
+- **mulMidBx2** (line 711): `theorem mulMidBx2 (b : BitVec 33) : BitVec.zeroExtend 66 (BitVec.signExtend 34 b <<< 1) + (if (BitVec.signExtend 34 b <<< 1).msb then 0#66 else (1#66 <<< 34)) + (1#66 <<< 35) = (BitVec.signExtend 66 b <<< 1) - 0#66 + 3#66 * (1#66 <<< 34) :=`
+- **mulMidNegBx2** (line 750): `theorem mulMidNegBx2 (b : BitVec 33) : BitVec.zeroExtend 66 ((~~~(BitVec.signExtend 34 b)) <<< 1) + (if ((~~~(BitVec.signExtend 34 b)) <<< 1).msb then 0#66 else (1#66 <<< 34)) + (1#66 <<< 35) = -((BitVec.signExtend 66 b) <<< 1) - 2#66 + 3#66 * (1#66 <<< 34) :=`
+- **mulMidNegB** (line 790): `theorem mulMidNegB (b : BitVec 33) : BitVec.zeroExtend 66 (~~~(BitVec.signExtend 34 b)) + (if (~~~(BitVec.signExtend 34 b)).msb then 0#66 else (1#66 <<< 34)) + (1#66 <<< 35) = -(BitVec.signExtend 66 b) - 1#66 + 3#66 * (1#66 <<< 34) :=`
+- **mulBaseMid** (line 830): `theorem mulBaseMid (x : BitVec 3) (b : BitVec 33) : BitVec.zeroExtend 66 (mulPpTemp x b) + (if (mulPpTemp x b).msb then 0#66 else (1#66 <<< 34)) + (1#66 <<< 35) = mulBoothB x (BitVec.signExtend 66 b) - mulCorrBV x + 3#66 * (1#66 <<< 34) :=`
+- **mulLastSext** (line 876): `theorem mulLastSext (b : BitVec 33) : (BitVec.zeroExtend 66 (BitVec.signExtend 34 b)) <<< 32 = (BitVec.signExtend 66 b - 0#66) <<< 32 :=`
+- **mulLastBx2** (line 896): `theorem mulLastBx2 (b : BitVec 33) : (BitVec.zeroExtend 66 (BitVec.signExtend 34 b <<< 1)) <<< 32 = ((BitVec.signExtend 66 b <<< 1) - 0#66) <<< 32 :=`
+- **mulLastNegBx2** (line 918): `theorem mulLastNegBx2 (b : BitVec 33) : (BitVec.zeroExtend 66 ((~~~(BitVec.signExtend 34 b)) <<< 1)) <<< 32 = (-((BitVec.signExtend 66 b) <<< 1) - 2#66) <<< 32 :=`
+- **mulLastNegB** (line 941): `theorem mulLastNegB (b : BitVec 33) : (BitVec.zeroExtend 66 (~~~(BitVec.signExtend 34 b))) <<< 32 = (-(BitVec.signExtend 66 b) - 1#66) <<< 32 :=`
+- **mulBaseLast** (line 965): `theorem mulBaseLast (x : BitVec 3) (b : BitVec 33) : (BitVec.zeroExtend 66 (mulPpTemp x b)) <<< 32 = (mulBoothB x (BitVec.signExtend 66 b) - mulCorrBV x) <<< 32 :=`
+- **mulShiftZero** (line 1014): `theorem mulShiftZero (v : BitVec 66) : v <<< 0 = v :=`
+- **mulPlacedRow_zero** (line 1020): `theorem mulPlacedRow_zero (a b : BitVec 33) : mulPlacedRow a b 0 = (mulDigitVec (mulWindow a 0) <<< 0) * BitVec.signExtend 66 b - (mulCorrBV (mulWindow a 0) <<< 0) + (1#66 <<< 36) :=`
+- **mulPlacedRow_mid** (line 1030): `theorem mulPlacedRow_mid (a b : BitVec 33) (i : Nat) (h2 : 2 ≤ i) (h31 : i ≠ 31) (h32 : i ≠ 32) : mulPlacedRow a b i = (mulDigitVec (mulWindow a i) <<< i) * BitVec.signExtend 66 b - (mulCorrBV (mulWindow a i) <<< i) + ((3#66 <<< 34) <<< i) + (mulCorrBV (mulWindow a (i - 2)) <<< (i - 2)) :=`
+- **mulPlacedRow_last** (line 1069): `theorem mulPlacedRow_last (a b : BitVec 33) : mulPlacedRow a b 32 = (mulDigitVec (mulWindow a 32) <<< 32) * BitVec.signExtend 66 b - (mulCorrBV (mulWindow a 32) <<< 32) + (mulCorrBV (mulWindow a 30) <<< 30) :=`
+- **mulDigitVec_toNat** (line 1107): `theorem mulDigitVec_toNat (w : BitVec 3) : (mulDigitVec w).toNat = (w.toNat % 2 + (w.toNat / 2) % 2 + 2 ^ 66 - 2 * (w.toNat / 4)) % 2 ^ 66 :=`
+- **mulTermMod** (line 1118): `theorem mulTermMod (lo mid hi : Nat) (hlo : lo ≤ 1) (hmid : mid ≤ 1) (hhi : hi ≤ 1) (i : Nat) (hi32 : i ≤ 32) : ((lo + mid + 2 ^ 66 - 2 * hi) % 2 ^ 66 * 2 ^ i) % 2 ^ 66 = (lo * 2 ^ i + mid * 2 ^ i + hi * (2 ^ 66 - 2 ^ (i + 1))) % 2 ^ 66 :=`
+- **mulWinNat0** (line 1151): `theorem mulWinNat0 (a : BitVec 33) : (mulWindow a 0).toNat = 2 * (a.toNat % 4) :=`
+- **mulWinNat2** (line 1157): `theorem mulWinNat2 (a : BitVec 33) : (mulWindow a 2).toNat = a.toNat / 2 ^ 1 % 8 :=`
+- **mulWinNat4** (line 1162): `theorem mulWinNat4 (a : BitVec 33) : (mulWindow a 4).toNat = a.toNat / 2 ^ 3 % 8 :=`
+- **mulWinNat6** (line 1167): `theorem mulWinNat6 (a : BitVec 33) : (mulWindow a 6).toNat = a.toNat / 2 ^ 5 % 8 :=`
+- **mulWinNat8** (line 1172): `theorem mulWinNat8 (a : BitVec 33) : (mulWindow a 8).toNat = a.toNat / 2 ^ 7 % 8 :=`
+- **mulWinNat10** (line 1177): `theorem mulWinNat10 (a : BitVec 33) : (mulWindow a 10).toNat = a.toNat / 2 ^ 9 % 8 :=`
+- **mulWinNat12** (line 1182): `theorem mulWinNat12 (a : BitVec 33) : (mulWindow a 12).toNat = a.toNat / 2 ^ 11 % 8 :=`
+- **mulWinNat14** (line 1187): `theorem mulWinNat14 (a : BitVec 33) : (mulWindow a 14).toNat = a.toNat / 2 ^ 13 % 8 :=`
+- **mulWinNat16** (line 1192): `theorem mulWinNat16 (a : BitVec 33) : (mulWindow a 16).toNat = a.toNat / 2 ^ 15 % 8 :=`
+- **mulWinNat18** (line 1197): `theorem mulWinNat18 (a : BitVec 33) : (mulWindow a 18).toNat = a.toNat / 2 ^ 17 % 8 :=`
+- **mulWinNat20** (line 1202): `theorem mulWinNat20 (a : BitVec 33) : (mulWindow a 20).toNat = a.toNat / 2 ^ 19 % 8 :=`
+- **mulWinNat22** (line 1207): `theorem mulWinNat22 (a : BitVec 33) : (mulWindow a 22).toNat = a.toNat / 2 ^ 21 % 8 :=`
+- **mulWinNat24** (line 1212): `theorem mulWinNat24 (a : BitVec 33) : (mulWindow a 24).toNat = a.toNat / 2 ^ 23 % 8 :=`
+- **mulWinNat26** (line 1217): `theorem mulWinNat26 (a : BitVec 33) : (mulWindow a 26).toNat = a.toNat / 2 ^ 25 % 8 :=`
+- **mulWinNat28** (line 1222): `theorem mulWinNat28 (a : BitVec 33) : (mulWindow a 28).toNat = a.toNat / 2 ^ 27 % 8 :=`
+- **mulWinNat30** (line 1227): `theorem mulWinNat30 (a : BitVec 33) : (mulWindow a 30).toNat = a.toNat / 2 ^ 29 % 8 :=`
+- **mulWinNat32** (line 1232): `theorem mulWinNat32 (a : BitVec 33) : (mulWindow a 32).toNat = a.toNat / 2 ^ 31 % 4 + (if a.getLsbD 32 then 4 else 0) :=`
+- **mulTermNat0** (line 1246): `theorem mulTermNat0 (a : BitVec 33) : (mulDigitVec (mulWindow a 0) <<< 0).toNat = (0 * 2 ^ 0 + (a.toNat % 2) * 2 ^ 0 + (a.toNat / 2 % 2) * (2 ^ 66 - 2 ^ 1)) % 2 ^ 66 :=`
+- **mulTermNat2** (line 1258): `theorem mulTermNat2 (a : BitVec 33) : (mulDigitVec (mulWindow a 2) <<< 2).toNat = ((a.toNat / 2 ^ 1 % 2) * 2 ^ 2 + (a.toNat / 2 ^ 2 % 2) * 2 ^ 2 + (a.toNat / 2 ^ 3 % 2) * (2 ^ 66 - 2 ^ 3)) % 2 ^ 66 :=`
+- **mulTermNat4** (line 1269): `theorem mulTermNat4 (a : BitVec 33) : (mulDigitVec (mulWindow a 4) <<< 4).toNat = ((a.toNat / 2 ^ 3 % 2) * 2 ^ 4 + (a.toNat / 2 ^ 4 % 2) * 2 ^ 4 + (a.toNat / 2 ^ 5 % 2) * (2 ^ 66 - 2 ^ 5)) % 2 ^ 66 :=`
+- **mulTermNat6** (line 1280): `theorem mulTermNat6 (a : BitVec 33) : (mulDigitVec (mulWindow a 6) <<< 6).toNat = ((a.toNat / 2 ^ 5 % 2) * 2 ^ 6 + (a.toNat / 2 ^ 6 % 2) * 2 ^ 6 + (a.toNat / 2 ^ 7 % 2) * (2 ^ 66 - 2 ^ 7)) % 2 ^ 66 :=`
+- **mulTermNat8** (line 1291): `theorem mulTermNat8 (a : BitVec 33) : (mulDigitVec (mulWindow a 8) <<< 8).toNat = ((a.toNat / 2 ^ 7 % 2) * 2 ^ 8 + (a.toNat / 2 ^ 8 % 2) * 2 ^ 8 + (a.toNat / 2 ^ 9 % 2) * (2 ^ 66 - 2 ^ 9)) % 2 ^ 66 :=`
+- **mulTermNat10** (line 1302): `theorem mulTermNat10 (a : BitVec 33) : (mulDigitVec (mulWindow a 10) <<< 10).toNat = ((a.toNat / 2 ^ 9 % 2) * 2 ^ 10 + (a.toNat / 2 ^ 10 % 2) * 2 ^ 10 + (a.toNat / 2 ^ 11 % 2) * (2 ^ 66 - 2 ^ 11)) % 2 ^ 66 :=`
+- **mulTermNat12** (line 1313): `theorem mulTermNat12 (a : BitVec 33) : (mulDigitVec (mulWindow a 12) <<< 12).toNat = ((a.toNat / 2 ^ 11 % 2) * 2 ^ 12 + (a.toNat / 2 ^ 12 % 2) * 2 ^ 12 + (a.toNat / 2 ^ 13 % 2) * (2 ^ 66 - 2 ^ 13)) % 2 ^ 66 :=`
+- **mulTermNat14** (line 1324): `theorem mulTermNat14 (a : BitVec 33) : (mulDigitVec (mulWindow a 14) <<< 14).toNat = ((a.toNat / 2 ^ 13 % 2) * 2 ^ 14 + (a.toNat / 2 ^ 14 % 2) * 2 ^ 14 + (a.toNat / 2 ^ 15 % 2) * (2 ^ 66 - 2 ^ 15)) % 2 ^ 66 :=`
+- **mulTermNat16** (line 1335): `theorem mulTermNat16 (a : BitVec 33) : (mulDigitVec (mulWindow a 16) <<< 16).toNat = ((a.toNat / 2 ^ 15 % 2) * 2 ^ 16 + (a.toNat / 2 ^ 16 % 2) * 2 ^ 16 + (a.toNat / 2 ^ 17 % 2) * (2 ^ 66 - 2 ^ 17)) % 2 ^ 66 :=`
+- **mulTermNat18** (line 1346): `theorem mulTermNat18 (a : BitVec 33) : (mulDigitVec (mulWindow a 18) <<< 18).toNat = ((a.toNat / 2 ^ 17 % 2) * 2 ^ 18 + (a.toNat / 2 ^ 18 % 2) * 2 ^ 18 + (a.toNat / 2 ^ 19 % 2) * (2 ^ 66 - 2 ^ 19)) % 2 ^ 66 :=`
+- **mulTermNat20** (line 1357): `theorem mulTermNat20 (a : BitVec 33) : (mulDigitVec (mulWindow a 20) <<< 20).toNat = ((a.toNat / 2 ^ 19 % 2) * 2 ^ 20 + (a.toNat / 2 ^ 20 % 2) * 2 ^ 20 + (a.toNat / 2 ^ 21 % 2) * (2 ^ 66 - 2 ^ 21)) % 2 ^ 66 :=`
+- **mulTermNat22** (line 1368): `theorem mulTermNat22 (a : BitVec 33) : (mulDigitVec (mulWindow a 22) <<< 22).toNat = ((a.toNat / 2 ^ 21 % 2) * 2 ^ 22 + (a.toNat / 2 ^ 22 % 2) * 2 ^ 22 + (a.toNat / 2 ^ 23 % 2) * (2 ^ 66 - 2 ^ 23)) % 2 ^ 66 :=`
+- **mulTermNat24** (line 1379): `theorem mulTermNat24 (a : BitVec 33) : (mulDigitVec (mulWindow a 24) <<< 24).toNat = ((a.toNat / 2 ^ 23 % 2) * 2 ^ 24 + (a.toNat / 2 ^ 24 % 2) * 2 ^ 24 + (a.toNat / 2 ^ 25 % 2) * (2 ^ 66 - 2 ^ 25)) % 2 ^ 66 :=`
+- **mulTermNat26** (line 1390): `theorem mulTermNat26 (a : BitVec 33) : (mulDigitVec (mulWindow a 26) <<< 26).toNat = ((a.toNat / 2 ^ 25 % 2) * 2 ^ 26 + (a.toNat / 2 ^ 26 % 2) * 2 ^ 26 + (a.toNat / 2 ^ 27 % 2) * (2 ^ 66 - 2 ^ 27)) % 2 ^ 66 :=`
+- **mulTermNat28** (line 1401): `theorem mulTermNat28 (a : BitVec 33) : (mulDigitVec (mulWindow a 28) <<< 28).toNat = ((a.toNat / 2 ^ 27 % 2) * 2 ^ 28 + (a.toNat / 2 ^ 28 % 2) * 2 ^ 28 + (a.toNat / 2 ^ 29 % 2) * (2 ^ 66 - 2 ^ 29)) % 2 ^ 66 :=`
+- **mulTermNat30** (line 1412): `theorem mulTermNat30 (a : BitVec 33) : (mulDigitVec (mulWindow a 30) <<< 30).toNat = ((a.toNat / 2 ^ 29 % 2) * 2 ^ 30 + (a.toNat / 2 ^ 30 % 2) * 2 ^ 30 + (a.toNat / 2 ^ 31 % 2) * (2 ^ 66 - 2 ^ 31)) % 2 ^ 66 :=`
+- **mulTermNat32** (line 1423): `theorem mulTermNat32 (a : BitVec 33) : (mulDigitVec (mulWindow a 32) <<< 32).toNat = ((a.toNat / 2 ^ 31 % 2) * 2 ^ 32 + (a.toNat / 2 ^ 32 % 2) * 2 ^ 32 + (a.toNat / 2 ^ 32 % 2) * (2 ^ 66 - 2 ^ 33)) % 2 ^ 66 :=`
+- **mulTelePart1** (line 1448): `theorem mulTelePart1 (a : BitVec 33) : (((mulDigitVec (mulWindow a 0) <<< 0) + (mulDigitVec (mulWindow a 2) <<< 2))).toNat = a.toNat % 2 ^ 3 + (a.toNat / 2 ^ 3 % 2) * (2 ^ 66 - 2 ^ 3) :=`
+- **mulTelePart2** (line 1458): `theorem mulTelePart2 (a : BitVec 33) : ((((mulDigitVec (mulWindow a 0) <<< 0) + (mulDigitVec (mulWindow a 2) <<< 2)) + (mulDigitVec (mulWindow a 4) <<< 4))).toNat = a.toNat % 2 ^ 5 + (a.toNat / 2 ^ 5 % 2) * (2 ^ 66 - 2 ^ 5) :=`
+- **mulTelePart3** (line 1467): `theorem mulTelePart3 (a : BitVec 33) : (((((mulDigitVec (mulWindow a 0) <<< 0) + (mulDigitVec (mulWindow a 2) <<< 2)) + (mulDigitVec (mulWindow a 4) <<< 4)) + (mulDigitVec (mulWindow a 6) <<< 6))).toNat = a.toNat % 2 ^ 7 + (a.toNat / 2 ^ 7 % 2) * (2 ^ 66 - 2 ^ 7) :=`
+- **mulTelePart4** (line 1476): `theorem mulTelePart4 (a : BitVec 33) : ((((((mulDigitVec (mulWindow a 0) <<< 0) + (mulDigitVec (mulWindow a 2) <<< 2)) + (mulDigitVec (mulWindow a 4) <<< 4)) + (mulDigitVec (mulWindow a 6) <<< 6)) + (mulDigitVec (mulWindow a 8) <<< 8))).toNat = a.toNat % 2 ^ 9 + (a.toNat / 2 ^ 9 % 2) * (2 ^ 66 - 2 ^ 9) :=`
+- **mulTelePart5** (line 1485): `theorem mulTelePart5 (a : BitVec 33) : (((((((mulDigitVec (mulWindow a 0) <<< 0) + (mulDigitVec (mulWindow a 2) <<< 2)) + (mulDigitVec (mulWindow a 4) <<< 4)) + (mulDigitVec (mulWindow a 6) <<< 6)) + (mulDigitVec (mulWindow a 8) <<< 8)) + (mulDigitVec (mulWindow a 10) <<< 10))).toNat = a.toNat % 2 ^ 11 + (a.toNat / 2 ^ 11 % 2) * (2 ^ 66 - 2 ^ 11) :=`
+- **mulTelePart6** (line 1494): `theorem mulTelePart6 (a : BitVec 33) : ((((((((mulDigitVec (mulWindow a 0) <<< 0) + (mulDigitVec (mulWindow a 2) <<< 2)) + (mulDigitVec (mulWindow a 4) <<< 4)) + (mulDigitVec (mulWindow a 6) <<< 6)) + (mulDigitVec (mulWindow a 8) <<< 8)) + (mulDigitVec (mulWindow a 10) <<< 10)) + (mulDigitVec (mulWindow a 12) <<< 12))).toNat = a.toNat % 2 ^ 13 + (a.toNat / 2 ^ 13 % 2) * (2 ^ 66 - 2 ^ 13) :=`
+- **mulTelePart7** (line 1503): `theorem mulTelePart7 (a : BitVec 33) : (((((((((mulDigitVec (mulWindow a 0) <<< 0) + (mulDigitVec (mulWindow a 2) <<< 2)) + (mulDigitVec (mulWindow a 4) <<< 4)) + (mulDigitVec (mulWindow a 6) <<< 6)) + (mulDigitVec (mulWindow a 8) <<< 8)) + (mulDigitVec (mulWindow a 10) <<< 10)) + (mulDigitVec (mulWindow a 12) <<< 12)) + (mulDigitVec (mulWindow a 14) <<< 14))).toNat = a.toNat % 2 ^ 15 + (a.toNat / 2 ^ 15 % 2) * (2 ^ 66 - 2 ^ 15) :=`
+- **mulTelePart8** (line 1512): `theorem mulTelePart8 (a : BitVec 33) : ((((((((((mulDigitVec (mulWindow a 0) <<< 0) + (mulDigitVec (mulWindow a 2) <<< 2)) + (mulDigitVec (mulWindow a 4) <<< 4)) + (mulDigitVec (mulWindow a 6) <<< 6)) + (mulDigitVec (mulWindow a 8) <<< 8)) + (mulDigitVec (mulWindow a 10) <<< 10)) + (mulDigitVec (mulWindow a 12) <<< 12)) + (mulDigitVec (mulWindow a 14) <<< 14)) + (mulDigitVec (mulWindow a 16) <<< 16))).toNat = a.toNat % 2 ^ 17 + (a.toNat / 2 ^ 17 % 2) * (2 ^ 66 - 2 ^ 17) :=`
+- **mulTelePart9** (line 1521): `theorem mulTelePart9 (a : BitVec 33) : (((((((((((mulDigitVec (mulWindow a 0) <<< 0) + (mulDigitVec (mulWindow a 2) <<< 2)) + (mulDigitVec (mulWindow a 4) <<< 4)) + (mulDigitVec (mulWindow a 6) <<< 6)) + (mulDigitVec (mulWindow a 8) <<< 8)) + (mulDigitVec (mulWindow a 10) <<< 10)) + (mulDigitVec (mulWindow a 12) <<< 12)) + (mulDigitVec (mulWindow a 14) <<< 14)) + (mulDigitVec (mulWindow a 16) <<< 16)) + (mulDigitVec (mulWindow a 18) <<< 18))).toNat = a.toNat % 2 ^ 19 + (a.toNat / 2 ^ 19 % 2) * (2 ^ 66 - 2 ^ 19) :=`
+- **mulTelePart10** (line 1530): `theorem mulTelePart10 (a : BitVec 33) : ((((((((((((mulDigitVec (mulWindow a 0) <<< 0) + (mulDigitVec (mulWindow a 2) <<< 2)) + (mulDigitVec (mulWindow a 4) <<< 4)) + (mulDigitVec (mulWindow a 6) <<< 6)) + (mulDigitVec (mulWindow a 8) <<< 8)) + (mulDigitVec (mulWindow a 10) <<< 10)) + (mulDigitVec (mulWindow a 12) <<< 12)) + (mulDigitVec (mulWindow a 14) <<< 14)) + (mulDigitVec (mulWindow a 16) <<< 16)) + (mulDigitVec (mulWindow a 18) <<< 18)) + (mulDigitVec (mulWindow a 20) <<< 20))).toNat = a.toNat % 2 ^ 21 + (a.toNat / 2 ^ 21 % 2) * (2 ^ 66 - 2 ^ 21) :=`
+- **mulTelePart11** (line 1539): `theorem mulTelePart11 (a : BitVec 33) : (((((((((((((mulDigitVec (mulWindow a 0) <<< 0) + (mulDigitVec (mulWindow a 2) <<< 2)) + (mulDigitVec (mulWindow a 4) <<< 4)) + (mulDigitVec (mulWindow a 6) <<< 6)) + (mulDigitVec (mulWindow a 8) <<< 8)) + (mulDigitVec (mulWindow a 10) <<< 10)) + (mulDigitVec (mulWindow a 12) <<< 12)) + (mulDigitVec (mulWindow a 14) <<< 14)) + (mulDigitVec (mulWindow a 16) <<< 16)) + (mulDigitVec (mulWindow a 18) <<< 18)) + (mulDigitVec (mulWindow a 20) <<< 20)) + (mulDigitVec (mulWindow a 22) <<< 22))).toNat = a.toNat % 2 ^ 23 + (a.toNat / 2 ^ 23 % 2) * (2 ^ 66 - 2 ^ 23) :=`
+- **mulTelePart12** (line 1548): `theorem mulTelePart12 (a : BitVec 33) : ((((((((((((((mulDigitVec (mulWindow a 0) <<< 0) + (mulDigitVec (mulWindow a 2) <<< 2)) + (mulDigitVec (mulWindow a 4) <<< 4)) + (mulDigitVec (mulWindow a 6) <<< 6)) + (mulDigitVec (mulWindow a 8) <<< 8)) + (mulDigitVec (mulWindow a 10) <<< 10)) + (mulDigitVec (mulWindow a 12) <<< 12)) + (mulDigitVec (mulWindow a 14) <<< 14)) + (mulDigitVec (mulWindow a 16) <<< 16)) + (mulDigitVec (mulWindow a 18) <<< 18)) + (mulDigitVec (mulWindow a 20) <<< 20)) + (mulDigitVec (mulWindow a 22) <<< 22)) + (mulDigitVec (mulWindow a 24) <<< 24))).toNat = a.toNat % 2 ^ 25 + (a.toNat / 2 ^ 25 % 2) * (2 ^ 66 - 2 ^ 25) :=`
+- **mulTelePart13** (line 1557): `theorem mulTelePart13 (a : BitVec 33) : (((((((((((((((mulDigitVec (mulWindow a 0) <<< 0) + (mulDigitVec (mulWindow a 2) <<< 2)) + (mulDigitVec (mulWindow a 4) <<< 4)) + (mulDigitVec (mulWindow a 6) <<< 6)) + (mulDigitVec (mulWindow a 8) <<< 8)) + (mulDigitVec (mulWindow a 10) <<< 10)) + (mulDigitVec (mulWindow a 12) <<< 12)) + (mulDigitVec (mulWindow a 14) <<< 14)) + (mulDigitVec (mulWindow a 16) <<< 16)) + (mulDigitVec (mulWindow a 18) <<< 18)) + (mulDigitVec (mulWindow a 20) <<< 20)) + (mulDigitVec (mulWindow a 22) <<< 22)) + (mulDigitVec (mulWindow a 24) <<< 24)) + (mulDigitVec (mulWindow a 26) <<< 26))).toNat = a.toNat % 2 ^ 27 + (a.toNat / 2 ^ 27 % 2) * (2 ^ 66 - 2 ^ 27) :=`
+- **mulTelePart14** (line 1566): `theorem mulTelePart14 (a : BitVec 33) : ((((((((((((((((mulDigitVec (mulWindow a 0) <<< 0) + (mulDigitVec (mulWindow a 2) <<< 2)) + (mulDigitVec (mulWindow a 4) <<< 4)) + (mulDigitVec (mulWindow a 6) <<< 6)) + (mulDigitVec (mulWindow a 8) <<< 8)) + (mulDigitVec (mulWindow a 10) <<< 10)) + (mulDigitVec (mulWindow a 12) <<< 12)) + (mulDigitVec (mulWindow a 14) <<< 14)) + (mulDigitVec (mulWindow a 16) <<< 16)) + (mulDigitVec (mulWindow a 18) <<< 18)) + (mulDigitVec (mulWindow a 20) <<< 20)) + (mulDigitVec (mulWindow a 22) <<< 22)) + (mulDigitVec (mulWindow a 24) <<< 24)) + (mulDigitVec (mulWindow a 26) <<< 26)) + (mulDigitVec (mulWindow a 28) <<< 28))).toNat = a.toNat % 2 ^ 29 + (a.toNat / 2 ^ 29 % 2) * (2 ^ 66 - 2 ^ 29) :=`
+- **mulTelePart15** (line 1575): `theorem mulTelePart15 (a : BitVec 33) : (((((((((((((((((mulDigitVec (mulWindow a 0) <<< 0) + (mulDigitVec (mulWindow a 2) <<< 2)) + (mulDigitVec (mulWindow a 4) <<< 4)) + (mulDigitVec (mulWindow a 6) <<< 6)) + (mulDigitVec (mulWindow a 8) <<< 8)) + (mulDigitVec (mulWindow a 10) <<< 10)) + (mulDigitVec (mulWindow a 12) <<< 12)) + (mulDigitVec (mulWindow a 14) <<< 14)) + (mulDigitVec (mulWindow a 16) <<< 16)) + (mulDigitVec (mulWindow a 18) <<< 18)) + (mulDigitVec (mulWindow a 20) <<< 20)) + (mulDigitVec (mulWindow a 22) <<< 22)) + (mulDigitVec (mulWindow a 24) <<< 24)) + (mulDigitVec (mulWindow a 26) <<< 26)) + (mulDigitVec (mulWindow a 28) <<< 28)) + (mulDigitVec (mulWindow a 30) <<< 30))).toNat = a.toNat % 2 ^ 31 + (a.toNat / 2 ^ 31 % 2) * (2 ^ 66 - 2 ^ 31) :=`
+- **mulTelescope** (line 1588): `theorem mulTelescope (a : BitVec 33) : mulDigitSumVec a = BitVec.signExtend 66 a :=`
+- **mulDigitTermSum_eq** (line 1613): `theorem mulDigitTermSum_eq (a b : BitVec 33) : (mulDigitVec (mulWindow a 0) <<< 0) * BitVec.signExtend 66 b + (mulDigitVec (mulWindow a 2) <<< 2) * BitVec.signExtend 66 b + (mulDigitVec (mulWindow a 4) <<< 4) * BitVec.signExtend 66 b + (mulDigitVec (mulWindow a 6) <<< 6) * BitVec.signExtend 66 b + (mulDigitVec (mulWindow a 8) <<< 8) * BitVec.signExtend 66 b + (mulDigitVec (mulWindow a 10) <<< 10) * BitVec.signExtend 66 b + (mulDigitVec (mulWindow a 12) <<< 12) * BitVec.signExtend 66 b + (mulDigitVec (mulWindow a 14) <<< 14) * BitVec.signExtend 66 b + (mulDigitVec (mulWindow a 16) <<< 16) * BitVec.signExtend 66 b + (mulDigitVec (mulWindow a 18) <<< 18) * BitVec.signExtend 66 b + (mulDigitVec (mulWindow a 20) <<< 20) * BitVec.signExtend 66 b + (mulDigitVec (mulWindow a 22) <<< 22) * BitVec.signExtend 66 b + (mulDigitVec (mulWindow a 24) <<< 24) * BitVec.signExtend 66 b + (mulDigitVec (mulWindow a 26) <<< 26) * BitVec.signExtend 66 b + (mulDigitVec (mulWindow a 28) <<< 28) * BitVec.signExtend 66 b + (mulDigitVec (mulWindow a 30) <<< 30) * BitVec.signExtend 66 b + (mulDigitVec (mulWindow a 32) <<< 32) * BitVec.signExtend 66 b = (BitVec.signExtend 66 a) * (BitVec.signExtend 66 b) :=`
+- **mulSubAddAdd** (line 1638): `theorem mulSubAddAdd (x y z : BitVec 66) : (x - y) + (z + y) = x + z :=`
+- **mulAddSubAssoc** (line 1642): `theorem mulAddSubAssoc (x y z : BitVec 66) : x + (y - z) = (x + y) - z :=`
+- **mulAddSubSwap** (line 1646): `theorem mulAddSubSwap (x y z : BitVec 66) : (x + y) - z = (x - z) + y :=`
+- **mulLinStep** (line 1651): `theorem mulLinStep (S KK D F L E : BitVec 66) : (S - E + KK) + (D - F + L + E) = (S + D) - F + (KK + L) :=`
+- **mulLinStepLast** (line 1661): `theorem mulLinStepLast (S KK D F E : BitVec 66) : (S - F + KK) + (D - E + F) = (S + D) - E + KK :=`
+- **mulLinConst** (line 1670): `theorem mulLinConst : ((1#66 <<< 36) + ((3#66 <<< 34) <<< 2) + ((3#66 <<< 34) <<< 4) + ((3#66 <<< 34) <<< 6) + ((3#66 <<< 34) <<< 8) + ((3#66 <<< 34) <<< 10) + ((3#66 <<< 34) <<< 12) + ((3#66 <<< 34) <<< 14) + ((3#66 <<< 34) <<< 16) + ((3#66 <<< 34) <<< 18) + ((3#66 <<< 34) <<< 20) + ((3#66 <<< 34) <<< 22) + ((3#66 <<< 34) <<< 24) + ((3#66 <<< 34) <<< 26) + ((3#66 <<< 34) <<< 28) + ((3#66 <<< 34) <<< 30)) = 0#66 :=`
+- **mulLinearComb** (line 1681): `theorem mulLinearComb {D0 D2 D4 D6 D8 D10 D12 D14 D16 D18 D20 D22 D24 D26 D28 D30 D32 : BitVec 66} {E0 E2 E4 E6 E8 E10 E12 E14 E16 E18 E20 E22 E24 E26 E28 E30 E32 : BitVec 66} {P : BitVec 66} (hdig : D0 + D2 + D4 + D6 + D8 + D10 + D12 + D14 + D16 + D18 + D20 + D22 + D24 + D26 + D28 + D30 + D32 = P) : (D0 - E0 + (1#66 <<< 36)) + (D2 - E2 + ((3#66 <<< 34) <<< 2) + E0) + (D4 - E4 + ((3#66 <<< 34) <<< 4) + E2) + (D6 - E6 + ((3#66 <<< 34) <<< 6) + E4) + (D8 - E8 + ((3#66 <<< 34) <<< 8) + E6) + (D10 - E10 + ((3#66 <<< 34) <<< 10) + E8) + (D12 - E12 + ((3#66 <<< 34) <<< 12) + E10) + (D14 - E14 + ((3#66 <<< 34) <<< 14) + E12) + (D16 - E16 + ((3#66 <<< 34) <<< 16) + E14) + (D18 - E18 + ((3#66 <<< 34) <<< 18) + E16) + (D20 - E20 + ((3#66 <<< 34) <<< 20) + E18) + (D22 - E22 + ((3#66 <<< 34) <<< 22) + E20) + (D24 - E24 + ((3#66 <<< 34) <<< 24) + E22) + (D26 - E26 + ((3#66 <<< 34) <<< 26) + E24) + (D28 - E28 + ((3#66 <<< 34) <<< 28) + E26) + (D30 - E30 + ((3#66 <<< 34) <<< 30) + E28) + (D32 - E32 + E30) = P - E32 :=`
+- **mulPlacedSum_eq** (line 1721): `theorem mulPlacedSum_eq (a b : BitVec 33) : mulPlacedSum a b = (BitVec.signExtend 66 a) * (BitVec.signExtend 66 b) - (mulCorrBV (mulWindow a 32) <<< 32) :=`
+- **mulWindow32_eq6** (line 1745): `theorem mulWindow32_eq6 (a : BitVec 33) : (mulWindow a 32 = 6#3) ↔ (a.getLsbD 32 = true ∧ a.getLsbD 31 = false) :=`
+- **mulCorr_window32_eq0** (line 1756): `theorem mulCorr_window32_eq0 (a : BitVec 33) (h : a.getLsbD 32 = false ∨ a.getLsbD 31 = true) : mulCorrBV (mulWindow a 32) = 0#66 :=`
+- **mul_sext33_corr0** (line 1770): `theorem mul_sext33_corr0 (x : BitVec 32) : mulCorrBV (mulWindow (BitVec.signExtend 33 x) 32) = 0#66 :=`
+- **mul_zext33_corr0** (line 1782): `theorem mul_zext33_corr0 (x : BitVec 32) : mulCorrBV (mulWindow (BitVec.zeroExtend 33 x) 32) = 0#66 :=`
+- **mulPlacedSum_eq_of_corr0** (line 1789): `theorem mulPlacedSum_eq_of_corr0 (a b : BitVec 33) (h : mulCorrBV (mulWindow a 32) = 0#66) : mulPlacedSum a b = (BitVec.signExtend 66 a) * (BitVec.signExtend 66 b) :=`
+- **mulPlacedSum_eq_reachable** (line 1798): `theorem mulPlacedSum_eq_reachable (a b : BitVec 33) (h : a.getLsbD 32 = false ∨ a.getLsbD 31 = true) : mulPlacedSum a b = (BitVec.signExtend 66 a) * (BitVec.signExtend 66 b) :=`
+- **mulPlacedSum_quirk** (line 1805): `theorem mulPlacedSum_quirk : ∃ a b : BitVec 33, mulPlacedSum a b ≠ (BitVec.signExtend 66 a) * (BitVec.signExtend 66 b) :=`
+- **mulRes_mul** (line 1862): `theorem mulRes_mul (r : BitVec 66) (m : BitVec 32) : mulRes mulFN_MUL r m = r.extractLsb' 0 32 :=`
+- **mulRes_mulh** (line 1866): `theorem mulRes_mulh (r : BitVec 66) (m : BitVec 32) : mulRes mulFN_MULH r m = r.extractLsb' 32 32 :=`
+- **mulRes_mulhu** (line 1870): `theorem mulRes_mulhu (r : BitVec 66) (m : BitVec 32) : mulRes mulFN_MULHU r m = r.extractLsb' 32 32 :=`
+- **mulRes_mulhsu** (line 1875): `theorem mulRes_mulhsu (r : BitVec 66) (m : BitVec 32) : mulRes mulFN_MULHSU r m = r.extractLsb' 0 32 :=`
+- **mulRes_mac** (line 1879): `theorem mulRes_mac (func : BitVec 5) (r : BitVec 66) (m : BitVec 32) (h : mulIsMAC func = true) : mulRes func r m = m :=`
+- **mulMacOut_macc** (line 1886): `theorem mulMacOut_macc (r : BitVec 66) (c : BitVec 32) : mulMacOut mulFN_MACC r c = r.extractLsb' 0 32 + c :=`
+- **mulMacOut_nmsac** (line 1890): `theorem mulMacOut_nmsac (r : BitVec 66) (c : BitVec 32) : mulMacOut mulFN_NMSAC r c = c - r.extractLsb' 0 32 :=`
+- **mulMacOut_madd** (line 1896): `theorem mulMacOut_madd (r : BitVec 66) (c : BitVec 32) : mulMacOut mulFN_MADD r c = r.extractLsb' 0 32 + c :=`
+- **mulMacOut_nmsub** (line 1900): `theorem mulMacOut_nmsub (r : BitVec 66) (c : BitVec 32) : mulMacOut mulFN_NMSUB r c = c - r.extractLsb' 0 32 :=`
+- **mulIn1_madd** (line 1908): `theorem mulIn1_madd (a c : BitVec 32) : mulIn1 mulFN_MADD a c = c :=`
+- **mulIn3_madd** (line 1911): `theorem mulIn3_madd (a c : BitVec 32) : mulIn3 mulFN_MADD a c = a :=`
+- **mulIn1_nmsub** (line 1914): `theorem mulIn1_nmsub (a c : BitVec 32) : mulIn1 mulFN_NMSUB a c = c :=`
+- **mulIn3_nmsub** (line 1917): `theorem mulIn3_nmsub (a c : BitVec 32) : mulIn3 mulFN_NMSUB a c = a :=`
+- **mulA33_mulh** (line 1920): `theorem mulA33_mulh (x : BitVec 32) : mulA33 mulFN_MULH x = BitVec.signExtend 33 x :=`
+- **mulA33_mulhsu** (line 1924): `theorem mulA33_mulhsu (x : BitVec 32) : mulA33 mulFN_MULHSU x = BitVec.signExtend 33 x :=`
+- **mulB33_mulhsu** (line 1928): `theorem mulB33_mulhsu (x : BitVec 32) : mulB33 mulFN_MULHSU x = BitVec.zeroExtend 33 x :=`
+- **mulA33_mac** (line 1934): `theorem mulA33_mac (func : BitVec 5) (x : BitVec 32) (h : mulIsMAC func = true) : mulA33 func x = BitVec.zeroExtend 33 x :=`
+- **mulSextZext** (line 1944): `theorem mulSextZext (x : BitVec 32) : BitVec.signExtend 66 (BitVec.zeroExtend 33 x) = BitVec.zeroExtend 66 x :=`
+- **mulSextSext** (line 1948): `theorem mulSextSext (x : BitVec 32) : BitVec.signExtend 66 (BitVec.signExtend 33 x) = BitVec.signExtend 66 x :=`
+- **mul_zext66_low32** (line 1964): `theorem mul_zext66_low32 (a b : BitVec 32) : ((BitVec.zeroExtend 66 a) * (BitVec.zeroExtend 66 b)).extractLsb' 0 32 = a * b :=`
+- **mul_wrap_mul** (line 1979): `theorem mul_wrap_mul (a b c : BitVec 32) : mulWrapOut mulFN_MUL a b c = a * b :=`
+- **mul_wrap_mulh** (line 1988): `theorem mul_wrap_mulh (a b c : BitVec 32) : mulWrapOut mulFN_MULH a b c = ((BitVec.signExtend 66 a) * (BitVec.signExtend 66 b)).extractLsb' 32 32 :=`
+- **mul_wrap_mulhu** (line 1997): `theorem mul_wrap_mulhu (a b c : BitVec 32) : mulWrapOut mulFN_MULHU a b c = ((BitVec.zeroExtend 66 a) * (BitVec.zeroExtend 66 b)).extractLsb' 32 32 :=`
+- **mul_mulhsu_diverges** (line 2007): `theorem mul_mulhsu_diverges (a b c : BitVec 32) : mulWrapOut mulFN_MULHSU a b c = ((BitVec.signExtend 66 a) * (BitVec.zeroExtend 66 b)).extractLsb' 0 32 :=`
+- **mul_mulhsu_witness** (line 2017): `theorem mul_mulhsu_witness : ∃ a b : BitVec 32, mulWrapOut mulFN_MULHSU a b 0#32 ≠ ((BitVec.signExtend 66 a) * (BitVec.zeroExtend 66 b)).extractLsb' 32 32 :=`
+- **mul_wrap_macc** (line 2025): `theorem mul_wrap_macc (a b c : BitVec 32) : mulWrapOut mulFN_MACC a b c = a * b + c :=`
+- **mul_wrap_nmsac** (line 2034): `theorem mul_wrap_nmsac (a b c : BitVec 32) : mulWrapOut mulFN_NMSAC a b c = c - a * b :=`
+- **mul_wrap_madd** (line 2043): `theorem mul_wrap_madd (a b c : BitVec 32) : mulWrapOut mulFN_MADD a b c = c * b + a :=`
+- **mul_wrap_nmsub** (line 2052): `theorem mul_wrap_nmsub (a b c : BitVec 32) : mulWrapOut mulFN_NMSUB a b c = a - c * b :=`
+- **mulPipe_two_cycles** (line 2106): `theorem mulPipe_two_cycles (prod : BitVec 33 → BitVec 33 → BitVec 66) (st : MulPipeState) (x y : MulPipeIn) (hx : x.valid = true) : let st2 :=`
+- **mul_dataModule8_exhaustive** (line 2123): `theorem mul_dataModule8_exhaustive : ∀ a b : BitVec 8, mulDataModule a b = (BitVec.signExtend 16 a) * (BitVec.signExtend 16 b) - ((BitVec.zeroExtend 16 (mulT (mulWindow a 6))) <<< 6) :=`
+- **mul_dataModule8_exhaustive_corr0** (line 2130): `theorem mul_dataModule8_exhaustive_corr0 : ∀ a b : BitVec 8, mulT (mulWindow a 6) = 0#2 → mulDataModule a b = (BitVec.signExtend 16 a) * (BitVec.signExtend 16 b) :=`
+- **mul_dm33_sext_intmin_intmax** (line 2138): `theorem mul_dm33_sext_intmin_intmax : mulDataModule (BitVec.signExtend 33 0x80000000#32) (BitVec.signExtend 33 0x7FFFFFFF#32) = (BitVec.signExtend 66 (BitVec.signExtend 33 0x80000000#32)) * (BitVec.signExtend 66 (BitVec.signExtend 33 0x7FFFFFFF#32)) :=`
+- **mul_dm33_sext_neg1_neg1** (line 2144): `theorem mul_dm33_sext_neg1_neg1 : mulDataModule (BitVec.signExtend 33 0xFFFFFFFF#32) (BitVec.signExtend 33 0xFFFFFFFF#32) = (BitVec.signExtend 66 (BitVec.signExtend 33 0xFFFFFFFF#32)) * (BitVec.signExtend 66 (BitVec.signExtend 33 0xFFFFFFFF#32)) :=`
+- **mul_dm33_sext_rand1** (line 2150): `theorem mul_dm33_sext_rand1 : mulDataModule (BitVec.signExtend 33 0x12345678#32) (BitVec.signExtend 33 0x7ABCDEF1#32) = (BitVec.signExtend 66 (BitVec.signExtend 33 0x12345678#32)) * (BitVec.signExtend 66 (BitVec.signExtend 33 0x7ABCDEF1#32)) :=`
+- **mul_dm33_sext_zext_witness** (line 2156): `theorem mul_dm33_sext_zext_witness : mulDataModule (BitVec.signExtend 33 0xFFFFFFFF#32) (BitVec.zeroExtend 33 0xFFFFFFFF#32) = (BitVec.signExtend 66 (BitVec.signExtend 33 0xFFFFFFFF#32)) * (BitVec.signExtend 66 (BitVec.zeroExtend 33 0xFFFFFFFF#32)) :=`
+- **mul_dm33_sext_zext_intmin** (line 2162): `theorem mul_dm33_sext_zext_intmin : mulDataModule (BitVec.signExtend 33 0x80000000#32) (BitVec.zeroExtend 33 0xFFFFFFFF#32) = (BitVec.signExtend 66 (BitVec.signExtend 33 0x80000000#32)) * (BitVec.signExtend 66 (BitVec.zeroExtend 33 0xFFFFFFFF#32)) :=`
+- **mul_dm33_zext_max_max** (line 2168): `theorem mul_dm33_zext_max_max : mulDataModule (BitVec.zeroExtend 33 0xFFFFFFFF#32) (BitVec.zeroExtend 33 0xFFFFFFFF#32) = (BitVec.signExtend 66 (BitVec.zeroExtend 33 0xFFFFFFFF#32)) * (BitVec.signExtend 66 (BitVec.zeroExtend 33 0xFFFFFFFF#32)) :=`
+- **mul_dm33_zext_intmin_intmin** (line 2174): `theorem mul_dm33_zext_intmin_intmin : mulDataModule (BitVec.zeroExtend 33 0x80000000#32) (BitVec.zeroExtend 33 0x80000000#32) = (BitVec.signExtend 66 (BitVec.zeroExtend 33 0x80000000#32)) * (BitVec.signExtend 66 (BitVec.zeroExtend 33 0x80000000#32)) :=`
+- **mul_dm33_zext_one_sext_intmin** (line 2180): `theorem mul_dm33_zext_one_sext_intmin : mulDataModule (BitVec.zeroExtend 33 1#32) (BitVec.signExtend 33 0x80000000#32) = (BitVec.signExtend 66 (BitVec.zeroExtend 33 1#32)) * (BitVec.signExtend 66 (BitVec.signExtend 33 0x80000000#32)) :=`
+- **mul_dm33_zero** (line 2186): `theorem mul_dm33_zero : mulDataModule (BitVec.zeroExtend 33 0#32) (BitVec.signExtend 33 0xDEADBEEF#32) = 0#66 :=`
+- **mul_dm33_zext_rand2** (line 2191): `theorem mul_dm33_zext_rand2 : mulDataModule (BitVec.zeroExtend 33 0xDEADBEEF#32) (BitVec.zeroExtend 33 0xCAFEBABE#32) = (BitVec.signExtend 66 (BitVec.zeroExtend 33 0xDEADBEEF#32)) * (BitVec.signExtend 66 (BitVec.zeroExtend 33 0xCAFEBABE#32)) :=`
+- **mul_dm33_eq_placedSum_spot1** (line 2198): `theorem mul_dm33_eq_placedSum_spot1 : mulDataModule (BitVec.signExtend 33 0x80000000#32) (BitVec.signExtend 33 0x7FFFFFFF#32) = mulPlacedSum (BitVec.signExtend 33 0x80000000#32) (BitVec.signExtend 33 0x7FFFFFFF#32) :=`
+- **mul_dm33_eq_placedSum_spot2** (line 2203): `theorem mul_dm33_eq_placedSum_spot2 : mulDataModule (BitVec.zeroExtend 33 0xFFFFFFFF#32) (BitVec.signExtend 33 0x80000000#32) = mulPlacedSum (BitVec.zeroExtend 33 0xFFFFFFFF#32) (BitVec.signExtend 33 0x80000000#32) :=`
+- **mul_dm33_eq_placedSum_spot3** (line 2208): `theorem mul_dm33_eq_placedSum_spot3 : mulDataModule (BitVec.signExtend 33 0xFFFFFFFF#32) (BitVec.zeroExtend 33 0xFFFFFFFF#32) = mulPlacedSum (BitVec.signExtend 33 0xFFFFFFFF#32) (BitVec.zeroExtend 33 0xFFFFFFFF#32) :=`
+
+### `Ventus/Arith/MultiplierCSA.lean`
+
+- **mcsaColVal_append** (line 87): `theorem mcsaColVal_append (l1 l2 : List Bool) : mcsaColVal (l1 ++ l2) = mcsaColVal l1 + mcsaColVal l2 :=`
+- **mcsaBitsVal_append** (line 93): `theorem mcsaBitsVal_append (l1 l2 : List Bool) : mcsaBitsVal (l1 ++ l2) = mcsaBitsVal l1 + 2 ^ l1.length * mcsaBitsVal l2 :=`
+- **mcsaColsVal_append** (line 102): `theorem mcsaColsVal_append (l1 l2 : List (List Bool)) : mcsaColsVal (l1 ++ l2) = mcsaColsVal l1 + 2 ^ l1.length * mcsaColsVal l2 :=`
+- **mcsaColsVal_singleton** (line 111): `theorem mcsaColsVal_singleton (c : List Bool) : mcsaColsVal [c] = mcsaColVal c :=`
+- **mcsaColsVal_replicate_nil** (line 114): `theorem mcsaColsVal_replicate_nil (n : Nat) : mcsaColsVal (List.replicate n ([] : List Bool)) = 0 :=`
+- **mcsaColVal_take_drop** (line 121): `theorem mcsaColVal_take_drop (l : List Bool) (n : Nat) : mcsaColVal (l.take n) + mcsaColVal (l.drop n) = mcsaColVal l :=`
+- **mcsaBitsVal_take_drop** (line 128): `theorem mcsaBitsVal_take_drop (l : List Bool) (n : Nat) : mcsaBitsVal l = mcsaBitsVal (l.take n) + 2 ^ (l.take n).length * mcsaBitsVal (l.drop n) :=`
+- **mcsaColVal_headD_drop** (line 135): `theorem mcsaColVal_headD_drop (cin : List Bool) : mcsaColVal cin = (cin.headD false).toNat + mcsaColVal (cin.drop 1) :=`
+- **mcsaAOC_val** (line 146): `theorem mcsaAOC_val (col cin : List Bool) : mcsaColVal (mulAddOneColumn col cin).1 + 2 * (mcsaColVal (mulAddOneColumn col cin).2.1 + mcsaColVal (mulAddOneColumn col cin).2.2) = mcsaColVal col + mcsaColVal cin :=`
+- **mulAddRound_eq_foldl** (line 222): `theorem mulAddRound_eq_foldl (cols : List (List Bool)) : mulAddRound cols = (cols.foldl mcsaRoundStep ([], [], [])).1 :=`
+- **mcsaRoundStep_eq** (line 226): `theorem mcsaRoundStep_eq (built : List (List Bool)) (c1 c2 col : List Bool) : mcsaRoundStep (built, c1, c2) col = (built ++ [(mulAddOneColumn col c1).1 ++ c2], (mulAddOneColumn col c1).2.1, (mulAddOneColumn col c1).2.2) :=`
+- **mcsaRoundStep_fold_length** (line 232): `theorem mcsaRoundStep_fold_length (tail : List (List Bool)) (built : List (List Bool)) (c1 c2 : List Bool) : (tail.foldl mcsaRoundStep (built, c1, c2)).1.length = built.length + tail.length :=`
+- **mcsaAddRound_fold** (line 245): `theorem mcsaAddRound_fold (tail : List (List Bool)) (built : List (List Bool)) (c1 c2 : List Bool) : mcsaColsVal (tail.foldl mcsaRoundStep (built, c1, c2)).1 + 2 ^ (built.length + tail.length) * (mcsaColVal (tail.foldl mcsaRoundStep (built, c1, c2)).2.1 + mcsaColVal (tail.foldl mcsaRoundStep (built, c1, c2)).2.2) = mcsaColsVal built + 2 ^ built.length * (mcsaColVal c1 + mcsaColVal c2 + mcsaColsVal tail) :=`
+- **mcsaAddRound_colsVal** (line 277): `theorem mcsaAddRound_colsVal (cols : List (List Bool)) : mcsaColsVal cols = mcsaColsVal (mulAddRound cols) + 2 ^ cols.length * (mcsaColVal (cols.foldl mcsaRoundStep ([], [], [])).2.1 + mcsaColVal (cols.foldl mcsaRoundStep ([], [], [])).2.2) :=`
+- **mcsaAddRound_length** (line 289): `theorem mcsaAddRound_length (cols : List (List Bool)) : (mulAddRound cols).length = cols.length :=`
+- **mcsaAddRound_mod** (line 294): `theorem mcsaAddRound_mod (cols : List (List Bool)) : mcsaColsVal (mulAddRound cols) % 2 ^ cols.length = mcsaColsVal cols % 2 ^ cols.length :=`
+- **mcsaCompress_length** (line 305): `theorem mcsaCompress_length (fuel : Nat) (cols : List (List Bool)) : (mulCompress fuel cols).length = cols.length :=`
+- **mcsaCompress_invariant** (line 316): `theorem mcsaCompress_invariant (fuel : Nat) (cols : List (List Bool)) : mcsaColsVal (mulCompress fuel cols) % 2 ^ cols.length = mcsaColsVal cols % 2 ^ cols.length :=`
+- **mcsaShapeAOC_zero** (line 350): `theorem mcsaShapeAOC_zero (cinLen : Nat) : mcsaShapeAOC 0 cinLen = (cinLen, 0, 0) :=`
+- **mcsaShapeAOC_one** (line 354): `theorem mcsaShapeAOC_one (cinLen : Nat) : mcsaShapeAOC 1 cinLen = (1 + cinLen, 0, 0) :=`
+- **mcsaShapeAOC_two** (line 359): `theorem mcsaShapeAOC_two (cinLen : Nat) : mcsaShapeAOC 2 cinLen = (1 + cinLen, 0, 1) :=`
+- **mcsaShapeAOC_three** (line 364): `theorem mcsaShapeAOC_three (cinLen : Nat) : mcsaShapeAOC 3 cinLen = (1 + cinLen, 0, 1) :=`
+- **mcsaShapeAOC_four** (line 369): `theorem mcsaShapeAOC_four (cinLen : Nat) : mcsaShapeAOC 4 cinLen = (1 + (cinLen - 1), 1, 1) :=`
+- **mcsaShapeAOC_gt4** (line 375): `theorem mcsaShapeAOC_gt4 {colLen cinLen : Nat} (h : ¬ colLen ≤ 4) : mcsaShapeAOC colLen cinLen = ((mcsaShapeAOC 4 (min cinLen 1)).1 + (mcsaShapeAOC (colLen - 4) (cinLen - 1)).1, (mcsaShapeAOC 4 (min cinLen 1)).2.1 + (mcsaShapeAOC (colLen - 4) (cinLen - 1)).2.1, (mcsaShapeAOC 4 (min cinLen 1)).2.2 + (mcsaShapeAOC (colLen - 4) (cinLen - 1)).2.2) :=`
+- **mcsaShapeAOC_eq_F_aux** (line 404): `theorem mcsaShapeAOC_eq_F_aux (fuel colLen cinLen : Nat) (h : colLen ≤ fuel) : mcsaShapeAOC colLen cinLen = mcsaShapeAOCF fuel colLen cinLen :=`
+- **mcsaShapeAOC_eq_F** (line 439): `theorem mcsaShapeAOC_eq_F (colLen cinLen : Nat) : mcsaShapeAOC colLen cinLen = mcsaShapeAOCF colLen colLen cinLen :=`
+- **mcsaShapeAOC_spec** (line 444): `theorem mcsaShapeAOC_spec (col cin : List Bool) : (mcsaShapeAOC col.length cin.length).1 = (mulAddOneColumn col cin).1.length ∧ (mcsaShapeAOC col.length cin.length).2.1 = (mulAddOneColumn col cin).2.1.length ∧ (mcsaShapeAOC col.length cin.length).2.2 = (mulAddOneColumn col cin).2.2.length :=`
+- **mcsaShapeRoundStep_eq** (line 512): `theorem mcsaShapeRoundStep_eq (built : List Nat) (c1 c2 colLen : Nat) : mcsaShapeRoundStep (built, c1, c2) colLen = (built ++ [(mcsaShapeAOC colLen c1).1 + c2], (mcsaShapeAOC colLen c1).2.1, (mcsaShapeAOC colLen c1).2.2) :=`
+- **mcsaShapeRound_fold** (line 520): `theorem mcsaShapeRound_fold (tail : List (List Bool)) (built : List (List Bool)) (c1 c2 : List Bool) : ((tail.foldl mcsaRoundStep (built, c1, c2)).1).map List.length = ((tail.map List.length).foldl mcsaShapeRoundStep (built.map List.length, c1.length, c2.length)).1 :=`
+- **mcsaAddRound_map_length** (line 540): `theorem mcsaAddRound_map_length (cols : List (List Bool)) : (mulAddRound cols).map List.length = mcsaShapeRound (cols.map List.length) :=`
+- **mcsaCompress_map_length** (line 552): `theorem mcsaCompress_map_length (fuel : Nat) (cols : List (List Bool)) : (mulCompress fuel cols).map List.length = mcsaShapeCompress fuel (cols.map List.length) :=`
+- **mcsaNat_mod_two_pow_succ** (line 573): `theorem mcsaNat_mod_two_pow_succ (x n : Nat) : x % 2 ^ (n + 1) = x % 2 ^ n + 2 ^ n * (x / 2 ^ n % 2) :=`
+- **mcsaBitsVal_range_getLsbD** (line 596): `theorem mcsaBitsVal_range_getLsbD {w : Nat} (v : BitVec w) (n : Nat) : mcsaBitsVal ((List.range n).map v.getLsbD) = v.toNat % 2 ^ n :=`
+- **mcsaBitsVal_bvBits** (line 618): `theorem mcsaBitsVal_bvBits {w : Nat} (v : BitVec w) : mcsaBitsVal (mulBvBits v) = v.toNat :=`
+- **mcsaNat_lor_two_pow** (line 624): `theorem mcsaNat_lor_two_pow (x k : Nat) (h : Nat.testBit x k = false) : x ||| 2 ^ k = x + 2 ^ k :=`
+- **mcsaOrBit_toNat** (line 664): `theorem mcsaOrBit_toNat (acc : BitVec 66) (k : Nat) (hk : k < 66) (hacc : acc.getLsbD k = false) : (acc ||| (1#66 <<< k)).toNat = acc.toNat + 2 ^ k :=`
+- **mcsaBitsToBv_fold** (line 673): `theorem mcsaBitsToBv_fold (acc : BitVec 66) (bits : List Bool) (k : Nat) (hacc : acc.toNat < 2 ^ k) (hk : k + bits.length ≤ 66) : ((bits.zipIdx k).foldl (fun acc p => if p.1 then acc ||| (1#66 <<< p.2) else acc) acc).toNat = acc.toNat + 2 ^ k * mcsaBitsVal bits :=`
+- **mcsaBitsToBv_toNat** (line 709): `theorem mcsaBitsToBv_toNat (bits : List Bool) (h : bits.length ≤ 66) : (mulBitsToBv (w :=`
+- **mcsaColVal_eq_getD** (line 716): `theorem mcsaColVal_eq_getD (c : List Bool) (h : c.length ≤ 2) : mcsaColVal c = (c.getD 0 false).toNat + (c.getD 1 false).toNat :=`
+- **mcsaBitsVal_map_getD_add** (line 729): `theorem mcsaBitsVal_map_getD_add (fin : List (List Bool)) (h : ∀ c ∈ fin, c.length ≤ 2) : mcsaBitsVal (fin.map (fun c => c.getD 0 false)) + mcsaBitsVal (fin.map (fun c => c.getD 1 false)) = mcsaColsVal fin :=`
+- **mcsaSumCarry_toNat** (line 746): `theorem mcsaSumCarry_toNat (fin : List (List Bool)) (hlen : fin.length = 66) (h2 : ∀ c ∈ fin, c.length ≤ 2) : (mulBitsToBv (w :=`
+- **mcsaInnerForIn** (line 778): `theorem mcsaInnerForIn (cols : Array (List Bool)) (bits : List Bool) (weight n : Nat) : (forIn (m :=`
+- **mcsaColumns_eq** (line 810): `theorem mcsaColumns_eq {len : Nat} (a b : BitVec len) : mulColumns a b = (mulRowIndices len).foldl (fun cols i => mcsaPlaceRowArr cols (mulRowBits a b i).1 (mulRowBits a b i).2 (2 * len)) (Array.replicate (2 * len) []) :=`
+- **mcsaPlaceRowArr_size** (line 856): `theorem mcsaPlaceRowArr_size (r : Array (List Bool)) (bits : List Bool) (weight n : Nat) : (mcsaPlaceRowArr r bits weight n).size = r.size :=`
+- **mcsaPlaceRowArr_toList** (line 871): `theorem mcsaPlaceRowArr_toList (r : Array (List Bool)) (bits : List Bool) (weight n : Nat) : (mcsaPlaceRowArr r bits weight n).toList = (List.range n).foldl (mcsaPlaceStep bits weight) r.toList :=`
+- **mcsaColumns_size** (line 887): `theorem mcsaColumns_size {len : Nat} (a b : BitVec len) : (mulColumns a b).size = 2 * len :=`
+- **mcsaColumns_length** (line 901): `theorem mcsaColumns_length {len : Nat} (a b : BitVec len) : (mulColumns a b).toList.length = 2 * len :=`
+- **mcsaPlaceFold_length** (line 906): `theorem mcsaPlaceFold_length (l0 : List (List Bool)) (bits : List Bool) (weight n : Nat) : ((List.range n).foldl (mcsaPlaceStep bits weight) l0).length = l0.length :=`
+- **mcsaBitsVal_singleton** (line 921): `theorem mcsaBitsVal_singleton (b : Bool) : mcsaBitsVal [b] = b.toNat :=`
+- **mcsaColsVal_modify_append** (line 925): `theorem mcsaColsVal_modify_append (l : List (List Bool)) (j : Nat) (b : Bool) (hj : j < l.length) : mcsaColsVal (l.modify j (· ++ [b])) = mcsaColsVal l + 2 ^ j * b.toNat :=`
+- **mcsaPlaceFold_colsVal** (line 947): `theorem mcsaPlaceFold_colsVal (l0 : List (List Bool)) (bits : List Bool) (weight n : Nat) (hlen : n ≤ l0.length) : mcsaColsVal ((List.range n).foldl (mcsaPlaceStep bits weight) l0) = mcsaColsVal l0 + 2 ^ weight * mcsaBitsVal (bits.take (n - weight)) :=`
+- **mcsaOuterFold_colsVal** (line 988): `theorem mcsaOuterFold_colsVal {len : Nat} (a b : BitVec len) (rows : List Nat) (cols0 : Array (List Bool)) (hsize : cols0.size = 2 * len) : mcsaColsVal ((rows.foldl (fun cols i => mcsaPlaceRowArr cols (mulRowBits a b i).1 (mulRowBits a b i).2 (2 * len)) cols0).toList) = mcsaColsVal cols0.toList + (rows.map fun i => 2 ^ (mulRowBits a b i).2 * mcsaBitsVal ((mulRowBits a b i).1.take (2 * len - (mulRowBits a b i).2))).sum :=`
+- **mcsaColumns_colsVal** (line 1005): `theorem mcsaColumns_colsVal (a b : BitVec 33) : mcsaColsVal (mulColumns a b).toList = ((mulRowIndices 33).map fun i => 2 ^ (mulRowBits a b i).2 * mcsaBitsVal ((mulRowBits a b i).1.take (2 * 33 - (mulRowBits a b i).2))).sum :=`
+- **mcsaBvBits_length** (line 1013): `theorem mcsaBvBits_length {w : Nat} (v : BitVec w) : (mulBvBits v).length = w :=`
+- **mcsaRowBits0** (line 1018): `theorem mcsaRowBits0 (a b : BitVec 33) : mulRowBits a b 0 = (mulBvBits (mulPpRow0 (mulPpTemp (mulWindow a 0) b)), 0) :=`
+- **mcsaRowBitsLastBranch** (line 1023): `theorem mcsaRowBitsLastBranch (a b : BitVec 33) (i : Nat) (h : i = 32 ∨ i = 31) : mulRowBits a b i = (mulBvBits (mulPpRowLast (mulPpTemp (mulWindow a i) b) (mulT (mulWindow a (i - 2)))), i - 2) :=`
+- **mcsaRowBitsMid** (line 1031): `theorem mcsaRowBitsMid (a b : BitVec 33) (i : Nat) (h0 : i ≠ 0) (h31 : i ≠ 31) (h32 : i ≠ 32) : mulRowBits a b i = (mulBvBits (mulPpRowMid (mulPpTemp (mulWindow a i) b) (mulT (mulWindow a (i - 2)))), i - 2) :=`
+- **mcsaPlacedRow0** (line 1038): `theorem mcsaPlacedRow0 (a b : BitVec 33) : mulPlacedRow a b 0 = BitVec.zeroExtend 66 (mulPpRow0 (mulPpTemp (mulWindow a 0) b)) :=`
+- **mcsaPlacedRow32** (line 1043): `theorem mcsaPlacedRow32 (a b : BitVec 33) : mulPlacedRow a b 32 = (BitVec.zeroExtend 66 (mulPpRowLast (mulPpTemp (mulWindow a 32) b) (mulT (mulWindow a (32 - 2))))) <<< (32 - 2) :=`
+- **mcsaPlacedRowMid** (line 1050): `theorem mcsaPlacedRowMid (a b : BitVec 33) (i : Nat) (h0 : i ≠ 0) (h31 : i ≠ 31) (h32 : i ≠ 32) : mulPlacedRow a b i = (BitVec.zeroExtend 66 (mulPpRowMid (mulPpTemp (mulWindow a i) b) (mulT (mulWindow a (i - 2))))) <<< (i - 2) :=`
+- **mcsaContrib0** (line 1060): `theorem mcsaContrib0 (a b : BitVec 33) : 2 ^ (mulRowBits a b 0).2 * mcsaBitsVal ((mulRowBits a b 0).1.take (2 * 33 - (mulRowBits a b 0).2)) = (mulPlacedRow a b 0).toNat :=`
+- **mcsaContribMid** (line 1074): `theorem mcsaContribMid (a b : BitVec 33) (i : Nat) (h0 : i ≠ 0) (h31 : i ≠ 31) (h32 : i ≠ 32) (hi : i ≤ 30) : 2 ^ (mulRowBits a b i).2 * mcsaBitsVal ((mulRowBits a b i).1.take (2 * 33 - (mulRowBits a b i).2)) = (mulPlacedRow a b i).toNat :=`
+- **mcsaContribLast** (line 1098): `theorem mcsaContribLast (a b : BitVec 33) : 2 ^ (mulRowBits a b 32).2 * mcsaBitsVal ((mulRowBits a b 32).1.take (2 * 33 - (mulRowBits a b 32).2)) = (mulPlacedRow a b 32).toNat :=`
+- **mcsaRowIndices33** (line 1130): `theorem mcsaRowIndices33 : mulRowIndices 33 = [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32] :=`
+- **mcsaColumns_colsVal_eq** (line 1135): `theorem mcsaColumns_colsVal_eq (a b : BitVec 33) : mcsaColsVal (mulColumns a b).toList = ((mulRowIndices 33).map fun i => (mulPlacedRow a b i).toNat).sum :=`
+- **mcsaNat_add_mod_left** (line 1158): `theorem mcsaNat_add_mod_left (a b n : Nat) : (a % n + b) % n = (a + b) % n :=`
+- **mcsaPlacedSum_toNat** (line 1165): `theorem mcsaPlacedSum_toNat (a b : BitVec 33) : (mulPlacedSum a b).toNat = ((mulRowIndices 33).map fun i => (mulPlacedRow a b i).toNat).sum % 2 ^ 66 :=`
+- **mcsaGetD_modify** (line 1179): `theorem mcsaGetD_modify (l : List (List Bool)) (i j : Nat) (b : Bool) (hi : i < l.length) : (l.modify i (· ++ [b])).getD j [] = if i = j then l.getD j [] ++ [b] else l.getD j [] :=`
+- **mcsaPlaceFold_getD** (line 1195): `theorem mcsaPlaceFold_getD (l0 : List (List Bool)) (bits : List Bool) (weight n j : Nat) (hlen : n ≤ l0.length) : ((List.range n).foldl (mcsaPlaceStep bits weight) l0).getD j [] = if j < n ∧ weight ≤ j ∧ j < weight + bits.length then l0.getD j [] ++ [bits.getD (j - weight) false] else l0.getD j [] :=`
+- **mcsaOuterFold_getD** (line 1235): `theorem mcsaOuterFold_getD {len : Nat} (a b : BitVec len) (rows : List Nat) (cols0 : Array (List Bool)) (j : Nat) (hsize : cols0.size = 2 * len) : ((rows.foldl (fun cols i => mcsaPlaceRowArr cols (mulRowBits a b i).1 (mulRowBits a b i).2 (2 * len)) cols0).toList).getD j [] = rows.foldl (fun c i => if j < 2 * len ∧ (mulRowBits a b i).2 ≤ j ∧ j < (mulRowBits a b i).2 + (mulRowBits a b i).1.length then c ++ [(mulRowBits a b i).1.getD (j - (mulRowBits a b i).2) false] else c) (cols0.toList.getD j []) :=`
+- **mcsaAppendFold_length** (line 1252): `theorem mcsaAppendFold_length (rows : List Nat) (cond : Nat → Prop) [∀ i, Decidable (cond i)] (bit : Nat → Bool) (acc : List Bool) : (rows.foldl (fun c i => if cond i then c ++ [bit i] else c) acc).length = acc.length + (rows.filter fun i => decide (cond i)).length :=`
+- **mcsaRowBits_weight33** (line 1281): `theorem mcsaRowBits_weight33 (a b : BitVec 33) (i : Nat) : (mulRowBits a b i).2 = mcsaRowWeight33 i :=`
+- **mcsaRowBits_length33** (line 1297): `theorem mcsaRowBits_length33 (a b : BitVec 33) (i : Nat) : (mulRowBits a b i).1.length = mcsaRowLen33 i :=`
+- **mcsaRowCond_eq** (line 1320): `theorem mcsaRowCond_eq (a b : BitVec 33) (i j : Nat) : (j < 2 * 33 ∧ (mulRowBits a b i).2 ≤ j ∧ j < (mulRowBits a b i).2 + (mulRowBits a b i).1.length) = (j < 66 ∧ mcsaRowWeight33 i ≤ j ∧ j < mcsaRowWeight33 i + mcsaRowLen33 i) :=`
+- **mcsaInitLens33_getElem** (line 1326): `theorem mcsaInitLens33_getElem (i : Nat) (h : i < mcsaInitLens33.length) : mcsaInitLens33[i]'h = ((mulRowIndices 33).filter fun i' => mcsaRowCover33 i' i).length :=`
+- **mcsaColumns_map_length** (line 1332): `theorem mcsaColumns_map_length (a b : BitVec 33) : ((mulColumns a b).toList.map List.length) = mcsaInitLens33 :=`
+- **mcsaShape33_final** (line 1365): `theorem mcsaShape33_final : (mcsaShapeCompress 12 mcsaInitLens33).all (fun l => decide (l ≤ 2)) = true :=`
+- **mcsaFin33_all_le2** (line 1370): `theorem mcsaFin33_all_le2 (a b : BitVec 33) : ∀ c ∈ mulCompress 12 (mulColumns a b).toList, c.length ≤ 2 :=`
+- **mcsaDataModule33_eq_placedSum** (line 1387): `theorem mcsaDataModule33_eq_placedSum (a b : BitVec 33) (hfin : ∀ c ∈ mulCompress 12 (mulColumns a b).toList, c.length ≤ 2) : mulDataModule a b = mulPlacedSum a b :=`
+- **mcsaDataModule33_eq_placedSum'** (line 1406): `theorem mcsaDataModule33_eq_placedSum' (a b : BitVec 33) : mulDataModule a b = mulPlacedSum a b :=`
+
+### `Ventus/Arith/RegFile.lean`
+
+- **rfVUpd_same** (line 174): `theorem rfVUpd_same (m : RfVMem) (i : Fin 256) (r : RfVRow) : rfVUpd m i r i = r :=`
+- **rfVUpd_diff** (line 177): `theorem rfVUpd_diff (m : RfVMem) (i j : Fin 256) (r : RfVRow) (h : i ≠ j) : rfVUpd m i r j = m j :=`
+- **rfS_bypass_next** (line 364): `theorem rfS_bypass_next (s : RfSState) (a : BitVec 8) (v : BitVec 32) : rfSOut (rfSStep s ⟨a, a, v, true⟩) = v :=`
+- **rfS_read_after_write** (line 369): `theorem rfS_read_after_write (s : RfSState) (a c : BitVec 8) (v x : BitVec 32) : rfSOut (rfSStep (rfSStep s ⟨a, a, v, true⟩) ⟨a, c, x, false⟩) = v :=`
+- **rfS_read_old_during_write** (line 374): `theorem rfS_read_old_during_write (s : RfSState) (a b : BitVec 8) (v : BitVec 32) (h : a ≠ b) : rfSOut (rfSStep s ⟨a, b, v, true⟩) = rf_read s.mem a.toFin :=`
+- **rfSStep_mem** (line 380): `theorem rfSStep_mem (s : RfSState) (i : RfSInputs) : (rfSStep s i).mem = if i.rdwen then rf_write s.mem i.rdidx.toFin i.rd else s.mem :=`
+- **rfS_write_preserves** (line 384): `theorem rfS_write_preserves (s : RfSState) (i : RfSInputs) (a : BitVec 8) (h : a ≠ i.rdidx) : rf_read (rfSStep s i).mem a.toFin = rf_read s.mem a.toFin :=`
+- **rfV_bypass_forwards_full_row** (line 393): `theorem rfV_bypass_forwards_full_row (s : RfVState) (a : BitVec 8) (v : RfVRow) (m : RfVMask) : rfVOut (rfVStep s ⟨a, a, v, true, m⟩) = v :=`
+- **rfV_mem_masked_merge** (line 399): `theorem rfV_mem_masked_merge (s : RfVState) (a c : BitVec 8) (v x : RfVRow) (m m' : RfVMask) (t : Fin 32) : rfVOut (rfVStep (rfVStep s ⟨a, a, v, true, m⟩) ⟨a, c, x, false, m'⟩) t = (if m t then v t else s.mem a.toFin t) :=`
+- **rfV_bypass_mem_diverge** (line 407): `theorem rfV_bypass_mem_diverge (s : RfVState) (a c : BitVec 8) (v x : RfVRow) (m m' : RfVMask) (t : Fin 32) (hm : m t = false) (hne : v t ≠ s.mem a.toFin t) : rfVOut (rfVStep s ⟨a, a, v, true, m⟩) t ≠ rfVOut (rfVStep (rfVStep s ⟨a, a, v, true, m⟩) ⟨a, c, x, false, m'⟩) t :=`
+- **rfV_read_old_during_write** (line 416): `theorem rfV_read_old_during_write (s : RfVState) (a b : BitVec 8) (v : RfVRow) (m : RfVMask) (h : a ≠ b) : rfVOut (rfVStep s ⟨a, b, v, true, m⟩) = s.mem a.toFin :=`
+- **rfVStep_mem** (line 422): `theorem rfVStep_mem (s : RfVState) (i : RfVInputs) : (rfVStep s i).mem = if i.rdwen then rfVUpd s.mem i.rdidx.toFin (rfVRowUpd (s.mem i.rdidx.toFin) i.rd i.rdwmask) else s.mem :=`
+- **rfV_write_preserves** (line 428): `theorem rfV_write_preserves (s : RfVState) (i : RfVInputs) (a : BitVec 8) (h : a ≠ i.rdidx) (t : Fin 32) : (rfVStep s i).mem a.toFin t = s.mem a.toFin t :=`
+- **rfVRowUpd_masked** (line 437): `theorem rfVRowUpd_masked (o n : RfVRow) (m : RfVMask) (t : Fin 32) (h : m t = true) : rfVRowUpd o n m t = n t :=`
+- **rfVRowUpd_unmasked** (line 441): `theorem rfVRowUpd_unmasked (o n : RfVRow) (m : RfVMask) (t : Fin 32) (h : m t = false) : rfVRowUpd o n m t = o t :=`
+- **rfV_v0_all_ones** (line 445): `theorem rfV_v0_all_ones (t : Fin 32) : rfVV0 t = 0xFFFFFFFF#32 :=`
+- **rfImm_I_spec** (line 449): `theorem rfImm_I_spec (inst : BitVec 32) (e : BitVec 7) : rfImmGen rfIMM_I inst e = BitVec.signExtend 32 (inst.extractLsb' 20 12) :=`
+- **rfImm_I_spec_shift** (line 454): `theorem rfImm_I_spec_shift (inst : BitVec 32) (e : BitVec 7) : rfImmGen rfIMM_I inst e = BitVec.sshiftRight' inst 20#32 :=`
+- **rfImm_S_spec** (line 458): `theorem rfImm_S_spec (inst : BitVec 32) (e : BitVec 7) : rfImmGen rfIMM_S inst e = BitVec.signExtend 32 ((inst.extractLsb' 25 7) ++ (inst.extractLsb' 7 5)) :=`
+- **rfImm_B_spec** (line 463): `theorem rfImm_B_spec (inst : BitVec 32) (e : BitVec 7) : rfImmGen rfIMM_B inst e = BitVec.signExtend 32 ((inst.extractLsb' 31 1) ++ (inst.extractLsb' 7 1) ++ (inst.extractLsb' 25 6) ++ (inst.extractLsb' 8 4) ++ 0#1) :=`
+- **rfImm_B_lsb_zero** (line 471): `theorem rfImm_B_lsb_zero (inst : BitVec 32) (e : BitVec 7) : (rfImmGen rfIMM_B inst e).getLsbD 0 = false :=`
+- **rfImm_U_spec** (line 476): `theorem rfImm_U_spec (inst : BitVec 32) (e : BitVec 7) : rfImmGen rfIMM_U inst e = inst &&& 0xFFFFF000#32 :=`
+- **rfImm_J_spec** (line 480): `theorem rfImm_J_spec (inst : BitVec 32) (e : BitVec 7) : rfImmGen rfIMM_J inst e = BitVec.signExtend 32 ((inst.extractLsb' 31 1) ++ (inst.extractLsb' 12 8) ++ (inst.extractLsb' 20 1) ++ (inst.extractLsb' 21 10) ++ 0#1) :=`
+- **rfImm_J_lsb_zero** (line 487): `theorem rfImm_J_lsb_zero (inst : BitVec 32) (e : BitVec 7) : (rfImmGen rfIMM_J inst e).getLsbD 0 = false :=`
+- **rfImm_Z_spec** (line 492): `theorem rfImm_Z_spec (inst : BitVec 32) (e : BitVec 7) : rfImmGen rfIMM_Z inst e = (inst >>> 15#32) &&& 0x1F#32 :=`
+- **rfImm_2_spec** (line 496): `theorem rfImm_2_spec (inst : BitVec 32) (e : BitVec 7) : rfImmGen rfIMM_2 inst e = BitVec.signExtend 32 (inst.extractLsb' 20 5) :=`
+- **rfImm_V_spec** (line 501): `theorem rfImm_V_spec (inst : BitVec 32) (e : BitVec 7) : rfImmGen rfIMM_V inst e = (if e.getLsbD 6 then BitVec.signExtend 32 ((e.extractLsb' 0 6) ++ (inst.extractLsb' 15 5)) else BitVec.signExtend 32 (inst.extractLsb' 15 5)) :=`
+- **rfImm_L11_spec** (line 508): `theorem rfImm_L11_spec (inst : BitVec 32) (e : BitVec 7) : rfImmGen rfIMM_L11 inst e = BitVec.signExtend 32 (inst.extractLsb' 20 11) :=`
+- **rfImm_S11_spec** (line 512): `theorem rfImm_S11_spec (inst : BitVec 32) (e : BitVec 7) : rfImmGen rfIMM_S11 inst e = BitVec.signExtend 32 ((inst.extractLsb' 25 6) ++ (inst.extractLsb' 7 5)) :=`
+- **rfImm_default_quirk** (line 518): `theorem rfImm_default_quirk (sel : BitVec 4) (inst : BitVec 32) (e : BitVec 7) (h : 10#4 ≤ sel) : rfImmGen sel inst e = (BitVec.signExtend 32 (inst.extractLsb' 20 12)) &&& 0xFFFFFFFE#32 :=`
+
+### `Ventus/Arith/ScalarALU.lean`
+
+- **sa_add_spec** (line 261): `theorem sa_add_spec (in1 in2 in3 : BitVec 32) : (saAlu saFN_ADD in1 in2 in3).1 = in1 + in2 :=`
+- **sa_sub_spec** (line 265): `theorem sa_sub_spec (in1 in2 in3 : BitVec 32) : (saAlu saFN_SUB in1 in2 in3).1 = in1 - in2 :=`
+- **sa_xor_spec** (line 270): `theorem sa_xor_spec (in1 in2 in3 : BitVec 32) : (saAlu saFN_XOR in1 in2 in3).1 = in1 ^^^ in2 :=`
+- **sa_or_spec** (line 274): `theorem sa_or_spec (in1 in2 in3 : BitVec 32) : (saAlu saFN_OR in1 in2 in3).1 = in1 ||| in2 :=`
+- **sa_and_spec** (line 278): `theorem sa_and_spec (in1 in2 in3 : BitVec 32) : (saAlu saFN_AND in1 in2 in3).1 = in1 &&& in2 :=`
+- **sa_sll_spec** (line 283): `theorem sa_sll_spec (in1 in2 in3 : BitVec 32) : (saAlu saFN_SL in1 in2 in3).1 = in1 <<< (in2 &&& 0x1F#32) :=`
+- **sa_srl_spec** (line 287): `theorem sa_srl_spec (in1 in2 in3 : BitVec 32) : (saAlu saFN_SR in1 in2 in3).1 = in1 >>> (in2 &&& 0x1F#32) :=`
+- **sa_sra_spec** (line 291): `theorem sa_sra_spec (in1 in2 in3 : BitVec 32) : (saAlu saFN_SRA in1 in2 in3).1 = BitVec.sshiftRight' in1 (in2 &&& 0x1F#32) :=`
+- **sa_seq_out_spec** (line 296): `theorem sa_seq_out_spec (in1 in2 in3 : BitVec 32) : (saAlu saFN_SEQ in1 in2 in3).1 = (if in1 == in2 then 1#32 else 0#32) :=`
+- **sa_seq_cmp_spec** (line 300): `theorem sa_seq_cmp_spec (in1 in2 in3 : BitVec 32) : (saAlu saFN_SEQ in1 in2 in3).2 = (in1 == in2) :=`
+- **sa_sne_out_spec** (line 304): `theorem sa_sne_out_spec (in1 in2 in3 : BitVec 32) : (saAlu saFN_SNE in1 in2 in3).1 = (if in1 != in2 then 1#32 else 0#32) :=`
+- **sa_sne_cmp_spec** (line 308): `theorem sa_sne_cmp_spec (in1 in2 in3 : BitVec 32) : (saAlu saFN_SNE in1 in2 in3).2 = (in1 != in2) :=`
+- **sa_slt_out_spec** (line 313): `theorem sa_slt_out_spec (in1 in2 in3 : BitVec 32) : (saAlu saFN_SLT in1 in2 in3).1 = (if BitVec.slt in1 in2 then 1#32 else 0#32) :=`
+- **sa_slt_cmp_spec** (line 317): `theorem sa_slt_cmp_spec (in1 in2 in3 : BitVec 32) : (saAlu saFN_SLT in1 in2 in3).2 = BitVec.slt in1 in2 :=`
+- **sa_sge_out_spec** (line 328): `theorem sa_sge_out_spec (in1 in2 in3 : BitVec 32) : (saAlu saFN_SGE in1 in2 in3).1 = (if BitVec.slt in1 in2 then 1#32 else 0#32) :=`
+- **sa_sge_cmp_spec** (line 332): `theorem sa_sge_cmp_spec (in1 in2 in3 : BitVec 32) : (saAlu saFN_SGE in1 in2 in3).2 = BitVec.sle in2 in1 :=`
+- **sa_sltu_out_spec** (line 336): `theorem sa_sltu_out_spec (in1 in2 in3 : BitVec 32) : (saAlu saFN_SLTU in1 in2 in3).1 = (if BitVec.ult in1 in2 then 1#32 else 0#32) :=`
+- **sa_sltu_cmp_spec** (line 340): `theorem sa_sltu_cmp_spec (in1 in2 in3 : BitVec 32) : (saAlu saFN_SLTU in1 in2 in3).2 = BitVec.ult in1 in2 :=`
+- **sa_sgeu_out_spec** (line 344): `theorem sa_sgeu_out_spec (in1 in2 in3 : BitVec 32) : (saAlu saFN_SGEU in1 in2 in3).1 = (if BitVec.ult in1 in2 then 1#32 else 0#32) :=`
+- **sa_sgeu_cmp_spec** (line 348): `theorem sa_sgeu_cmp_spec (in1 in2 in3 : BitVec 32) : (saAlu saFN_SGEU in1 in2 in3).2 = BitVec.ule in2 in1 :=`
+- **sa_min_spec** (line 353): `theorem sa_min_spec (in1 in2 in3 : BitVec 32) : (saAlu saFN_MIN in1 in2 in3).1 = (if BitVec.slt in1 in2 then in1 else in2) :=`
+- **sa_max_spec** (line 357): `theorem sa_max_spec (in1 in2 in3 : BitVec 32) : (saAlu saFN_MAX in1 in2 in3).1 = (if BitVec.slt in1 in2 then in2 else in1) :=`
+- **sa_minu_spec** (line 361): `theorem sa_minu_spec (in1 in2 in3 : BitVec 32) : (saAlu saFN_MINU in1 in2 in3).1 = (if BitVec.ult in1 in2 then in1 else in2) :=`
+- **sa_maxu_spec** (line 365): `theorem sa_maxu_spec (in1 in2 in3 : BitVec 32) : (saAlu saFN_MAXU in1 in2 in3).1 = (if BitVec.ult in1 in2 then in2 else in1) :=`
+- **sa_a1zero_spec** (line 370): `theorem sa_a1zero_spec (in1 in2 in3 : BitVec 32) : (saAlu saFN_A1ZERO in1 in2 in3).1 = in2 :=`
+- **sa_a2zero_spec** (line 374): `theorem sa_a2zero_spec (in1 in2 in3 : BitVec 32) : (saAlu saFN_A2ZERO in1 in2 in3).1 = in1 :=`
+- **sa_mul_family_out_zero** (line 379): `theorem sa_mul_family_out_zero (func : BitVec 5) (in1 in2 in3 : BitVec 32) (hlo : 20#5 ≤ func) (hhi : func ≤ 27#5) : (saAlu func in1 in2 in3).1 = 0#32 :=`
+
+### `Ventus/Base/Defs.lean`
+
+- **rf_read_write_same** (line 203): `theorem rf_read_write_same {n w : Nat} (rf : RegFile n w) (i : Fin n) (v : Bits w) : rf_read (rf_write rf i v) i = v :=`
+- **rf_read_write_diff** (line 207): `theorem rf_read_write_diff {n w : Nat} (rf : RegFile n w) (i j : Fin n) (v : Bits w) (h : i ≠ j) : rf_read (rf_write rf i v) j = rf_read rf j :=`
+- **mem_read_write_same** (line 211): `theorem mem_read_write_same {size w : Nat} (mem : Memory size w) (addr : Fin size) (v : Bits w) : mem_read (mem_write mem addr v) addr = v :=`
+- **mem_read_write_diff** (line 215): `theorem mem_read_write_diff {size w : Nat} (mem : Memory size w) (a1 a2 : Fin size) (v : Bits w) (h : a1 ≠ a2) : mem_read (mem_write mem a1 v) a2 = mem_read mem a2 :=`
+
+### `Ventus/Base/DefsSpec.lean`
+
+- **cat_toNat** (line 32): `theorem cat_toNat {m n : Nat} (hi : Bits m) (lo : Bits n) : bits2nat (Cat hi lo) = bits2nat hi * 2 ^ n + bits2nat lo :=`
+- **cat_bit_at_lo** (line 46): `theorem cat_bit_at_lo {m n : Nat} (hi : Bits m) (lo : Bits n) (i : Nat) (h : i < n) : (Cat hi lo)[[i]] = lo[[i]] :=`
+- **cat_bit_at_hi** (line 57): `theorem cat_bit_at_hi {m n : Nat} (hi : Bits m) (lo : Bits n) (i : Nat) (h1 : n ≤ i) (h2 : i < n + m) : (Cat hi lo)[[i]] = hi[[i - n]] :=`
+- **cat_eq_append_cast** (line 71): `theorem cat_eq_append_cast {m n : Nat} (hi : Bits m) (lo : Bits n) : Cat hi lo = (hi ++ lo).cast (Nat.add_comm m n) :=`
+
+### `Ventus/Base/Handshake.lean`
+
+- **fires_eq** (line 48): `theorem fires_eq (v r : Bool) : fires v r = (v && r) :=`
+- **fires_true_iff** (line 50): `theorem fires_true_iff (v r : Bool) : fires v r = true ↔ v = true ∧ r = true :=`
+- **fires_of** (line 53): `theorem fires_of {v r : Bool} (hv : v = true) (hr : r = true) : fires v r = true :=`
+- **fires_comm** (line 56): `theorem fires_comm (v r : Bool) : fires v r = fires r v :=`
+- **fires_true_iff** (line 66): `theorem fires_true_iff {α : Type} (o : Obs α) : o.fires = true ↔ o.valid = true ∧ o.ready = true :=`
+- **fires_eq_fires** (line 71): `theorem fires_eq_fires {α : Type} (o : Obs α) : o.fires = Handshake.fires o.valid o.ready :=`
+- **irrevocable_iff** (line 95): `theorem irrevocable_iff {tr : Trace α} : Irrevocable tr ↔ ∀ t, (tr t).valid = true → (tr t).ready = false → (tr (t + 1)).valid = true ∧ (tr (t + 1)).bits = (tr t).bits :=`
+- **irrevocable_and_stable_noWithdraw** (line 106): `theorem irrevocable_and_stable_noWithdraw {tr : Trace α} : Irrevocable tr ↔ Stable tr ∧ NoWithdraw tr :=`
+- **irrevocable_of** (line 110): `theorem irrevocable_of {tr : Trace α} (hs : Stable tr) (hn : NoWithdraw tr) : Irrevocable tr :=`
+- **Irrevocable.stable** (line 113): `theorem Irrevocable.stable {tr : Trace α} (h : Irrevocable tr) : Stable tr :=`
+- **Irrevocable.noWithdraw** (line 115): `theorem Irrevocable.noWithdraw {tr : Trace α} (h : Irrevocable tr) : NoWithdraw tr :=`
+- **irrevocable_of_alwaysReady** (line 127): `theorem irrevocable_of_alwaysReady {tr : Trace α} (h : AlwaysReady tr) : Irrevocable tr :=`
+- **irrevocable_of_neverValid** (line 131): `theorem irrevocable_of_neverValid {tr : Trace α} (h : NeverValid tr) : Irrevocable tr :=`
+- **irrevocable_of_valid_imp_ready** (line 135): `theorem irrevocable_of_valid_imp_ready {tr : Trace α} (h : ∀ t, (tr t).valid = true → (tr t).ready = true) : Irrevocable tr :=`
+- **countFires_succ_of_fires** (line 162): `theorem countFires_succ_of_fires {tr : Trace α} {n : Nat} (h : (tr n).fires = true) : countFires tr (n + 1) = countFires tr n + 1 :=`
+- **countFires_succ_of_not_fires** (line 167): `theorem countFires_succ_of_not_fires {tr : Trace α} {n : Nat} (h : (tr n).fires = false) : countFires tr (n + 1) = countFires tr n :=`
+- **countFires_le** (line 172): `theorem countFires_le (tr : Trace α) (n : Nat) : countFires tr n ≤ n :=`
+- **countFires_mono** (line 180): `theorem countFires_mono {tr : Trace α} {m n : Nat} (h : m ≤ n) : countFires tr m ≤ countFires tr n :=`
+- **countFires_congr** (line 187): `theorem countFires_congr {tr1 tr2 : Trace α} {n : Nat} (h : ∀ t, t < n → tr1 t = tr2 t) : countFires tr1 n = countFires tr2 n :=`
+- **countFires_pos_of_fires** (line 198): `theorem countFires_pos_of_fires {tr : Trace α} {t n : Nat} (hf : (tr t).fires = true) (ht : t < n) : 0 < countFires tr n :=`
+- **fires_lt_countFires** (line 206): `theorem fires_lt_countFires {tr : Trace α} {t n : Nat} (hf : (tr t).fires = true) (ht : t < n) : countFires tr t < countFires tr n :=`
+- **Trace.append_apply_of_lt** (line 240): `theorem Trace.append_apply_of_lt {n : Nat} {tr1 tr2 : Trace α} {t : Nat} (ht : t < n) : Trace.append n tr1 tr2 t = tr1 t :=`
+- **Trace.append_apply_of_le** (line 244): `theorem Trace.append_apply_of_le {n : Nat} {tr1 tr2 : Trace α} {t : Nat} (ht : n ≤ t) : Trace.append n tr1 tr2 t = tr2 (t - n) :=`
+- **stable_shift** (line 250): `theorem stable_shift {tr : Trace α} (h : Stable tr) (k : Nat) : Stable (tr.shift k) :=`
+- **noWithdraw_shift** (line 253): `theorem noWithdraw_shift {tr : Trace α} (h : NoWithdraw tr) (k : Nat) : NoWithdraw (tr.shift k) :=`
+- **irrevocable_shift** (line 257): `theorem irrevocable_shift {tr : Trace α} (h : Irrevocable tr) (k : Nat) : Irrevocable (tr.shift k) :=`
+- **countFires_add** (line 262): `theorem countFires_add (tr : Trace α) (m n : Nat) : countFires tr (m + n) = countFires tr m + countFires (tr.shift m) n :=`
+- **stable_map** (line 271): `theorem stable_map (f : α → β) {tr : Trace α} (h : Stable tr) : Stable (tr.map f) :=`
+- **noWithdraw_map** (line 275): `theorem noWithdraw_map (f : α → β) {tr : Trace α} (h : NoWithdraw tr) : NoWithdraw (tr.map f) :=`
+- **irrevocable_map** (line 280): `theorem irrevocable_map (f : α → β) {tr : Trace α} (h : Irrevocable tr) : Irrevocable (tr.map f) :=`
+- **countFires_map** (line 285): `theorem countFires_map (f : α → β) (tr : Trace α) (n : Nat) : countFires (tr.map f) n = countFires tr n :=`
+- **irrevocable_append** (line 296): `theorem irrevocable_append {n : Nat} {tr1 tr2 : Trace α} (h1 : Irrevocable tr1) (h2 : Irrevocable tr2) (hb : (tr1 (n - 1)).valid = true → (tr1 (n - 1)).ready = false → (tr2 0).valid = true ∧ (tr2 0).bits = (tr1 (n - 1)).bits) : Irrevocable (Trace.append n tr1 tr2) :=`
+- **countFires_append** (line 337): `theorem countFires_append {n : Nat} {tr1 tr2 : Trace α} (m : Nat) : countFires (Trace.append n tr1 tr2) (n + m) = countFires tr1 n + countFires tr2 m :=`
+- **irrevocable_const** (line 354): `theorem irrevocable_const (o : Obs α) : Irrevocable (Trace.const o) :=`
+- **irrevocable_idle** (line 358): `theorem irrevocable_idle (b : α) (r : Bool) : Irrevocable (Trace.idle b r) :=`
+- **irrevocable_constFiring** (line 362): `theorem irrevocable_constFiring (b : α) : Irrevocable (Trace.constFiring b) :=`
+- **countFires_const** (line 366): `theorem countFires_const (o : Obs α) (n : Nat) : countFires (Trace.const o) n = (if o.fires then n else 0) :=`
+- **countFires_idle** (line 377): `theorem countFires_idle (b : α) (r : Bool) (n : Nat) : countFires (Trace.idle b r) n = 0 :=`
+- **countFires_constFiring** (line 382): `theorem countFires_constFiring (b : α) (n : Nat) : countFires (Trace.constFiring b) n = n :=`
+- **irrevocable_stable_until** (line 399): `theorem irrevocable_stable_until {tr : Trace α} (h : Irrevocable tr) {s t : Nat} (hst : s ≤ t) (hv : (tr s).valid = true) (hblock : ∀ u, s ≤ u → u < t → (tr u).ready = false) : (tr t).valid = true ∧ (tr t).bits = (tr s).bits :=`
+- **irrevocable_bits_at_fire** (line 413): `theorem irrevocable_bits_at_fire {tr : Trace α} (h : Irrevocable tr) {s t : Nat} (hst : s ≤ t) (hv : (tr s).valid = true) (hblock : ∀ u, s ≤ u → u < t → (tr u).ready = false) (hfire : (tr t).fires = true) : (tr t).bits = (tr s).bits :=`
+- **fires_of_alwaysReady** (line 421): `theorem fires_of_alwaysReady {tr : Trace α} (h : AlwaysReady tr) (t : Nat) : (tr t).fires = (tr t).valid :=`
+- **countFires_eq_countValid** (line 426): `theorem countFires_eq_countValid {tr : Trace α} (h : AlwaysReady tr) (n : Nat) : countFires tr n = countValid tr n :=`
+- **countFires_eq_zero_of_neverValid** (line 433): `theorem countFires_eq_zero_of_neverValid {tr : Trace α} (h : NeverValid tr) (n : Nat) : countFires tr n = 0 :=`
+- **testTrA_stable** (line 523): `theorem testTrA_stable : Stable testTrA :=`
+- **testTrA_noWithdraw** (line 538): `theorem testTrA_noWithdraw : NoWithdraw testTrA :=`
+- **testTrA_irrevocable** (line 553): `theorem testTrA_irrevocable : Irrevocable testTrA :=`
+
+### `Ventus/Base/LibraryFns.lean`
+
+- **muxOR_true** (line 51): `theorem muxOR_true {n : Nat} (data : Bits n) : muxOR b1 data = data :=`
+- **muxOR_false** (line 54): `theorem muxOR_false {n : Nat} (data : Bits n) : muxOR b0 data = bits_zero n :=`
+- **muxORBool_true** (line 57): `theorem muxORBool_true (data : Bit) : muxORBool b1 data = data :=`
+- **muxORBool_false** (line 60): `theorem muxORBool_false (data : Bit) : muxORBool b0 data = b0 :=`
+- **muxOR_eq_zero_iff** (line 64): `theorem muxOR_eq_zero_iff {n : Nat} (valid : Bit) (data : Bits n) : muxOR valid data = bits_zero n ↔ valid = b0 ∨ data = bits_zero n :=`
+- **muxOR_or_of_not_both** (line 69): `theorem muxOR_or_of_not_both {n : Nat} (v1 v2 : Bit) (d1 d2 : Bits n) (h : ¬(v1 = b1 ∧ v2 = b1)) : muxOR v1 d1 ||| muxOR v2 d2 = Mux v1 d1 (Mux v2 d2 (bits_zero n)) :=`
+- **forceZero_invalid** (line 90): `theorem forceZero_invalid {w : Nat} (b : Bits w) : forceZero (false, b) = (false, bits_zero w) :=`
+- **forceZero_valid** (line 94): `theorem forceZero_valid {w : Nat} (b : Bits w) : forceZero (true, b) = (true, b) :=`
+- **toNat_ne_zero_of_ne** (line 115): `theorem toNat_ne_zero_of_ne {n : Nat} {x : Bits n} (h : x ≠ 0) : x.toNat ≠ 0 :=`
+- **clz_zero** (line 120): `theorem clz_zero (n : Nat) : clz (0 : Bits n) = n :=`
+- **clz_of_ne_zero** (line 124): `theorem clz_of_ne_zero {n : Nat} (x : Bits n) (h : x ≠ 0) : clz x = n - (Nat.log2 x.toNat + 1) :=`
+- **clz_le** (line 133): `theorem clz_le {n : Nat} (x : Bits n) : clz x ≤ n :=`
+- **clz_spec** (line 140): `theorem clz_spec {n : Nat} (x : Bits n) (h : x ≠ 0) : 2 ^ (n - 1 - clz x) ≤ x.toNat ∧ x.toNat < 2 ^ (n - clz x) :=`
+- **clz_eq_n_iff** (line 152): `theorem clz_eq_n_iff {n : Nat} (x : Bits n) : clz x = n ↔ x = 0 :=`
+- **zip32_words** (line 195): `theorem zip32_words (a b : Bits 32) : zip32 4#3 a b = b ++ a :=`
+- **zip32_halves** (line 200): `theorem zip32_halves (a b : Bits 32) : zip32 2#3 a b = (b[[31,16]] ++ a[[31,16]]) ++ (b[[15,0]] ++ a[[15,0]]) :=`
+- **zip32_bytes** (line 206): `theorem zip32_bytes (a b : Bits 32) : zip32 1#3 a b = (b[[31,24]] ++ (a[[31,24]] ++ b[[23,16]]) ++ a[[23,16]]) ++ (b[[15,8]] ++ (a[[15,8]] ++ b[[7,0]]) ++ a[[7,0]]) :=`
+- **contains_eq_true_iff** (line 230): `theorem contains_eq_true_iff {w : Nat} (idx start fin : Bits w) : contains idx start fin = true ↔ start.toNat ≤ idx.toNat ∧ idx.toNat < fin.toNat :=`
+- **contains_start** (line 234): `theorem contains_start {w : Nat} (start fin : Bits w) (h : start.toNat < fin.toNat) : contains start start fin = true :=`
+- **contains_end_lt** (line 238): `theorem contains_end_lt {w : Nat} (idx start fin : Bits w) (h : contains idx start fin = true) : idx.toNat < fin.toNat :=`
+- **rotateVecLeft_spec** (line 269): `theorem rotateVecLeft_spec {n w : Nat} (hn : 0 < n) (data : Fin n → Bits w) {o shift : Nat} (ho : o < n) (hs : shift < n) : rotateVecLeft hn data shift ⟨(o + shift) % n, Nat.mod_lt _ hn⟩ = data ⟨o, ho⟩ :=`
+- **rotateVecRight_spec** (line 287): `theorem rotateVecRight_spec {n w : Nat} (hn : 0 < n) (data : Fin n → Bits w) {o shift : Nat} (ho : o < n) (hs : shift < n) : rotateVecRight hn data shift ⟨(o + n - shift) % n, Nat.mod_lt _ hn⟩ = data ⟨o, ho⟩ :=`
+- **rotateVecLeft_mod** (line 306): `theorem rotateVecLeft_mod {n w : Nat} (hn : 0 < n) (data : Fin n → Bits w) (shift : Nat) : rotateVecLeft hn data shift = rotateVecLeft hn data (shift % n) :=`
+- **shiftVecLeft_of_le** (line 327): `theorem shiftVecLeft_of_le {n w : Nat} (data : Fin n → Bits w) {shift : Nat} (j : Fin n) (h : shift ≤ j.val) : shiftVecLeft data shift j = data ⟨j.val - shift, Nat.lt_of_le_of_lt (Nat.sub_le _ _) j.isLt⟩ :=`
+- **shiftVecLeft_of_lt** (line 334): `theorem shiftVecLeft_of_lt {n w : Nat} (data : Fin n → Bits w) {shift : Nat} (j : Fin n) (h : j.val < shift) : shiftVecLeft data shift j = bits_zero w :=`
+- **shiftVecLeft_spec** (line 340): `theorem shiftVecLeft_spec {n w : Nat} (data : Fin n → Bits w) {o shift : Nat} (h : o + shift < n) : shiftVecLeft data shift ⟨o + shift, h⟩ = data ⟨o, Nat.lt_of_le_of_lt (Nat.le_add_right _ _) h⟩ :=`
+- **shiftVecRight_spec** (line 351): `theorem shiftVecRight_spec {n w : Nat} (data : Fin n → Bits w) {o shift : Nat} (ho : o < n) (h : o + shift < n) : shiftVecRight data shift ⟨o, ho⟩ = data ⟨o + shift, h⟩ :=`
+- **shiftVecRight_of_ge** (line 357): `theorem shiftVecRight_of_ge {n w : Nat} (data : Fin n → Bits w) {shift : Nat} (j : Fin n) (h : n ≤ j.val + shift) : shiftVecRight data shift j = bits_zero w :=`
+- **oneHotInOrder_true_cons** (line 395): `theorem oneHotInOrder_true_cons (l : List Bool) : oneHotInOrder (true :: l) = oneHotInOrder l :=`
+- **oneHotInOrder_false_false** (line 401): `theorem oneHotInOrder_false_false (l : List Bool) : oneHotInOrder (false :: false :: l) = oneHotInOrder (false :: l) :=`
+- **oneHotInOrder_false_true** (line 404): `theorem oneHotInOrder_false_true (l : List Bool) : oneHotInOrder (false :: true :: l) = false :=`
+- **oneHotInOrder_replicate** (line 407): `theorem oneHotInOrder_replicate (k m : Nat) : oneHotInOrder (List.replicate k true ++ List.replicate m false) = true :=`
+- **oneHotInOrder_spec** (line 426): `theorem oneHotInOrder_spec (l : List Bool) : oneHotInOrder l = true ↔ ∃ k m, l = List.replicate k true ++ List.replicate m false :=`
+- **isEnabled_eq_true_iff** (line 510): `theorem isEnabled_eq_true_iff {w : Nat} (c : LoopingCounter w) : c.isEnabled = true ↔ c.max ≠ 0 :=`
+- **isFull_eq_true_iff** (line 514): `theorem isFull_eq_true_iff {w : Nat} (c : LoopingCounter w) : c.isFull = true ↔ c.curr = c.max :=`
+- **next_max** (line 518): `theorem next_max {w : Nat} (c : LoopingCounter w) : c.next.max = c.max :=`
+- **next_curr_of_full** (line 520): `theorem next_curr_of_full {w : Nat} (c : LoopingCounter w) (h : c.isFull = true) : c.next.curr = bits_zero w :=`
+- **next_curr_of_not_full** (line 524): `theorem next_curr_of_not_full {w : Nat} (c : LoopingCounter w) (h : c.isFull = false) : c.next.curr = c.curr + 1 :=`
+- **reset_curr** (line 528): `theorem reset_curr {w : Nat} (c : LoopingCounter w) : c.reset.curr = bits_zero w :=`
+- **init_inv** (line 530): `theorem init_inv {w : Nat} (m : Bits w) : Inv (init m) :=`
+- **next_preserves_inv** (line 534): `theorem next_preserves_inv {w : Nat} (c : LoopingCounter w) (h : Inv c) : Inv c.next :=`
+- **stepN_zero** (line 556): `theorem stepN_zero {w : Nat} (c : LoopingCounter w) : stepN c 0 = c :=`
+- **stepN_max** (line 558): `theorem stepN_max {w : Nat} (c : LoopingCounter w) (k : Nat) : (stepN c k).max = c.max :=`
+- **stepN_inv** (line 565): `theorem stepN_inv {w : Nat} (c : LoopingCounter w) (h : Inv c) (k : Nat) : Inv (stepN c k) :=`
+- **stepN_curr_toNat** (line 572): `theorem stepN_curr_toNat {w : Nat} (m : Bits w) (k : Nat) (hk : k ≤ m.toNat) : (stepN (init m) k).curr.toNat = k :=`
+- **stepN_cycle** (line 591): `theorem stepN_cycle {w : Nat} (m : Bits w) : stepN (init m) (m.toNat + 1) = init m :=`
+- **clamp_of_le_lo** (line 624): `theorem clamp_of_le_lo {w : Nat} (x lo hi : Bits w) (h : x.toInt ≤ lo.toInt) : clamp x lo hi = lo :=`
+- **clamp_of_in_range** (line 630): `theorem clamp_of_in_range {w : Nat} (x lo hi : Bits w) (h1 : lo.toInt < x.toInt) (h2 : x.toInt < hi.toInt) : clamp x lo hi = x :=`
+- **clamp_of_ge_hi** (line 637): `theorem clamp_of_ge_hi {w : Nat} (x lo hi : Bits w) (h1 : lo.toInt < x.toInt) (h2 : hi.toInt ≤ x.toInt) : clamp x lo hi = hi :=`
+- **clamp_inbounds** (line 644): `theorem clamp_inbounds {w : Nat} (x lo hi : Bits w) (h : lo.toInt ≤ hi.toInt) : lo.toInt ≤ (clamp x lo hi).toInt ∧ (clamp x lo hi).toInt ≤ hi.toInt :=`
+
+### `Ventus/Base/MemLaws.lean`
+
+- **read_write** (line 86): `theorem read_write (m : M) (a b : Addr) (v : Data) : read (write m a v) b = (if b = a then v else read m b) :=`
+- **read_write_shadow** (line 93): `theorem read_write_shadow (m : M) (a b : Addr) (u v : Data) : read (write (write m a u) a v) b = read (write m a v) b :=`
+- **read_write_comm** (line 99): `theorem read_write_comm (m : M) (a b c : Addr) (u v : Data) (hab : a ≠ b) : read (write (write m a u) b v) c = read (write (write m b v) a u) c :=`
+- **read_write_init** (line 109): `theorem read_write_init (a b : Addr) (v : Data) : read (write (initOf M) a v) b = (if b = a then v else initDataOf M) :=`
+- **read_write_write_diff** (line 115): `theorem read_write_write_diff (m : M) (a b c : Addr) (u v : Data) (hca : c ≠ a) (hcb : c ≠ b) : read (write (write m a u) b v) c = read m c :=`
+
+### `Ventus/Base/QueueModel.lean`
+
+- **AQueue.ext** (line 57): `theorem AQueue.ext {α : Type} {cap : Nat} {q1 q2 : AQueue α cap} (h : q1.items = q2.items) : q1 = q2 :=`
+- **AQueue.count_eq_length** (line 62): `theorem AQueue.count_eq_length {α : Type} {cap : Nat} (q : AQueue α cap) : q.count = q.items.length :=`
+- **AQueue.isEmpty_iff** (line 65): `theorem AQueue.isEmpty_iff {α : Type} {cap : Nat} (q : AQueue α cap) : q.isEmpty ↔ q.items = [] :=`
+- **AQueue.canEnq_iff_not_isFull** (line 74): `theorem AQueue.canEnq_iff_not_isFull {α : Type} {cap : Nat} (q : AQueue α cap) : q.canEnq ↔ ¬q.isFull :=`
+- **AQueue.canDeq_iff_not_isEmpty** (line 81): `theorem AQueue.canDeq_iff_not_isEmpty {α : Type} {cap : Nat} (q : AQueue α cap) : q.canDeq ↔ ¬q.isEmpty :=`
+- **AQueue.empty_count** (line 86): `theorem AQueue.empty_count {α : Type} {cap : Nat} : (AQueue.empty : AQueue α cap).count = 0 :=`
+- **AQueue.empty_canEnq** (line 88): `theorem AQueue.empty_canEnq {α : Type} {cap : Nat} (h : 0 < cap) : (AQueue.empty : AQueue α cap).canEnq :=`
+- **AQueue.enq_full** (line 128): `theorem AQueue.enq_full {α : Type} {cap : Nat} (q : AQueue α cap) (x : α) (h : q.isFull) : q.enq x = none :=`
+- **AQueue.enq_none_iff** (line 137): `theorem AQueue.enq_none_iff {α : Type} {cap : Nat} (q : AQueue α cap) (x : α) : q.enq x = none ↔ q.isFull :=`
+- **AQueue.canEnq_of_enq_some** (line 150): `theorem AQueue.canEnq_of_enq_some {α : Type} {cap : Nat} {q q' : AQueue α cap} {x : α} (h : q.enq x = some q') : q.canEnq :=`
+- **AQueue.enq_success** (line 158): `theorem AQueue.enq_success {α : Type} {cap : Nat} (q : AQueue α cap) (x : α) (h : q.canEnq) : ∃ q', q.enq x = some q' ∧ q'.items = q.items ++ [x] ∧ q'.count = q.count + 1 :=`
+- **AQueue.enq_items** (line 171): `theorem AQueue.enq_items {α : Type} {cap : Nat} {q q' : AQueue α cap} {x : α} (h : q.enq x = some q') : q'.items = q.items ++ [x] :=`
+- **AQueue.enq_count** (line 180): `theorem AQueue.enq_count {α : Type} {cap : Nat} {q q' : AQueue α cap} {x : α} (h : q.enq x = some q') : q'.count = q.count + 1 :=`
+- **AQueue.deq_empty** (line 191): `theorem AQueue.deq_empty {α : Type} {cap : Nat} (q : AQueue α cap) (h : q.isEmpty) : q.deq = none :=`
+- **AQueue.deq_none_iff** (line 200): `theorem AQueue.deq_none_iff {α : Type} {cap : Nat} (q : AQueue α cap) : q.deq = none ↔ q.isEmpty :=`
+- **AQueue.canDeq_of_deq_some** (line 211): `theorem AQueue.canDeq_of_deq_some {α : Type} {cap : Nat} {q q' : AQueue α cap} {y : α} (h : q.deq = some (y, q')) : q.canDeq :=`
+- **AQueue.deq_success** (line 220): `theorem AQueue.deq_success {α : Type} {cap : Nat} (q : AQueue α cap) (h : q.canDeq) : ∃ y q', q.deq = some (y, q') ∧ q.items = y :: q'.items ∧ q'.count + 1 = q.count :=`
+- **AQueue.deq_items** (line 241): `theorem AQueue.deq_items {α : Type} {cap : Nat} {q q' : AQueue α cap} {y : α} (h : q.deq = some (y, q')) : q.items = y :: q'.items :=`
+- **AQueue.deq_count** (line 249): `theorem AQueue.deq_count {α : Type} {cap : Nat} {q q' : AQueue α cap} {y : α} (h : q.deq = some (y, q')) : q'.count + 1 = q.count ∧ q'.count = q.count - 1 :=`
+- **AQueue.deq_head** (line 258): `theorem AQueue.deq_head {α : Type} {cap : Nat} {q q' : AQueue α cap} {y : α} (h : q.deq = some (y, q')) : q.items.head? = some y :=`
+- **AQueue.enqDeq_success** (line 267): `theorem AQueue.enqDeq_success {α : Type} {cap : Nat} (q : AQueue α cap) (x : α) (h : q.canDeq) : ∃ y q', q.enqDeq x = some (y, q') ∧ q'.count = q.count ∧ ∃ ys, q.items = y :: ys ∧ q'.items = ys ++ [x] :=`
+- **AQueue.enqDeq_full** (line 282): `theorem AQueue.enqDeq_full {α : Type} {cap : Nat} (q : AQueue α cap) (x : α) (hfull : q.isFull) (hcd : q.canDeq) : ∃ y q', q.enqDeq x = some (y, q') ∧ q'.isFull :=`
+- **AQueue.enqDeq_empty** (line 290): `theorem AQueue.enqDeq_empty {α : Type} {cap : Nat} (q : AQueue α cap) (x : α) (h : q.isEmpty) : q.enqDeq x = none :=`
+- **AQueue.canDeq_of_enqDeq_some** (line 295): `theorem AQueue.canDeq_of_enqDeq_some {α : Type} {cap : Nat} {q q' : AQueue α cap} {x y : α} (h : q.enqDeq x = some (y, q')) : q.canDeq :=`
+- **Hist.run_prefix** (line 370): `theorem Hist.run_prefix {α : Type} {cap : Nat} (h0 : Hist α cap) (ops : List (AOp α)) (hf : Hist α cap) (_h : h0.run ops = some hf) : (∃ t, hf.deqHist ++ t = hf.enqHist) ∧ hf.enqHist = hf.deqHist ++ hf.q.items :=`
+- **Hist.run_from_empty_prefix** (line 378): `theorem Hist.run_from_empty_prefix {α : Type} {cap : Nat} (ops : List (AOp α)) (hf : Hist α cap) (h : (Hist.empty : Hist α cap).run ops = some hf) : ∃ t, hf.deqHist ++ t = hf.enqHist :=`
+- **AQueue.fifo_single** (line 384): `theorem AQueue.fifo_single {α : Type} {cap : Nat} (x : α) (hcap : 0 < cap) : ∃ q', (AQueue.empty : AQueue α cap).enq x = some q' ∧ q'.deq = some (x, AQueue.empty) :=`
+- **aStep_enq** (line 443): `theorem aStep_enq {α : Type} {cap : Nat} {q q' : AQueue α cap} {x : α} (h : q.enq x = some q') : aStep q (.enq x) = some (none, q') :=`
+- **aStep_deq** (line 447): `theorem aStep_deq {α : Type} {cap : Nat} {q q' : AQueue α cap} {y : α} (h : q.deq = some (y, q')) : aStep q .deq = some (some y, q') :=`
+- **aStep_enqDeq** (line 451): `theorem aStep_enqDeq {α : Type} {cap : Nat} {q q' : AQueue α cap} {x y : α} (h : q.enqDeq x = some (y, q')) : aStep q (.enqDeq x) = some (some y, q') :=`
+- **aStep_skip** (line 455): `theorem aStep_skip {α : Type} {cap : Nat} (q : AQueue α cap) : aStep q .skip = some (none, q) :=`
+- **aSteps_append** (line 458): `theorem aSteps_append {α : Type} {cap : Nat} (ls1 ls2 : List (AOp α)) : ∀ (q q1 q2 : AQueue α cap) (os1 os2 : List α), aSteps q ls1 = some (os1, q1) → aSteps q1 ls2 = some (os2, q2) → aSteps q (ls1 ++ ls2) = some (os1 ++ os2, q2) :=`
+- **Steps.single** (line 499): `theorem Steps.single {S : Type} {α : Type} {step : S → Option α → S → Prop} {s s' : S} {o : Option α} (h : step s o s') : Steps step s o.toList s' :=`
+- **Steps.trans** (line 505): `theorem Steps.trans {S : Type} {α : Type} {step : S → Option α → S → Prop} {s t u : S} {os1 os2 : List α} (h1 : Steps step s os1 t) (h2 : Steps step t os2 u) : Steps step s (os1 ++ os2) u :=`
+- **simulates_steps** (line 526): `theorem simulates_steps {S : Type} {α : Type} {cap : Nat} {abs : S → AQueue α cap} {step : S → Option α → S → Prop} (hsim : Simulates abs step) {s s' : S} {os : List α} (h : Steps step s os s') : ∃ ls : List (AOp α), aSteps (abs s) ls = some (os, abs s') :=`
+
+### `Ventus/CTA/Allocator.lean`
+
+- **alcSelFin_zero** (line 160): `theorem alcSelFin_zero : alcSelFin 0#1 = (0 : Fin 2) :=`
+- **alcSelFin_one** (line 161): `theorem alcSelFin_one : alcSelFin 1#1 = (1 : Fin 2) :=`
+- **alcPEOH8_and** (line 182): `theorem alcPEOH8_and (u : BitVec 8) : u &&& alcPEOH8 u = alcPEOH8 u :=`
+- **alcPEOH8_ne_zero** (line 185): `theorem alcPEOH8_ne_zero {u : BitVec 8} (h : u ≠ 0#8) : alcPEOH8 u ≠ 0#8 :=`
+- **alcPEOH8_compl** (line 189): `theorem alcPEOH8_compl (u : BitVec 8) : u &&& alcPEOH8 (~~~u) = 0#8 :=`
+- **alcPEOH8_eq_shift** (line 193): `theorem alcPEOH8_eq_shift {u : BitVec 8} (h : u ≠ 0#8) : alcPEOH8 u = 1#8 <<< (alcPE8 u).zeroExtend 8 :=`
+- **alc_compl_ne_zero** (line 198): `theorem alc_compl_ne_zero {u : BitVec 8} (h : u ≠ BitVec.allOnes 8) : ~~~u ≠ 0#8 :=`
+- **alcPE8_bit_set** (line 202): `theorem alcPE8_bit_set {u : BitVec 8} (h : u ≠ 0#8) : (u >>> (alcPE8 u).zeroExtend 8) &&& 1#8 = 1#8 :=`
+- **alc_cu_check_always** (line 207): `theorem alc_cu_check_always (x c : BitVec 1) : x ≤ c ∨ c ≤ x :=`
+- **alcFsmNext_eq_alloc** (line 393): `theorem alcFsmNext_eq_alloc (s : AlcState) (i : AlcInputs) (h : alcFsmNext s i = .alloc) (hf : s.fsm ≠ .alloc) : s.fsm = .resCheck ∧ alcRepeat s i = false ∧ alcResult s = true :=`
+- **alcCuNext_of_alloc** (line 419): `theorem alcCuNext_of_alloc (s : AlcState) (i : AlcInputs) (hrc : s.fsm = .resCheck) (h : alcFsmNext s i = .alloc) : alcCuNext s i = s.cu :=`
+- **alcWgNewFire_ne_idle** (line 424): `theorem alcWgNewFire_ne_idle {s : AlcState} {i : AlcInputs} (hf : s.fsm ≠ .idle) : alcWgNewFire s i = false :=`
+- **alcAllocWr_not_alloc** (line 430): `theorem alcAllocWr_not_alloc {s : AlcState} (hf : s.fsm ≠ .alloc) : alcAllocWr s = false :=`
+- **alcAllocMask_not_first** (line 434): `theorem alcAllocMask_not_first {s : AlcState} (hf : s.fsm ≠ .alloc) : alcAllocMask s = 0#8 :=`
+- **alcCuTmp_not_first** (line 437): `theorem alcCuTmp_not_first {s : AlcState} {i : AlcInputs} (hf : s.fsm ≠ .alloc) : alcCuTmp s i = alcCuFin i.deallocCu :=`
+- **alc_sel_lds_ok** (line 442): `theorem alc_sel_lds_ok (s : AlcState) (h : alcOrLds s = true) : s.cacheLds (alcCuFin s.cu) (alcSelFin (alcSelLds s)) ≥ s.wg.numLds :=`
+- **alc_sel_sgpr_ok** (line 456): `theorem alc_sel_sgpr_ok (s : AlcState) (h : alcOrSgpr s = true) : s.cacheSgpr (alcCuFin s.cu) (alcSelFin (alcSelSgpr s)) ≥ s.wg.numSgpr :=`
+- **alc_sel_vgpr_ok** (line 470): `theorem alc_sel_vgpr_ok (s : AlcState) (h : alcOrVgpr s = true) : s.cacheVgpr (alcCuFin s.cu) (alcSelFin (alcSelVgpr s)) ≥ s.wg.numVgpr :=`
+- **alc_and_and_compl** (line 485): `theorem alc_and_and_compl {w dm p : BitVec 8} (h : w &&& p = 0#8) : (w &&& ~~~dm) &&& p = 0#8 :=`
+- **alc_or_zero** (line 488): `theorem alc_or_zero (x : BitVec 8) : x ||| 0#8 = x :=`
+- **alc_wf_fit_dealloc** (line 491): `theorem alc_wf_fit_dealloc {old d n : BitVec 4} (h1 : 8#4 - old ≥ n) (h2 : old ≤ 8#4) (h3 : d ≤ old) : 8#4 - (old - d) ≥ n :=`
+- **alc_wf_bound_alloc** (line 495): `theorem alc_wf_bound_alloc {old d n : BitVec 4} (h1 : 8#4 - old ≥ n) (h2 : old ≤ 8#4) (h3 : d ≤ old) : old + n - d ≤ 8#4 :=`
+- **alc_wf_bound_sub** (line 499): `theorem alc_wf_bound_sub {old d : BitVec 4} (h2 : old ≤ 8#4) (h3 : d ≤ old) : old - d ≤ 8#4 :=`
+- **alc_add_zero4** (line 502): `theorem alc_add_zero4 (x : BitVec 4) : x + 0#4 = x :=`
+- **alc_dealloc_le** (line 505): `theorem alc_dealloc_le (s : AlcState) (i : AlcInputs) (henv : AlcEnvOk s i) : (if alcDeallocFire s i then i.deallocNumWf else 0#4) ≤ s.wfslot (alcCuTmp s i) :=`
+- **alcInv_init** (line 527): `theorem alcInv_init : AlcInv alcInit :=`
+- **alcInv_step** (line 532): `theorem alcInv_step (s : AlcState) (i : AlcInputs) (hinv : AlcInv s) (henv : AlcEnvOk s i) : AlcInv (alcStep s i) :=`
+- **alcInv_run** (line 667): `theorem alcInv_run (ins : List AlcInputs) (henv : ∀ (pre : List AlcInputs) (i : AlcInputs), AlcEnvOk (alcRun alcInit pre) i) : AlcInv (alcRun alcInit ins) :=`
+- **alc_h_alloc_slot** (line 689): `theorem alc_h_alloc_slot (s : AlcState) (h : AlcInv s) (h1 : s.fsm = .alloc) (h2 : s.fsmR1 ≠ .alloc) : s.wgslot1H ≠ 0#8 ∧ (s.wgslot (alcCuFin s.cu)) &&& s.wgslot1H = 0#8 ∧ (~~~(s.wgslot (alcCuFin s.cu)) >>> s.wgslotId.zeroExtend 8) &&& 1#8 = 1#8 :=`
+- **alc_h_alloc_fit** (line 705): `theorem alc_h_alloc_fit (s : AlcState) (h : AlcInv s) (h1 : s.fsm = .alloc) (h2 : s.fsmR1 ≠ .alloc) : s.cacheLds (alcCuFin s.cu) (alcSelFin s.ldsSel) ≥ s.wg.numLds ∧ s.cacheSgpr (alcCuFin s.cu) (alcSelFin s.sgprSel) ≥ s.wg.numSgpr ∧ s.cacheVgpr (alcCuFin s.cu) (alcSelFin s.vgprSel) ≥ s.wg.numVgpr ∧ (8#4 - s.wfslot (alcCuFin s.cu)) ≥ s.wg.numWf :=`
+- **alc_assert91** (line 717): `theorem alc_assert91 (s : AlcState) (h : AlcInv s) (hw : alcAllocWr s = true) : s.cacheLds (alcCuFin s.cu) (alcSelFin s.ldsSel) ≥ s.wg.numLds ∧ s.cacheSgpr (alcCuFin s.cu) (alcSelFin s.sgprSel) ≥ s.wg.numSgpr ∧ s.cacheVgpr (alcCuFin s.cu) (alcSelFin s.vgprSel) ≥ s.wg.numVgpr :=`
+- **alc_hold_alloc** (line 735): `theorem alc_hold_alloc (s : AlcState) (i : AlcInputs) (hf : s.fsm = .alloc) : (alcStep s i).wgslotId = s.wgslotId ∧ (alcStep s i).wgslot1H = s.wgslot1H ∧ (alcStep s i).cu = s.cu ∧ (alcStep s i).wg = s.wg ∧ (alcStep s i).ldsSel = s.ldsSel ∧ (alcStep s i).sgprSel = s.sgprSel ∧ (alcStep s i).vgprSel = s.vgprSel :=`
+
+### `Ventus/CTA/CTA2warp.lean`
+
+- **c2wFin_inj** (line 85): `theorem c2wFin_inj {a b : BitVec 3} (h : c2wFin a = c2wFin b) : a = b :=`
+- **c2wOut_ctaRspTag** (line 162): `theorem c2wOut_ctaRspTag (s : C2wState) (i : C2wInputs) : (c2wOut s i).ctaRspTag = c2wRspTagOf s.data s.fifo :=`
+- **c2wStep_idxUsing** (line 189): `theorem c2wStep_idxUsing (s : C2wState) (i : C2wInputs) : (c2wStep s i).idxUsing = c2wStepIdx s.idxUsing (c2wAllocIdx s) (c2wReqFire s i) (c2wEnqFire s i) i.warpRspWid :=`
+- **c2wStep_data** (line 192): `theorem c2wStep_data (s : C2wState) (i : C2wInputs) : (c2wStep s i).data = if c2wReqFire s i then rf_write s.data (c2wFin (c2wAllocIdx s)) i.ctaReqTag else s.data :=`
+- **c2wStep_fifo** (line 195): `theorem c2wStep_fifo (s : C2wState) (i : C2wInputs) : (c2wStep s i).fifo = c2wStepFifo s.fifo (c2wEnqFire s i) (c2wDeqFire s i) i.warpRspWid :=`
+- **c2w1_alloc_idx_clear** (line 324): `theorem c2w1_alloc_idx_clear (u : BitVec 8) (h : u ≠ BitVec.allOnes 8) : ((u >>> (c2wPriorityEnc (~~~u)).zeroExtend 8) &&& 1#8) = 0#8 :=`
+- **c2w1_alloc_idx_min** (line 329): `theorem c2w1_alloc_idx_min (u : BitVec 8) (h : u ≠ BitVec.allOnes 8) : (u &&& ((1#8 <<< (c2wPriorityEnc (~~~u)).zeroExtend 8) - 1#8)) = ((1#8 <<< (c2wPriorityEnc (~~~u)).zeroExtend 8) - 1#8) :=`
+- **c2w1_alloc_rsp_no_clash** (line 337): `theorem c2w1_alloc_rsp_no_clash (u : BitVec 8) (w : BitVec 3) (h : u ≠ BitVec.allOnes 8) (hw : ((u >>> w.zeroExtend 8) &&& 1#8) = 1#8) : c2wPriorityEnc (~~~u) ≠ w :=`
+- **c2w2_alloc_sets** (line 343): `theorem c2w2_alloc_sets (u : BitVec 8) : (((u ||| (1#8 <<< (c2wPriorityEnc (~~~u)).zeroExtend 8)) >>> (c2wPriorityEnc (~~~u)).zeroExtend 8) &&& 1#8) = 1#8 :=`
+- **c2w2_rsp_clears** (line 349): `theorem c2w2_rsp_clears (u : BitVec 8) (w : BitVec 3) : (((u &&& ~~~(1#8 <<< w.zeroExtend 8)) >>> w.zeroExtend 8) &&& 1#8) = 0#8 :=`
+- **c2w2_set_preserves** (line 354): `theorem c2w2_set_preserves (u m : BitVec 8) (k : BitVec 3) (hk : ((u >>> k.zeroExtend 8) &&& 1#8) = 1#8) : (((u ||| m) >>> k.zeroExtend 8) &&& 1#8) = 1#8 :=`
+- **c2w3_step_full_idx_mono** (line 361): `theorem c2w3_step_full_idx_mono (s : C2wState) (i : C2wInputs) (hf : s.fifo.length = 16) (k : BitVec 3) (hk : ((s.idxUsing >>> k.zeroExtend 8) &&& 1#8) = 1#8) : (((c2wStep s i).idxUsing >>> k.zeroExtend 8) &&& 1#8) = 1#8 :=`
+- **c2w4_full_stuck_run** (line 380): `theorem c2w4_full_stuck_run (s : C2wState) (ins : List C2wInputs) (hf : s.fifo.length = 16) (hnr : ∀ x ∈ ins, x.ctaRspReady = false) : (c2wRun s ins).fifo.length = 16 ∧ ∀ k : BitVec 3, ((s.idxUsing >>> k.zeroExtend 8) &&& 1#8) = 1#8 → (((c2wRun s ins).idxUsing >>> k.zeroExtend 8) &&& 1#8) = 1#8 :=`
+- **c2w5_step_fifo_bound** (line 397): `theorem c2w5_step_fifo_bound (s : C2wState) (i : C2wInputs) (hb : s.fifo.length ≤ 16) : (c2wStep s i).fifo.length ≤ 16 :=`
+- **c2w5_fifo_len_delta** (line 421): `theorem c2w5_fifo_len_delta (s : C2wState) (i : C2wInputs) (hb : s.fifo.length ≤ 16) : (c2wStep s i).fifo.length = s.fifo.length + (if c2wEnqFire s i then 1 else 0) - (if c2wDeqFire s i then 1 else 0) :=`
+- **c2w6_rsp_dropped_iff_full** (line 442): `theorem c2w6_rsp_dropped_iff_full (s : C2wState) (i : C2wInputs) (hb : s.fifo.length ≤ 16) (hv : i.warpRspValid = true) : c2wEnqFire s i = false ↔ s.fifo.length = 16 :=`
+- **c2wOut_tag_cons** (line 458): `theorem c2wOut_tag_cons (u : BitVec 8) (d : Fin 8 → BitVec 6) (w : BitVec 3) (ws : List (BitVec 3)) (i : C2wInputs) : (c2wOut ⟨u, d, w :: ws⟩ i).ctaRspTag = d (c2wFin w) :=`
+- **c2w7_tag_safe_next_cycle** (line 465): `theorem c2w7_tag_safe_next_cycle (u : BitVec 8) (d : Fin 8 → BitVec 6) (i1 i2 : C2wInputs) (hbit : ((u >>> i1.warpRspWid.zeroExtend 8) &&& 1#8) = 1#8) (hrsp : c2wEnqFire ⟨u, d, []⟩ i1 = true) (hdeq : c2wDeqFire (c2wStep ⟨u, d, []⟩ i1) i2 = true) : (c2wOut (c2wStep ⟨u, d, []⟩ i1) i2).ctaRspTag = d (c2wFin i1.warpRspWid) :=`
+- **c2wFifo_simulates** (line 526): `theorem c2wFifo_simulates (inp : C2wFifoIn) : Simulates c2wFifoAbs (c2wFifoStepR inp) :=`
+
+### `Ventus/CTA/CtaScheduler.lean`
+
+- **ctas_tag_roundtrip** (line 102): `theorem ctas_tag_roundtrip (slot wf : BitVec 3) : ctasTagSlot (ctasWfTag slot wf) = slot ∧ ctasTagWf (ctasWfTag slot wf) = wf :=`
+- **ctas_hostFire_imp_initOk** (line 115): `theorem ctas_hostFire_imp_initOk (v r i : Bool) (h : ctasHostFire v r i = true) : i = true :=`
+- **ctas_hostFire_blocked_init** (line 120): `theorem ctas_hostFire_blocked_init (v r : Bool) : ctasHostFire v r false = false :=`
+- **ctas_hostFire_iff** (line 124): `theorem ctas_hostFire_iff (v r i : Bool) : ctasHostFire v r i = true ↔ v = true ∧ r = true ∧ i = true :=`
+- **ctasWrite_self** (line 297): `theorem ctasWrite_self (lv : Fin 2 → Fin 8 → Option CtasWgRec) (cu : Fin 2) (slot : Fin 8) (v : Option CtasWgRec) : ctasWrite lv cu slot v cu slot = v :=`
+- **ctasWrite_other** (line 302): `theorem ctasWrite_other (lv : Fin 2 → Fin 8 → Option CtasWgRec) {cu cu' : Fin 2} {slot slot' : Fin 8} (h : ¬ (cu' = cu ∧ slot' = slot)) (v : Option CtasWgRec) : ctasWrite lv cu slot v cu' slot' = lv cu' slot' :=`
+- **ctasWrite_ne** (line 307): `theorem ctasWrite_ne (lv : Fin 2 → Fin 8 → Option CtasWgRec) {cu cu' : Fin 2} (hc : cu' ≠ cu) (slot : Fin 8) (v : Option CtasWgRec) (j : Fin 8) : ctasWrite lv cu slot v cu' j = lv cu' j :=`
+- **ctasSum8_write** (line 313): `theorem ctasSum8_write (f : Fin 8 → Nat) (k : Fin 8) (v : Nat) : ctasSum8 (fun j => if j = k then v else f j) = ctasSum8 f - f k + v :=`
+- **ctasUsed_write_eq** (line 320): `theorem ctasUsed_write_eq (lv : Fin 2 → Fin 8 → Option CtasWgRec) (cu : Fin 2) (slot : Fin 8) (v : Option CtasWgRec) (proj : CtasWgRec → Nat) : ctasSum8 (fun j => ctasSlotRes (ctasWrite lv cu slot v cu j) proj) = ctasSum8 (fun j => ctasSlotRes (lv cu j) proj) - ctasSlotRes (lv cu slot) proj + ctasSlotRes v proj :=`
+- **ctasSlotRes_le_sum** (line 335): `theorem ctasSlotRes_le_sum (lv : Fin 2 → Fin 8 → Option CtasWgRec) (cu : Fin 2) (slot : Fin 8) (proj : CtasWgRec → Nat) : ctasSlotRes (lv cu slot) proj ≤ ctasSum8 (fun j => ctasSlotRes (lv cu j) proj) :=`
+- **ctasUsed_other** (line 356): `theorem ctasUsed_other (lv : Fin 2 → Fin 8 → Option CtasWgRec) {cu cu' : Fin 2} (hc : cu' ≠ cu) (slot : Fin 8) (v : Option CtasWgRec) (proj : CtasWgRec → Nat) : ctasSum8 (fun j => ctasSlotRes (ctasWrite lv cu slot v cu' j) proj) = ctasSum8 (fun j => ctasSlotRes (lv cu' j) proj) :=`
+- **ctasUsed_alloc** (line 365): `theorem ctasUsed_alloc (s : CtasState) (cu : Fin 2) (slot : Fin 8) (rec : CtasWgRec) (hslot : s.live cu slot = none) (proj : CtasWgRec → Nat) : ctasSum8 (fun j => ctasSlotRes (ctasWrite s.live cu slot (some rec) cu j) proj) = ctasSum8 (fun j => ctasSlotRes (s.live cu j) proj) + proj rec :=`
+- **ctasUsed_remove** (line 376): `theorem ctasUsed_remove (s : CtasState) (cu : Fin 2) (slot : Fin 8) (proj : CtasWgRec → Nat) : ctasSum8 (fun j => ctasSlotRes (ctasWrite s.live cu slot none cu j) proj) = ctasSum8 (fun j => ctasSlotRes (s.live cu j) proj) - ctasSlotRes (s.live cu slot) proj :=`
+- **ctasDisjoint_symm** (line 384): `theorem ctasDisjoint_symm {r1 r2 : CtasWgRec} (h : ctasDisjoint r1 r2) : ctasDisjoint r2 r1 :=`
+- **ctasPairOk_symm** (line 388): `theorem ctasPairOk_symm {o1 o2 : Option CtasWgRec} (h : ctasPairOk o1 o2) : ctasPairOk o2 o1 :=`
+- **ctasPairOk_none_left** (line 397): `theorem ctasPairOk_none_left (o : Option CtasWgRec) : ctasPairOk none o = True :=`
+- **ctasPairOk_none_right** (line 400): `theorem ctasPairOk_none_right (o : Option CtasWgRec) : ctasPairOk o none = True :=`
+- **ctas_step_inv** (line 409): `theorem ctas_step_inv (s : CtasState) (e : CtasEvent) (hinv : CtasInv s) (hok : CtasEventOk s e) : CtasInv (ctasStep s e) :=`
+- **ctas_no_oversubscribe** (line 775): `theorem ctas_no_oversubscribe (s : CtasState) (h : CtasInv s) (cu : Fin 2) : ctasUsed s cu CtasWgRec.sgprSize ≤ ctasNUM_SGPR_MAX ∧ ctasUsed s cu CtasWgRec.vgprSize ≤ ctasNUM_VGPR_MAX ∧ ctasUsed s cu CtasWgRec.ldsSize ≤ ctasNUM_LDS_MAX :=`
+- **ctas_alloc_needs_free_slot** (line 782): `theorem ctas_alloc_needs_free_slot (s : CtasState) (cu : Fin 2) (slot : Fin 8) (rec : CtasWgRec) (hok : CtasEventOk s (.alloc cu slot rec)) : s.live cu slot = none :=`
+- **ctas_dealloc_only_when_complete** (line 789): `theorem ctas_dealloc_only_when_complete (s : CtasState) (cu : Fin 2) (slot : Fin 8) (wgId : BitVec 32) (hok : CtasEventOk s (.dealloc cu slot wgId)) : ∃ r, s.live cu slot = some r ∧ r.wfDone = r.numWf ∧ r.wgId = wgId :=`
+- **ctas_dealloc_frees** (line 799): `theorem ctas_dealloc_frees (s : CtasState) (cu : Fin 2) (slot : Fin 8) (wgId : BitVec 32) : (ctasStep s (.dealloc cu slot wgId)).live cu slot = none ∧ ∀ proj : CtasWgRec → Nat, ctasUsed (ctasStep s (.dealloc cu slot wgId)) cu proj = ctasUsed s cu proj - ctasSlotRes (s.live cu slot) proj :=`
+- **ctas_wfCount_bounded** (line 813): `theorem ctas_wfCount_bounded (s : CtasState) (h : CtasInv s) (cu : Fin 2) (slot : Fin 8) (r : CtasWgRec) (hl : s.live cu slot = some r) : r.wfDone ≤ r.wfSent ∧ r.wfSent ≤ r.numWf :=`
+
+### `Ventus/CTA/CuInterface.lean`
+
+- **cuif_tag_roundtrip** (line 86): `theorem cuif_tag_roundtrip (slot wf : BitVec 3) : cuifTagSlot (cuifWfTag slot wf) = slot ∧ cuifTagWf (cuifWfTag slot wf) = wf :=`
+- **cuif_fifo_step** (line 367): `theorem cuif_fifo_step (s : CuifState) (i : CuifInputs) : (cuifStep s i).fifo = (if cuifDeqFire s i then s.fifo.tail else s.fifo) ++ (if cuifEnqFire s i then [i.enqWg] else []) :=`
+- **cuif_splitCnt_step** (line 372): `theorem cuif_splitCnt_step (s : CuifState) (i : CuifInputs) : (cuifStep s i).splitCnt = (if s.splitCnt ≠ 0#4 then (if cuifWfFire s i then s.splitCnt - 1#4 else s.splitCnt) else (match s.fifo with | ...`
+- **cuif_cnt_step_at** (line 378): `theorem cuif_cnt_step_at (s : CuifState) (i : CuifInputs) (g : Fin 16) : (cuifStep s i).cntMem g = (if s.gfsm = .update ∧ g = cuifGaddr s.cuReg s.slotReg then (if cuifFinish s then 0#4 else s.cntRd + 1#4) else s.cntMem g) :=`
+- **cuif_info_step_at** (line 390): `theorem cuif_info_step_at (s : CuifState) (i : CuifInputs) (g : Fin 16) : (cuifStep s i).infoMem g = (if cuifLoadNew s = true ∧ g = cuifGaddr (cuifHead s).cuId (cuifHead s).wgSlotId then cuifInfoOf (cuifHead s) else s.infoMem g) :=`
+- **cuif_live_step_at** (line 402): `theorem cuif_live_step_at (s : CuifState) (i : CuifInputs) (g : Fin 16) : (cuifStep s i).liveMem g = (if s.gfsm = .update ∧ g = cuifGaddr s.cuReg s.slotReg then !cuifFinish s else if cuifLoadNew s = true ∧ g = cuifGaddr (cuifHead s).cuId (cuifHead s).wgSlotId then true else s.liveMem g) :=`
+- **cuif_mem_step_fifo** (line 418): `theorem cuif_mem_step_fifo {s : CuifState} {i : CuifInputs} {w : CuifWg} (h : w ∈ (cuifStep s i).fifo) : w ∈ s.fifo ∨ w = i.enqWg :=`
+- **cuif_mem_step_fifo_old** (line 429): `theorem cuif_mem_step_fifo_old {s : CuifState} {i : CuifInputs} {w : CuifWg} (h : w ∈ (cuifStep s i).fifo) (he : cuifEnqFire s i = false) : w ∈ s.fifo :=`
+- **cuif_fifo_step_cons** (line 438): `theorem cuif_fifo_step_cons (s : CuifState) (i : CuifInputs) (h : CuifWg) (t : List CuifWg) (hf : s.fifo = h :: t) (hd : cuifDeqFire s i = false) : (cuifStep s i).fifo = h :: (t ++ (if cuifEnqFire s i then [i.enqWg] else [])) :=`
+- **cuifHead_of_cons** (line 445): `theorem cuifHead_of_cons {s : CuifState} {h : CuifWg} {t : List CuifWg} (hf : s.fifo = h :: t) : cuifHead s = h :=`
+- **cuifGaddr_inj** (line 450): `theorem cuifGaddr_inj {c1 c2 : BitVec 1} {s1 s2 : BitVec 3} (h : cuifGaddr c1 s1 = cuifGaddr c2 s2) : c1 = c2 ∧ s1 = s2 :=`
+- **cuif_arbFire_getWf** (line 459): `theorem cuif_arbFire_getWf {s : CuifState} {i : CuifInputs} (h : cuifArbFire s i = true) : s.gfsm = .getWf :=`
+- **cuif_deqFire_facts** (line 466): `theorem cuif_deqFire_facts (s : CuifState) (i : CuifInputs) (hd : cuifDeqFire s i = true) : s.splitCnt = 1#4 ∧ s.fifo ≠ [] ∧ cuifWfFire s i = true :=`
+- **cuif_wfFire_facts** (line 482): `theorem cuif_wfFire_facts (s : CuifState) (i : CuifInputs) (hf : cuifWfFire s i = true) : s.splitCnt ≠ 0#4 ∧ s.fifo ≠ [] :=`
+- **cuif_deq_of_wfFire_one** (line 493): `theorem cuif_deq_of_wfFire_one (s : CuifState) (i : CuifInputs) (h1 : s.splitCnt = 1#4) (hf : cuifWfFire s i = true) : cuifDeqFire s i = true :=`
+- **cuif_no_fire_no_deq** (line 504): `theorem cuif_no_fire_no_deq (s : CuifState) (i : CuifInputs) (hc : s.splitCnt ≠ 0#4) (hf : cuifWfFire s i = false) : cuifDeqFire s i = false :=`
+- **cuif_loadNew_facts** (line 518): `theorem cuif_loadNew_facts (s : CuifState) (hl : cuifLoadNew s = true) : s.splitCnt = 0#4 ∧ s.fifo ≠ [] :=`
+- **cuif_no_deq_of_cnt0** (line 529): `theorem cuif_no_deq_of_cnt0 (s : CuifState) (i : CuifInputs) (hc : s.splitCnt = 0#4) : cuifDeqFire s i = false :=`
+- **cuif_ne_zero_of_toNat_pos** (line 534): `theorem cuif_ne_zero_of_toNat_pos {x : BitVec 4} (h : 1 ≤ x.toNat) : x ≠ 0#4 :=`
+- **cuif_sub_one_ne_zero** (line 537): `theorem cuif_sub_one_ne_zero {x : BitVec 4} (h0 : x ≠ 0#4) (h1 : x ≠ 1#4) : x - 1#4 ≠ 0#4 :=`
+- **cuif_sub_one_le** (line 540): `theorem cuif_sub_one_le {x n : BitVec 4} (h0 : x ≠ 0#4) (h : x ≤ n) : x - 1#4 ≤ n :=`
+- **cuif_sub_lt_self** (line 542): `theorem cuif_sub_lt_self {n c : BitVec 4} (h1 : 1#4 ≤ c) (h2 : c ≤ n) : n - c < n :=`
+- **cuif_one_le_of_ne_zero** (line 545): `theorem cuif_one_le_of_ne_zero {x : BitVec 4} (h : x ≠ 0#4) : 1#4 ≤ x :=`
+- **cuif_toNat_add_one** (line 550): `theorem cuif_toNat_add_one {x : BitVec 4} (h : x.toNat + 1 < 16) : (x + 1#4).toNat = x.toNat + 1 :=`
+- **cuif_step_gfsm_update** (line 557): `theorem cuif_step_gfsm_update (s : CuifState) (i : CuifInputs) (h : (cuifStep s i).gfsm = .update) : s.gfsm = .getWf ∧ cuifArbFire s i = true :=`
+- **cuifInv_init** (line 586): `theorem cuifInv_init : CuifInv cuifInit :=`
+- **cuifInv_step** (line 597): `theorem cuifInv_step (s : CuifState) (i : CuifInputs) (hinv : CuifInv s) (henv : CuifEnvOk s i) : CuifInv (cuifStep s i) :=`
+- **cuifInv_run** (line 1038): `theorem cuifInv_run (ins : List CuifInputs) (henv : ∀ (pre : List CuifInputs) (i : CuifInputs), CuifEnvOk (cuifRun cuifInit pre) i) : CuifInv (cuifRun cuifInit ins) :=`
+- **cuif_split_tag** (line 1060): `theorem cuif_split_tag (s : CuifState) (h : CuifInv s) (hc : s.splitCnt ≠ 0#4) : ∃ h' t, s.fifo = h' :: t ∧ cuifWfNewTag s = cuifWfTag h'.wgSlotId ((h'.numWf - s.splitCnt).extractLsb' 0 3) ∧ (h'.numWf - s.splitCnt) < h'.numWf :=`
+- **cuif_split_deq_last** (line 1073): `theorem cuif_split_deq_last (s : CuifState) (i : CuifInputs) (hd : cuifDeqFire s i = true) : s.splitCnt = 1#4 ∧ ∃ h' t, s.fifo = h' :: t ∧ cuifWfNewTag s = cuifWfTag h'.wgSlotId ((h'.numWf - 1#4).extractLsb' 0 3) :=`
+- **cuif_split_countdown** (line 1088): `theorem cuif_split_countdown (s : CuifState) (i : CuifInputs) (hf : cuifWfFire s i = true) : (cuifStep s i).splitCnt = s.splitCnt - 1#4 :=`
+- **cuif_split_hold** (line 1094): `theorem cuif_split_hold (s : CuifState) (i : CuifInputs) (hc : s.splitCnt ≠ 0#4) (hf : cuifWfFire s i = false) : (cuifStep s i).splitCnt = s.splitCnt :=`
+- **cuif_split_load** (line 1100): `theorem cuif_split_load (s : CuifState) (i : CuifInputs) (hc : s.splitCnt = 0#4) (h0 : CuifWg) (t0 : List CuifWg) (hf : s.fifo = h0 :: t0) : (cuifStep s i).splitCnt = h0.numWf :=`
+- **cuif_finish_exact** (line 1107): `theorem cuif_finish_exact (s : CuifState) (h : CuifInv s) (hg : s.gfsm = .update) : (s.cntMem (cuifGaddr s.cuReg s.slotReg)).toNat < (s.infoMem (cuifGaddr s.cuReg s.slotReg)).numWf.toNat ∧ (cuifFinish s = true ↔ (s.cntMem (cuifGaddr s.cuReg s.slotReg)).toNat + 1 = (s.infoMem (cuifGaddr s.cuReg s.slotReg)).numWf.toNat) :=`
+- **cuif_done_read** (line 1138): `theorem cuif_done_read (s : CuifState) (i : CuifInputs) (hf : cuifArbFire s i = true) : (cuifStep s i).cuReg = cuifChosenCu i ∧ (cuifStep s i).slotReg = cuifTagSlot (cuifChosenTag i) ∧ (cuifStep s i).cntRd = s.cntMem (cuifGaddr (cuifChosenCu i) (cuifTagSlot (cuifChosenTag i))) ∧ (cuifStep s i).infoRd = s.infoMem (cuifGaddr (cuifChosenCu i) (cuifTagSlot (cuifChosenTag i))) ∧ (cuifStep s i).gfsm = .update :=`
+- **cuif_cnt_update** (line 1156): `theorem cuif_cnt_update (s : CuifState) (i : CuifInputs) (hg : s.gfsm = .update) : (cuifStep s i).cntMem (cuifGaddr s.cuReg s.slotReg) = (if cuifFinish s then 0#4 else s.cntRd + 1#4) ∧ (∀ g, g ≠ cuifGaddr s.cuReg s.slotReg → (cuifStep s i).cntMem g = s.cntMem g) :=`
+- **cuif_dealloc_valid_iff** (line 1166): `theorem cuif_dealloc_valid_iff (s : CuifState) : cuifRtDeallocValid s = true ↔ (s.gfsm = .update ∧ cuifFinish s = true) ∨ (s.gfsm = .dealloc ∧ s.rtOk = false) :=`
+- **cuif_dealloc_exact** (line 1175): `theorem cuif_dealloc_exact (s : CuifState) (h : CuifInv s) (hv : cuifRtDeallocValid s = true) : s.cntRd.toNat + 1 = s.infoRd.numWf.toNat :=`
+- **cuif_dealloc_bits** (line 1192): `theorem cuif_dealloc_bits (s : CuifState) : cuifDeallocBits s = (s.cuReg, s.slotReg, s.infoRd) :=`
+- **cuif_dealloc_wgId** (line 1197): `theorem cuif_dealloc_wgId (s : CuifState) (h : CuifInv s) (hg : s.gfsm = .update) : s.infoRd = s.infoMem (cuifGaddr s.cuReg s.slotReg) :=`
+- **cuif_host_valid_iff** (line 1202): `theorem cuif_host_valid_iff (s : CuifState) : cuifHostDoneValid s = true ↔ (s.gfsm = .update ∧ cuifFinish s = true) ∨ (s.gfsm = .dealloc ∧ s.hostOk = false) :=`
+- **cuif_host_paired** (line 1209): `theorem cuif_host_paired (s : CuifState) (hg : s.gfsm = .update) : cuifHostDoneValid s = cuifRtDeallocValid s :=`
+- **cuif_dealloc_no_double** (line 1215): `theorem cuif_dealloc_no_double (s : CuifState) (i : CuifInputs) (hg : s.gfsm = .dealloc) (hf : cuifRtFire s i = true) : cuifRtDeallocValid (cuifStep s i) = false :=`
+
+### `Ventus/CTA/ResourceTable.lean`
+
+- **rt_bw_empty_size_sgpr** (line 119): `theorem rt_bw_empty_size_sgpr : (2047#12 - 4095#12) = 2048#12 :=`
+- **rt_bw_empty_size_vgpr** (line 121): `theorem rt_bw_empty_size_vgpr : (1023#11 - 2047#11) = 1024#11 :=`
+- **rt_bw_empty_size_lds** (line 123): `theorem rt_bw_empty_size_lds : (131071#18 - 262143#18) = 131072#18 :=`
+- **rt_bw_sentinel_succ_sgpr** (line 127): `theorem rt_bw_sentinel_succ_sgpr : (4095#12 + 1#12) = 0#12 :=`
+- **rt_bw_sentinel_succ_vgpr** (line 128): `theorem rt_bw_sentinel_succ_vgpr : (2047#11 + 1#11) = 0#11 :=`
+- **rt_bw_sentinel_succ_lds** (line 129): `theorem rt_bw_sentinel_succ_lds : (262143#18 + 1#18) = 0#18 :=`
+- **rt_bw_addr2_fits** (line 133): `theorem rt_bw_addr2_fits (N base size : Nat) (hbs : base + size ≤ N) (hs : 1 ≤ size) : base + size - 1 < N :=`
+- **rt_bw_base_fits** (line 137): `theorem rt_bw_base_fits (N base size : Nat) (hbs : base + size ≤ N) (hs : 1 ≤ size) : base < N :=`
+- **rt_sort3_onehot0** (line 164): `theorem rt_sort3_onehot0 (a b c : BitVec 12) : ¬ ((a > b) && !(c > a) && ((b > c) && !(a > b))) ∧ ¬ ((a > b) && !(c > a) && ((c > a) && !(b > c))) ∧ ¬ ((b > c) && !(a > b) && ((c > a) && !(b > c))) :=`
+- **rt_sort3_out** (line 171): `theorem rt_sort3_out (a b c : BitVec 12) : (rtSort3Circ a b c).1 = (if b ≤ a then if c ≤ a then a else c else if c ≤ b then b else c) ∧ (rtSort3Circ a b c).2.1 = (let mab :=`
+- **rt_addr1_strict_aux** (line 231): `theorem rt_addr1_strict_aux (ram : RtRam) (N : Nat) (hwf : RtWf ram N) : ∀ d i, i + d + 1 < ram.cnt → ram.addr1 (ram.walk i) < ram.addr1 (ram.walk (i+d+1)) | ...`
+- **rt_addr1_strict** (line 248): `theorem rt_addr1_strict (ram : RtRam) (N : Nat) (hwf : RtWf ram N) {i j : Nat} (hij : i < j) (hj : j < ram.cnt) : ram.addr1 (ram.walk i) < ram.addr1 (ram.walk j) :=`
+- **rt_addr1_mono** (line 256): `theorem rt_addr1_mono (ram : RtRam) (N : Nat) (hwf : RtWf ram N) {i j : Nat} (hij : i ≤ j) (hj : j < ram.cnt) : ram.addr1 (ram.walk i) ≤ ram.addr1 (ram.walk j) :=`
+- **rt_addr2_lt_addr1** (line 263): `theorem rt_addr2_lt_addr1 (ram : RtRam) (N : Nat) (hwf : RtWf ram N) {i j : Nat} (hij : i < j) (hj : j < ram.cnt) : ram.addr2 (ram.walk i) < ram.addr1 (ram.walk j) :=`
+- **rt_walk_inj** (line 270): `theorem rt_walk_inj (ram : RtRam) (N : Nat) (hwf : RtWf ram N) {i j : Nat} (hi : i < ram.cnt) (hj : j < ram.cnt) (h : ram.walk i = ram.walk j) : i = j :=`
+- **rtGapLo_succ** (line 296): `theorem rtGapLo_succ (ram : RtRam) (i : Nat) : rtGapLo ram (i+1) = ram.addr2 (ram.walk i) + 1 :=`
+- **rtGapHi_of_lt** (line 300): `theorem rtGapHi_of_lt (ram : RtRam) (N : Nat) {i : Nat} (h : i < ram.cnt) : rtGapHi ram N i = ram.addr1 (ram.walk i) :=`
+- **rtGapHi_cnt** (line 303): `theorem rtGapHi_cnt (ram : RtRam) (N : Nat) : rtGapHi ram N ram.cnt = N :=`
+- **rt_gapLo_le_hi** (line 306): `theorem rt_gapLo_le_hi (ram : RtRam) (N : Nat) (hwf : RtWf ram N) {i : Nat} (hi : i ≤ ram.cnt) : rtGapLo ram i ≤ rtGapHi ram N i :=`
+- **rt_gapSize_lt_N** (line 324): `theorem rt_gapSize_lt_N (ram : RtRam) (N : Nat) (hwf : RtWf ram N) (hcnt : 0 < ram.cnt) {i : Nat} (hi : i ≤ ram.cnt) : rtGapSize ram N i < N :=`
+- **rtFindGo_zero** (line 371): `theorem rtFindGo_zero (ram : RtRam) (N wgsize i : Nat) (acc : RtAcc) : rtFindGo ram N wgsize 0 i acc = acc :=`
+- **rtFindGo_succ** (line 374): `theorem rtFindGo_succ (ram : RtRam) (N wgsize f i : Nat) (acc : RtAcc) : rtFindGo ram N wgsize (f+1) i acc = rtFindGo ram N wgsize f (i+1) (rtFindStep ram N wgsize acc i) :=`
+- **rtFindGo_ok** (line 386): `theorem rtFindGo_ok (ram : RtRam) (N wgsize : Nat) (hwf : RtWf ram N) : ∀ f i acc, i + f ≤ ram.cnt + 1 → rtAccOk ram N wgsize i acc → rtAccOk ram N wgsize (i + f) (rtFindGo ram N wgsize f i acc) | ...`
+- **rtFind_ok** (line 422): `theorem rtFind_ok (ram : RtRam) (N wgsize : Nat) (hwf : RtWf ram N) : rtAccOk ram N wgsize (ram.cnt + 1) (rtFind ram N wgsize) :=`
+- **rtFind_upd** (line 431): `theorem rtFind_upd (ram : RtRam) (N wgsize : Nat) (hwf : RtWf ram N) (h : (rtFind ram N wgsize).upd = true) : (rtFind ram N wgsize).fk ≤ ram.cnt ∧ (rtFind ram N wgsize).faddr = rtGapLo ram (rtFind ram N wgsize).fk ∧ (rtFind ram N wgsize).fsize = rtGapSize ram N (rtFind ram N wgsize).fk ∧ wgsize ≤ (rtFind ram N wgsize).fsize :=`
+- **rtFindGo_upd_mono** (line 443): `theorem rtFindGo_upd_mono (ram : RtRam) (N wgsize : Nat) : ∀ f i acc, acc.upd = true → (rtFindGo ram N wgsize f i acc).upd = true | ...`
+- **rtFindGo_success** (line 456): `theorem rtFindGo_success (ram : RtRam) (N wgsize : Nat) (hwf : RtWf ram N) (hcnt : 0 < ram.cnt) : ∀ f i acc, i + f ≤ ram.cnt + 1 → (acc.upd = false → acc.fsize = N) → (∃ j, i ≤ j ∧ j < i + f ∧ wgsize ≤ rtGapSize ram N j) → (rtFindGo ram N wgsize f i acc).upd = true | ...`
+- **rtFind_success** (line 503): `theorem rtFind_success (ram : RtRam) (N wgsize : Nat) (hwf : RtWf ram N) (hcnt : 0 < ram.cnt) (hex : ∃ j, j ≤ ram.cnt ∧ wgsize ≤ rtGapSize ram N j) : (rtFind ram N wgsize).upd = true :=`
+- **rtFind_empty** (line 514): `theorem rtFind_empty (ram : RtRam) (N wgsize : Nat) (hcnt : ram.cnt = 0) : rtFind ram N wgsize = ⟨N, 0, 0, false⟩ :=`
+- **rtGapHi_le_N** (line 527): `theorem rtGapHi_le_N (ram : RtRam) (N : Nat) (hwf : RtWf ram N) {i : Nat} (hi : i ≤ ram.cnt) : rtGapHi ram N i ≤ N :=`
+- **rtRam_walk_zero** (line 537): `theorem rtRam_walk_zero (ram : RtRam) : ram.walk 0 = ram.head :=`
+- **rtRam_walk_succ** (line 540): `theorem rtRam_walk_succ (ram : RtRam) (i : Nat) : ram.walk (i+1) = ram.next (ram.walk i) :=`
+- **rtInsert_addr1** (line 571): `theorem rtInsert_addr1 (ram : RtRam) (slot : Fin 8) (base size k : Nat) : (rtInsert ram slot base size k).addr1 = rtSet ram.addr1 slot base :=`
+- **rtInsert_addr2** (line 574): `theorem rtInsert_addr2 (ram : RtRam) (slot : Fin 8) (base size k : Nat) : (rtInsert ram slot base size k).addr2 = rtSet ram.addr2 slot (base + size - 1) :=`
+- **rtInsert_addr1_eq** (line 577): `theorem rtInsert_addr1_eq (ram : RtRam) (slot : Fin 8) (base size k : Nat) : (rtInsert ram slot base size k).addr1 slot = base :=`
+- **rtInsert_addr2_eq** (line 581): `theorem rtInsert_addr2_eq (ram : RtRam) (slot : Fin 8) (base size k : Nat) : (rtInsert ram slot base size k).addr2 slot = base + size - 1 :=`
+- **rtInsert_addr1_ne** (line 585): `theorem rtInsert_addr1_ne (ram : RtRam) {slot s : Fin 8} (h : s ≠ slot) (base size k : Nat) : (rtInsert ram slot base size k).addr1 s = ram.addr1 s :=`
+- **rtInsert_addr2_ne** (line 589): `theorem rtInsert_addr2_ne (ram : RtRam) {slot s : Fin 8} (h : s ≠ slot) (base size k : Nat) : (rtInsert ram slot base size k).addr2 s = ram.addr2 s :=`
+- **rtInsert_next** (line 594): `theorem rtInsert_next (ram : RtRam) (slot : Fin 8) (base size k : Nat) (s : Fin 8) : (rtInsert ram slot base size k).next s = if s = slot then (if k < ram.cnt then ram.walk k else ram.next slot) else if 0 < k ∧ s = ram.walk (k-1) then slot else ram.next s :=`
+- **rtInsert_prev** (line 608): `theorem rtInsert_prev (ram : RtRam) (slot : Fin 8) (base size k : Nat) (s : Fin 8) : (rtInsert ram slot base size k).prev s = if s = slot then (if 0 < k then ram.walk (k-1) else ram.prev slot) else if k < ram.cnt ∧ s = ram.walk k then slot else ram.prev s :=`
+- **rtInsert_walk_lt** (line 622): `theorem rtInsert_walk_lt (ram : RtRam) (N : Nat) (hwf : RtWf ram N) {slot : Fin 8} {base size k : Nat} (hk : k ≤ ram.cnt) (hnew : ∀ i, i < ram.cnt → ram.walk i ≠ slot) : ∀ i, i < k → (rtInsert ram slot base size k).walk i = ram.walk i :=`
+- **rtInsert_walk_eq_succ** (line 646): `theorem rtInsert_walk_eq_succ (ram : RtRam) (N : Nat) (hwf : RtWf ram N) {slot : Fin 8} {base size m : Nat} (hk : m + 1 ≤ ram.cnt) (hnew : ∀ i, i < ram.cnt → ram.walk i ≠ slot) : (rtInsert ram slot base size (m+1)).walk (m+1) = slot :=`
+- **rtInsert_walk_eq** (line 656): `theorem rtInsert_walk_eq (ram : RtRam) (N : Nat) (hwf : RtWf ram N) {slot : Fin 8} {base size k : Nat} (hk : k ≤ ram.cnt) (hnew : ∀ i, i < ram.cnt → ram.walk i ≠ slot) : (rtInsert ram slot base size k).walk k = slot :=`
+- **rtInsert_walk_gt** (line 666): `theorem rtInsert_walk_gt (ram : RtRam) (N : Nat) (hwf : RtWf ram N) {slot : Fin 8} {base size k : Nat} (hk : k ≤ ram.cnt) (hnew : ∀ i, i < ram.cnt → ram.walk i ≠ slot) : ∀ d, k + d < ram.cnt → (rtInsert ram slot base size k).walk (k+1+d) = ram.walk (k+d) | ...`
+- **rtInsert_wf** (line 689): `theorem rtInsert_wf (ram : RtRam) (N : Nat) (hwf : RtWf ram N) {slot : Fin 8} {base size k : Nat} (hk : k ≤ ram.cnt) (hnew : ∀ i, i < ram.cnt → ram.walk i ≠ slot) (hlo : rtGapLo ram k ≤ base) (hhi : base + size ≤ rtGapHi ram N k) (hsize : 1 ≤ size) (hcnt : ram.cnt < rtNUM_WG_SLOT) : RtWf (rtInsert ram slot base size k) N :=`
+- **rtRemove_addr1** (line 863): `theorem rtRemove_addr1 (ram : RtRam) (slot : Fin 8) (k : Nat) : (rtRemove ram slot k).addr1 = ram.addr1 :=`
+- **rtRemove_addr2** (line 866): `theorem rtRemove_addr2 (ram : RtRam) (slot : Fin 8) (k : Nat) : (rtRemove ram slot k).addr2 = ram.addr2 :=`
+- **rtRemove_next** (line 870): `theorem rtRemove_next (ram : RtRam) (slot : Fin 8) (k : Nat) (s : Fin 8) : (rtRemove ram slot k).next s = if 0 < k ∧ s = ram.prev slot then ram.next slot else ram.next s :=`
+- **rtRemove_prev** (line 880): `theorem rtRemove_prev (ram : RtRam) (slot : Fin 8) (k : Nat) (s : Fin 8) : (rtRemove ram slot k).prev s = if k + 1 < ram.cnt ∧ s = ram.next slot then ram.prev slot else ram.prev s :=`
+- **rt_prev_slot_eq** (line 890): `theorem rt_prev_slot_eq (ram : RtRam) (N : Nat) (hwf : RtWf ram N) {slot : Fin 8} {k : Nat} (hk : k < ram.cnt) (hslot : ram.walk k = slot) (hk0 : 0 < k) : ram.prev slot = ram.walk (k-1) :=`
+- **rtRemove_walk_lt** (line 899): `theorem rtRemove_walk_lt (ram : RtRam) (N : Nat) (hwf : RtWf ram N) {slot : Fin 8} {k : Nat} (hk : k < ram.cnt) (hslot : ram.walk k = slot) : ∀ i, i < k → (rtRemove ram slot k).walk i = ram.walk i :=`
+- **rtRemove_walk_ge** (line 923): `theorem rtRemove_walk_ge (ram : RtRam) (N : Nat) (hwf : RtWf ram N) {slot : Fin 8} {k : Nat} (hk : k < ram.cnt) (hslot : ram.walk k = slot) : ∀ d, k + d < ram.cnt - 1 → (rtRemove ram slot k).walk (k+d) = ram.walk (k+d+1) | ...`
+- **rtRemove_wf** (line 956): `theorem rtRemove_wf (ram : RtRam) (N : Nat) (hwf : RtWf ram N) {slot : Fin 8} {k : Nat} (hk : k < ram.cnt) (hslot : ram.walk k = slot) : RtWf (rtRemove ram slot k) N :=`
+- **rtSumSizes_zero** (line 1097): `theorem rtSumSizes_zero (ram : RtRam) : rtSumSizes ram 0 = 0 :=`
+- **rtSumSizes_succ** (line 1099): `theorem rtSumSizes_succ (ram : RtRam) (n : Nat) : rtSumSizes ram (n+1) = rtSumSizes ram n + (ram.addr2 (ram.walk n) + 1 - ram.addr1 (ram.walk n)) :=`
+- **rtSumSizes_mono** (line 1104): `theorem rtSumSizes_mono (ram : RtRam) (n : Nat) : rtSumSizes ram n ≤ rtSumSizes ram (n+1) :=`
+- **rtSumSizes_mono_le** (line 1109): `theorem rtSumSizes_mono_le (ram : RtRam) {a b : Nat} (h : a ≤ b) : rtSumSizes ram a ≤ rtSumSizes ram b :=`
+- **rtSumSizes_le_addr2** (line 1118): `theorem rtSumSizes_le_addr2 (ram : RtRam) (N : Nat) (hwf : RtWf ram N) : ∀ n, n < ram.cnt → rtSumSizes ram (n+1) ≤ ram.addr2 (ram.walk n) + 1 :=`
+- **rt_sum_le_N** (line 1136): `theorem rt_sum_le_N (ram : RtRam) (N : Nat) (hwf : RtWf ram N) : rtSumSizes ram ram.cnt ≤ N :=`
+- **rt_alloc_used** (line 1147): `theorem rt_alloc_used (ram : RtRam) (N : Nat) (hwf : RtWf ram N) {slot : Fin 8} {base size k : Nat} (hk : k ≤ ram.cnt) (hnew : ∀ i, i < ram.cnt → ram.walk i ≠ slot) (hsize : 1 ≤ size) : rtSumSizes (rtInsert ram slot base size k) (ram.cnt + 1) = rtSumSizes ram ram.cnt + size :=`
+- **rt_dealloc_used** (line 1207): `theorem rt_dealloc_used (ram : RtRam) (N : Nat) (hwf : RtWf ram N) {slot : Fin 8} {k : Nat} (hk : k < ram.cnt) (hslot : ram.walk k = slot) : rtSumSizes (rtRemove ram slot k) (ram.cnt - 1) = rtSumSizes ram ram.cnt - (ram.addr2 slot + 1 - ram.addr1 slot) :=`
+- **rtScanGo_zero** (line 1288): `theorem rtScanGo_zero (ram : RtRam) (N i : Nat) (acc : Nat × Nat) : rtScanGo ram N 0 i acc = acc :=`
+- **rtScanGo_succ** (line 1291): `theorem rtScanGo_succ (ram : RtRam) (N f i : Nat) (acc : Nat × Nat) : rtScanGo ram N (f+1) i acc = rtScanGo ram N f (i+1) (rtScanStep acc (rtGapSize ram N i)) :=`
+- **rtGapMaxGo_zero** (line 1299): `theorem rtGapMaxGo_zero (ram : RtRam) (N i : Nat) : rtGapMaxGo ram N 0 i = 0 :=`
+- **rtGapMaxGo_succ** (line 1301): `theorem rtGapMaxGo_succ (ram : RtRam) (N f i : Nat) : rtGapMaxGo ram N (f+1) i = max (rtGapSize ram N i) (rtGapMaxGo ram N f (i+1)) :=`
+- **rtScanGo_fst** (line 1304): `theorem rtScanGo_fst (ram : RtRam) (N : Nat) : ∀ f i r0 r1, (rtScanGo ram N f i (r0, r1)).1 = max r0 (rtGapMaxGo ram N f i) | ...`
+- **rtScan_max** (line 1321): `theorem rtScan_max (ram : RtRam) (N : Nat) : (rtScan ram N).1 = rtGapMaxGo ram N (ram.cnt + 1) 0 :=`
+- **rtGapMaxGo_ge** (line 1327): `theorem rtGapMaxGo_ge (ram : RtRam) (N w : Nat) : ∀ f i j, i ≤ j → j < i + f → w ≤ rtGapSize ram N j → w ≤ rtGapMaxGo ram N f i :=`
+- **rtGapMaxGo_mem** (line 1339): `theorem rtGapMaxGo_mem (ram : RtRam) (N w : Nat) : ∀ f i, 0 < f → w ≤ rtGapMaxGo ram N f i → ∃ j, i ≤ j ∧ j < i + f ∧ w ≤ rtGapSize ram N j :=`
+- **rt_scan_ge_iff** (line 1365): `theorem rt_scan_ge_iff (ram : RtRam) (N wgsize : Nat) : wgsize ≤ (rtScan ram N).1 ↔ ∃ i, i ≤ ram.cnt ∧ wgsize ≤ rtGapSize ram N i :=`
+- **rt_find_of_scan** (line 1377): `theorem rt_find_of_scan (ram : RtRam) (N wgsize : Nat) (hwf : RtWf ram N) (hcnt : 0 < ram.cnt) (h : wgsize ≤ (rtScan ram N).1) : (rtFind ram N wgsize).upd = true :=`
+- **rtFindSlotGo_zero** (line 1393): `theorem rtFindSlotGo_zero (ram : RtRam) (slot : Fin 8) (i : Nat) : rtFindSlotGo ram slot 0 i = none :=`
+- **rtFindSlotGo_succ** (line 1396): `theorem rtFindSlotGo_succ (ram : RtRam) (slot : Fin 8) (f i : Nat) : rtFindSlotGo ram slot (f+1) i = if ram.walk i = slot then some i else rtFindSlotGo ram slot f (i+1) :=`
+- **rtFindSlotGo_spec** (line 1400): `theorem rtFindSlotGo_spec (ram : RtRam) (slot : Fin 8) : ∀ f i k, rtFindSlotGo ram slot f i = some k → i ≤ k ∧ k < i + f ∧ ram.walk k = slot | ...`
+- **rtFindSlotGo_none** (line 1414): `theorem rtFindSlotGo_none (ram : RtRam) (slot : Fin 8) : ∀ f i, rtFindSlotGo ram slot f i = none → ∀ j, i ≤ j → j < i + f → ram.walk j ≠ slot | ...`
+- **rtFindSlot_spec** (line 1426): `theorem rtFindSlot_spec (ram : RtRam) (slot : Fin 8) {k : Nat} (h : rtFindSlot ram slot = some k) : k < ram.cnt ∧ ram.walk k = slot :=`
+- **rtFindSlot_none** (line 1431): `theorem rtFindSlot_none (ram : RtRam) (slot : Fin 8) (h : rtFindSlot ram slot = none) : ∀ j, j < ram.cnt → ram.walk j ≠ slot :=`
+- **rtStep_alloc** (line 1465): `theorem rtStep_alloc (ram : RtRam) (N : Nat) (slot : Fin 8) (wgsize : Nat) : rtStep ram N (.alloc slot wgsize) = if wgsize = 0 then ram else rtInsert ram slot (rtFind ram N wgsize).faddr wgsize (rtFind ram N wgsize).fk :=`
+- **rtStep_dealloc** (line 1470): `theorem rtStep_dealloc (ram : RtRam) (N : Nat) (slot : Fin 8) : rtStep ram N (.dealloc slot) = match rtFindSlot ram slot with | ...`
+- **rt_alloc_base_bounds** (line 1477): `theorem rt_alloc_base_bounds (ram : RtRam) (N : Nat) (hwf : RtWf ram N) (slot : Fin 8) (wgsize : Nat) (hok : rtEventOk ram N (.alloc slot wgsize)) : rtAllocBase ram N slot wgsize + wgsize ≤ N :=`
+- **rt_alloc_disjoint** (line 1504): `theorem rt_alloc_disjoint (ram : RtRam) (N : Nat) (hwf : RtWf ram N) (slot : Fin 8) (wgsize : Nat) (hok : rtEventOk ram N (.alloc slot wgsize)) (hsize : wgsize ≠ 0) : ∀ j, j < ram.cnt → rtAllocBase ram N slot wgsize + wgsize ≤ ram.addr1 (ram.walk j) ∨ ram.addr2 (ram.walk j) < rtAllocBase ram N slot wgsize :=`
+- **rt_wf_disjoint** (line 1546): `theorem rt_wf_disjoint (ram : RtRam) (N : Nat) (hwf : RtWf ram N) {i j : Nat} (hi : i < ram.cnt) (hj : j < ram.cnt) (hij : i ≠ j) : ram.addr2 (ram.walk i) < ram.addr1 (ram.walk j) ∨ ram.addr2 (ram.walk j) < ram.addr1 (ram.walk i) :=`
+- **rt_step_wf** (line 1556): `theorem rt_step_wf (ram : RtRam) (N : Nat) (hwf : RtWf ram N) (e : RtEvent) (hok : rtEventOk ram N e) : RtWf (rtStep ram N e) N :=`
+- **rt_dealloc_notin** (line 1602): `theorem rt_dealloc_notin (ram : RtRam) (N : Nat) (hwf : RtWf ram N) {slot : Fin 8} {k : Nat} (hk : k < ram.cnt) (hslot : ram.walk k = slot) : ∀ i, i < (rtRemove ram slot k).cnt → (rtRemove ram slot k).walk i ≠ slot :=`
+- **rtEmpty_wf** (line 1631): `theorem rtEmpty_wf (N : Nat) (hN : 0 < N) : RtWf rtEmpty N :=`
+- **rtA_wf** (line 1648): `theorem rtA_wf : RtWf rtA rtNUM_SGPR :=`
+- **rtB_wf** (line 1668): `theorem rtB_wf : RtWf rtB rtNUM_SGPR :=`
+- **rtC_wf** (line 1688): `theorem rtC_wf : RtWf rtC rtNUM_SGPR :=`
+- **rtD_wf** (line 1703): `theorem rtD_wf : RtWf rtD rtNUM_SGPR :=`
+
+### `Ventus/CTA/RtCacheConsistency.lean`
+
+- **rtccGapSumGo_zero** (line 129): `theorem rtccGapSumGo_zero (ram : RtRam) (N i : Nat) : rtccGapSumGo ram N 0 i = 0 :=`
+- **rtccGapSumGo_succ** (line 131): `theorem rtccGapSumGo_succ (ram : RtRam) (N f i : Nat) : rtccGapSumGo ram N (f+1) i = rtGapSize ram N i + rtccGapSumGo ram N f (i+1) :=`
+- **rtccScanGo_snd_le** (line 143): `theorem rtccScanGo_snd_le (ram : RtRam) (N : Nat) : ∀ f i r0 r1, r1 ≤ r0 → (rtScanGo ram N f i (r0, r1)).2 ≤ (rtScanGo ram N f i (r0, r1)).1 :=`
+- **rtccScan_snd_le** (line 166): `theorem rtccScan_snd_le (ram : RtRam) (N : Nat) : (rtScan ram N).2 ≤ (rtScan ram N).1 :=`
+- **rtcc_sound_step** (line 172): `theorem rtcc_sound_step (ch : RtccCh) (N size : Nat) (h0 : ch.c0 ≤ rtccGapMax ch.ram N) (h1 : ch.c1 ≤ rtccGapMax ch.ram N) (hchk : rtccCheck ch size) : ∃ i, i ≤ ch.ram.cnt ∧ size ≤ rtGapSize ch.ram N i :=`
+- **rtcc_find_success_of_bounded** (line 184): `theorem rtcc_find_success_of_bounded (ch : RtccCh) (N size : Nat) (hwf : RtWf ch.ram N) (hcnt : 0 < ch.ram.cnt) (h0 : ch.c0 ≤ rtccGapMax ch.ram N) (h1 : ch.c1 ≤ rtccGapMax ch.ram N) (hchk : rtccCheck ch size) : (rtFind ch.ram N size).upd = true :=`
+- **rtcc_fit_after_scan** (line 192): `theorem rtcc_fit_after_scan (ch : RtccCh) (N size : Nat) (hchk : rtccCheck (rtccStep N ch .scan) size) : ∃ i, i ≤ ch.ram.cnt ∧ size ≤ rtGapSize ch.ram N i :=`
+- **rtccGapSumGo_last** (line 208): `theorem rtccGapSumGo_last (ram : RtRam) (N : Nat) : ∀ f i, rtccGapSumGo ram N (f+1) i = rtccGapSumGo ram N f i + rtGapSize ram N (i+f) :=`
+- **rtcc_telescope_aux** (line 228): `theorem rtcc_telescope_aux (ram : RtRam) (N : Nat) (hwf : RtWf ram N) : ∀ k, k < ram.cnt → rtccGapSumGo ram N (k+1) 0 + rtSumSizes ram (k+1) = ram.addr2 (ram.walk k) + 1 :=`
+- **rtcc_gapSum** (line 253): `theorem rtcc_gapSum (ram : RtRam) (N : Nat) (hwf : RtWf ram N) : rtccGapSum ram N + rtSumSizes ram ram.cnt = N :=`
+- **rtccAllocCache_sum** (line 275): `theorem rtccAllocCache_sum (c0 c1 size : Nat) (hchk : size ≤ c0 ∨ size ≤ c1) : (rtccAllocCache c0 c1 size).1 + (rtccAllocCache c0 c1 size).2 = c0 + c1 - size :=`
+- **rtcc_gapSum_alloc** (line 287): `theorem rtcc_gapSum_alloc (ram : RtRam) (N : Nat) (hwf : RtWf ram N) (slot : Fin 8) (size : Nat) (hcnt8 : ram.cnt < rtNUM_WG_SLOT) (hnew : ∀ i, i < ram.cnt → ram.walk i ≠ slot) (hfit : size = 0 ∨ ∃ i, i ≤ ram.cnt ∧ size ≤ rtGapSize ram N i) : rtccGapSum (rtStep ram N (.alloc slot size)) N = rtccGapSum ram N - size :=`
+- **rtccFindSlot_isSome** (line 339): `theorem rtccFindSlot_isSome (ram : RtRam) (slot : Fin 8) (h : ∃ k, k < ram.cnt ∧ ram.walk k = slot) : ∃ k', rtFindSlot ram slot = some k' :=`
+- **rtcc_gapSum_dealloc_le** (line 348): `theorem rtcc_gapSum_dealloc_le (ram : RtRam) (N : Nat) (hwf : RtWf ram N) (slot : Fin 8) (hres : ∃ k, k < ram.cnt ∧ ram.walk k = slot) : rtccGapSum ram N ≤ rtccGapSum (rtStep ram N (.dealloc slot)) N :=`
+- **rtccScanStep_pair** (line 368): `theorem rtccScanStep_pair (r0 r1 sz : Nat) : rtScanStep (r0, r1) sz = if r0 ≤ sz then (sz, r0) else if r1 ≤ sz then (r0, sz) else (r0, r1) :=`
+- **rtccScanGo_sum_le** (line 373): `theorem rtccScanGo_sum_le (ram : RtRam) (N : Nat) : ∀ f i r0 r1, (rtScanGo ram N f i (r0, r1)).1 + (rtScanGo ram N f i (r0, r1)).2 ≤ r0 + r1 + rtccGapSumGo ram N f i :=`
+- **rtccInv_step** (line 398): `theorem rtccInv_step (N : Nat) (hN : 0 < N) (ch : RtccCh) (e : RtccEv) (hinv : RtccInv N ch) (hok : rtccEvOk N ch e) : RtccInv N (rtccStep N ch e) :=`
+- **rtccInv_init** (line 422): `theorem rtccInv_init (N : Nat) (hN : 0 < N) : RtccInv N (rtccInit N) :=`
+- **rtccInv_run** (line 434): `theorem rtccInv_run (N : Nat) (hN : 0 < N) (es : List RtccEv) (hok : ∀ (pre : List RtccEv) (e : RtccEv), rtccEvOk N (rtccRun N (rtccInit N) pre) e) : RtccInv N (rtccRun N (rtccInit N) es) :=`
+- **rtcc_w_scan_cache** (line 476): `theorem rtcc_w_scan_cache : (rtccW 5).c0 = 6 ∧ (rtccW 5).c1 = 3 :=`
+- **rtcc_w_final_cache** (line 479): `theorem rtcc_w_final_cache : (rtccW 8).c0 = 2 ∧ (rtccW 8).c1 = 0 :=`
+- **rtcc_w_gapmax** (line 482): `theorem rtcc_w_gapmax : rtccGapMax (rtccW 8).ram rtNUM_SGPR = 1 :=`
+- **rtcc_w_checks** (line 485): `theorem rtcc_w_checks : rtccCheck (rtccW 5) 4 ∧ rtccCheck (rtccW 6) 1 ∧ rtccCheck (rtccW 7) 2 ∧ rtccCheck (rtccW 8) 2 :=`
+- **rtcc_w_fit5** (line 490): `theorem rtcc_w_fit5 : 4 ≤ rtccGapMax (rtccW 5).ram rtNUM_SGPR :=`
+- **rtcc_w_fit6** (line 491): `theorem rtcc_w_fit6 : 1 ≤ rtccGapMax (rtccW 6).ram rtNUM_SGPR :=`
+- **rtcc_w_fit7** (line 492): `theorem rtcc_w_fit7 : 2 ≤ rtccGapMax (rtccW 7).ram rtNUM_SGPR :=`
+- **rtcc_w_nofit** (line 496): `theorem rtcc_w_nofit : rtccCheck (rtccW 8) 2 ∧ ¬ ∃ i, i ≤ (rtccW 8).ram.cnt ∧ 2 ≤ rtGapSize (rtccW 8).ram rtNUM_SGPR i :=`
+- **rtcc_w_find_fails** (line 509): `theorem rtcc_w_find_fails : (rtFind (rtccW 8).ram rtNUM_SGPR 2).upd = false :=`
+- **rtcc_w_corrupt** (line 514): `theorem rtcc_w_corrupt : (rtStep (rtccW 8).ram rtNUM_SGPR (.alloc 5 2)).addr1 5 = 0 ∧ (rtStep (rtccW 8).ram rtNUM_SGPR (.alloc 5 2)).addr2 5 = 1 ∧ (rtStep (rtccW 8).ram rtNUM_SGPR (.alloc 5 2)).addr1 6 = 0 ∧ (rtStep (rtccW 8).ram rtNUM_SGPR (.alloc 5 2)).addr2 6 = 2037 :=`
+- **rtcc_w_overlap** (line 521): `theorem rtcc_w_overlap : (rtStep (rtccW 8).ram rtNUM_SGPR (.alloc 5 2)).addr1 5 ≤ (rtStep (rtccW 8).ram rtNUM_SGPR (.alloc 5 2)).addr2 6 ∧ (rtStep (rtccW 8).ram rtNUM_SGPR (.alloc 5 2)).addr1 6 ≤ (rtStep (rtccW 8).ram rtNUM_SGPR (.alloc 5 2)).addr2 5 :=`
+
+### `Ventus/CTA/WgBuffer.lean`
+
+- **wgbT0_rr_fresh** (line 247): `theorem wgbT0_rr_fresh : wgbRrPick 7#3 0b00001100#8 = 2#3 :=`
+- **wgbT0_rr_advance** (line 248): `theorem wgbT0_rr_advance : wgbRrPick 2#3 0b00001100#8 = 3#3 :=`
+- **wgbT0_rr_wrap** (line 249): `theorem wgbT0_rr_wrap : wgbRrPick 3#3 0b00001100#8 = 2#3 :=`
+- **wgbT0_rr_wrap2** (line 250): `theorem wgbT0_rr_wrap2 : wgbRrPick 0#3 0b10000001#8 = 7#3 :=`
+- **wgbT1_init_ready** (line 253): `theorem wgbT1_init_ready : wgbHostReady wgbInit = true :=`
+- **wgbT1_init_count** (line 254): `theorem wgbT1_init_count : wgbCount wgbInit.valid = 0 :=`
+- **wgbT1_init_allocValid** (line 255): `theorem wgbT1_init_allocValid : wgbAllocOutValid wgbInit = false :=`
+- **wgbT1_init_cuifValid** (line 256): `theorem wgbT1_init_cuifValid : wgbCuifOutValid wgbInit = false :=`
+- **wgbT1_init_last** (line 257): `theorem wgbT1_init_last : wgbInit.wrLast = 7#3 ∧ wgbInit.rdLast = 7#3 :=`
+- **wgbT2_write_slot0** (line 260): `theorem wgbT2_write_slot0 : let s1 :=`
+- **wgbT3_full_backpressure** (line 272): `theorem wgbT3_full_backpressure : let s8 :=`
+- **wgbT3b_full_no_fire** (line 276): `theorem wgbT3b_full_no_fire : wgbHostFire (wgbRun wgbInit wgbT3Trace) { hostValid :=`
+- **wgbT4_offer_capture** (line 286): `theorem wgbT4_offer_capture : let s2 :=`
+- **wgbT4_accept_to_cuif** (line 289): `theorem wgbT4_accept_to_cuif : let s4 :=`
+- **wgbT4_drain** (line 292): `theorem wgbT4_drain : (wgbRun wgbInit wgbT4Trace).cuifValidR = false :=`
+- **wgbT5_rr_write_order** (line 303): `theorem wgbT5_rr_write_order : (wgbRun wgbInit (wgbT5Trace.take 3)).wrLast = 2#3 :=`
+- **wgbT5_rr_offer_order** (line 304): `theorem wgbT5_rr_offer_order : let s3 :=`
+- **wgbT6_reject_keeps_valid** (line 319): `theorem wgbT6_reject_keeps_valid : let s4 :=`
+- **wgbT6_reoffer** (line 322): `theorem wgbT6_reoffer : let s5 :=`
+- **wgbT7_reorder_witness** (line 338): `theorem wgbT7_reorder_witness : let s8 :=`
+- **wgbT8_simul_write_accept** (line 345): `theorem wgbT8_simul_write_accept : let s7 :=`
+- **wgbT9_alloc_stall** (line 353): `theorem wgbT9_alloc_stall : let s2 :=`
+- **wgbT9_cuif_stall** (line 358): `theorem wgbT9_cuif_stall : let s8 :=`
+- **wgb_bne0** (line 371): `theorem wgb_bne0 : ∀ v : BitVec 8, (v != 0#8) = true ↔ v ≠ 0#8 :=`
+- **wgb_not_allOnes** (line 372): `theorem wgb_not_allOnes : ∀ v : BitVec 8, ~~~v ≠ 0#8 ↔ v ≠ 0xFF#8 :=`
+- **wgb_and_true** (line 375): `theorem wgb_and_true {a b : Bool} (h : (a && b) = true) : a = true ∧ b = true :=`
+- **wgb_rrPick_mem** (line 379): `theorem wgb_rrPick_mem : ∀ (last : BitVec 3) (x : BitVec 8), x ≠ 0#8 → wgbBit x (wgbRrPick last x) = true :=`
+- **wgbBit_not** (line 382): `theorem wgbBit_not : ∀ (v : BitVec 8) (a : BitVec 3), wgbBit (~~~v) a = true ↔ wgbBit v a = false :=`
+- **wgbBit_and_true** (line 385): `theorem wgbBit_and_true : ∀ (v w : BitVec 8) (a : BitVec 3), wgbBit (v &&& w) a = true → wgbBit v a = true :=`
+- **wgbBit_zero** (line 388): `theorem wgbBit_zero : ∀ a : BitVec 3, wgbBit 0#8 a = false :=`
+- **wgbBit_set_self** (line 389): `theorem wgbBit_set_self : ∀ (v : BitVec 8) (x : BitVec 3), wgbBit (v ||| (1#8 <<< x)) x = true :=`
+- **wgbBit_set_ne** (line 391): `theorem wgbBit_set_ne : ∀ (v : BitVec 8) (a x : BitVec 3), a ≠ x → wgbBit (v ||| (1#8 <<< x)) a = wgbBit v a :=`
+- **wgbBit_clear_self** (line 393): `theorem wgbBit_clear_self : ∀ (v : BitVec 8) (x : BitVec 3), wgbBit (v &&& ~~~(1#8 <<< x)) x = false :=`
+- **wgbBit_clear_ne** (line 395): `theorem wgbBit_clear_ne : ∀ (v : BitVec 8) (a x : BitVec 3), a ≠ x → wgbBit (v &&& ~~~(1#8 <<< x)) a = wgbBit v a :=`
+- **wgb_and_allOnes** (line 398): `theorem wgb_and_allOnes : ∀ v : BitVec 8, v &&& ~~~(0#8) = v :=`
+- **wgb_or_zero** (line 399): `theorem wgb_or_zero : ∀ v : BitVec 8, v ||| 0#8 = v :=`
+- **wgbFin_ne** (line 402): `theorem wgbFin_ne : ∀ a b : BitVec 3, a ≠ b → wgbFin a ≠ wgbFin b :=`
+- **wgbBit_ne_of** (line 404): `theorem wgbBit_ne_of {v : BitVec 8} {a b : BitVec 3} (h0 : wgbBit v a = false) (h1 : wgbBit v b = true) : a ≠ b :=`
+- **wgbCount_le** (line 408): `theorem wgbCount_le : ∀ v : BitVec 8, wgbCount v ≤ 8 :=`
+- **wgbCount_eq8_iff** (line 409): `theorem wgbCount_eq8_iff : ∀ v : BitVec 8, wgbCount v = 8 ↔ v = 0xFF#8 :=`
+- **wgbCount_pos_of_bit** (line 410): `theorem wgbCount_pos_of_bit : ∀ (v : BitVec 8) (a : BitVec 3), wgbBit v a = true → 1 ≤ wgbCount v :=`
+- **wgbCount_set** (line 413): `theorem wgbCount_set : ∀ (v : BitVec 8) (a : BitVec 3), wgbBit v a = false → wgbCount (v ||| (1#8 <<< a)) = wgbCount v + 1 :=`
+- **wgbCount_clear** (line 416): `theorem wgbCount_clear : ∀ (v : BitVec 8) (a : BitVec 3), wgbBit v a = true → wgbCount (v &&& ~~~(1#8 <<< a)) = wgbCount v - 1 :=`
+- **wgbStep_valid** (line 423): `theorem wgbStep_valid (s : WgbState) (i : WgbInputs) : (wgbStep s i).valid = (s.valid &&& ~~~(wgbValidRstMask s i)) ||| wgbValidSetMask s i :=`
+- **wgbStep_alloc** (line 426): `theorem wgbStep_alloc (s : WgbState) (i : WgbInputs) : (wgbStep s i).alloc = ((s.alloc &&& ~~~(if wgbHostFire s i = true then (1#8 <<< wgbWrAddr s) else 0#8)) &&& ~~~(if wgbAllocClrAct s i = true then (1#8 <<< i.resAddr) else 0#8)) ||| (if wgbRdAct s i = true then (1#8 <<< wgbRdAddr s) else 0#8) :=`
+- **wgbStep_ram** (line 431): `theorem wgbStep_ram (s : WgbState) (i : WgbInputs) : (wgbStep s i).ram = if wgbHostFire s i = true then wgbUpd s.ram (wgbFin (wgbWrAddr s)) i.hostTag else s.ram :=`
+- **wgbStep_ghost** (line 434): `theorem wgbStep_ghost (s : WgbState) (i : WgbInputs) : (wgbStep s i).ghost = if wgbHostFire s i = true then wgbUpd s.ghost (wgbFin (wgbWrAddr s)) i.hostTag else s.ghost :=`
+- **wgbSetMask_eq** (line 438): `theorem wgbSetMask_eq (s : WgbState) (i : WgbInputs) (h : wgbHostFire s i = true) : wgbValidSetMask s i = 1#8 <<< wgbWrAddr s :=`
+- **wgbSetMask_zero** (line 440): `theorem wgbSetMask_zero (s : WgbState) (i : WgbInputs) (h : ¬(wgbHostFire s i = true)) : wgbValidSetMask s i = 0#8 :=`
+- **wgbRstMask_eq** (line 442): `theorem wgbRstMask_eq (s : WgbState) (i : WgbInputs) (h : wgbClearAct s i = true) : wgbValidRstMask s i = 1#8 <<< i.resAddr :=`
+- **wgbRstMask_zero** (line 444): `theorem wgbRstMask_zero (s : WgbState) (i : WgbInputs) (h : ¬(wgbClearAct s i = true)) : wgbValidRstMask s i = 0#8 :=`
+- **wgbHostFire_ready** (line 448): `theorem wgbHostFire_ready {s : WgbState} {i : WgbInputs} (h : wgbHostFire s i = true) : wgbHostReady s = true :=`
+- **wgbHostFire_bit_free** (line 452): `theorem wgbHostFire_bit_free {s : WgbState} {i : WgbInputs} (h : wgbHostFire s i = true) : wgbBit s.valid (wgbWrAddr s) = false :=`
+- **wgbClearAct_resValid** (line 457): `theorem wgbClearAct_resValid {s : WgbState} {i : WgbInputs} (h : wgbClearAct s i = true) : i.resValid = true :=`
+- **wgbClearAct_bit_valid** (line 462): `theorem wgbClearAct_bit_valid {s : WgbState} {i : WgbInputs} (henv : WgbEnvOk s i) (h : wgbClearAct s i = true) : wgbBit s.valid i.resAddr = true :=`
+- **wgb_hostReady_iff_count** (line 471): `theorem wgb_hostReady_iff_count (s : WgbState) : wgbHostReady s = true ↔ wgbCount s.valid < 8 :=`
+- **wgb_h_wgb_discharge** (line 487): `theorem wgb_h_wgb_discharge (s : WgbState) (i : WgbInputs) (h : wgbHostFire s i = true) : wgbPending s < ctasWGBUF_ENTRIES :=`
+- **wgb_count_bounded** (line 492): `theorem wgb_count_bounded (s : WgbState) : wgbCount s.valid ≤ 8 :=`
+- **wgb_step_count** (line 496): `theorem wgb_step_count (s : WgbState) (i : WgbInputs) (henv : WgbEnvOk s i) : wgbCount (wgbStep s i).valid = wgbCount s.valid + (if wgbHostFire s i = true then 1 else 0) - (if wgbClearAct s i = true then 1 else 0) :=`
+- **wgb_pending_host** (line 524): `theorem wgb_pending_host (s : WgbState) (i : WgbInputs) (henv : WgbEnvOk s i) (hw : wgbHostFire s i = true) (hc : ¬(wgbClearAct s i = true)) : wgbPending (wgbStep s i) = wgbPending s + 1 :=`
+- **wgb_pending_alloc** (line 533): `theorem wgb_pending_alloc (s : WgbState) (i : WgbInputs) (henv : WgbEnvOk s i) (hc : wgbClearAct s i = true) (hw : ¬(wgbHostFire s i = true)) : wgbPending (wgbStep s i) = wgbPending s - 1 :=`
+- **wgbInv_init** (line 546): `theorem wgbInv_init : WgbInv wgbInit :=`
+- **wgbInv_step** (line 552): `theorem wgbInv_step (s : WgbState) (i : WgbInputs) (h : WgbInv s) : WgbInv (wgbStep s i) :=`
+- **wgb_alloc_capture** (line 583): `theorem wgb_alloc_capture (s : WgbState) (i : WgbInputs) (hinv : WgbInv s) (h : wgbRdAct s i = true) : (wgbStep s i).allocValidR = true ∧ (wgbStep s i).allocDataR = s.ghost (wgbFin (wgbRdAddr s)) ∧ (wgbStep s i).allocAddrR = wgbRdAddr s :=`
+- **wgb_rd_sets_alloc** (line 596): `theorem wgb_rd_sets_alloc (s : WgbState) (i : WgbInputs) (h : wgbRdAct s i = true) : wgbBit (wgbStep s i).alloc (wgbRdAddr s) = true :=`
+- **wgb_cuif_capture** (line 604): `theorem wgb_cuif_capture (s : WgbState) (i : WgbInputs) (hinv : WgbInv s) (henv : WgbEnvOk s i) (h : wgbClearAct s i = true) : (wgbStep s i).cuifValidR = true ∧ (wgbStep s i).cuifDataR = s.ghost (wgbFin i.resAddr) :=`
+- **wgb_alloc_stable** (line 615): `theorem wgb_alloc_stable (s : WgbState) (i : WgbInputs) (hv : s.allocValidR = true) (hr : i.allocReady = false) : wgbRdAct s i = false ∧ (wgbStep s i).allocValidR = true ∧ (wgbStep s i).allocDataR = s.allocDataR ∧ (wgbStep s i).allocAddrR = s.allocAddrR :=`
+- **wgb_cuif_stable** (line 627): `theorem wgb_cuif_stable (s : WgbState) (i : WgbInputs) (hv : s.cuifValidR = true) (hr : i.cuifReady = false) : wgbClearAct s i = false ∧ (wgbStep s i).cuifValidR = true ∧ (wgbStep s i).cuifDataR = s.cuifDataR :=`
+- **wgb_resReady_accept** (line 638): `theorem wgb_resReady_accept (s : WgbState) (i : WgbInputs) (h : i.resAccept = true) : wgbResReady s i = wgbClearReady s i :=`
+- **wgb_resReady_reject** (line 640): `theorem wgb_resReady_reject (s : WgbState) (i : WgbInputs) (h : i.resAccept = false) : wgbResReady s i = true :=`
+- **wgb_valid_persists** (line 648): `theorem wgb_valid_persists (s : WgbState) (i : WgbInputs) (a : BitVec 3) (hbit : wgbBit s.valid a = true) (hnc : wgbClearAct s i = true → i.resAddr ≠ a) : wgbBit (wgbStep s i).valid a = true :=`
+- **wgb_clear_exact** (line 670): `theorem wgb_clear_exact (s : WgbState) (i : WgbInputs) (henv : WgbEnvOk s i) (h : wgbClearAct s i = true) : wgbBit (wgbStep s i).valid i.resAddr = false :=`
+- **wgb_no_double_clear** (line 684): `theorem wgb_no_double_clear (s : WgbState) (i : WgbInputs) (henv : WgbEnvOk s i) (hbit : wgbBit s.valid i.resAddr = false) : wgbClearAct s i = false :=`
+
+### `Ventus/L2/Directory.lean`
+
+- **l2d_lfsr_zero** (line 485): `theorem l2d_lfsr_zero : l2dLfsrStep 0#16 = 1#16 :=`
+- **l2d_lfsr_cycle** (line 497): `theorem l2d_lfsr_cycle : l2dLfsrIter 42 1#16 = l2dLfsrIter 11 1#16 :=`
+- **l2d_lfsr_period31** (line 501): `theorem l2d_lfsr_period31 : l2dLfsrIter 31 (l2dLfsrIter 11 1#16) = l2dLfsrIter 11 1#16 :=`
+- **l2d_lfsr_victim_cover** (line 506): `theorem l2d_lfsr_victim_cover : ∀ w : BitVec 4, (List.range 42).any (fun k => (l2dLfsrIter k 1#16).setWidth 4 == w) = true :=`
+- **l2d_lfsr_orbit_stable** (line 514): `theorem l2d_lfsr_orbit_stable : ∀ x : BitVec 16, x ∈ l2dLfsrOrbit → l2dLfsrStep x ∈ l2dLfsrOrbit :=`
+- **l2d_lfsr_orbit_ne_zero** (line 519): `theorem l2d_lfsr_orbit_ne_zero : ∀ x : BitVec 16, x ∈ l2dLfsrOrbit → x ≠ 0#16 :=`
+- **l2d_lfsr_reach** (line 525): `theorem l2d_lfsr_reach (k : Nat) : l2dLfsrIter k 1#16 ∈ l2dLfsrOrbit ∧ l2dLfsrIter k 1#16 ≠ 0#16 :=`
+- **l2d_victimWay_range** (line 534): `theorem l2d_victimWay_range (x : BitVec 16) : (l2dVictimWay x).toNat < 16 :=`
+- **l2d_hit_mutual** (line 548): `theorem l2d_hit_mutual (tags : Fin 16 → BitVec 19) (valid : Fin 16 → Bool) (t : BitVec 19) (hdist : ∀ i j : Fin 16, valid i = true → valid j = true → tags i = tags j → i = j) (i j : Fin 16) (hi : l2dHitBit tags valid t i = true) (hj : l2dHitBit tags valid t j = true) : i = j :=`
+- **l2dT_hits_fold_agree** (line 558): `theorem l2dT_hits_fold_agree : let tags : Fin 16 → BitVec 19 :=`
+- **l2dT_oh2uint_onehot** (line 568): `theorem l2dT_oh2uint_onehot : (List.range 16).all (fun k => l2OHToUInt16 (1#16 <<< k) == BitVec.ofNat 4 k) = true :=`
+- **l2dT_wipe** (line 590): `theorem l2dT_wipe : (l2dWiped.wipeCount = 64#7) ∧ ((List.range 64).all (fun i => (List.range 16).all (fun j => l2StatusGet l2dWiped.statusV i j == false)) = true) ∧ (l2dWiped.sram.mem ⟨9, by decide⟩ ⟨7, by decide⟩ = 0#19) ∧ ((l2dOut l2dWiped l2dInIdle).ready = true) :=`
+- **l2dT_write_then_read_hit** (line 599): `theorem l2dT_write_then_read_hit : let outs :=`
+- **l2dT_miss_victim_lfsr** (line 608): `theorem l2dT_miss_victim_lfsr : let outs :=`
+- **l2dT_flush_count_stuck** (line 631): `theorem l2dT_flush_count_stuck : l2dAfterFlush.flushCount = 1024#11 :=`
+- **l2dT_flush_first_completes** (line 636): `theorem l2dT_flush_first_completes : (l2dAfterFlush.flushIssueReg = false) ∧ ((l2dOut l2dAfterFlush l2dInIdle).ready = true) :=`
+- **l2dT_flush_second_outofrange** (line 641): `theorem l2dT_flush_second_outofrange : let st :=`
+- **l2dT_write_during_flush_corrupts** (line 652): `theorem l2dT_write_during_flush_corrupts : let st :=`
+- **l2dT_flush_false_hit** (line 669): `theorem l2dT_flush_false_hit : let outs :=`
+
+### `Ventus/L2/Discharge.lean`
+
+- **l2dc_i42_witness** (line 90): `theorem l2dc_i42_witness : l2scMixedI (l2scRun l2scInit [l2dcI42In0]) l2dcI42In1Put 0 = true ∧ l2scMixedI (l2scRun l2scInit [l2dcI42In0]) l2dcI42In1Get 0 = false ∧ (l2dcI42BugSt3.mshrs 0).sinkDReg = true ∧ (l2dcI42BugSt3.mshrs 0).mixedReg = true ∧ (l2dcI42BugSt3.mshrs 0).scheDirValid = false ∧ l2scDirV l2dcI42BugSt3 l2dcI42Obs 0 = false ∧ l2scSchedDirValid l2dcI42BugSt3 l2dcI42Obs = false ∧ l2scSinkDAdrValid l2dcI42BugSt3 l2dcI42Obs = false ∧ (l2dcI42OkSt3.mshrs 0).sinkDReg = true ∧ (l2dcI42OkSt3.mshrs 0).scheDirValid = true ∧ l2scSchedDirValid l2dcI42OkSt3 l2dcI42Obs = true ∧ l2scSinkDAdrValid l2dcI42OkSt3 l2dcI42Obs = true ∧ l2scSinkDAdrSet l2dcI42OkSt3 l2dcI42Obs = 5#6 ∧ l2scSinkDAdrWay l2dcI42OkSt3 l2dcI42Obs = 3#4 :=`
+- **l2dc_i42_env0** (line 112): `theorem l2dc_i42_env0 : l2scEnv l2scInit l2dcI42In0 :=`
+- **l2dc_i42_env1_put** (line 115): `theorem l2dc_i42_env1_put : l2scEnv (l2scRun l2scInit [l2dcI42In0]) l2dcI42In1Put :=`
+- **l2dc_i42_env1_get** (line 119): `theorem l2dc_i42_env1_get : l2scEnv (l2scRun l2scInit [l2dcI42In0]) l2dcI42In1Get :=`
+- **l2dc_i42_env2_bug** (line 123): `theorem l2dc_i42_env2_bug : l2scEnv (l2scRun l2scInit [l2dcI42In0, l2dcI42In1Put]) l2dcI42In2Sd :=`
+- **l2dc_i42_env2_ok** (line 128): `theorem l2dc_i42_env2_ok : l2scEnv (l2scRun l2scInit [l2dcI42In0, l2dcI42In1Get]) l2dcI42In2Sd :=`
+- **l2dc_i43_witness** (line 171): `theorem l2dc_i43_witness : l2dcI43St1.drbValid = true ∧ l2dcI43St1.drbBits.tag = 0x111#19 ∧ (l2dcI43In1.dirResValid && (l2dcI43In1.dirRes.hit || l2dcI43In1.dirRes.dirty || l2dcI43In1.dirRes.lastFlush) && !l2dcI43St1.drbValid) = false ∧ l2scPushValid l2dcI43St1 l2dcI43In1 = true ∧ l2dcI43St2.valids = 3#32 ∧ (l2dcI43St2.mshrs 1).request.tag = 0x222#19 ∧ (l2dcI43St2.mshrs 1).request.set = 10#6 ∧ (l2dcI43St2.mshrs 1).request.way = 5#4 ∧ (l2dcI43St2.mshrs 1).scheAValid = true ∧ l2dcI43St2.drbValid = true ∧ l2dcI43St2.drbBits.tag = 0x111#19 ∧ l2dcI43St2.drbBits.set = 9#6 ∧ l2dcI43St2.drbBits.way = 2#4 :=`
+- **l2dc_i43_env0** (line 194): `theorem l2dc_i43_env0 : l2scEnv l2scInit l2dcI43In0 :=`
+- **l2dc_i43_env1** (line 197): `theorem l2dc_i43_env1 : l2scEnv l2dcI43St1 l2dcI43In1 :=`
+- **l2dc_probe_o1** (line 217): `theorem l2dc_probe_o1 : let outs :=`
+- **l2dc_probe_o2** (line 224): `theorem l2dc_probe_o2 : let outs :=`
+- **l2dc_probe_fire** (line 231): `theorem l2dc_probe_fire : (l2dWiresOf (l2dStep l2dcDirSt0 l2dcDirInA) l2dcDirInB).readFire = true :=`
+- **l2dc_i43_dir_results** (line 238): `theorem l2dc_i43_dir_results : let outs :=`
+- **l2dc_i43_sourced_busy** (line 260): `theorem l2dc_i43_sourced_busy : let outs :=`
+- **l2dc_lb_pool_exhausted** (line 291): `theorem l2dc_lb_pool_exhausted : lbPushReady l2dcLbPrim = true ∧ l2dcLbFull.used = BitVec.allOnes 32 ∧ l2dcLbFull.valid.getLsbD 31 = false ∧ lbPushReady l2dcLbFull = false :=`
+- **l2dc_e3_counterexample** (line 354): `theorem l2dc_e3_counterexample : l2scAllocValid l2dcE3Pre l2dcE3CexIn 31 = true ∧ l2dcE3CexIn.pushReady = false ∧ (l2dcE3St33.mshrs 31).scheAValid = true ∧ l2dcE3St33.valids.getLsbD 31 = false ∧ l2scAFire l2dcE3St33 l2dcE3CexIn 31 = true ∧ l2scAFire l2dcE3St35 l2dcE3CexIn 31 = true :=`
+- **l2dc_e3_falsified** (line 367): `theorem l2dc_e3_falsified : ¬ (∀ i, l2scAllocValid l2dcE3Pre l2dcE3CexIn i = true → l2dcE3CexIn.pushReady = true) :=`
+- **l2dc_e3_inv1_broken** (line 377): `theorem l2dc_e3_inv1_broken : ¬ l2scInv1 l2dcE3St33 :=`
+- **l2dc_e3_env_allocs** (line 387): `theorem l2dc_e3_env_allocs (i : Nat) : l2scEnv (l2dcE3St i) (l2dcE3AllocIn i) :=`
+- **l2dc_e1_step** (line 424): `theorem l2dc_e1_step (sc : L2scState) (aOut : BitVec 32) (inp : L2scIn) (hinv : l2dcInvE1 sc aOut) (he3 : ∀ i, l2scAllocValid sc inp i = true → inp.pushReady = true) (he1b : l2dcE1b aOut inp) : (∀ i, i < 32 → l2scSinkdV sc inp i = true → sc.valids.getLsbD i = true ∧ (sc.mshrs i).sinkDReg = false) ∧ l2dcInvE1 (l2scStep sc inp) (l2dcAOutNext sc inp aOut) :=`
+- **l2dc_e1_init** (line 678): `theorem l2dc_e1_init : l2dcInvE1 l2scInit 0#32 :=`
+- **l2dc_e1_run** (line 694): `theorem l2dc_e1_run : ∀ (sc : L2scState) (aOut : BitVec 32) (trace : List L2scIn), l2dcInvE1 sc aOut → (∀ pre inp post, trace = pre ++ inp :: post → (∀ i, l2scAllocValid (l2scRun sc pre) inp i = true → inp.pushReady = true) ∧ l2dcE1b (l2dcAOutRun sc aOut pre) inp) → l2dcInvE1 (l2scRun sc trace) (l2dcAOutRun sc aOut trace) :=`
+
+### `Ventus/L2/L2Channels.lean`
+
+- **parse_expand** (line 223): `theorem parse_expand (t : BitVec l2TagBits) (s : BitVec l2SetBits) (o : BitVec l2OffsetBits) : parseTag (expandAddress t s o) = t ∧ parseSet (expandAddress t s o) = s ∧ parseOffset (expandAddress t s o) = o :=`
+- **expand_parse** (line 230): `theorem expand_parse (x : BitVec l2AddrBits) : expandAddress (parseTag x) (parseSet x) (parseOffset x) = x :=`
+- **holdOut_en** (line 252): `theorem holdOut_en (s : HoldState w) (x : BitVec w) : holdOut s x true = x :=`
+- **holdOut_hold** (line 253): `theorem holdOut_hold (s : HoldState w) (x : BitVec w) : holdOut s x false = s.reg :=`
+- **holdStep_en** (line 254): `theorem holdStep_en (s : HoldState w) (x : BitVec w) : holdStep s x true = ⟨x⟩ :=`
+- **holdStep_hold** (line 255): `theorem holdStep_hold (s : HoldState w) (x : BitVec w) : holdStep s x false = s :=`
+- **hold_holds** (line 258): `theorem hold_holds (s : HoldState w) (x y : BitVec w) : holdOut (holdStep s x true) y false = x :=`
+- **holdT_seq** (line 262): `theorem holdT_seq : holdOut (holdStep ⟨0#8⟩ 0xAB#8 true) 0xFF#8 false = 0xAB#8 ∧ holdOut (holdStep (holdStep ⟨0#8⟩ 0xAB#8 true) 0xCD#8 false) 0xEE#8 false = 0xAB#8 ∧ holdOut ⟨0#8⟩ 0x55#8 true = 0x55#8 :=`
+- **lbLowestOne_spec** (line 276): `theorem lbLowestOne_spec (x : BitVec 32) : lbLowestOne x &&& (lbLowestOne x - 1#32) = 0#32 ∧ lbLowestOne x &&& x = lbLowestOne x ∧ (lbLowestOne x = 0#32 ↔ x = 0#32) ∧ x &&& (lbLowestOne x - 1#32) = 0#32 :=`
+- **lb_not_eq_zero** (line 284): `theorem lb_not_eq_zero (x : BitVec 32) : ~~~x = 0#32 ↔ x = BitVec.allOnes 32 :=`
+- **lbPushReady_iff** (line 384): `theorem lbPushReady_iff (s : LbState qBits eBits α) : lbPushReady s = true ↔ s.used ≠ BitVec.allOnes (2 ^ eBits) :=`
+- **lbT_push_visible** (line 404): `theorem lbT_push_visible : let s1 :=`
+- **lbT_fifo** (line 410): `theorem lbT_fifo : let s2 :=`
+- **lbT_full_block** (line 419): `theorem lbT_full_block : let s4 :=`
+- **lbT_recycle** (line 425): `theorem lbT_recycle : let s2 :=`
+- **lbT_sim_pushpop** (line 434): `theorem lbT_sim_pushpop : let s1 :=`
+- **lbT_two_queues** (line 442): `theorem lbT_two_queues : let s3 :=`
+- **sinkAHasData_not_hint** (line 558): `theorem sinkAHasData_not_hint (op : BitVec 3) : sinkAHasData op = true → (op == 5#3) = false :=`
+- **sinkA_aReady_data** (line 563): `theorem sinkA_aReady_data (s : SinkAState) (i : SinkAIn) (h : sinkAHasData i.a.opcode = true) : sinkAARdy s i = (i.reqReady && !sinkABufBlock s i && !sinkASetBlock s i) :=`
+- **sinkA_hint_gated** (line 574): `theorem sinkA_hint_gated (s : SinkAState) (i : SinkAIn) (hop : i.a.opcode = 5#3) (hempty : sinkAEmpty s i = false) : sinkAARdy s i = false ∧ sinkAReqValid s i = false :=`
+- **sinkA_listsSet_iff** (line 581): `theorem sinkA_listsSet_iff (s : SinkAState) (i : SinkAIn) : sinkAListsSet s i ≠ 0 ↔ i.aValid = true ∧ sinkAHasData i.a.opcode = true ∧ i.reqReady = true ∧ sinkABufBlock s i = false ∧ s.lists ≠ BitVec.allOnes l2PutLists :=`
+- **sinkA_put_consistent** (line 611): `theorem sinkA_put_consistent (s : SinkAState) (i : SinkAIn) : (sinkALbIn s i).pushIndex = sinkAFreeIdx s ∧ (sinkAReqBits s i).put = sinkAFreeIdx s :=`
+- **sinkA_step_idle** (line 617): `theorem sinkA_step_idle (s : SinkAState) (i : SinkAIn) (hv : i.aValid = false) (hp : i.pbPopValid = false) : sinkAStep s i = s :=`
+- **sinkAT_put_alloc** (line 642): `theorem sinkAT_put_alloc : let i :=`
+- **sinkAT_two_puts** (line 655): `theorem sinkAT_two_puts : let s2 :=`
+- **sinkAT_pop_clears** (line 664): `theorem sinkAT_pop_clears : let s1 :=`
+- **sinkAT_put_pop_reuse** (line 673): `theorem sinkAT_put_pop_reuse : let s2 :=`
+- **sinkAT_get_no_alloc** (line 682): `theorem sinkAT_get_no_alloc : let i :=`
+- **sinkAT_hint_gate** (line 690): `theorem sinkAT_hint_gate : let s1 :=`
+- **sinkAT_backpressure** (line 700): `theorem sinkAT_backpressure : let i :=`
+- **sinkAT_lists_full** (line 706): `theorem sinkAT_lists_full : let s : SinkAState :=`
+- **sourceA_addr_roundtrip** (line 769): `theorem sourceA_addr_roundtrip (t : BitVec l2TagBits) (s : BitVec l2SetBits) (o : BitVec l2OffsetBits) : parseTag (expandAddress t s o) = t ∧ parseSet (expandAddress t s o) = s ∧ parseOffset (expandAddress t s o) = o :=`
+- **sinkDT_pass_through** (line 778): `theorem sinkDT_pass_through : let s1 :=`
+- **sourceAT_connect** (line 788): `theorem sourceAT_connect : let r : FullRequest :=`
+
+### `Ventus/L2/L2MSHR.lean`
+
+- **l2mT1_alloc** (line 476): `theorem l2mT1_alloc : let st :=`
+- **l2mT1b_aOut** (line 484): `theorem l2mT1b_aOut : let st :=`
+- **l2mT2_aFire** (line 493): `theorem l2mT2_aFire : let st1 :=`
+- **l2mT_alloc_fire_collision** (line 501): `theorem l2mT_alloc_fire_collision : let st1 :=`
+- **l2mT_alloc_sinkd_collision** (line 510): `theorem l2mT_alloc_sinkd_collision : let inp :=`
+- **l2mT3_merge** (line 518): `theorem l2mT3_merge : let st1 :=`
+- **l2mT_merge_sinkd_priority** (line 532): `theorem l2mT_merge_sinkd_priority : let st1 :=`
+- **l2mT4_sinkd** (line 544): `theorem l2mT4_sinkd : let st1 :=`
+- **l2mT4b_put_no_dir** (line 557): `theorem l2mT4b_put_no_dir : let allocPut :=`
+- **l2mT4c_mixed_no_dir** (line 568): `theorem l2mT4c_mixed_no_dir : let st1 :=`
+- **l2mT_dvalid_withdraw** (line 577): `theorem l2mT_dvalid_withdraw : let st1 :=`
+- **l2mT6_trace** (line 587): `theorem l2mT6_trace : let st0 :=`
+- **l2m_step_alloc** (line 616): `theorem l2m_step_alloc (st : L2mState) (inp : L2mInput) (ha : inp.allocValid = true) (hs : inp.sinkdValid = false) (hf : l2mAFire st inp = false) : (l2mStep st inp).request = inp.allocBits ∧ (l2mStep st inp).dataReg = inp.allocBits.data ∧ (l2mStep st inp).scheAValid = true ∧ (l2mStep st inp).scheDirValid = false ∧ (l2mStep st inp).mixedReg = false ∧ (l2mStep st inp).sinkDReg = false :=`
+- **l2m_request_stable** (line 629): `theorem l2m_request_stable (st : L2mState) (inp : L2mInput) (ha : inp.allocValid = false) : (l2mStep st inp).request = st.request :=`
+- **l2m_scheA_noWithdraw** (line 636): `theorem l2m_scheA_noWithdraw (st : L2mState) (inp : L2mInput) (hf : l2mAFire st inp = false) (ha : inp.allocValid = false) : (l2mStep st inp).scheAValid = st.scheAValid :=`
+- **l2m_aBits_stable** (line 642): `theorem l2m_aBits_stable (st : L2mState) (inp : L2mInput) (ha : inp.allocValid = false) : (l2mOut (l2mStep st inp) inp).aBits = (l2mOut st inp).aBits :=`
+- **l2m_sinkd_effect** (line 649): `theorem l2m_sinkd_effect (st : L2mState) (inp : L2mInput) (ha : inp.allocValid = false) (hm : inp.mergeValid = false) (hs : inp.sinkdValid = true) : (l2mStep st inp).sinkDReg = true ∧ (l2mStep st inp).dataReg = inp.sinkdBits.data :=`
+- **l2m_sinkd_dir_set** (line 657): `theorem l2m_sinkd_dir_set (st : L2mState) (inp : L2mInput) (ha : inp.allocValid = false) (hf : l2mDirFire st inp = false) (hx : inp.mixed = false) (hm : st.mixedReg = false) (hs : inp.sinkdValid = true) : (l2mStep st inp).scheDirValid = true :=`
+- **l2m_dirValid_get** (line 665): `theorem l2m_dirValid_get (st : L2mState) (inp : L2mInput) (h : (l2mOut st inp).dirValid = true) : st.request.opcode = l2mOpGet :=`
+- **l2m_dValid_def** (line 673): `theorem l2m_dValid_def (st : L2mState) (inp : L2mInput) : (l2mOut st inp).dValid = (inp.valid && st.sinkDReg && !st.scheAValid) :=`
+- **l2mByteLanes_getLsbD** (line 680): `theorem l2mByteLanes_getLsbD (f : Nat → BitVec 8) (k n : Nat) : (l2mByteLanes f k).getLsbD n = (decide (n / 8 < k) && decide (n < l2mDataBits) && (f (n/8)).getLsbD (n % 8)) :=`
+- **l2mFullMask_getLsbD** (line 708): `theorem l2mFullMask_getLsbD (mask : BitVec l2mMaskBits) (n : Nat) (hn : n < l2mDataBits) : (l2mFullMask mask).getLsbD n = mask.getLsbD (n / 8) :=`
+- **l2mMergeData_getLsbD** (line 728): `theorem l2mMergeData_getLsbD (md dd : BitVec l2mDataBits) (mask : BitVec l2mMaskBits) (n : Nat) (hn : n < l2mDataBits) : (l2mMergeData md dd mask).getLsbD n = (if mask.getLsbD (n/8) then md.getLsbD n else dd.getLsbD n) :=`
+- **l2mMergeData_byte** (line 739): `theorem l2mMergeData_byte (md dd : BitVec l2mDataBits) (mask : BitVec l2mMaskBits) (j : Nat) (hj : j < l2mMaskBits) : l2mByteOf (l2mMergeData md dd mask) j = (if mask.getLsbD j then l2mByteOf md j else l2mByteOf dd j) :=`
+- **l2mFullMask_allOnes** (line 756): `theorem l2mFullMask_allOnes : l2mFullMask (BitVec.allOnes l2mMaskBits) = BitVec.allOnes l2mDataBits :=`
+- **l2mMergeData_allOnes** (line 767): `theorem l2mMergeData_allOnes (md dd : BitVec l2mDataBits) : l2mMergeData md dd (BitVec.allOnes l2mMaskBits) = md :=`
+- **l2mMergeData_zero** (line 778): `theorem l2mMergeData_zero (md dd : BitVec l2mDataBits) : l2mMergeData md dd 0 = dd :=`
+- **l2mBsRowAddr_inj** (line 789): `theorem l2mBsRowAddr_inj (s s' : BitVec l2mSetBits) (w w' : BitVec l2mWayBits) (h : l2mBsRowAddr s w = l2mBsRowAddr s' w') : s = s' ∧ w = w' :=`
+- **l2mBsWriteLanes_read** (line 805): `theorem l2mBsWriteLanes_read {M : Type} [MemLaws M L2mBsAddr (BitVec 8)] (m : M) (row row' : BitVec 10) (data : BitVec l2mDataBits) (mask : BitVec l2mMaskBits) (k j : Nat) (hj : j < 128) : MemLaws.read (l2mBsWriteLanes m row data mask k) (row', BitVec.ofNat 7 j) = (if row' = row ∧ j < k ∧ mask.getLsbD j then l2mByteOf data j else MemLaws.read m (row', BitVec.ofNat 7 j)) :=`
+- **l2mBsWriteRow_read_same** (line 872): `theorem l2mBsWriteRow_read_same {M : Type} [MemLaws M L2mBsAddr (BitVec 8)] (m : M) (row : BitVec 10) (data : BitVec l2mDataBits) (mask : BitVec l2mMaskBits) (j : Nat) (hj : j < 128) : MemLaws.read (l2mBsWriteRow m row data mask) (row, BitVec.ofNat 7 j) = (if mask.getLsbD j then l2mByteOf data j else MemLaws.read m (row, BitVec.ofNat 7 j)) :=`
+- **l2mBsWriteRow_read_diff** (line 884): `theorem l2mBsWriteRow_read_diff {M : Type} [MemLaws M L2mBsAddr (BitVec 8)] (m : M) (row row' : BitVec 10) (data : BitVec l2mDataBits) (mask : BitVec l2mMaskBits) (j : Nat) (hj : j < 128) (hrow : row' ≠ row) : MemLaws.read (l2mBsWriteRow m row data mask) (row', BitVec.ofNat 7 j) = MemLaws.read m (row', BitVec.ofNat 7 j) :=`
+- **l2mBsReadRow_byte** (line 895): `theorem l2mBsReadRow_byte {M : Type} [MemLaws M L2mBsAddr (BitVec 8)] (m : M) (row : BitVec 10) (j : Nat) (hj : j < 128) : l2mByteOf (l2mBsReadRow m row) j = MemLaws.read m (row, BitVec.ofNat 7 j) :=`
+- **l2mBs_wadrReady** (line 914): `theorem l2mBs_wadrReady (inp : L2mBsInput) (h : inp.sinkDValid = true) : l2mBsWadrReady inp = false :=`
+- **l2mBsStep_rdata** (line 920): `theorem l2mBsStep_rdata {M : Type} [MemLaws M L2mBsAddr (BitVec 8)] (st : L2mBsState M) (inp : L2mBsInput) (hr : inp.radrValid = true) (j : Nat) (hj : j < 128) : l2mByteOf (l2mBsStep st inp).rdata j = MemLaws.read st.mem (l2mBsRowAddr inp.radrSet inp.radrWay, BitVec.ofNat 7 j) :=`
+- **l2mBsT1_full_write** (line 933): `theorem l2mBsT1_full_write : let m0 : L2mBsTestMem :=`
+- **l2mBsT2_byte_mask** (line 943): `theorem l2mBsT2_byte_mask : let m0 : L2mBsTestMem :=`
+- **l2mBsT3_step** (line 956): `theorem l2mBsT3_step : let st0 : L2mBsState L2mBsTestMem :=`
+- **l2mBsT4_collision** (line 970): `theorem l2mBsT4_collision : let inp : L2mBsInput :=`
+
+### `Ventus/L2/Scheduler.lean`
+
+- **l2scOfPredGo_getLsbD** (line 369): `theorem l2scOfPredGo_getLsbD (f : Nat → Bool) (k i : Nat) (hk : k ≤ 32) : (l2scOfPredGo f k).getLsbD i = (decide (i < k) && f i) :=`
+- **l2scOfPred_getLsbD** (line 396): `theorem l2scOfPred_getLsbD (f : Nat → Bool) (i : Nat) (hi : i < 32) : (l2scOfPred f).getLsbD i = f i :=`
+- **l2scOfPred_eq_zero** (line 402): `theorem l2scOfPred_eq_zero (f : Nat → Bool) (h : ∀ i, i < 32 → f i = false) : l2scOfPred f = 0#32 :=`
+- **l2scOfPred_ne_zero** (line 408): `theorem l2scOfPred_ne_zero (f : Nat → Bool) (h : l2scOfPred f ≠ 0#32) : ∃ i, i < 32 ∧ f i = true :=`
+- **l2sc_t_init_idle** (line 421): `theorem l2sc_t_init_idle : (l2scMshrRequest l2scInit l2scInIdle = 0#32 ∧ l2scSelectOH l2scInit l2scInIdle = 0#32 ∧ l2scInsertOH l2scInit = 1#32) ∧ l2scInsertOH { l2scInit with valids :=`
+- **l2sc_selectOH_bv** (line 429): `theorem l2sc_selectOH_bv (a filt : BitVec 32) : let rr : BitVec 64 :=`
+- **l2scSelectOH_spec** (line 437): `theorem l2scSelectOH_spec (st : L2scState) (inp : L2scIn) : l2scSelectOH st inp &&& (l2scSelectOH st inp - 1#32) = 0#32 ∧ (l2scSelectOH st inp = 0#32 ↔ l2scMshrRequest st inp = 0#32) ∧ l2scSelectOH st inp &&& l2scMshrRequest st inp = l2scSelectOH st inp :=`
+- **l2scSelectOH_getLsbD_req** (line 446): `theorem l2scSelectOH_getLsbD_req (st : L2scState) (inp : L2scIn) (i : Nat) (hi : i < 32) (h : (l2scSelectOH st inp).getLsbD i = true) : l2scReqBit st inp i = true :=`
+- **l2sc_testBit_div** (line 458): `theorem l2sc_testBit_div (n k : Nat) : n.testBit k = decide (n / 2^k % 2 = 1) :=`
+- **l2sc_testBit_pred_of_lt** (line 467): `theorem l2sc_testBit_pred_of_lt {n i j : Nat} (hi : n.testBit i = true) (hj : n.testBit j = true) (hij : i < j) : (n - 1).testBit j = true :=`
+- **l2sc_onehot_unique** (line 494): `theorem l2sc_onehot_unique (oh : BitVec 32) (i j : Nat) (h1 : oh &&& (oh - 1#32) = 0#32) (hi : oh.getLsbD i = true) (hj : oh.getLsbD j = true) : i = j :=`
+- **l2sc_getLsbD_false_of_ge32** (line 525): `theorem l2sc_getLsbD_false_of_ge32 {x : BitVec 32} {i : Nat} (h : 32 ≤ i) : x.getLsbD i = false :=`
+- **l2sc_getLsbD_lt32** (line 534): `theorem l2sc_getLsbD_lt32 {x : BitVec 32} {i : Nat} (h : x.getLsbD i = true) : i < 32 :=`
+- **l2sc_getLsbD_exists** (line 542): `theorem l2sc_getLsbD_exists {x : BitVec 32} (hx : x ≠ 0#32) : ∃ i, i < 32 ∧ x.getLsbD i = true :=`
+- **l2scCtzF_lt32** (line 559): `theorem l2scCtzF_lt32 (x : BitVec 32) (r i : Nat) (hr : r < 32) : l2scCtzF x r i = r :=`
+- **l2scCtzF_32** (line 565): `theorem l2scCtzF_32 (x : BitVec 32) (i : Nat) : l2scCtzF x 32 i = if x.getLsbD i then i else 32 :=`
+- **l2scCtzF_fold_stay** (line 570): `theorem l2scCtzF_fold_stay (x : BitVec 32) (r : Nat) (hr : r < 32) : ∀ (l : List Nat), (l.foldl (l2scCtzF x) r) = r :=`
+- **l2sc_lbCtz_go** (line 578): `theorem l2sc_lbCtz_go {x : BitVec 32} : ∀ (l : List Nat), (∀ m, m ∈ l → m < 32) → (∃ m, m ∈ l ∧ m < 32 ∧ x.getLsbD m = true) → (l.foldl (l2scCtzF x) 32) < 32 ∧ x.getLsbD (l.foldl (l2scCtzF x) 32) = true :=`
+- **l2sc_lbCtz_getLsbD** (line 603): `theorem l2sc_lbCtz_getLsbD {x : BitVec 32} (hx : x ≠ 0#32) : lbCtz x < 32 ∧ x.getLsbD (lbCtz x) = true :=`
+- **l2scMux1H_transfer** (line 613): `theorem l2scMux1H_transfer {oh : BitVec 32} {f : Nat → Bool} {i : Nat} (h1 : oh &&& (oh - 1#32) = 0#32) (hm : l2scMux1H oh f = true) (hi : oh.getLsbD i = true) (h32 : i < 32) : f i = true :=`
+- **l2sc_ofNat16_inj** (line 639): `theorem l2sc_ofNat16_inj {i j : Nat} (hi32 : i < 32) (hj32 : j < 32) (heq : BitVec.ofNat 16 i = BitVec.ofNat 16 j) : i = j :=`
+- **l2scPopValid_parts** (line 646): `theorem l2scPopValid_parts {st : L2scState} {inp : L2scIn} (h : l2scPopValid st inp = true) : ((l2scSelectOH st inp &&& st.valids) ≠ 0#32) ∧ l2scSchedDValid st inp = true ∧ inp.sourceDReqReady = true :=`
+- **l2scDV_parts** (line 655): `theorem l2scDV_parts {st : L2scState} {inp : L2scIn} {i : Nat} (h : l2scDV st inp i = true) : st.valids.getLsbD i = true ∧ (st.mshrs i).sinkDReg = true ∧ (st.mshrs i).scheAValid = false :=`
+- **l2scSinkdV_parts** (line 668): `theorem l2scSinkdV_parts {st : L2scState} {inp : L2scIn} {i : Nat} (h : l2scSinkdV st inp i = true) : inp.sinkdValid = true ∧ inp.sinkdSource = BitVec.ofNat 16 i ∧ inp.sinkdOpcode = l2scOpAccessAckData :=`
+- **l2scMergeValid_parts** (line 677): `theorem l2scMergeValid_parts {st : L2scState} {inp : L2scIn} {i : Nat} (h : l2scMergeValid st inp i = true) : l2scSchedDValid st inp = true ∧ l2scSelect st inp = i :=`
+- **l2scAllocValid_parts** (line 685): `theorem l2scAllocValid_parts {st : L2scState} {inp : L2scIn} {i : Nat} (h : l2scAllocValid st inp i = true) : inp.dirResValid = true ∧ l2scAlloc st inp = true ∧ (l2scInsertOH st).getLsbD i = true ∧ inp.dirRes.hit = false ∧ inp.dirRes.flush = false :=`
+- **l2scInsertOH_free** (line 693): `theorem l2scInsertOH_free (st : L2scState) (i : Nat) (h : (l2scInsertOH st).getLsbD i = true) : st.valids.getLsbD i = false :=`
+- **l2sc_inv1_init** (line 703): `theorem l2sc_inv1_init : l2scInv1 l2scInit :=`
+- **l2sc_i39_no_alloc_afire** (line 708): `theorem l2sc_i39_no_alloc_afire (st : L2scState) (inp : L2scIn) (i : Nat) (hinv : l2scInv1 st) (h : l2scAllocValid st inp i = true) : l2scAFire st inp i = false :=`
+- **l2sc_inv1_preserved** (line 717): `theorem l2sc_inv1_preserved (st : L2scState) (inp : L2scIn) (hinv : l2scInv1 st) (henv : l2scEnv st inp) : l2scInv1 (l2scStep st inp) :=`
+- **l2sc_inv1_run** (line 805): `theorem l2sc_inv1_run : ∀ (st : L2scState) (trace : List L2scIn), l2scInv1 st → (∀ pre inp post, trace = pre ++ inp :: post → l2scEnv (l2scRun st pre) inp) → l2scInv1 (l2scRun st trace) :=`
+- **l2sc_sinkdV_env** (line 821): `theorem l2sc_sinkdV_env {st : L2scState} {inp : L2scIn} {i : Nat} (henv : l2scEnv st inp) (hi32 : i < 32) (hs : l2scSinkdV st inp i = true) : st.valids.getLsbD i = true ∧ (st.mshrs i).sinkDReg = false :=`
+- **l2sc_i41a_no_alloc_sinkd** (line 833): `theorem l2sc_i41a_no_alloc_sinkd (st : L2scState) (inp : L2scIn) (i : Nat) (henv : l2scEnv st inp) (h : l2scAllocValid st inp i = true) : l2scSinkdV st inp i = false :=`
+- **l2sc_i41b_no_merge_sinkd** (line 846): `theorem l2sc_i41b_no_merge_sinkd (st : L2scState) (inp : L2scIn) (i : Nat) (henv : l2scEnv st inp) (h : l2scMergeValid st inp i = true) : l2scSinkdV st inp i = false :=`
+- **l2sc_q4_sinkd_always_accepted** (line 871): `theorem l2sc_q4_sinkd_always_accepted (st : L2scState) (inp : L2scIn) (i : Nat) (h : l2scSinkdV st inp i = true) : ((l2scStep st inp).mshrs i).sinkDReg = true :=`
+- **l2sc_alloc_exclusive** (line 882): `theorem l2sc_alloc_exclusive (st : L2scState) (inp : L2scIn) (i j : Nat) (hi : l2scAllocValid st inp i = true) (hj : l2scAllocValid st inp j = true) : i = j :=`
+- **l2sc_alloc_exists_unique** (line 890): `theorem l2sc_alloc_exists_unique (st : L2scState) (inp : L2scIn) (hv : inp.dirResValid = true) (hhit : inp.dirRes.hit = false) (hfl : inp.dirRes.flush = false) (halloc : l2scAlloc st inp = true) (hfree : l2scMshrFree st = true) : ∃ i, i < 32 ∧ l2scAllocValid st inp i = true ∧ ∀ j, l2scAllocValid st inp j = true → j = i :=`
+- **l2sc_sinkd_unique** (line 906): `theorem l2sc_sinkd_unique (st : L2scState) (inp : L2scIn) (i j : Nat) (hi32 : i < 32) (hj32 : j < 32) (hi : l2scSinkdV st inp i = true) (hj : l2scSinkdV st inp j = true) : i = j :=`
+- **l2sc_i40_env0** (line 933): `theorem l2sc_i40_env0 : l2scEnv l2scInit l2scI40In0 :=`
+- **l2sc_i40_env1** (line 937): `theorem l2sc_i40_env1 : l2scEnv (l2scRun l2scInit [l2scI40In0]) l2scI40In1 :=`
+- **l2sc_i40_env2** (line 941): `theorem l2sc_i40_env2 : l2scEnv l2scI40St2 l2scI40In2 :=`
+- **l2sc_i40_witness** (line 949): `theorem l2sc_i40_witness : l2scSinkDAdrValid l2scI40St2 l2scI40In2 = true ∧ l2scSinkDAdrSet l2scI40St2 l2scI40In2 = 5#6 ∧ l2scSinkDAdrWay l2scI40St2 l2scI40In2 = 3#4 ∧ l2scBsCollision l2scI40St2 l2scI40In2 = true ∧ l2scBsCollision l2scI40St2 { l2scI40In2 with radrValid :=`
+- **l2sc_t_roundrobin** (line 966): `theorem l2sc_t_roundrobin : l2scSelectOH (l2scRun l2scInit [l2scI40In0, l2scRrIn1]) l2scInIdle = 1#32 ∧ (l2scRun l2scInit [l2scI40In0, l2scRrIn1, l2scInIdle]).robinFilter = 0xFFFFFFFE#32 ∧ l2scSelectOH (l2scRun l2scInit [l2scI40In0, l2scRrIn1, l2scInIdle]) l2scInIdle = 2#32 :=`
+- **l2sc_t_alloc_sinkd_flow** (line 973): `theorem l2sc_t_alloc_sinkd_flow : (l2scRun l2scInit [l2scI40In0, l2scI40In1]).valids = 1#32 ∧ ((l2scRun l2scInit [l2scI40In0, l2scI40In1]).mshrs 0).sinkDReg = true ∧ ((l2scRun l2scInit [l2scI40In0, l2scI40In1]).mshrs 0).scheAValid = false ∧ l2scDV (l2scRun l2scInit [l2scI40In0, l2scI40In1]) l2scInIdle 0 = true :=`
+
+### `Ventus/L2/SourceD.lean`
+
+- **l2s_putput_and_false** (line 337): `theorem l2s_putput_and_false : ∀ op : BitVec 3, ((op == l2opPutFull) && (op == l2opPutPartial)) = false :=`
+- **l2sT_mshr_wait_put_miss** (line 344): `theorem l2sT_mshr_wait_put_miss : let req : L2sReq :=`
+- **l2sT_d_get_hit** (line 363): `theorem l2sT_d_get_hit : let f : L2sReq :=`
+- **l2sT_d_get_miss** (line 371): `theorem l2sT_d_get_miss : let f : L2sReq :=`
+- **l2sT_d_write_ack** (line 379): `theorem l2sT_d_write_ack : let f : L2sReq :=`
+- **l2sT_d_hintack** (line 387): `theorem l2sT_d_hintack : let f : L2sReq :=`
+- **l2sT_d_addr** (line 395): `theorem l2sT_d_addr : let f : L2sReq :=`
+- **l2sT_trace_read_hit** (line 411): `theorem l2sT_trace_read_hit : let req :=`
+- **l2sT_trace_write_hit** (line 426): `theorem l2sT_trace_write_hit : let req : L2sReq :=`
+- **l2sT_trace_miss_clean** (line 440): `theorem l2sT_trace_miss_clean : let req : L2sReq :=`
+- **l2sT_trace_miss_dirty** (line 452): `theorem l2sT_trace_miss_dirty : let req :=`
+- **l2sT_trace_write_miss_noalloc** (line 468): `theorem l2sT_trace_write_miss_noalloc : let req : L2sReq :=`
+- **l2sT_trace_flush_last_dirty** (line 480): `theorem l2sT_trace_flush_last_dirty : let req :=`
+- **l2sT_stage8_accepts_req** (line 500): `theorem l2sT_stage8_accepts_req : let flushReq : L2sReq :=`
+- **l2sT_stage8_payload_clobber** (line 512): `theorem l2sT_stage8_payload_clobber : let flushReq : L2sReq :=`
+
+### `Ventus/Mem/DCache.lean`
+
+- **dc_blockAddr_roundtrip** (line 140): `theorem dc_blockAddr_roundtrip (tag : BitVec 17) (setIdx : BitVec 8) : dcGetTag (dcBlockAddr tag setIdx) = tag ∧ dcGetSetIdx (dcBlockAddr tag setIdx) = setIdx :=`
+- **dcT_blockAddr** (line 146): `theorem dcT_blockAddr : dcBlockAddr 0x1ABCD#17 0x5A#8 = 0x1ABCD5A#25 ∧ dcGetTag 0x1ABCD5A#25 = 0x1ABCD#17 ∧ dcGetSetIdx 0x1ABCD5A#25 = 0x5A#8 ∧ dcMemRspSetIdx 0x35A#12 = 0x5A#8 ∧ dcWshrIdx 0x35A#12 = 0b11#2 :=`
+- **dcT_genControl** (line 192): `theorem dcT_genControl : dcGenControl 0#3 0#4 = { dcCtrlIdle with isRead :=`
+- **dc_genControl_onehot** (line 204): `theorem dc_genControl_onehot : ∀ (op : BitVec 3) (prm : BitVec 4), (if dcGenControl op prm |>.isRead then 1 else 0) + (if dcGenControl op prm |>.isWrite then 1 else 0) + (if dcGenControl op prm |>.isLR then 1 else 0) + (if dcGenControl op prm |>.isSC then 1 else 0) + (if dcGenControl op prm |>.isAMO then 1 else 0) + (if dcGenControl op prm |>.isFlush then 1 else 0) + (if dcGenControl op prm |>.isInvalidate then 1 else 0) + (if dcGenControl op prm |>.isWaitMSHR then 1 else 0) ≤ 1 :=`
+- **dc_genControl_amo_noop** (line 217): `theorem dc_genControl_amo_noop : ∀ (prm : BitVec 4), let c :=`
+- **dcT_onehot4** (line 306): `theorem dcT_onehot4 : ∀ m : BitVec 4, dcOneHot4 m = true ↔ (m = 1#4 ∨ m = 2#4 ∨ m = 4#4 ∨ m = 8#4) :=`
+- **dcT_ohToUInt4** (line 309): `theorem dcT_ohToUInt4 : dcOHToUInt4 0b0001#4 = 0#2 ∧ dcOHToUInt4 0b0010#4 = 1#2 ∧ dcOHToUInt4 0b0100#4 = 2#2 ∧ dcOHToUInt4 0b1000#4 = 3#2 :=`
+- **dc_mapByte_onehot** (line 314): `theorem dc_mapByte_onehot : ∀ ori : BitVec 32, (dcMapByte ori 0b0001#4) &&& 0xFF#32 = ori &&& 0xFF#32 ∧ (dcMapByte ori 0b0010#4) >>> 8 &&& 0xFF#32 = ori &&& 0xFF#32 ∧ (dcMapByte ori 0b0100#4) >>> 16 &&& 0xFF#32 = ori &&& 0xFF#32 ∧ (dcMapByte ori 0b1000#4) >>> 24 &&& 0xFF#32 = ori &&& 0xFF#32 :=`
+- **dc_relocByte_onehot** (line 324): `theorem dc_relocByte_onehot : ∀ ori : BitVec 32, dcRelocByte (ori <<< 0) 0b0001#4 &&& 0xFF#32 = ori &&& 0xFF#32 ∧ dcRelocByte (ori <<< 8) 0b0010#4 &&& 0xFF#32 = ori &&& 0xFF#32 ∧ dcRelocByte (ori <<< 16) 0b0100#4 &&& 0xFF#32 = ori &&& 0xFF#32 ∧ dcRelocByte (ori <<< 24) 0b1000#4 &&& 0xFF#32 = ori &&& 0xFF#32 :=`
+- **dcT_mapByte** (line 333): `theorem dcT_mapByte : dcMapByte 0x000000AB#32 0b0010#4 = 0x0000AB00#32 ∧ dcMapByte 0x0000ABCD#32 0b1100#4 = 0xABCD0000#32 ∧ dcMapByte 0x89ABCDEF#32 0b1111#4 = 0x89ABCDEF#32 ∧ dcMapByte 0x89ABCDEF#32 0b0011#4 = 0x89ABCDEF#32 :=`
+- **dcAnd_or_self** (line 341): `theorem dcAnd_or_self {w : Nat} (a b : BitVec w) : ((a ||| b) &&& b) = b :=`
+- **dcOr_sup** (line 346): `theorem dcOr_sup {w : Nat} (a b c : BitVec w) (h : (a &&& c) = c) : ((a ||| b) &&& c) = c :=`
+- **dcAnd_sup_trans** (line 354): `theorem dcAnd_sup_trans {w : Nat} (a b c : BitVec w) (h1 : (a &&& b) = b) (h2 : (b &&& c) = c) : (a &&& c) = c :=`
+- **dcMemSplit** (line 364): `theorem dcMemSplit {α : Type} {l : List α} {a : α} (h : a ∈ l) : ∃ s t, l = s ++ a :: t :=`
+- **dcFoldl_cor_sup** (line 375): `theorem dcFoldl_cor_sup {w : Nat} (xs : List (Fin 32)) (c : Fin 32 → Bool) (f : Fin 32 → BitVec w) (init x : BitVec w) (h : (init &&& x) = x) : ((xs.foldl (fun acc i => if c i then acc ||| f i else acc) init) &&& x) = x :=`
+- **dcFoldl_cor_mem** (line 387): `theorem dcFoldl_cor_mem {w : Nat} (xs : List (Fin 32)) (c : Fin 32 → Bool) (f : Fin 32 → BitVec w) (l : Fin 32) (init : BitVec w) (hl : l ∈ xs) (hc : c l = true) : ((xs.foldl (fun acc i => if c i then acc ||| f i else acc) init) &&& f l) = f l :=`
+- **dcRemapMask_includes** (line 399): `theorem dcRemapMask_includes (lanes : Fin 32 → DcLane) (i l : Fin 32) (hm : dcBlockMatch lanes i l = true) : (dcRemapMask lanes i &&& (lanes l).wordOffset1H) = (lanes l).wordOffset1H :=`
+- **dcRemapData_includes** (line 405): `theorem dcRemapData_includes (lanes : Fin 32 → DcLane) (dat : Fin 32 → BitVec 32) (i l : Fin 32) (hm : dcBlockMatch lanes i l = true) : (dcRemapData lanes dat i &&& dat l) = dat l :=`
+- **dcWriteMissMask_complete** (line 413): `theorem dcWriteMissMask_complete (lanes : Fin 32 → DcLane) (j : BitVec 5) (l : Fin 32) (hact : (lanes l).activeMask = true) (hbo : (lanes l).blockOffset = j) : (dcWriteMissMaskWord lanes j &&& (lanes l).wordOffset1H) = (lanes l).wordOffset1H :=`
+- **dcBankValid_iff** (line 427): `theorem dcBankValid_iff (lanes : Fin 32 → DcLane) (b : BitVec 5) : dcBankValid lanes b = true ↔ ∃ l : Fin 32, (lanes l).activeMask = true ∧ (lanes l).blockOffset = b :=`
+- **dcBankLane_spec** (line 440): `theorem dcBankLane_spec (lanes : Fin 32 → DcLane) (b : BitVec 5) (hv : dcBankValid lanes b = true) : (lanes (dcBankLane lanes b)).activeMask = true ∧ (lanes (dcBankLane lanes b)).blockOffset = b :=`
+- **dcT_i28_asymmetry** (line 484): `theorem dcT_i28_asymmetry : dcWriteMissMaskWord dcI28Lanes 3#5 = 0b0011#4 ∧ dcRemapMask dcI28Lanes ⟨5, by decide⟩ = 0b0011#4 ∧ dcRemapMask dcI28Lanes ⟨27, by decide⟩ = 0b0011#4 ∧ l1taDmBuild ((fun i => if i = 5 then (true, 3, 0b0001#4) else if i = 27 then (true, 3, 0b0010#4) else (false, 0, 0#4)) : Fin 32 → L1taLane 32 4) = (0b0010#4).zeroExtend 128 <<< 12 :=`
+- **dcw_conflict_iff** (line 539): `theorem dcw_conflict_iff (s : DcwState) (ba : BitVec 25) : dcwConflict s ba = true ↔ ∃ i : Fin 4, s.valid i = true ∧ s.entries i = ba :=`
+- **dcw_not_conflict** (line 551): `theorem dcw_not_conflict (s : DcwState) (ba : BitVec 25) (h : dcwConflict s ba = false) : ∀ i : Fin 4, s.valid i = true → s.entries i ≠ ba :=`
+- **dcw_nextFree_invalid** (line 559): `theorem dcw_nextFree_invalid (s : DcwState) (h : dcwFull s = false) : s.valid (dcwNextFree s) = false :=`
+- **dcw_pop_clears** (line 593): `theorem dcw_pop_clears (s : DcwState) (ba : BitVec 25) (i : Fin 4) : (dcwStep s false ba true i).valid i = false :=`
+- **dcw_push_sets** (line 598): `theorem dcw_push_sets (s : DcwState) (ba : BitVec 25) (h : dcwFull s = false) : (dcwStep s true ba false ⟨0, by decide⟩).entries (dcwNextFree s) = ba ∧ (dcwStep s true ba false ⟨0, by decide⟩).valid (dcwNextFree s) = true :=`
+- **dcw_pushpop_recycle** (line 604): `theorem dcw_pushpop_recycle (s : DcwState) (ba : BitVec 25) (i : Fin 4) (h : dcwFull s = false) : (dcwStep s true ba true i).entries i = ba ∧ (dcwStep s true ba true i).valid i = true :=`
+- **dcwDistinct_push** (line 615): `theorem dcwDistinct_push (s : DcwState) (ba : BitVec 25) (hd : dcwDistinct s) (hfull : dcwFull s = false) (hconf : dcwConflict s ba = false) : dcwDistinct (dcwStep s true ba false ⟨0, by decide⟩) :=`
+- **dcT_wshr_flow** (line 650): `theorem dcT_wshr_flow : dcwEmpty dcwInit = true ∧ dcwConflict dcwT2 0x222#25 = true ∧ dcwConflict dcwT2 0x333#25 = false ∧ dcwFull dcwT2 = false ∧ (dcwT3.valid ⟨1, by decide⟩) = false ∧ dcwT4.entries ⟨1, by decide⟩ = 0x333#25 ∧ dcwT4.valid ⟨1, by decide⟩ = true ∧ dcwPushedIdx dcwT2 true true ⟨1, by decide⟩ = ⟨1, by decide⟩ :=`
+- **dc_fire_excludes_allocWrite** (line 927): `theorem dc_fire_excludes_allocWrite : ∀ (v aw e f g h m3 m1 o r : Bool), dcCoreReqReady v aw e f g h m3 m1 o r = true → (v && aw) = false :=`
+- **dc_st1Ready_amo_swallowed** (line 933): `theorem dc_st1Ready_amo_swallowed (s : DcState) (i : DcIn) : s.st1 = some ⟨dcGenControl 2#3 0#4, false, 0#8, 0#3⟩ → dcSt1Ready s i = true :=`
+- **dcT_w1_collision_reachable** (line 979): `theorem dcT_w1_collision_reachable : dcW1S2.st1 = some dcW1Req ∧ dcW1S2.prevAllocWriteV = true ∧ dcCollision dcW1S2 dcW1I2 = true ∧ dcWriteHit dcW1S2 dcW1I2 = true ∧ dcDataReplaceReadV dcW1S2 dcW1I2 = true :=`
+- **dcT_w1_sram_lfsr** (line 992): `theorem dcT_w1_sram_lfsr : sramRespData sramCfgDCacheData dcW1Sram ⟨0, by decide⟩ = 0x43B2A190#32 ∧ sramRespData sramCfgDCacheData dcW1Sram ⟨0, by decide⟩ ≠ 0xAAAA0000#32 ∧ dcW1Sram.mem ⟨1, by decide⟩ ⟨0, by decide⟩ = 0xAAAA0000#32 :=`
+- **dcT_w2a_normal** (line 1015): `theorem dcT_w2a_normal : (dcRun dcInit [{ dcInNop with fire :=`
+- **dcT_w2b_early_clear** (line 1033): `theorem dcT_w2b_early_clear : (dcRun dcInit [{ dcInNop with fire :=`
+- **dcT_w2b_stale_instrId** (line 1041): `theorem dcT_w2b_stale_instrId : dcW2bTrace.rspLog = [3#3, 3#3] ∧ ¬ (5#3 ∈ dcW2bTrace.rspLog) :=`
+- **dcT_w2c_rsp_lost** (line 1058): `theorem dcT_w2c_rsp_lost : dcW2cTrace.rspLog = [3#3] ∧ ¬ (5#3 ∈ dcW2cTrace.rspLog) :=`
+
+### `Ventus/Mem/DupRsp.lean`
+
+- **dbr_l1m_guard_exact** (line 89): `theorem dbr_l1m_guard_exact (s : L1mState) (i : L1mIn) : l1mRspEnqV s i = (i.rspInV && (l1mRspUsed s i != 0)) :=`
+- **dbrL1m_used0_row** (line 93): `theorem dbrL1m_used0_row (s : L1mState) (i : L1mIn) (h : l1mRspUsed s i = 0) : ∀ se, s.subValid (l1mRspSel i) se = false :=`
+- **dbr_l1m_orphan_no_coreRsp** (line 110): `theorem dbr_l1m_orphan_no_coreRsp (s : L1mState) (i : L1mIn) (hused : l1mRspUsed s i = 0) : l1mRspEnqV s i = false :=`
+- **dbr_l1m_orphan_absorbed_ready** (line 117): `theorem dbr_l1m_orphan_absorbed_ready (s : L1mState) (i : L1mIn) (hreq : i.reqV = false) (hused : l1mRspUsed s i = 0) : l1mRspInReady s i = true :=`
+- **dbr_l1m_orphan_subValid_kept** (line 123): `theorem dbr_l1m_orphan_subValid_kept (s : L1mState) (i : L1mIn) (hreq : i.reqV = false) (hused : l1mRspUsed s i = 0) : (l1mStep s i).subValid = s.subValid :=`
+- **dbr_l1m_orphan_tables_kept** (line 139): `theorem dbr_l1m_orphan_tables_kept (s : L1mState) (i : L1mIn) (hreq : i.reqV = false) : (l1mStep s i).ti = s.ti ∧ (l1mStep s i).blockAddr = s.blockAddr ∧ (l1mStep s i).instrId = s.instrId :=`
+- **dbr_l1m_orphan_stall_toggle** (line 149): `theorem dbr_l1m_orphan_stall_toggle (s : L1mState) (i : L1mIn) (hrsp : i.rspInV = true) (hreq : i.reqV = false) (hused : l1mRspUsed s i = 0) : (l1mStep s i).releasing (l1mRspSel i) = !s.releasing (l1mRspSel i) ∧ ∀ e, e ≠ l1mRspSel i → (l1mStep s i).releasing e = s.releasing e :=`
+- **dbr_l1m_orphan_statusR** (line 164): `theorem dbr_l1m_orphan_statusR (s : L1mState) (i : L1mIn) (hrsp : i.rspInV = true) (hreq : i.reqV = false) (hprobe : i.probeV = false) (hused : l1mRspUsed s i = 0) : (l1mStep s i).statusR = (if (s.statusR == 1#3 || s.statusR == 2#3 || s.statusR == 4#3) then 0#3 else s.statusR) :=`
+- **dbr_l1m_reused_consumed** (line 180): `theorem dbr_l1m_reused_consumed (s : L1mState) (i : L1mIn) (hrsp : i.rspInV = true) (hused : l1mRspUsed s i ≠ 0) (hq : l1mQEnqRdy s.rspQ = true) (hreq : i.reqV = false) (hrdy : i.rspOutRdy = true) : l1mRspOutFire s i = true ∧ (l1mRspOutBits s i).ti = s.ti (l1mRspSel i) (l1mNext2Cancel s i) ∧ (l1mRspOutBits s i).ba = s.blockAddr (l1mRspSel i) ∧ (l1mStep s i).subValid (l1mRspSel i) (l1mNext2Cancel s i) = false :=`
+- **dbrW1_genuine_drains** (line 218): `theorem dbrW1_genuine_drains : l1mRspOutValid dbrW1S1 dbrIRsp = true ∧ (l1mRspOutBits dbrW1S1 dbrIRsp).ti = 0xAAAA#323 ∧ l1mRspInFire dbrW1S2 dbrIRsp = true ∧ l1mEmpty dbrW1S3 = true ∧ dbrW1S3.releasing ⟨0, by decide⟩ = false :=`
+- **dbrW1_orphan_absorbed** (line 227): `theorem dbrW1_orphan_absorbed : l1mRspOutValid dbrW1S3 dbrIRsp = false ∧ l1mRspInFire dbrW1S3 dbrIRsp = true ∧ l1mEmpty dbrW1S4dup = true ∧ dbrW1S4dup.blockAddr ⟨0, by decide⟩ = 0x10#25 ∧ dbrW1S4dup.ti ⟨0, by decide⟩ ⟨0, by decide⟩ = 0xAAAA#323 :=`
+- **dbrW1_sole_effect_stall** (line 236): `theorem dbrW1_sole_effect_stall : dbrW1S4dup.releasing ⟨0, by decide⟩ = true ∧ l1mReleasingStall dbrW1S4dup = true ∧ dbrW1S4idl.releasing ⟨0, by decide⟩ = false ∧ l1mReleasingStall dbrW1S4idl = false :=`
+- **dbrW2_realloc** (line 251): `theorem dbrW2_realloc : dbrW2S4.subValid ⟨0, by decide⟩ ⟨0, by decide⟩ = true ∧ dbrW2S4.blockAddr ⟨0, by decide⟩ = 0x20#25 ∧ dbrW2S4.ti ⟨0, by decide⟩ ⟨0, by decide⟩ = 0xBBBB#323 :=`
+- **dbrW2_dup_emits_B_coreRsp** (line 259): `theorem dbrW2_dup_emits_B_coreRsp : l1mRspOutValid dbrW2S4 dbrIRsp = true ∧ (l1mRspOutBits dbrW2S4 dbrIRsp).ti = 0xBBBB#323 ∧ (l1mRspOutBits dbrW2S4 dbrIRsp).ba = 0x20#25 ∧ l1mRspInReady dbrW2S4 dbrIRsp = false ∧ l1mRspInFire dbrW2S5 dbrIRsp = true :=`
+- **dbrW2_genuine_orphaned** (line 269): `theorem dbrW2_genuine_orphaned : l1mEmpty dbrW2S6 = true ∧ l1mRspOutValid dbrW2S6 dbrIRsp = false ∧ dbrW2S7.releasing ⟨0, by decide⟩ = true ∧ l1mReleasingStall dbrW2S7 = true :=`
+- **dbr_mshr_no_guard** (line 282): `theorem dbr_mshr_no_guard (s : MshrState) : mshrDcRdy s = s.state.isIdle :=`
+- **dbr_mshr_orphan_cm_kept** (line 286): `theorem dbr_mshr_orphan_cm_kept (s : MshrState) (i : MshrIn) (hs : s.state = .idle) (hdc : mshrDcFire s i = true) (hcm : s.currentMask (mshrIdx3 i.rspId) = 0#32) : (mshrStep s i).currentMask = s.currentMask :=`
+- **dbr_mshr_orphan_tag_kept** (line 300): `theorem dbr_mshr_orphan_tag_kept (s : MshrState) (i : MshrIn) (hs : s.state = .idle) (hdc : mshrDcFire s i = true) : (mshrStep s i).tag = s.tag :=`
+- **dbr_mshr_orphan_complete8_kept** (line 309): `theorem dbr_mshr_orphan_complete8_kept (s : MshrState) (i : MshrIn) (hs : s.state = .idle) (hdc : mshrDcFire s i = true) (hcm : s.currentMask (mshrIdx3 i.rspId) = 0#32) : mshrComplete8 (mshrStep s i) = mshrComplete8 s :=`
+- **dbr_mshr_rsp_premature_complete** (line 323): `theorem dbr_mshr_rsp_premature_complete (s : MshrState) (i : MshrIn) (hs : s.state = .idle) (hdc : mshrDcFire s i = true) (hused : mshrUsedBit s (mshrIdx3 i.rspId) = true) (hcover : s.currentMask (mshrIdx3 i.rspId) &&& ~~~i.rspMask = 0#32) : mshrEntryComplete (mshrStep s i) (mshrIdx3 i.rspId) = true :=`
+- **dbrW3_normal_flow** (line 366): `theorem dbrW3_normal_flow : mshrOutValid dbrM2 = true ∧ (mshrOutTag dbrM2).warp_id = 2#3 ∧ mshrOutData dbrM2 ⟨0, by decide⟩ = 0xAAAA0000#32 ∧ dbrM3.used = 0#8 :=`
+- **dbrW3_realloc** (line 374): `theorem dbrW3_realloc : dbrM5.used = 0x01#8 ∧ (dbrM5.tag ⟨0, by decide⟩).warp_id = 5#3 ∧ dbrM5.currentMask ⟨0, by decide⟩ = 0x3#32 ∧ dbrM5.state = .idle :=`
+- **dbrW3_dup_premature** (line 382): `theorem dbrW3_dup_premature : mshrEntryComplete dbrM6 ⟨0, by decide⟩ = true ∧ mshrOutValid dbrM6 = true ∧ (mshrOutTag dbrM6).warp_id = 5#3 ∧ mshrOutData dbrM6 ⟨0, by decide⟩ = 0xAAAA0000#32 ∧ mshrOutData dbrM6 ⟨1, by decide⟩ = 0xBBBB1111#32 ∧ dbrM7.used = 0#8 :=`
+- **dbrW3_genuine_blocked** (line 392): `theorem dbrW3_genuine_blocked : mshrDcFire dbrM7 dbrMRspB = false ∧ dbrM8.state = .idle :=`
+- **dbrW3_genuine_orphan** (line 397): `theorem dbrW3_genuine_orphan : mshrDcFire dbrM8 dbrMRspB = true ∧ mshrComplete8 dbrM9 = 0#8 ∧ dbrM9.used = 0#8 ∧ mshrOutValid dbrM9 = false ∧ (dbrM9.tag ⟨0, by decide⟩).warp_id = 5#3 :=`
+
+### `Ventus/Mem/DupRspTag.lean`
+
+- **dbt_orphan_allocV** (line 99): `theorem dbt_orphan_allocV (ctrl : Bool) : dbtAllocV ctrl true true = ctrl :=`
+- **dbt_orphan_datafill** (line 104): `theorem dbt_orphan_datafill (ctrl : Bool) : dbtDataFillV ctrl false false = ctrl :=`
+- **dbtT_oh2** (line 114): `theorem dbtT_oh2 : dbtOH2 0b00#2 = ⟨0, by decide⟩ ∧ dbtOH2 0b01#2 = ⟨0, by decide⟩ ∧ dbtOH2 0b10#2 = ⟨1, by decide⟩ ∧ dbtOH2 0b11#2 = ⟨1, by decide⟩ :=`
+- **dbtW2_cases** (line 138): `theorem dbtW2_cases (w : Fin 2) : w = dbtW0 ∨ w = dbtW1 :=`
+- **dbt_notfull_dup_way_diff** (line 202): `theorem dbt_notfull_dup_way_diff (v : BitVec 2) (t0 t1 t0' t1' : BitVec 10) (h : v ≠ 0b11#2) (h' : (v ||| l1taReplD2 v t0 t1) ≠ 0b11#2) : l1taReplD2 (v ||| l1taReplD2 v t0 t1) t0' t1' ≠ l1taReplD2 v t0 t1 :=`
+- **dbtVos_eq_11** (line 209): `theorem dbtVos_eq_11 (v0 v1 : Bool) : l1taValidOfSetD v0 v1 = 0b11#2 ↔ v0 = true ∧ v1 = true :=`
+- **dbt_fill_idempotent_of_same** (line 216): `theorem dbt_fill_idempotent_of_same (s : DbtSet) (tg : BitVec 17) (dt : BitVec 32) (cnt : BitVec 10) (w : Fin 2) (hfull : l1taValidOfSetD (s.valid dbtW0) (s.valid dbtW1) = 0b11#2) (hway : dbtOH2 (dbtWaymask s) = w) (htag : s.tag w = tg) (hdata : s.data w = dt) : (dbtFill s tg dt cnt).tag = s.tag ∧ (dbtFill s tg dt cnt).data = s.data ∧ (dbtFill s tg dt cnt).valid = s.valid :=`
+- **dbt_fill_makes_dup_tags** (line 247): `theorem dbt_fill_makes_dup_tags (s : DbtSet) (tg : BitVec 17) (dt : BitVec 32) (cnt : BitVec 10) (w w' : Fin 2) (hne : w ≠ w') (hway : dbtOH2 (dbtWaymask s) = w) (htg' : s.tag w' = tg) (hv' : s.valid w' = true) (hvw : s.valid w = true ∨ l1taValidOfSetD (s.valid dbtW0) (s.valid dbtW1) ≠ 0b11#2) : (dbtFill s tg dt cnt).tag w = tg ∧ (dbtFill s tg dt cnt).tag w' = tg ∧ (dbtFill s tg dt cnt).valid w = true ∧ (dbtFill s tg dt cnt).valid w' = true :=`
+- **dbt_dup_twohot** (line 280): `theorem dbt_dup_twohot (tg : BitVec 17) : l1taTagWaymask2 tg tg tg true true = 0b11#2 :=`
+- **dbt_dup_hit_reads_dup_copy** (line 287): `theorem dbt_dup_hit_reads_dup_copy (s : DbtSet) (tg : BitVec 17) (ht0 : s.tag dbtW0 = tg) (ht1 : s.tag dbtW1 = tg) (hv0 : s.valid dbtW0 = true) (hv1 : s.valid dbtW1 = true) : dbtProbeMask s tg = 0b11#2 ∧ dbtHitReadData s tg = s.data dbtW1 :=`
+- **dbt_storeHit_times_tie** (line 303): `theorem dbt_storeHit_times_tie (s : DbtSet) (tg : BitVec 17) (nd : BitVec 32) (cnt : BitVec 10) (hdup : dbtProbeMask s tg = 0b11#2) : (dbtStoreHit s tg nd cnt).time dbtW0 = cnt ∧ (dbtStoreHit s tg nd cnt).time dbtW1 = cnt :=`
+- **dbt_tie_evicts_way1** (line 318): `theorem dbt_tie_evicts_way1 (t : BitVec 10) : l1taReplD2 0b11#2 t t = 0b10#2 :=`
+- **dbt_fix_orphan_noop** (line 327): `theorem dbt_fix_orphan_noop (ctrl deqV isRead : Bool) : dbtAllocVFixed ctrl deqV isRead false = false :=`
+- **dbtW1_dup_installed** (line 358): `theorem dbtW1_dup_installed : dbtS2.tag dbtW0 = dbtTagA ∧ dbtS2.tag dbtW1 = dbtTagA ∧ dbtS2.valid dbtW0 = true ∧ dbtS2.valid dbtW1 = true ∧ dbtS2.data dbtW0 = dbtDatA ∧ dbtS2.data dbtW1 = dbtDatA ∧ dbtProbeMask dbtS2 dbtTagA = 0b11#2 :=`
+- **dbtW2_storeHit_dup_copy** (line 367): `theorem dbtW2_storeHit_dup_copy : dbtS3.data dbtW1 = dbtDatA2 ∧ dbtS3.data dbtW0 = dbtDatA ∧ dbtS3.dirty dbtW1 = true ∧ dbtS3.dirty dbtW0 = false ∧ dbtS3.time dbtW0 = 30#10 ∧ dbtS3.time dbtW1 = 30#10 ∧ dbtHitReadData dbtS3 dbtTagA = dbtDatA2 :=`
+- **dbtW3_evict_fresh_copy** (line 377): `theorem dbtW3_evict_fresh_copy : dbtS4.tag dbtW0 = dbtTagA ∧ dbtS4.valid dbtW0 = true ∧ dbtS4.data dbtW0 = dbtDatA ∧ dbtS4.tag dbtW1 = dbtTagB ∧ dbtProbeMask dbtS4 dbtTagA = 0b01#2 :=`
+- **dbtW_stale_read_contrast** (line 388): `theorem dbtW_stale_read_contrast : dbtHitReadData dbtS4 dbtTagA = dbtDatA ∧ dbtProbeHit dbtS4 dbtTagA = true ∧ dbtHitReadData dbtT3 dbtTagA = dbtDatA2 ∧ dbtT3.tag dbtW0 = dbtTagA ∧ dbtT3.tag dbtW1 = dbtTagB :=`
+- **dbtW5_idempotent_full_mru** (line 405): `theorem dbtW5_idempotent_full_mru : dbtF1.tag dbtW0 = dbtF0.tag dbtW0 ∧ dbtF1.tag dbtW1 = dbtF0.tag dbtW1 ∧ dbtF1.data dbtW0 = dbtF0.data dbtW0 ∧ dbtF1.data dbtW1 = dbtF0.data dbtW1 ∧ dbtF1.valid dbtW0 = true ∧ dbtF1.valid dbtW1 = true ∧ dbtF1.time dbtW1 = 25#10 :=`
+- **dbtW_capacity** (line 414): `theorem dbtW_capacity : dbtFullB dbtS3 = true ∧ dbtFullB dbtT2 = false :=`
+
+### `Ventus/Mem/ICache.lean`
+
+- **icBATag_getBA** (line 155): `theorem icBATag_getBA (a : BitVec 32) : icBATag (icGetBA a) = icGetTag a :=`
+- **icBASet_getBA** (line 160): `theorem icBASet_getBA (a : BitVec 32) : icBASet (icGetBA a) = icGetSetIdxFin a :=`
+- **icGetBA_inj_parts** (line 165): `theorem icGetBA_inj_parts (a : BitVec 32) : icGetBA a = (icGetTag a).zeroExtend 25 <<< 8 ||| (icGetSetIdx a).zeroExtend 25 :=`
+- **icT_addr_split** (line 170): `theorem icT_addr_split : icGetTag 0x55E68180#32 = 0x0ABCD#17 ∧ icGetSetIdxFin 0x55E68180#32 = ⟨3, by decide⟩ ∧ icGetBA 0x55E68180#32 = 0xABCD03#25 ∧ icGetBlockOffset 0x55E68180#32 = 0#5 :=`
+- **icFin2_cases** (line 177): `theorem icFin2_cases (j : Fin 2) : j = 0 ∨ j = 1 :=`
+- **icFin4_cases** (line 184): `theorem icFin4_cases (e : Fin 4) : e = 0 ∨ e = 1 ∨ e = 2 ∨ e = 3 :=`
+- **icBeq4_ne** (line 194): `theorem icBeq4_ne {a b : Fin 4} (h : a ≠ b) : (a == b) = false :=`
+- **icAny4_eq_true** (line 210): `theorem icAny4_eq_true (f : Fin 4 → Bool) : icAny4 f = true ↔ ∃ e, f e = true :=`
+- **icAll4_eq_true** (line 228): `theorem icAll4_eq_true (f : Fin 4 → Bool) : icAll4 f = true ↔ ∀ e, f e = true :=`
+- **icIdxOf4_spec** (line 237): `theorem icIdxOf4_spec (f : Fin 4 → Bool) (h : icAny4 f = true) : f (icIdxOf4 f) = true :=`
+- **icCount4_eq_one_unique** (line 241): `theorem icCount4_eq_one_unique (f : Fin 4 → Bool) (a b : Fin 4) (hc : icCount4 f = 1) (ha : f a = true) (hb : b ≠ a) : f b = false :=`
+- **icOHToUInt2_onehot** (line 249): `theorem icOHToUInt2_onehot (j : Fin 2) : icOHToUInt2 (BitVec.ofNat 2 (1 <<< j.val)) = j :=`
+- **icRd_ofFn** (line 288): `theorem icRd_ofFn (f : Fin n → α) (e : Fin n) (d : α) : (Array.ofFn f).getD e.val d = f e :=`
+- **icMshr_reqReady_spec** (line 473): `theorem icMshr_reqReady_spec : icMshrReqReady s i = !((icEntryFull s && !icSecondary s i) || (icSelFull s i && icSecondary s i) || icConflict s i) :=`
+- **icMshr_conflict_block** (line 480): `theorem icMshr_conflict_block (h : icConflict s i = true) : icMshrReqReady s i = false :=`
+- **icMshr_busy_rspIn_not_ready** (line 485): `theorem icMshr_busy_rspIn_not_ready (h : s.busy = true) : icRspInFire s i = false :=`
+- **icMemNext_spec** (line 490): `theorem icMemNext_spec (h : icAny4 (fun e => !s.hasSend e && icEntryValid s e) = true) : (!s.hasSend (icMemNext s) && icEntryValid s (icMemNext s)) = true :=`
+- **icMshr_primary_alloc** (line 497): `theorem icMshr_primary_alloc (hf : icMshrReqFire s i = true) (hp : icSecondary s i = false) : (icMshrStep s i).blockAddr (icEntryNext s) = i.reqBA ∧ (icMshrStep s i).subValid (icEntryNext s) 0 = true ∧ (icMshrStep s i).targetInfo (icEntryNext s) 0 = i.reqTI ∧ (∀ e, e ≠ icEntryNext s → (icMshrStep s i).blockAddr e = s.blockAddr e) :=`
+- **icMshr_secondary_merge** (line 513): `theorem icMshr_secondary_merge (hf : icMshrReqFire s i = true) (hs : icSecondary s i = true) (hsep : icMatchIdx s i ≠ icRspSel s i) : (∀ e, (icMshrStep s i).blockAddr e = s.blockAddr e) ∧ (icMshrStep s i).subValid (icMatchIdx s i) (icSelNext s i) = true ∧ (icMshrStep s i).targetInfo (icMatchIdx s i) (icSelNext s i) = i.reqTI ∧ (∀ e, e ≠ icRspSel s i → icEntryValid (icMshrStep s i) e = icEntryValid s e) :=`
+- **icEntryNext_invalid** (line 554): `theorem icEntryNext_invalid (hreq : icMshrReqFire s i = true) (hsec : icSecondary s i = false) : icEntryValid s (icEntryNext s) = false :=`
+- **icMatchIdx_ne_rspSel_of_secondary** (line 570): `theorem icMatchIdx_ne_rspSel_of_secondary (hreq : icMshrReqFire s i = true) (hsec : icSecondary s i = true) (hfire : icRspInFire s i = true) : i.rspIdx ≠ icMatchIdx s i :=`
+- **icMshr_rsp_fire** (line 588): `theorem icMshr_rsp_fire (hrv : i.rspValid = true) (hb : s.busy = false) (hvalid : icEntryValid s i.rspIdx = true) : icRspOutValid s i = true ∧ icRspOutBA s i = s.blockAddr i.rspIdx ∧ (icMshrStep s i).subValid i.rspIdx (icNext2Cancel s i) = false :=`
+- **icMshr_subValid'_cases** (line 634): `theorem icMshr_subValid'_cases (e se : Fin 4) (hv : (icMshrStep s i).subValid e se = true) : s.subValid e se = true ∨ (icMshrReqFire s i = true ∧ icSecondary s i = false ∧ e = icEntryNext s) ∨ (icMshrReqFire s i = true ∧ icSecondary s i = true ∧ e = icMatchIdx s i) :=`
+- **icMshr_entryValid'_cases** (line 667): `theorem icMshr_entryValid'_cases (e : Fin 4) (hv : icEntryValid (icMshrStep s i) e = true) : icEntryValid s e = true ∨ (icMshrReqFire s i = true ∧ icSecondary s i = false ∧ e = icEntryNext s) :=`
+- **icMshr_blockAddr'_old** (line 701): `theorem icMshr_blockAddr'_old (e : Fin 4) (hev : icEntryValid s e = true) : (icMshrStep s i).blockAddr e = s.blockAddr e :=`
+- **icMshrInit_inv** (line 721): `theorem icMshrInit_inv : icMshrInv icMshrInit :=`
+- **icMshrStep_inv** (line 726): `theorem icMshrStep_inv (h : icMshrInv s) : icMshrInv (icMshrStep s i) :=`
+- **icMshr_no_loss** (line 748): `theorem icMshr_no_loss (hf : icMshrReqFire s i = true) : ∃ e se, (icMshrStep s i).subValid e se = true ∧ (icMshrStep s i).blockAddr e = i.reqBA ∧ (icMshrStep s i).targetInfo e se = i.reqTI :=`
+- **icMshr_miss2mem_once** (line 768): `theorem icMshr_miss2mem_once (hf : icMemFire s i = true) : (icMshrStep s i).hasSend (icMemNext s) = true :=`
+- **icMshr_hasSend_sticky** (line 774): `theorem icMshr_hasSend_sticky (e : Fin 4) (hnc : ¬((s.busy || icRspInFire s i) = true ∧ icRspOutFire s i = true ∧ icSelUsed s i = 1 ∧ e = icRspSel s i)) (hold : s.hasSend e = true) : (icMshrStep s i).hasSend e = true :=`
+- **icMshr_rsp_last_frees** (line 791): `theorem icMshr_rsp_last_frees (hrv : i.rspValid = true) (hb : s.busy = false) (hused : icSelUsed s i = 1) (hsent : s.hasSend i.rspIdx = true) (hvalid : icEntryValid s i.rspIdx = true) : icEntryValid (icMshrStep s i) i.rspIdx = false ∧ (icMshrStep s i).hasSend i.rspIdx = false ∧ (icMshrStep s i).busy = false :=`
+- **icT_q_bypass** (line 945): `theorem icT_q_bypass : icQDeqValid icRspQInit true = true ∧ icQDeqBits icRspQInit ⟨7#5, 42#1024⟩ = ⟨7#5, 42#1024⟩ ∧ icQEmpty (icQStep icRspQInit true ⟨7#5, 42#1024⟩ true) = true :=`
+- **icT_q_hold** (line 951): `theorem icT_q_hold : let q1 :=`
+- **icT_q_fifo** (line 957): `theorem icT_q_fifo : let q1 :=`
+- **icWaymaskHit_eq** (line 1036): `theorem icWaymaskHit_eq (t : IcTagState) (tag : BitVec 17) (v : Fin 256) : icWaymaskHit t tag v = (if icWayMatch t tag v 1 then 2#2 else 0#2) ||| (if icWayMatch t tag v 0 then 1#2 else 0#2) :=`
+- **icTagHit_iff** (line 1042): `theorem icTagHit_iff (t : IcTagState) (tag : BitVec 17) (v : Fin 256) : icTagHit t tag v = true ↔ ∃ j : Fin 2, icWayMatch t tag v j = true :=`
+- **icHitWayIdx_of_onehot** (line 1063): `theorem icHitWayIdx_of_onehot (wm : BitVec 2) (j : Fin 2) (h : wm = BitVec.ofNat 2 (1 <<< j.val)) : icOHToUInt2 wm = j :=`
+- **icVictimMask_empty** (line 1068): `theorem icVictimMask_empty (t : IcTagState) (v : Fin 256) (h : t.wayValid v = 0#2) : icVictimMask t v = 1#2 :=`
+- **icVictimMask_full** (line 1073): `theorem icVictimMask_full (t : IcTagState) (v : Fin 256) (h : t.wayValid v = 0b11#2) : icVictimMask t v = t.victim :=`
+- **icVictimMask_way0_valid_only** (line 1079): `theorem icVictimMask_way0_valid_only (t : IcTagState) (v : Fin 256) (h : t.wayValid v = 0b01#2) : icVictimMask t v = 0b01#2 :=`
+- **icTagStep_wayValid_refill** (line 1084): `theorem icTagStep_wayValid_refill (t : IcTagState) (rV : Bool) (rSet wSet : Fin 256) (wTag : BitVec 17) (hnotfull : icSetFull t wSet = false) : (icTagStep t rV rSet true wSet wTag false).wayValid wSet = t.wayValid wSet ||| icVictimMask t wSet :=`
+- **icTagStep_wayValid_of_inv** (line 1091): `theorem icTagStep_wayValid_of_inv (t : IcTagState) (rV : Bool) (rSet wSet : Fin 256) (wTag : BitVec 17) (wV : Bool) (v : Fin 256) : (icTagStep t rV rSet wV wSet wTag true).wayValid v = 0#2 :=`
+- **icTagStep_wayValid_of_wr** (line 1097): `theorem icTagStep_wayValid_of_wr (t : IcTagState) (rV : Bool) (rSet wSet : Fin 256) (wTag : BitVec 17) (inv : Bool) (wV : Bool) (hinv : inv = false) (hw : (wV && !icSetFull t wSet) = true) (v : Fin 256) : (icTagStep t rV rSet wV wSet wTag inv).wayValid v = (if v == wSet then t.wayValid wSet ||| icVictimMask t wSet else t.wayValid v) :=`
+- **icTagStep_wayValid_of_keep** (line 1105): `theorem icTagStep_wayValid_of_keep (t : IcTagState) (rV : Bool) (rSet wSet : Fin 256) (wTag : BitVec 17) (inv : Bool) (wV : Bool) (hinv : inv = false) (hw : (wV && !icSetFull t wSet) = false) (v : Fin 256) : (icTagStep t rV rSet wV wSet wTag inv).wayValid v = t.wayValid v :=`
+- **icTagStep_invalidate** (line 1112): `theorem icTagStep_invalidate (t : IcTagState) (rV : Bool) (rSet wSet : Fin 256) (wTag : BitVec 17) (wV : Bool) : (icTagStep t rV rSet wV wSet wTag true).wayValid = fun _ => 0#2 :=`
+- **icTagInit_inv** (line 1121): `theorem icTagInit_inv : icTagInv icTagInit :=`
+- **icTagStep_preserves_inv** (line 1124): `theorem icTagStep_preserves_inv (t : IcTagState) (rV : Bool) (rSet : Fin 256) (wV : Bool) (wSet : Fin 256) (wTag : BitVec 17) (inv : Bool) (h : icTagInv t) : icTagInv (icTagStep t rV rSet wV wSet wTag inv) :=`
+- **ic_coreReq_ready_true** (line 1342): `theorem ic_coreReq_ready_true : icCoreReqReady = true :=`
+- **ic_deqFire_indep_probe** (line 1346): `theorem ic_deqFire_indep_probe (s : IcState) (i : IcIn) : icDeqFire s i = (if icQEmpty s.q then i.rspValid && !s.mshr.busy else !s.mshr.busy) :=`
+- **ic_probe_read_indep_refill** (line 1353): `theorem ic_probe_read_indep_refill (s : IcState) (i i' : IcIn) (hreq : i.reqValid = i'.reqValid) (hfa : i.flushValid = i'.flushValid) (hrw : i.reqWarp = i'.reqWarp) (hfw : i.flushWarp = i'.flushWarp) : (i.reqValid && !icFlush0 s i) = (i'.reqValid && !icFlush0 s i') :=`
+- **ic_tag_collision_lfsr** (line 1363): `theorem ic_tag_collision_lfsr (s : IcState) (i : IcIn) (j : Fin 2) (hinv : i.invalidate = false) (hfl : icFlush0 s i = false) (hreq : i.reqValid = true) (hdeq : icDeqFire s i = true) (hset : icGetSetIdxFin i.reqAddr = icRefillSet s i) (hmask : ((icRefillMask s i) >>> j.val) &&& 1#2 = 1#2) : sramRespData sramCfgICacheTag (icStep s i).tag.sram j = (sramLfsrStep (s.tag.sram.lfsr j)).setWidth 17 :=`
+- **ic_data_collision_lfsr** (line 1378): `theorem ic_data_collision_lfsr (s : IcState) (i : IcIn) (j : Fin 2) (hfl : icFlush0 s i = false) (hreq : i.reqValid = true) (hdeq : icDeqFire s i = true) (hset : icGetSetIdxFin i.reqAddr = icRefillSet s i) (hmask : ((icRefillMask s i) >>> j.val) &&& 1#2 = 1#2) : sramRespData sramCfgICacheData (icStep s i).dat j = (sramLfsrStep (s.dat.lfsr j)).setWidth 1024 :=`
+- **icWaymaskHit_bit_set** (line 1392): `theorem icWaymaskHit_bit_set (t : IcTagState) (tag : BitVec 17) (v : Fin 256) (j : Fin 2) (h : icWayMatch t tag v j = true) : (icWaymaskHit t tag v >>> j.val) &&& 1#2 = 1#2 :=`
+- **ic_false_hit_st1** (line 1402): `theorem ic_false_hit_st1 (s : IcState) (i : IcIn) (j : Fin 2) (hinv : i.invalidate = false) (hfl : icFlush0 s i = false) (hreq : i.reqValid = true) (hdeq : icDeqFire s i = true) (hset : icGetSetIdxFin i.reqAddr = icRefillSet s i) (hmask : ((icRefillMask s i) >>> j.val) &&& 1#2 = 1#2) (htag : icGetTag i.reqAddr = (sramLfsrStep (s.tag.sram.lfsr j)).setWidth 17) (hnotfull : icSetFull s.tag (icRefillSet s i) = false) : icWayMatch (icStep s i).tag (icGetTag (icStep s i).paddr1) (icStep s i).st1Set j = true :=`
+- **icTA_miss_accepted** (line 1451): `theorem icTA_miss_accepted : icRspValidOut icTA2 = true ∧ icRspStatus icTA2 = 0b01#2 ∧ icMemReqValid icTA2 = true ∧ icMemReqAddr icTA2 = icBAB.zeroExtend 32 <<< 7 :=`
+- **icTA_collision_reachable** (line 1458): `theorem icTA_collision_reachable : (icI3coll.reqValid && !icFlush0 icTA3 icI3coll) = true ∧ icDeqFire icTA3 icI3coll = true ∧ icGetSetIdxFin icI3coll.reqAddr = icRefillSet icTA3 icI3coll :=`
+- **icTA_tag_readout_lfsr** (line 1465): `theorem icTA_tag_readout_lfsr : sramRespData sramCfgICacheTag icTA4.tag.sram ⟨0, by decide⟩ = icL4.setWidth 17 ∧ icTA4.tag.sram.mem ⟨3, by decide⟩ ⟨0, by decide⟩ = 0x0ABCD#17 ∧ icTA4.tag.wayValid ⟨3, by decide⟩ = 0b01#2 :=`
+- **icTA_false_miss** (line 1473): `theorem icTA_false_miss : icHitSt1 icTA4 = false ∧ icCacheMiss1 icTA4 = true ∧ icMshrReqFire icTA4.mshr (icMshrInOf icTA4 icInIdle) = true :=`
+- **icTA_duplicate_alloc** (line 1480): `theorem icTA_duplicate_alloc : icEntryValid icTA5.mshr ⟨0, by decide⟩ = true ∧ icTA5.mshr.blockAddr ⟨0, by decide⟩ = icBAB ∧ icMemReqValid icTA5 = true ∧ icMemReqAddr icTA5 = icBAB.zeroExtend 32 <<< 7 ∧ icTA5.tag.sram.mem ⟨3, by decide⟩ ⟨0, by decide⟩ = 0x0ABCD#17 :=`
+- **icTB_false_hit** (line 1503): `theorem icTB_false_hit : icHitSt1 icTB4 = true ∧ icCacheMiss1 icTB4 = false ∧ icTB4.tag.sram.mem ⟨3, by decide⟩ ⟨0, by decide⟩ = 0x0ABCD#17 ∧ icTB4.tag.sram.mem ⟨3, by decide⟩ ⟨1, by decide⟩ = 0#17 ∧ icTagX ≠ 0x0ABCD#17 ∧ icTagX ≠ 0#17 ∧ icRspValidOut icTB5 = true ∧ icRspStatus icTB5 = 0b00#2 ∧ icRspData icTB5 = icL4 ∧ icRspData icTB5 ≠ 0xDEADBEEF#64 ∧ icRspAddr icTB5 = icAddrX :=`
+- **icTC_clean_hit** (line 1524): `theorem icTC_clean_hit : icHitSt1 icTC5 = true ∧ icWaymaskHitSt1 icTC5 = 0b01#2 ∧ icRspValidOut icTC6 = true ∧ icRspStatus icTC6 = 0b00#2 ∧ icRspData icTC6 = 0xDEADBEEF#64 ∧ icRspAddr icTC6 = icAddrA ∧ icRspWarp icTC6 = 0#3 :=`
+- **icTD_victim_thrash** (line 1548): `theorem icTD_victim_thrash : icTD8.tag.sram.mem ⟨3, by decide⟩ ⟨0, by decide⟩ = 0x12345#17 ∧ icTD8.tag.sram.mem ⟨3, by decide⟩ ⟨1, by decide⟩ = 0#17 ∧ icTD8.tag.wayValid ⟨3, by decide⟩ = 0b01#2 ∧ icHitSt1 icTD9 = false ∧ icCacheMiss1 icTD9 = true :=`
+- **ic_way1_never_valid** (line 1557): `theorem ic_way1_never_valid (s : IcState) (is : List IcIn) (h : icTagInv s.tag) : icTagInv (icRun s is).tag :=`
+- **icDataSt1_of_onehot** (line 1567): `theorem icDataSt1_of_onehot (s : IcState) (j : Fin 2) (h : icWaymaskHitSt1 s = BitVec.ofNat 2 (1 <<< j.val)) : icDataSt1 s = (sramRespData sramCfgICacheData s.dat j).extractLsb' ((icGetBlockOffset s.paddr1).toNat * 32) 64 :=`
+- **icT_mshr_alloc** (line 1584): `theorem icT_mshr_alloc : icEntryValid icM1 0 = true ∧ icM1.blockAddr 0 = 0x100#25 ∧ icM1.subValid 0 0 = true ∧ icM1.targetInfo 0 0 = 5#3 ∧ icMemValid icM1 = true ∧ icMemNext icM1 = ⟨0, by decide⟩ :=`
+- **icT_mshr_merge** (line 1593): `theorem icT_mshr_merge : icSecondary icM1 (icMI 0x100#25 6#3) = true ∧ icEntryValid icM2 1 = false ∧ icM2.subValid 0 1 = true ∧ icCount4 (icM2.subValid 0) = 2 ∧ icM2.targetInfo 0 1 = 6#3 ∧ (∀ e, icM2.blockAddr e = icM1.blockAddr e) ∧ icM2.hasSend 0 = true ∧ icMemValid icM2 = false :=`
+- **icT_mshr_rsp_busy** (line 1604): `theorem icT_mshr_rsp_busy : icRspOutValid icM2 (icMIrsp 0) = true ∧ icRspOutBA icM2 (icMIrsp 0) = 0x100#25 ∧ icRspOutTI icM2 (icMIrsp 0) = 5#3 ∧ icM3.busy = true ∧ icRspInFire icM3 (icMIrsp 0) = false ∧ icRspOutValid icM3 (icMIrsp 0) = true :=`
+- **icT_mshr_rsp_drain** (line 1615): `theorem icT_mshr_rsp_drain : icEntryValid icM4 0 = false ∧ icM4.hasSend 0 = false ∧ icM4.busy = false :=`
+- **icT_mshr_full** (line 1622): `theorem icT_mshr_full : icEntryFull icM4full = true ∧ icMshrReqReady icM4full (icMI 0x50#25 0) = false ∧ icMshrReqReady icM4full (icMI 0x10#25 1) = true :=`
+- **icT_mshr_conflict** (line 1629): `theorem icT_mshr_conflict : icMshrReqReady icM1 ⟨true, 0x100#25, 0, true, ⟨0, by decide⟩, true⟩ = false :=`
+- **icT_subfull_quirk** (line 1637): `theorem icT_subfull_quirk : icSecondary icMq1 ⟨true, 0x20#25, 0, false, ⟨0, by decide⟩, true⟩ = true ∧ icSelFull icMq1 ⟨true, 0x20#25, 0, false, ⟨0, by decide⟩, true⟩ = true ∧ icMshrReqReady icMq1 ⟨true, 0x20#25, 0, false, ⟨0, by decide⟩, true⟩ = false :=`
+
+### `Ventus/Mem/L1MSHR.lean`
+
+- **l1mUpd_of_ne** (line 131): `theorem l1mUpd_of_ne (f : Fin n → α) (i j : Fin n) (v : α) (h : j ≠ i) : l1mUpd f i v j = f j :=`
+- **l1mT1_outputs** (line 478): `theorem l1mT1_outputs : l1mProbeStatus l1mInit l1mI1 = 0#3 ∧ l1mASource l1mInit l1mI1 = 0#2 ∧ l1mProbestatus l1mInit l1mI1 = true ∧ l1mReqFire l1mInit l1mI1 = true :=`
+- **l1mT1_alloc** (line 486): `theorem l1mT1_alloc : l1mS1.subValid ⟨0, by decide⟩ ⟨0, by decide⟩ = true ∧ l1mEntryValid l1mS1 ⟨0, by decide⟩ = true ∧ l1mS1.blockAddr ⟨0, by decide⟩ = 0x10#25 ∧ l1mS1.instrId ⟨0, by decide⟩ = 5#3 ∧ l1mS1.ti ⟨0, by decide⟩ ⟨0, by decide⟩ = 0xBEEF#323 ∧ l1mEmpty l1mS1 = false ∧ l1mEntryNext l1mS1 = ⟨1, by decide⟩ ∧ l1mS1.st1Q.full = false ∧ l1mS1.statusR = 0#3 :=`
+- **l1mT2_outputs** (line 505): `theorem l1mT2_outputs : l1mProbeStatus l1mS1 l1mI2 = 2#3 ∧ l1mASource l1mS1 l1mI2 = 0#2 ∧ l1mStatusSt0 l1mS1 l1mI2 = 3#3 ∧ l1mReqFire l1mS1 l1mI2 = true :=`
+- **l1mT2_merge** (line 514): `theorem l1mT2_merge : l1mS2.subValid ⟨0, by decide⟩ ⟨1, by decide⟩ = true ∧ l1mS2.subValid ⟨0, by decide⟩ ⟨0, by decide⟩ = true ∧ l1mS2.blockAddr ⟨0, by decide⟩ = 0x10#25 ∧ l1mS2.ti ⟨0, by decide⟩ ⟨1, by decide⟩ = 0xCAFE#323 ∧ l1mS2.statusR = 2#3 ∧ l1mEntryNext l1mS2 = ⟨1, by decide⟩ :=`
+- **l1mT7_ready_inconsistent** (line 531): `theorem l1mT7_ready_inconsistent : l1mStatusSt0 l1mS2 l1mI3 = 3#3 ∧ l1mReqReady l1mS2 l1mI3 = true ∧ l1mReqFire l1mS2 l1mI3 = true :=`
+- **l1mT7_reqLost** (line 538): `theorem l1mT7_reqLost : l1mS3.subValid ⟨0, by decide⟩ ⟨0, by decide⟩ = true ∧ l1mS3.subValid ⟨0, by decide⟩ ⟨1, by decide⟩ = true ∧ l1mRspUsed l1mS2 l1mI3 = 2 :=`
+- **l1mT7_tiCorrupt** (line 545): `theorem l1mT7_tiCorrupt : l1mS2.ti ⟨0, by decide⟩ ⟨0, by decide⟩ = 0xBEEF#323 ∧ l1mS3.ti ⟨0, by decide⟩ ⟨0, by decide⟩ = 0xDEAD#323 ∧ l1mS3.statusR = 3#3 :=`
+- **l1mT4_full_backpressure** (line 561): `theorem l1mT4_full_backpressure : l1mMainFull l1mSFull = true ∧ l1mStatusSt0 l1mSFull l1mI4 = 1#3 ∧ l1mReqReady l1mSFull l1mI4 = false ∧ l1mReqFire l1mSFull l1mI4 = false :=`
+- **l1mT5_drain0** (line 586): `theorem l1mT5_drain0 : l1mRspOutValid l1mSDrain l1mI5 = true ∧ (l1mRspOutBits l1mSDrain l1mI5).ti = 0x111#323 ∧ (l1mRspOutBits l1mSDrain l1mI5).ba = 0x10#25 ∧ l1mRspInReady l1mSDrain l1mI5 = false ∧ l1mSD1.subValid ⟨0, by decide⟩ ⟨0, by decide⟩ = false ∧ l1mSD1.subValid ⟨0, by decide⟩ ⟨1, by decide⟩ = true ∧ l1mSD1.releasing ⟨0, by decide⟩ = true ∧ l1mReleasingStall l1mSD1 = true ∧ l1mSD1.statusR = 3#3 :=`
+- **l1mT5_drain1** (line 600): `theorem l1mT5_drain1 : l1mRspOutValid l1mSD1 l1mI5 = true ∧ (l1mRspOutBits l1mSD1 l1mI5).ti = 0x222#323 ∧ l1mSD2.subValid ⟨0, by decide⟩ ⟨1, by decide⟩ = false ∧ l1mEmpty l1mSD2 = true ∧ l1mSD2.statusR = 4#3 :=`
+- **l1mT5_drain2** (line 610): `theorem l1mT5_drain2 : l1mRspOutValid l1mSD2 l1mI5 = false ∧ l1mRspInFire l1mSD2 l1mI5 = true ∧ l1mSD3.releasing ⟨0, by decide⟩ = false ∧ l1mReleasingStall l1mSD3 = false ∧ l1mSD3.statusR = 0#3 :=`
+- **l1mT6_q_passthrough** (line 620): `theorem l1mT6_q_passthrough : l1mQDeqValid (l1mQInit (0#8)) true = true ∧ l1mQDeqBits (l1mQInit (0#8)) 0xA5#8 = 0xA5#8 ∧ (l1mQStep (l1mQInit (0#8)) true 0xA5#8 true).full = false :=`
+- **l1mT6_q_hold** (line 626): `theorem l1mT6_q_hold : (l1mQStep (l1mQInit (0#8)) true 0xA5#8 false).full = true ∧ l1mQDeqBits (l1mQStep (l1mQInit (0#8)) true 0xA5#8 false) 0#8 = 0xA5#8 ∧ (l1mQStep (l1mQStep (l1mQInit (0#8)) true 0xA5#8 false) false 0#8 true).full = false :=`
+- **l1m_rspInReady_simplify** (line 651): `theorem l1m_rspInReady_simplify (s : L1mState) (i : L1mIn) : l1mRspInReady s i = !((l1mRspUsed s i != 0) || i.reqV) :=`
+- **l1m_reqFire_not_rspInFire** (line 663): `theorem l1m_reqFire_not_rspInFire (s : L1mState) (i : L1mIn) (hf : l1mReqFire s i = true) : l1mRspInFire s i = false :=`
+- **l1m_rspOut_noWithdraw** (line 674): `theorem l1m_rspOut_noWithdraw (s : L1mState) (i i' : L1mIn) (hv : l1mRspOutValid s i = true) (hr : i.rspOutRdy = false) : l1mRspOutValid (l1mStep s i) i' = true :=`
+- **l1m_rspOut_stable** (line 684): `theorem l1m_rspOut_stable (s : L1mState) (i i' : L1mIn) (hv : l1mRspOutValid s i = true) (hr : i.rspOutRdy = false) : l1mRspOutBits (l1mStep s i) i' = l1mRspOutBits s i :=`
+- **l1m_st0_primary_full** (line 696): `theorem l1m_st0_primary_full (s : L1mState) (i : L1mIn) (hp : l1mPrimarySt0 s i = true) (hf : l1mMainFull s = true) : l1mStatusSt0 s i = 1#3 :=`
+- **l1m_st0_secondary_full** (line 702): `theorem l1m_st0_secondary_full (s : L1mState) (i : L1mIn) (hp : l1mPrimarySt0 s i = false) (hf : l1mSubFull s i = true) : l1mStatusSt0 s i = 3#3 :=`
+- **l1mEntryNext_invalid** (line 710): `theorem l1mEntryNext_invalid (s : L1mState) (h : l1mMainFull s = false) : l1mEntryValid s (l1mEntryNext s) = false :=`
+- **l1mFirstOne2_spec** (line 720): `theorem l1mFirstOne2_spec (row : Fin 2 → Bool) (h : row 0 = true ∨ row 1 = true) : row (l1mFirstOne2 row) = true :=`
+- **l1mPriEnc4_hit** (line 729): `theorem l1mPriEnc4_hit (v : BitVec 4) (h : v ≠ 0#4) : (v >>> (l1mPriEnc4 v).zeroExtend 4) &&& 1#4 = 1#4 :=`
+- **l1m_primary_alloc** (line 737): `theorem l1m_primary_alloc (s : L1mState) (i : L1mIn) (hf : l1mReqFire s i = true) (hprim : l1mSecondary s i = false) (hdeq : l1mSt1DeqFire s i = true) (hw : l1mSt1W s i = 0#3) (hst1r : i.st1Rdy = true) : (l1mStep s i).subValid (l1mEntryNext s) 0 = true ∧ (l1mStep s i).blockAddr (l1mEntryNext s) = i.reqBA ∧ (l1mStep s i).ti (l1mEntryNext s) 0 = i.reqTI :=`
+- **l1m_secondary_merge** (line 762): `theorem l1m_secondary_merge (s : L1mState) (i : L1mIn) (hf : l1mReqFire s i = true) (hsec : l1mSecondary s i = true) (hdeq : l1mSt1DeqFire s i = true) (hst1r : i.st1Rdy = true) (hrsp : i.rspInV = false) (hidx : l1mOf2 (l1mSt1DeqBits s i).seIdx = 1) (hw : l1mSt1W s i ≠ 0#3) : (l1mStep s i).blockAddr = s.blockAddr ∧ (l1mStep s i).subValid (l1mOf4 (l1mMatchId s i)) 1 = true ∧ (l1mStep s i).ti (l1mOf4 (l1mPriEnc4 (l1mSt1DeqBits s i).matchProbe)) 1 = i.reqTI :=`
+- **l1mCount2_clear** (line 786): `theorem l1mCount2_clear (row : Fin 2 → Bool) (k : Fin 2) (hk : row k = true) : l1mCount2 (fun se => if se == k then false else row se) = l1mCount2 row - 1 :=`
+- **l1m_rsp_consume** (line 798): `theorem l1m_rsp_consume (s : L1mState) (i : L1mIn) (hv : i.rspInV = true) (hq : l1mQEnqRdy s.rspQ = true) (hreq : i.reqV = false) (hused : l1mRspUsed s i ≠ 0) : (l1mStep s i).subValid (l1mRspSel i) (l1mNext2Cancel s i) = false ∧ l1mCount2 ((l1mStep s i).subValid (l1mRspSel i)) = l1mRspUsed s i - 1 :=`
+- **l1mMatchBit_unique** (line 829): `theorem l1mMatchBit_unique (s : L1mState) (ba : BitVec 25) (hd : l1mDistinct s) {e e' : Fin 4} (hne : e ≠ e') (h1 : l1mMatchBit s ba e = true) (h2 : l1mMatchBit s ba e' = true) : False :=`
+- **l1mMatchProbe_cpop_le_one** (line 836): `theorem l1mMatchProbe_cpop_le_one (s : L1mState) (ba : BitVec 25) (hd : l1mDistinct s) : (l1mMatchProbe s ba).cpop ≤ 1#4 :=`
+- **l1mDistinct_step_primary** (line 852): `theorem l1mDistinct_step_primary (s : L1mState) (i : L1mIn) (hd : l1mDistinct s) (hf : l1mReqFire s i = true) (hprim : l1mSecondary s i = false) (hdeq : l1mSt1DeqFire s i = true) (hw : l1mSt1W s i = 0#3) (hst1r : i.st1Rdy = true) (hrsp : i.rspInV = false) (hfresh : ∀ e : Fin 4, l1mEntryValid s e = true → s.blockAddr e ≠ i.reqBA) : l1mDistinct (l1mStep s i) :=`
+- **l1m_q1_ready_inconsistent** (line 908): `theorem l1m_q1_ready_inconsistent (s : L1mState) (i : L1mIn) (hsr : s.statusR = 2#3) (hsec : l1mSecondary s i = true) (hprim0 : l1mPrimarySt0 s i = false) (hfull : l1mSubFull s i = true) : l1mReqReady s i = true ∧ l1mStatusSt0 s i = 3#3 :=`
+
+### `Ventus/Mem/L1TagAccess.lean`
+
+- **l1taT_cat2** (line 119): `theorem l1taT_cat2 : l1taCat2 true false = 0b10#2 ∧ l1taCat2 false true = 0b01#2 ∧ l1taCat2 true true = 0b11#2 ∧ l1taCat2 false false = 0#2 :=`
+- **l1ta_rev2_cat2_roundtrip** (line 125): `theorem l1ta_rev2_cat2_roundtrip : ∀ b0 b1 : Bool, l1taRev2 (l1taCat2 b0 b1) = l1taCat2 b1 b0 :=`
+- **l1ta_rev2_invol** (line 128): `theorem l1ta_rev2_invol : ∀ b : BitVec 2, l1taRev2 (l1taRev2 b) = b :=`
+- **l1taOH2_eq** (line 131): `theorem l1taOH2_eq (x : BitVec 1) : l1taOH2 x = 1#2 <<< x.toNat :=`
+- **l1ta_tagWaymask2_sem** (line 150): `theorem l1ta_tagWaymask2_sem (t0 t1 tp : BitVec tb) (v0 v1 : Bool) : l1taTagWaymask2 t0 t1 tp v0 v1 = l1taCat2 ((t1 == tp) && v1) ((t0 == tp) && v0) :=`
+- **l1ta_tagHit2_iff** (line 156): `theorem l1ta_tagHit2_iff (t0 t1 tp : BitVec tb) (v0 v1 : Bool) : l1taTagHit2 t0 t1 tp v0 v1 = true ↔ (t0 = tp ∧ v0 = true) ∨ (t1 = tp ∧ v1 = true) :=`
+- **l1ta_tagWaymask2_not_both** (line 164): `theorem l1ta_tagWaymask2_not_both (t0 t1 tp : BitVec tb) (v0 v1 : Bool) (h : t0 ≠ t1) : l1taTagWaymask2 t0 t1 tp v0 v1 ≠ 0b11#2 :=`
+- **l1taT_tagcheck** (line 171): `theorem l1taT_tagcheck : l1taTagWaymask2 0x5A#8 0x33#8 0x5A#8 true true = 0b01#2 ∧ l1taTagWaymask2 0x5A#8 0x33#8 0x33#8 true true = 0b10#2 ∧ l1taTagWaymask2 0x5A#8 0x33#8 0x33#8 true false = 0#2 ∧ l1taTagHit2 0x5A#8 0x33#8 0x33#8 true true = true ∧ l1taTagHit2 0x5A#8 0x33#8 0x77#8 true true = false :=`
+- **l1ta_freeIdx2_picks_invalid** (line 205): `theorem l1ta_freeIdx2_picks_invalid (v : BitVec 2) (h : v ≠ 0b11#2) : (l1taOH2 (l1taFreeIdx2 v) &&& v) = 0#2 :=`
+- **l1ta_freeIdx2_lowest** (line 210): `theorem l1ta_freeIdx2_lowest (v : BitVec 2) : (v &&& (l1taOH2 (l1taFreeIdx2 v) - 1#2)) = (l1taOH2 (l1taFreeIdx2 v) - 1#2) :=`
+- **l1ta_replD2_mapping** (line 216): `theorem l1ta_replD2_mapping (v0 v1 : Bool) (t0 t1 : BitVec 10) (h : ¬(v0 = true ∧ v1 = true)) : l1taReplD2 (l1taValidOfSetD v0 v1) t0 t1 = (if v0 then 0b10#2 else 0b01#2) :=`
+- **l1ta_replD2_full_evicts_mru** (line 224): `theorem l1ta_replD2_full_evicts_mru (t0 t1 : BitVec 10) (h : t0 ≠ t1) : l1taReplD2 0b11#2 t0 t1 = (if t0 < t1 then 0b10#2 else 0b01#2) :=`
+- **l1ta_replD2_full_ne_lru** (line 232): `theorem l1ta_replD2_full_ne_lru (t0 t1 : BitVec 10) (h : t0 ≠ t1) : l1taReplD2 0b11#2 t0 t1 ≠ l1taLruSpec2 t0 t1 :=`
+- **l1taT_replD2_notfull** (line 238): `theorem l1taT_replD2_notfull : l1taReplD2 0b00#2 7#10 9#10 = 0b01#2 ∧ l1taReplD2 0b01#2 7#10 9#10 = 0b10#2 ∧ l1taReplD2 0b10#2 7#10 9#10 = 0b01#2 :=`
+- **l1taT_replD2_full_witness** (line 244): `theorem l1taT_replD2_full_witness : l1taReplD2 0b11#2 5#10 3#10 = 0b01#2 ∧ l1taLruSpec2 5#10 3#10 = 0b10#2 ∧ l1taReplD2 0b11#2 3#10 5#10 = 0b10#2 ∧ l1taLruSpec2 3#10 5#10 = 0b01#2 :=`
+- **l1ta_i24_mapping** (line 271): `theorem l1ta_i24_mapping : ∀ (v0 v1 : Bool) (victim : BitVec 2), ¬(v0 = true ∧ v1 = true) → l1taReplI2 (l1taValidOfSetI v0 v1) victim = (if v1 then 0b10#2 else 0b01#2) :=`
+- **l1ta_i24_way0_occupied** (line 278): `theorem l1ta_i24_way0_occupied (victim : BitVec 2) (t0 t1 : BitVec 10) : l1taReplD2 (l1taValidOfSetD true false) t0 t1 = 0b10#2 ∧ l1taReplI2 (l1taValidOfSetI true false) victim = 0b01#2 :=`
+- **l1ta_i24_way1_never_valid** (line 297): `theorem l1ta_i24_way1_never_valid (v0 : Bool) (wen inval : Bool) (victim : BitVec 2) : (l1taIValidStep v0 false wen inval victim).2 = false :=`
+- **l1taT_two_refill_contrast** (line 321): `theorem l1taT_two_refill_contrast : l1taTraceD2 = (0b01#2, 0b10#2, (true, true)) ∧ l1taTraceI2 = (0b01#2, 0b01#2, (true, false)) :=`
+- **l1ta_i24_fix_correct** (line 326): `theorem l1ta_i24_fix_correct : ∀ (v0 v1 : Bool) (victim : BitVec 2), ¬(v0 = true ∧ v1 = true) → l1taReplI2 (l1taRev2 (l1taCat2 v0 v1)) victim = (if v0 then 0b10#2 else 0b01#2) :=`
+- **l1taT_victim_rot** (line 332): `theorem l1taT_victim_rot : l1taVictimRot2 0b01#2 = 0b10#2 ∧ l1taVictimRot2 0b10#2 = 0b01#2 :=`
+- **l1taD_alloc_sets_valid** (line 380): `theorem l1taD_alloc_sets_valid (st : L1taDState nset way) (i : L1taDIn nset way) (ha : i.allocFire = true) (hnf : i.allocNotFull = true) : (l1taDStep st i).valid i.allocSet i.victim = true :=`
+- **l1taD_alloc_valid_other_set** (line 386): `theorem l1taD_alloc_valid_other_set (st : L1taDState nset way) (i : L1taDIn nset way) (ha : i.allocFire = true) (hnf : i.allocNotFull = true) (s : Fin nset) (hs : s ≠ i.allocSet) : (l1taDStep st i).valid s = st.valid s :=`
+- **l1taD_alloc_valid_other_way** (line 393): `theorem l1taD_alloc_valid_other_way (st : L1taDState nset way) (i : L1taDIn nset way) (ha : i.allocFire = true) (hnf : i.allocNotFull = true) (w : Fin way) (hw : w ≠ i.victim) : (l1taDStep st i).valid i.allocSet w = st.valid i.allocSet w :=`
+- **l1taD_invalidate_clears** (line 400): `theorem l1taD_invalidate_clears (st : L1taDState nset way) (i : L1taDIn nset way) (ha : i.allocFire = false) (hi : i.invalAll = true) : ∀ s w, (l1taDStep st i).valid s w = false :=`
+- **l1taD_alloc_prio_invalidate** (line 407): `theorem l1taD_alloc_prio_invalidate (st : L1taDState nset way) (i : L1taDIn nset way) (ha : i.allocFire = true) (hnf : i.allocNotFull = true) (hi : i.invalAll = true) : (l1taDStep st i).valid i.allocSet i.victim = true :=`
+- **l1taD_writeHit_sets_dirty** (line 413): `theorem l1taD_writeHit_sets_dirty (st : L1taDState nset way) (i : L1taDIn nset way) (hw : i.writeHit = true) : (l1taDStep st i).dirty i.hitSet i.hitWay = true :=`
+- **l1taD_flush_clears_dirty** (line 419): `theorem l1taD_flush_clears_dirty (st : L1taDState nset way) (i : L1taDIn nset way) (hw : i.writeHit = false) (hf : i.flushV = true) : (l1taDStep st i).dirty i.flushSet i.flushWay = false :=`
+- **l1taD_needReplace_clears_dirty** (line 425): `theorem l1taD_needReplace_clears_dirty (st : L1taDState nset way) (i : L1taDIn nset way) (hw : i.writeHit = false) (hf : i.flushV = false) (hn : i.needReplace = true) : (l1taDStep st i).dirty i.allocSet i.victim = false :=`
+- **l1taD_writeHit_prio_flush** (line 432): `theorem l1taD_writeHit_prio_flush (st : L1taDState nset way) (i : L1taDIn nset way) (hw : i.writeHit = true) (hf : i.flushV = true) : (l1taDStep st i).dirty i.hitSet i.hitWay = true :=`
+- **l1taD_valid_idle** (line 438): `theorem l1taD_valid_idle (st : L1taDState nset way) (i : L1taDIn nset way) (ha : i.allocFire = false) (hi : i.invalAll = false) : (l1taDStep st i).valid = st.valid :=`
+- **l1taD_hasDirty_after_writeHit** (line 473): `theorem l1taD_hasDirty_after_writeHit (st : L1taDState nset way) (i : L1taDIn nset way) (hw : i.writeHit = true) (ha : i.allocFire = false) (hi : i.invalAll = false) (hv : st.valid i.hitSet i.hitWay = true) : l1taHasDirty (l1taDStep st i) :=`
+- **l1taD_no_dirty_after_invalidate** (line 482): `theorem l1taD_no_dirty_after_invalidate (st : L1taDState nset way) (i : L1taDIn nset way) (ha : i.allocFire = false) (hi : i.invalAll = true) : ¬ l1taHasDirty (l1taDStep st i) :=`
+- **l1taT_hasDirtyB_iff** (line 498): `theorem l1taT_hasDirtyB_iff : ∀ v d : BitVec 8, l1taHasDirtyB (l1taStateOfBits v d) = true ↔ (l1taSetDirty (l1taStateOfBits v d) 0 = true ∨ l1taSetDirty (l1taStateOfBits v d) 1 = true ∨ l1taSetDirty (l1taStateOfBits v d) 2 = true ∨ l1taSetDirty (l1taStateOfBits v d) 3 = true) :=`
+- **l1taT_chosenSet_none** (line 505): `theorem l1taT_chosenSet_none : ∀ v d : BitVec 8, l1taChosenSet (l1taStateOfBits v d) = none → l1taHasDirtyB (l1taStateOfBits v d) = false :=`
+- **l1taT_chosenSet_some_minimal** (line 511): `theorem l1taT_chosenSet_some_minimal : ∀ v d : BitVec 8, ∀ s : Fin 4, l1taChosenSet (l1taStateOfBits v d) = some s → (l1taSetDirty (l1taStateOfBits v d) s = true ∧ ∀ s' : Fin 4, s'.val < s.val → l1taSetDirty (l1taStateOfBits v d) s' = false) :=`
+- **l1taT_chosenWayOH2** (line 518): `theorem l1taT_chosenWayOH2 : ∀ d0 d1 : Bool, (l1taChosenWayOH2 d0 d1 = 0b01#2 ↔ d0 = true) ∧ (l1taChosenWayOH2 d0 d1 = 0b10#2 ↔ (d0 = false ∧ d1 = true)) ∧ (l1taChosenWayOH2 d0 d1 = 0#2 ↔ (d0 = false ∧ d1 = false)) :=`
+- **l1taT_dirty_flow** (line 549): `theorem l1taT_dirty_flow : l1taHasDirtyB l1taTD_alloc = false ∧ l1taHasDirtyB l1taTD_hit = true ∧ l1taChosenSet l1taTD_hit = some l1taS1 ∧ l1taHasDirtyB l1taTD_flush = false :=`
+- **l1taT_stale_dirty_after_invalidate** (line 559): `theorem l1taT_stale_dirty_after_invalidate : l1taTQ4.dirty l1taS1 l1taW0 = true ∧ l1taTQ4.valid l1taS1 l1taW0 = false ∧ l1taHasDirtyB l1taTQ4 = false ∧ l1taNeedReplace l1taTQ4 l1taS1 l1taW0 true = true :=`
+- **l1ta_dmMerge_superset** (line 590): `theorem l1ta_dmMerge_superset (initb old : BitVec 128) : (l1taDmMerge initb old &&& old) = old ∧ (l1taDmMerge initb old &&& initb) = initb :=`
+- **l1taT_dmBuild_single** (line 595): `theorem l1taT_dmBuild_single : ∀ (off : Fin 4) (m : BitVec 4), l1taDmBuild (fun i : Fin 2 => if i = 0 then (true, off, m) else (false, off, m)) = (m.zeroExtend 16 <<< (off.val * 4)) :=`
+- **l1taT_dmBuild_overwrite** (line 602): `theorem l1taT_dmBuild_overwrite : ∀ (off : Fin 4) (m0 m1 : BitVec 4), l1taDmBuild (fun i : Fin 2 => if i = 0 then (true, off, m0) else (true, off, m1)) = (m1.zeroExtend 16 <<< (off.val * 4)) :=`
+- **l1taT_dmBuild_overwrite_real** (line 610): `theorem l1taT_dmBuild_overwrite_real : l1taDmBuild ((fun i => if i = 5 then (true, 3, 0b0001#4) else if i = 27 then (true, 3, 0b0010#4) else (false, 0, 0#4)) : Fin 32 → L1taLane 32 4) = (0b0010#4).zeroExtend 128 <<< 12 :=`
+- **l1taT_refill_then_hit** (line 632): `theorem l1taT_refill_then_hit : l1taTagWaymask2 (sramRespData sramCfgDCacheTag l1taTI_s2 l1taW0) (sramRespData sramCfgDCacheTag l1taTI_s2 l1taW1) 0x5A#8 (l1taTI_v1.valid l1taS1 l1taW0) (l1taTI_v1.valid l1taS1 l1taW1) = 0b01#2 :=`
+- **l1taT_invalid_no_hit** (line 640): `theorem l1taT_invalid_no_hit : l1taTagHit2 (sramRespData sramCfgDCacheTag l1taTI_s3 l1taW0) (sramRespData sramCfgDCacheTag l1taTI_s3 l1taW1) 0#8 (l1taTI_v1.valid l1taS2 l1taW0) (l1taTI_v1.valid l1taS2 l1taW1) = false :=`
+
+### `Ventus/Mem/LSU.lean`
+
+- **lsuBex_word** (line 280): `theorem lsuBex_word (u : Bool) (x : BitVec 32) : lsuByteExtract u x 0xF#4 = x :=`
+- **lsuBex_byte** (line 284): `theorem lsuBex_byte (u : Bool) (x : BitVec 32) (j : BitVec 2) : lsuByteExtract u x (1#4 <<< j.zeroExtend 4) = (if u || ((x >>> (j.zeroExtend 32 * 8 + 7)) &&& 1#32) == 0#32 then ((x >>> (j.zeroExtend 32 * 8)).extractLsb' 0 8).zeroExtend 32 else ((x >>> (j.zeroExtend 32 * 8)).extractLsb' 0 8).signExtend 32) :=`
+- **lsuBex_half** (line 293): `theorem lsuBex_half (u : Bool) (x : BitVec 32) (h : BitVec 1) : lsuByteExtract u x (3#4 <<< (h.zeroExtend 4 + h.zeroExtend 4)) = (if u || ((x >>> (h.zeroExtend 32 * 16 + 15)) &&& 1#32) == 0#32 then ((x >>> (h.zeroExtend 32 * 16)).extractLsb' 0 16).zeroExtend 32 else ((x >>> (h.zeroExtend 32 * 16)).extractLsb' 0 16).signExtend 32) :=`
+- **lsuBex_default** (line 301): `theorem lsuBex_default (u : Bool) (x : BitVec 32) (sel : BitVec 4) (h1 : sel ≠ 0xF#4) (h2 : sel ≠ 0xC#4) (h3 : sel ≠ 0x3#4) (h4 : sel ≠ 0x8#4) (h5 : sel ≠ 0x4#4) (h6 : sel ≠ 0x2#4) (h7 : sel ≠ 0x1#4) : lsuByteExtract u x sel = x :=`
+- **lsuBex_unsigned_byte** (line 309): `theorem lsuBex_unsigned_byte (x : BitVec 32) (j : BitVec 2) : lsuByteExtract true x (1#4 <<< j.zeroExtend 4) = ((x >>> (j.zeroExtend 32 * 8)).extractLsb' 0 8).zeroExtend 32 :=`
+- **lsuCntDone_false** (line 1008): `theorem lsuCntDone_false (c : BitVec 5) : lsuCntDone c = false :=`
+- **lsuBv3_cases** (line 1012): `theorem lsuBv3_cases (x : BitVec 3) : x = 0#3 ∨ x = 1#3 ∨ x = 2#3 ∨ x = 3#3 ∨ x = 4#3 ∨ x = 5#3 ∨ x = 6#3 ∨ x = 7#3 :=`
+- **lsuPrioEncF_find** (line 1019): `theorem lsuPrioEncF_find (m : LsuMask32) (h : lsuMaskNez m = true) : ∃ a, (List.finRange 32).find? (fun x => m x) = some a ∧ m a = true ∧ ∃ as bs, List.finRange 32 = as ++ a :: bs ∧ ∀ y ∈ as, !(m y) :=`
+- **lsuPrioEncF_spec_set** (line 1034): `theorem lsuPrioEncF_spec_set (m : LsuMask32) (h : lsuMaskNez m = true) : m (lsuPrioEncF m) = true :=`
+- **lsuMaskNext_pe** (line 1041): `theorem lsuMaskNext_pe (v : LsuVExe) (tid pds numw : BitVec 32) (h : lsuMaskNez v.mask = true) : lsuMaskNext v tid pds numw (lsuPrioEncF v.mask) = false :=`
+- **lsuMaskNext_subset** (line 1050): `theorem lsuMaskNext_subset (v : LsuVExe) (tid pds numw : BitVec 32) (x : Fin 32) (h : lsuMaskNext v tid pds numw x = true) : v.mask x = true :=`
+- **lsuT_progress** (line 1063): `theorem lsuT_progress (v : LsuVExe) (tid pds numw : BitVec 32) (h : lsuMaskNez v.mask = true) : lsuMaskCount (lsuMaskNext v tid pds numw) < lsuMaskCount v.mask :=`
+- **lsuT_progress_dcache** (line 1097): `theorem lsuT_progress_dcache (sm : BitVec 32) (s : LsuState) (i : LsuIn) (hst : s.state = lsuSDcache) (hf : lsuDcacheFire s i = true) (hm : lsuMaskNez s.regSave.mask = true) : lsuMaskCount (lsuStep sm s i).regSave.mask < lsuMaskCount s.regSave.mask :=`
+- **lsuT_progress_shared** (line 1111): `theorem lsuT_progress_shared (sm : BitVec 32) (s : LsuState) (i : LsuIn) (hst : s.state = lsuSShared) (hf : lsuSharedFire s i = true) (hm : lsuMaskNez s.regSave.mask = true) : lsuMaskCount (lsuStep sm s i).regSave.mask < lsuMaskCount s.regSave.mask :=`
+- **lsuT_dcache_hold** (line 1128): `theorem lsuT_dcache_hold (sm : BitVec 32) (s : LsuState) (i : LsuIn) (hv : lsuDcacheValid s = true) (hno : i.dcacheReady = false) : lsuStep sm s i = s :=`
+- **lsuT_dcache_irrevocable** (line 1166): `theorem lsuT_dcache_irrevocable (sm : BitVec 32) (s : LsuState) (i : LsuIn) (hv : lsuDcacheValid s = true) (hno : i.dcacheReady = false) : (lsuOutputs (lsuStep sm s i) i).dcacheValid = true ∧ (lsuOutputs (lsuStep sm s i) i).dcacheBits = (lsuOutputs s i).dcacheBits :=`
+- **lsuT_shared_hold** (line 1174): `theorem lsuT_shared_hold (sm : BitVec 32) (s : LsuState) (i : LsuIn) (hst : s.state = lsuSShared) (hno : i.sharedReady = false) : lsuStep sm s i = s :=`
+- **lsuT_ssave_hold** (line 1190): `theorem lsuT_ssave_hold (sm : BitVec 32) (s : LsuState) (i : LsuIn) (hst : s.state = lsuSSave) (hmem : s.regSave.ctrl.mem_cmd ≠ 0#2) (hno : i.mshrReady = false) : lsuStep sm s i = s :=`
+- **lsuT_ssave_fire** (line 1209): `theorem lsuT_ssave_fire (sm : BitVec 32) (s : LsuState) (i : LsuIn) (hst : s.state = lsuSSave) (hmem : s.regSave.ctrl.mem_cmd ≠ 0#2) (hrdy : i.mshrReady = true) : ((lsuStep sm s i).state = lsuSShared ∨ (lsuStep sm s i).state = lsuSDcache) ∧ (lsuStep sm s i).entryID = i.idxEntry :=`
+- **lsuT_ssave_entry** (line 1240): `theorem lsuT_ssave_entry (sm : BitVec 32) (s : LsuState) (i : LsuIn) (h : (lsuStep sm s i).state = lsuSSave) : (s.state = lsuSIdle ∧ lsuFifoFire s i = true) ∨ s.state = lsuSSave :=`
+- **lsuFifoFire_facts** (line 1348): `theorem lsuFifoFire_facts (s : LsuState) (i : LsuIn) (hf : lsuFifoFire s i = true) : s.state = lsuSIdle ∧ i.flushValid = false ∧ lsuFlushFire s i = false :=`
+- **lsuT_accept_mask_scalar** (line 1358): `theorem lsuT_accept_mask_scalar (sm : BitVec 32) (s : LsuState) (i : LsuIn) (hf : lsuFifoFire s i = true) (hvec : i.fifoBits.ctrl.isvec = false) : (lsuStep sm s i).regSave.mask = (fun _ => true) :=`
+- **lsuT_accept_mask_vec** (line 1366): `theorem lsuT_accept_mask_vec (sm : BitVec 32) (s : LsuState) (i : LsuIn) (hf : lsuFifoFire s i = true) (hvec : i.fifoBits.ctrl.isvec = true) : (lsuStep sm s i).regSave.mask = i.fifoBits.mask :=`
+- **lsuT_accept_aq** (line 1374): `theorem lsuT_accept_aq (sm : BitVec 32) (s : LsuState) (i : LsuIn) (hf : lsuFifoFire s i = true) (hatom : i.fifoBits.ctrl.atomic = true) : (lsuStep sm s i).regSave.ctrl.aq = true :=`
+- **lsuT_flush_accept** (line 1383): `theorem lsuT_flush_accept (sm : BitVec 32) (s : LsuState) (i : LsuIn) (hst : s.state = lsuSIdle) (hf : i.flushValid = true) : (lsuStep sm s i).state = lsuSDcache ∧ (lsuStep sm s i).isFlush = true ∧ (lsuStep sm s i).regSave = { lsuVExe0 with ctrl :=`
+- **lsuT_flush_opcode** (line 1401): `theorem lsuT_flush_opcode (s : LsuState) (i : LsuIn) (hf : s.isFlush = true) (ha : s.regSave.ctrl.atomic = false) (hfe : s.regSave.ctrl.fence = false) : (lsuOutputs s i).dcacheBits.opcode = 3#3 ∧ (lsuOutputs s i).dcacheBits.param = 0#4 :=`
+- **lsuT_instrId_dcache** (line 1412): `theorem lsuT_instrId_dcache (s : LsuState) (i : LsuIn) : (lsuOutputs s i).dcacheBits.instrId = s.entryID :=`
+- **lsuT_instrId_shared** (line 1415): `theorem lsuT_instrId_shared (s : LsuState) (i : LsuIn) : (lsuOutputs s i).sharedBits.instrId = s.entryID :=`
+- **lsuT_entryID_hold** (line 1420): `theorem lsuT_entryID_hold (s : LsuState) (i : LsuIn) (hst : s.state ≠ lsuSSave) : lsuNextEntryID s i = s.entryID :=`
+- **lsuBv3_le5_cases** (line 1430): `theorem lsuBv3_le5_cases (x : BitVec 3) (h : x ≤ 5#3) : x = 0#3 ∨ x = 1#3 ∨ x = 2#3 ∨ x = 3#3 ∨ x = 4#3 ∨ x = 5#3 :=`
+- **lsuT_state_legal_step** (line 1433): `theorem lsuT_state_legal_step (sm : BitVec 32) (s : LsuState) (i : LsuIn) (h : lsuLegalState s.state) : lsuLegalState (lsuStep sm s i).state :=`
+- **lsuT_state_legal_run** (line 1477): `theorem lsuT_state_legal_run (sm : BitVec 32) (s : LsuState) (ins : List LsuIn) (h : lsuLegalState s.state) : lsuLegalState (lsuRun sm s ins).state :=`
+- **lsuT_init_legal** (line 1483): `theorem lsuT_init_legal : lsuLegalState lsuInit.state :=`
+- **lsu2wb_outX_fidelity** (line 1559): `theorem lsu2wb_outX_fidelity (rsp : LsuWbRsp) : (lsu2wbOutXBits rsp).warp_id = rsp.tag.warp_id ∧ (lsu2wbOutXBits rsp).reg_idxw = rsp.tag.reg_idxw ∧ (lsu2wbOutXBits rsp).wxd = rsp.tag.wxd ∧ (lsu2wbOutXBits rsp).rd = rsp.data ⟨0, by decide⟩ :=`
+- **lsu2wb_outV_fidelity** (line 1565): `theorem lsu2wb_outV_fidelity (rsp : LsuWbRsp) : (lsu2wbOutVBits rsp).mask = rsp.tag.mask ∧ (lsu2wbOutVBits rsp).data = rsp.data :=`
+- **lsu2wb_rspFire_iff** (line 1571): `theorem lsu2wb_rspFire_iff (i : LsuWbIn) : (i.rspValid && lsu2wbRspReady i) = (i.rspValid && i.rsp.tag.wxd && i.outXReady) || (i.rspValid && !i.rsp.tag.wxd && i.rsp.tag.wfd && i.outVReady) || (i.rspValid && !i.rsp.tag.wxd && !i.rsp.tag.wfd && i.rsp.tag.isWrite) :=`
+- **lsu2wb_retract_safe** (line 1582): `theorem lsu2wb_retract_safe (i : LsuWbIn) (hv : i.rspValid = true) (hr : lsu2wbRspReady i = false) : (lsu2wbOutXValid i && i.outXReady) = false ∧ (lsu2wbOutVValid i && i.outVReady) = false :=`
+- **lsuSbInv_step** (line 1641): `theorem lsuSbInv_step (taps : BitVec 4) (l r : Bool) (h : lsuSbInv taps) : lsuSbInv (lsuSbStep taps l r) :=`
+- **lsuSbFull_iff** (line 1647): `theorem lsuSbFull_iff (taps : BitVec 4) (h : lsuSbInv taps) : lsuSbFull taps = true ↔ taps = 0b1111#4 :=`
+- **lsuSbStep_push** (line 1653): `theorem lsuSbStep_push (t : BitVec 4) : lsuSbStep t true false = (t <<< 1) ||| 1#4 :=`
+- **lsuSbStep_pop** (line 1654): `theorem lsuSbStep_pop (t : BitVec 4) : lsuSbStep t false true = t >>> 1 :=`
+- **lsuSbStep_push_count** (line 1659): `theorem lsuSbStep_push_count (taps : BitVec 4) (h : lsuSbInv taps) (hnf : lsuSbFull taps = false) : lsuSbStep taps true false = taps + taps + 1#4 :=`
+- **lsuSbStep_pop_count** (line 1668): `theorem lsuSbStep_pop_count (taps : BitVec 4) (h : lsuSbInv taps) (hne : taps ≠ 0#4) : lsuSbStep taps false true + lsuSbStep taps false true + 1#4 = taps :=`
+- **lsuSbStep_push_full** (line 1676): `theorem lsuSbStep_push_full (taps : BitVec 4) (h : taps = 0b1111#4) : lsuSbStep taps true false = 0b1111#4 :=`
+- **lsuSbStep_pop_empty** (line 1680): `theorem lsuSbStep_pop_empty (taps : BitVec 4) (h : taps = 0#4) : lsuSbStep taps false true = 0#4 :=`
+- **lsuSbEmpty_iff** (line 1684): `theorem lsuSbEmpty_iff (taps : BitVec 4) (l r : Bool) (h : lsuSbInv taps) : lsuSbEmpty taps l r = true ↔ lsuSbStep taps l r = 0#4 :=`
+- **lsuSbStepAll_other** (line 1720): `theorem lsuSbStepAll_other (boards : BitVec 3 → BitVec 4) (reqFire : Bool) (reqWid : BitVec 3) (rspFire : Bool) (rspWid b : BitVec 3) (hb1 : b ≠ reqWid) (hb2 : b ≠ rspWid) : lsuSbStepAll boards reqFire reqWid rspFire rspWid b = boards b :=`
+- **lsuReqReady_blocked** (line 1732): `theorem lsuReqReady_blocked (boards : BitVec 3 → BitVec 4) (reqWid : BitVec 3) (fifoRdy reqValid : Bool) (h : lsuSbFull (boards reqWid) = true) : lsuReqReady boards reqWid fifoRdy = false ∧ lsuReqValidGated boards reqWid reqValid = false :=`
+
+### `Ventus/Mem/MSHR.lean`
+
+- **bex_lw** (line 154): `theorem bex_lw (isUInt : Bool) (x : BitVec 32) : bexByteExtract isUInt x 0xF#4 = x :=`
+- **bex_lh_low** (line 158): `theorem bex_lh_low (isUInt : Bool) (x : BitVec 32) : bexByteExtract isUInt x 0x3#4 = bexExt isUInt (x.extractLsb' 0 16) :=`
+- **mshrUpd_of_ne** (line 211): `theorem mshrUpd_of_ne (f : Fin 8 → α) (i j : Fin 8) (v : α) (h : j ≠ i) : mshrUpd f i v j = f j :=`
+- **mshr_ofNat_toNat3** (line 228): `theorem mshr_ofNat_toNat3 (e : BitVec 3) : BitVec.ofNat 3 e.toNat = e :=`
+- **mshrT1_alloc** (line 388): `theorem mshrT1_alloc : mshrT1S1.used = 0x01#8 ∧ mshrT1S1.state = .idle ∧ mshrT1S1.currentMask ⟨0, by decide⟩ = 0x00000003#32 ∧ (mshrT1S1.tag ⟨0, by decide⟩).warp_id = 2#3 ∧ mshrIdxEntry mshrInit mshrT1I0 = 0#3 :=`
+- **mshrT1_fastpath** (line 396): `theorem mshrT1_fastpath : mshrT1S2.state = .out ∧ mshrOutValid mshrT1S2 = true ∧ mshrT1S2.currentMask ⟨0, by decide⟩ = 0#32 :=`
+- **mshrT1_outdata** (line 403): `theorem mshrT1_outdata : mshrOutData mshrT1S2 ⟨0, by decide⟩ = 0xFFFF8001#32 ∧ mshrOutData mshrT1S2 ⟨1, by decide⟩ = 0x7FFF0000#32 ∧ mshrOutData mshrT1S2 ⟨2, by decide⟩ = 0#32 ∧ (mshrOutTag mshrT1S2).reg_idxw = 5#8 :=`
+- **mshrT1_release** (line 413): `theorem mshrT1_release : mshrT1S3.used = 0#8 ∧ mshrT1S3.state = .out ∧ mshrOutValid mshrT1S3 = false ∧ (mshrStep mshrT1S3 mshrInIdle).state = .idle :=`
+- **mshrT2_bothfire** (line 424): `theorem mshrT2_bothfire : mshrT2S1.state = .add ∧ mshrT2S1.used = 0#8 ∧ (mshrT2S1.regReq).warp_id = 2#3 ∧ mshrIdxEntry mshrInit mshrT2I0 = 0#3 :=`
+- **mshrT2_sadd_alloc** (line 431): `theorem mshrT2_sadd_alloc : mshrT2S2.used = 0x01#8 ∧ (mshrT2S2.tag ⟨0, by decide⟩).reg_idxw = 5#8 ∧ mshrT2S2.currentMask ⟨0, by decide⟩ = 0x00000003#32 ∧ mshrT2S2.state = .idle :=`
+- **mshrT4_full_backpressure** (line 440): `theorem mshrT4_full_backpressure : mshrAddrRdy mshrSFull = false ∧ mshrDcRdy mshrSFull = true ∧ mshrValidEntry mshrSFull = 0#3 ∧ mshrComplete8 mshrSFull = 0xFF#8 :=`
+- **mshrT5_immediate_complete** (line 451): `theorem mshrT5_immediate_complete : mshrComplete8 mshrT5S1 = 0x01#8 ∧ mshrOutValid mshrT5S1 = false :=`
+- **mshrT5_output_next** (line 456): `theorem mshrT5_output_next : (mshrStep mshrT5S1 { mshrInIdle with outReady :=`
+- **mshrT_complete8** (line 473): `theorem mshrT_complete8 : mshrComplete8 mshrSC2 = 0b00000100#8 ∧ mshrOutputEntry mshrSC2 = 2#3 :=`
+- **mshrT_degenerate_safe** (line 478): `theorem mshrT_degenerate_safe : mshrOutputEntry mshrInit = 0#3 ∧ mshrOutValid mshrInit = false :=`
+- **mshrPriEnc_bit** (line 489): `theorem mshrPriEnc_bit (v : BitVec 8) : v ≠ 0#8 → (v >>> (mshrPriEnc v).zeroExtend 8) &&& 1#8 = 1#8 :=`
+- **mshrPriEnc_min** (line 494): `theorem mshrPriEnc_min (v : BitVec 8) : v ≠ 0#8 → v &&& ((1#8 <<< (mshrPriEnc v).zeroExtend 8) - 1#8) = 0#8 :=`
+- **mshr_bit_clear** (line 499): `theorem mshr_bit_clear (u : BitVec 8) (e : BitVec 3) : ((u &&& ~~~(1#8 <<< e.zeroExtend 8)) >>> e.zeroExtend 8) &&& 1#8 = 0#8 :=`
+- **mshrEntryComplete_used** (line 504): `theorem mshrEntryComplete_used (s : MshrState) (i : Fin 8) (h : mshrEntryComplete s i = true) : mshrUsedBit s i = true :=`
+- **MshrFSM.out_of_isOut** (line 509): `theorem MshrFSM.out_of_isOut {f : MshrFSM} (h : f.isOut = true) : f = .out :=`
+- **mshr_stateN_ne_out_of_not_ready** (line 514): `theorem mshr_stateN_ne_out_of_not_ready (s : MshrState) (i : MshrIn) (hr : i.outReady = false) : (mshrStep s i).state ≠ .out :=`
+- **mshr_out_entry_needs_ready** (line 523): `theorem mshr_out_entry_needs_ready (s : MshrState) (i : MshrIn) (h : (mshrStep s i).state = .out) : i.outReady = true :=`
+- **mshr_withdraw** (line 530): `theorem mshr_withdraw (s : MshrState) (i : MshrIn) (hs : s.state = .out) (hr : i.outReady = false) : mshrOutValid (mshrStep s i) = false :=`
+- **mshr_outValid_isOut** (line 542): `theorem mshr_outValid_isOut (s : MshrState) (h : mshrOutValid s = true) : s.state.isOut = true :=`
+- **mshr_used_unchanged_of_idle_dcFire** (line 548): `theorem mshr_used_unchanged_of_idle_dcFire (s : MshrState) (i : MshrIn) (hs : s.state = .idle) (hdc : mshrDcFire s i = true) : (mshrStep s i).used = s.used :=`
+- **mshr_sadd_alloc_consistent** (line 556): `theorem mshr_sadd_alloc_consistent (s : MshrState) (i : MshrIn) (hs : s.state = .idle) (hdc : mshrDcFire s i = true) : mshrValidEntry (mshrStep s i) = mshrValidEntry s ∧ mshrIdxEntry s i = (if mshrAddrFire s i then mshrValidEntry (mshrStep s i) else 0#3) :=`
+- **mshr_priEnc_free** (line 568): `theorem mshr_priEnc_free (u : BitVec 8) : u ≠ 0xFF#8 → (u >>> (mshrPriEnc (~~~u)).zeroExtend 8) &&& 1#8 = 0#8 :=`
+- **mshr_addrFire_entry_free** (line 572): `theorem mshr_addrFire_entry_free (s : MshrState) (i : MshrIn) (hf : mshrAddrFire s i = true) : mshrUsedBit3 s (mshrValidEntry s) = false :=`
+- **mshr_outFire_used_cleared** (line 584): `theorem mshr_outFire_used_cleared (s : MshrState) (i : MshrIn) (hs : s.state = .out) (hf : mshrOutFire s i = true) : (mshrStep s i).used = s.used &&& ~~~(1#8 <<< (mshrOutputEntry s).zeroExtend 8) :=`
+- **mshr_outFire_entry_cleared** (line 591): `theorem mshr_outFire_entry_cleared (s : MshrState) (i : MshrIn) (hs : s.state = .out) (hf : mshrOutFire s i = true) : mshrEntryComplete (mshrStep s i) (mshrIdx3 (mshrOutputEntry s)) = false :=`
+- **mshr_rsp_cm_update** (line 601): `theorem mshr_rsp_cm_update (s : MshrState) (i : MshrIn) (hs : s.state = .idle) (hdc : mshrDcFire s i = true) : (mshrStep s i).currentMask (mshrIdx3 i.rspId) = s.currentMask (mshrIdx3 i.rspId) &&& ~~~i.rspMask :=`
+- **mshr_rsp_data_update** (line 608): `theorem mshr_rsp_data_update (s : MshrState) (i : MshrIn) (l : Fin 32) (hs : s.state = .idle) (hdc : mshrDcFire s i = true) : (mshrStep s i).data (mshrIdx3 i.rspId) l = (if (i.rspMask >>> l.val) &&& 1#32 = 1#32 then i.rspData l else s.data (mshrIdx3 i.rspId) l) :=`
+- **mshr_alloc_cm_init** (line 616): `theorem mshr_alloc_cm_init (s : MshrState) (i : MshrIn) (hs : s.state = .idle) (hdc : mshrDcFire s i = false) (ha : mshrAddrFire s i = true) : (mshrStep s i).currentMask (mshrIdx3 (mshrValidEntry s)) = i.addrTag.mask :=`
+- **mshr_alloc_used_set** (line 622): `theorem mshr_alloc_used_set (s : MshrState) (i : MshrIn) (hs : s.state = .idle) (hdc : mshrDcFire s i = false) (ha : mshrAddrFire s i = true) : (mshrStep s i).used = s.used ||| (1#8 <<< (mshrValidEntry s).zeroExtend 8) :=`
+- **mshr_fastpath_complete_next** (line 629): `theorem mshr_fastpath_complete_next (s : MshrState) (i : MshrIn) (hs : s.state = .idle) (hdc : mshrDcFire s i = true) (hused : mshrUsedBit s (mshrIdx3 i.rspId) = true) (hfp : s.currentMask (mshrIdx3 i.rspId) = i.rspMask) : mshrEntryComplete (mshrStep s i) (mshrIdx3 i.rspId) = true :=`
+- **mshrFastpath_subset_cntex** (line 644): `theorem mshrFastpath_subset_cntex : (0x00000003#32) &&& ~~~(0x00000007#32) = 0#32 ∧ (0x00000003#32 ≠ 0x00000007#32) :=`
+- **mshr_outData_masked** (line 650): `theorem mshr_outData_masked (s : MshrState) (l : Fin 32) (hm : ((mshrOutTag s).mask >>> l.val) &&& 1#32 = 1#32) : mshrOutData s l = bexByteExtract (mshrOutTag s).unsigned (s.data (mshrIdx3 (mshrOutputEntry s)) l) ((mshrOutTag s).wordOffset1H l) :=`
+- **mshr_outData_unmasked** (line 659): `theorem mshr_outData_unmasked (s : MshrState) (l : Fin 32) (hm : ((mshrOutTag s).mask >>> l.val) &&& 1#32 ≠ 1#32) : mshrOutData s l = 0#32 :=`
+- **mshrT_withdraw_witness** (line 692): `theorem mshrT_withdraw_witness : (mshrTraceOf mshrTrWithdraw 2).valid = true ∧ (mshrTraceOf mshrTrWithdraw 2).ready = false ∧ (mshrTraceOf mshrTrWithdraw 2).fires = false ∧ (mshrTraceOf mshrTrWithdraw 3).valid = false :=`
+- **mshr_noWithdraw_violated** (line 701): `theorem mshr_noWithdraw_violated : ¬ Ventus.Base.Handshake.NoWithdraw (mshrTraceOf mshrTrWithdraw) :=`
+
+### `Ventus/Mem/SRAMTemplate.lean`
+
+- **sramT_lfsr_step0** (line 155): `theorem sramT_lfsr_step0 : sramLfsrStep sramLfsrInit = 0x891A2B3C43B2A190#64 :=`
+- **sramT_lfsr_step1** (line 157): `theorem sramT_lfsr_step1 : sramLfsrStep (sramLfsrStep sramLfsrInit) = 0xC48D159E21D950C8#64 :=`
+- **sramT_lfsr_zero_lockup** (line 160): `theorem sramT_lfsr_zero_lockup : sramLfsrStep 0#64 = 1#64 :=`
+- **sramT_lfsr_low32** (line 162): `theorem sramT_lfsr_low32 : (sramLfsrStep sramLfsrInit).setWidth 32 = 0x43B2A190#32 :=`
+- **sramUpd_of_ne** (line 266): `theorem sramUpd_of_ne (f : Fin n → α) (i j : Fin n) (v : α) (h : j ≠ i) : sramUpd f i v j = f j :=`
+- **sramWriteMem_masked** (line 422): `theorem sramWriteMem_masked (mem : Fin set → Fin way → BitVec w) (a : Fin set) (wd : Fin way → BitVec w) (wm : BitVec way) (j : Fin way) (hm : (wm >>> j.val) &&& 1#way = 1#way) : sramWriteMem mem a wd wm a j = wd j :=`
+- **sramWriteMem_unmasked** (line 429): `theorem sramWriteMem_unmasked (mem : Fin set → Fin way → BitVec w) (a : Fin set) (wd : Fin way → BitVec w) (wm : BitVec way) (j : Fin way) (hm : (wm >>> j.val) &&& 1#way ≠ 1#way) : sramWriteMem mem a wd wm a j = mem a j :=`
+- **sramWriteMem_diff_set** (line 436): `theorem sramWriteMem_diff_set (mem : Fin set → Fin way → BitVec w) (a b : Fin set) (wd : Fin way → BitVec w) (wm : BitVec way) (j : Fin way) (h : b ≠ a) : sramWriteMem mem a wd wm b j = mem b j :=`
+- **sram_wready_true** (line 442): `theorem sram_wready_true : sramWRdy = true :=`
+- **sram_rready_reset** (line 445): `theorem sram_rready_reset (cfg : SramCfg) (s : SramState set way w) (i : SramIn set way w) (h : sramResetBusy cfg s = true) : sramRRdy cfg s i = false :=`
+- **sram_rready_singlePort_wen** (line 450): `theorem sram_rready_singlePort_wen (cfg : SramCfg) (s : SramState set way w) (i : SramIn set way w) (hsp : cfg.singlePort = true) (hw : i.wValid = true) : sramRRdy cfg s i = false :=`
+- **sram_realRen_singlePort** (line 455): `theorem sram_realRen_singlePort (cfg : SramCfg) (s : SramState set way w) (i : SramIn set way w) (hsp : cfg.singlePort = true) (h : sramRealRen cfg s i = true) : sramWen cfg s i = false :=`
+- **sramResetBusy_step_false** (line 462): `theorem sramResetBusy_step_false (cfg : SramCfg) (s : SramState set way w) (i : SramIn set way w) (h : sramResetBusy cfg s = false) : sramResetBusy cfg (sramStep cfg s i) = false :=`
+- **sram_resetStep_mem** (line 470): `theorem sram_resetStep_mem (cfg : SramCfg) (s : SramState set way w) (i : SramIn set way w) (h : sramResetBusy cfg s = true) : (sramStep cfg s i).mem = sramWriteMem s.mem s.resetSet (fun _ => 0) (BitVec.allOnes way) :=`
+- **sram_resetStep_progress** (line 477): `theorem sram_resetStep_progress (cfg : SramCfg) (s : SramState set way w) (i : SramIn set way w) (h : sramResetBusy cfg s = true) (hnotlast : s.resetSet.val ≠ set - 1) : (sramStep cfg s i).resetBusy = true ∧ (sramStep cfg s i).resetSet.val = s.resetSet.val + 1 :=`
+- **sram_resetStep_finish** (line 492): `theorem sram_resetStep_finish (cfg : SramCfg) (s : SramState set way w) (i : SramIn set way w) (h : sramResetBusy cfg s = true) (hlast : s.resetSet.val = set - 1) : (sramStep cfg s i).resetBusy = false :=`
+- **sram_read_clean** (line 500): `theorem sram_read_clean (cfg : SramCfg) (s : SramState set way w) (b : Fin set) (j : Fin way) (hres : sramResetBusy cfg s = false) : sramRespData cfg (sramStep cfg (sramStep cfg s sramInIdle) (sramInRead b)) j = s.mem b j :=`
+- **sram_read_after_write** (line 509): `theorem sram_read_after_write (cfg : SramCfg) (s : SramState set way w) (a b : Fin set) (wd : Fin way → BitVec w) (wm : BitVec way) (j : Fin way) (hres : sramResetBusy cfg s = false) : sramRespData cfg (sramStep cfg (sramStep cfg s (sramInWrite a wd wm)) (sramInRead b)) j = sramWriteMem s.mem a wd wm b j :=`
+- **sram_read_after_write_masked** (line 521): `theorem sram_read_after_write_masked (cfg : SramCfg) (s : SramState set way w) (a : Fin set) (wd : Fin way → BitVec w) (wm : BitVec way) (j : Fin way) (hres : sramResetBusy cfg s = false) (hm : (wm >>> j.val) &&& 1#way = 1#way) : sramRespData cfg (sramStep cfg (sramStep cfg s (sramInWrite a wd wm)) (sramInRead a)) j = wd j :=`
+- **sram_bypass_forward** (line 531): `theorem sram_bypass_forward (cfg : SramCfg) (s : SramState set way w) (a : Fin set) (wd : Fin way → BitVec w) (wm : BitVec way) (j : Fin way) (hres : sramResetBusy cfg s = false) (hsp : cfg.singlePort = false) (hbp : cfg.bypassWrite = true) (hm : (wm >>> j.val) &&& 1#way = 1#way) : sramRespData cfg (sramStep cfg s (sramInRW a wd wm)) j = wd j :=`
+- **sram_lfsr_bypass** (line 543): `theorem sram_lfsr_bypass (cfg : SramCfg) (s : SramState set way w) (a : Fin set) (wd : Fin way → BitVec w) (wm : BitVec way) (j : Fin way) (hres : sramResetBusy cfg s = false) (hsp : cfg.singlePort = false) (hbp : cfg.bypassWrite = false) (hm : (wm >>> j.val) &&& 1#way = 1#way) : sramRespData cfg (sramStep cfg s (sramInRW a wd wm)) j = (sramLfsrStep (s.lfsr j)).setWidth w :=`
+- **sram_hold_holds** (line 556): `theorem sram_hold_holds (cfg : SramCfg) (s : SramState set way w) (i : SramIn set way w) (j : Fin way) (hh : cfg.holdRead = true) (hpr : s.prevRealRen = true) (hrv : i.rValid = false) : sramRespData cfg (sramStep cfg s i) j = sramRespData cfg s j :=`
+- **sramT_read_after_write** (line 583): `theorem sramT_read_after_write : sramRespData sramCfgDCacheTag sramTA2 ⟨0, by decide⟩ = 0xAAAA0000#32 ∧ sramRespData sramCfgDCacheTag sramTA2 ⟨1, by decide⟩ = 0#32 :=`
+- **sramT_hold** (line 589): `theorem sramT_hold : sramRespData sramCfgDCacheTag sramTA3 ⟨0, by decide⟩ = 0xAAAA0000#32 ∧ sramRespData sramCfgDCacheTag sramTA3 ⟨1, by decide⟩ = 0#32 :=`
+- **sramT_read_diff_set** (line 595): `theorem sramT_read_diff_set : sramRespData sramCfgDCacheTag (sramStep sramCfgDCacheTag sramTA1 (sramInRead ⟨2, by decide⟩)) ⟨0, by decide⟩ = 0#32 :=`
+- **sramT_bypass_forward** (line 601): `theorem sramT_bypass_forward : sramRespData sramCfgDCacheTag (sramStep sramCfgDCacheTag (sramInit 4 2 32) (sramInRW ⟨1, by decide⟩ sramTdA 0b01#2)) ⟨0, by decide⟩ = 0xAAAA0000#32 ∧ sramRespData sramCfgDCacheTag (sramStep sramCfgDCacheTag (sramInit 4 2 32) (sramInRW ⟨1, by decide⟩ sramTdA 0b01#2)) ⟨1, by decide⟩ = 0#32 :=`
+- **sramT_lfsr_bypass** (line 616): `theorem sramT_lfsr_bypass : sramRespData sramCfgICacheTag sramTB1 ⟨0, by decide⟩ = 0x43B2A190#32 ∧ sramRespData sramCfgICacheTag sramTB1 ⟨0, by decide⟩ ≠ sramTdA ⟨0, by decide⟩ ∧ sramTB1.mem ⟨1, by decide⟩ ⟨0, by decide⟩ = 0xAAAA0000#32 ∧ sramRespData sramCfgICacheTag sramTB1 ⟨1, by decide⟩ = 0#32 :=`
+- **sramT_singlePort_block** (line 626): `theorem sramT_singlePort_block : sramRRdy sramCfgSinglePort (sramInit 4 2 32) (sramInRW ⟨1, by decide⟩ sramTdA 0b11#2) = false ∧ sramRealRen sramCfgSinglePort (sramInit 4 2 32) (sramInRW ⟨1, by decide⟩ sramTdA 0b11#2) = false ∧ sramWRdy = true :=`
+- **sramT_singlePort_raw** (line 635): `theorem sramT_singlePort_raw : sramRespData sramCfgSinglePort (sramStep sramCfgSinglePort (sramStep sramCfgSinglePort (sramInit 4 2 32) (sramInWrite ⟨1, by decide⟩ sramTdA 0b01#2)) (sramInRead ⟨1, by decide⟩)) ⟨0, by decide⟩ = 0xAAAA0000#32 :=`
+- **sramT_reset_rdy_low** (line 655): `theorem sramT_reset_rdy_low : sramRRdy sramCfgDCacheDirty sramTDInit sramInIdle = false ∧ sramRRdy sramCfgDCacheDirty sramTD1 sramInIdle = false ∧ sramRRdy sramCfgDCacheDirty sramTD2 sramInIdle = false ∧ sramRRdy sramCfgDCacheDirty sramTD3 sramInIdle = false :=`
+- **sramT_reset_done** (line 663): `theorem sramT_reset_done : sramTD4.resetBusy = false ∧ (∀ a j, sramTD4.mem a j = 0#32) ∧ sramRRdy sramCfgDCacheDirty sramTD4 sramInIdle = true :=`
+- **sramT_reset_read_zero** (line 669): `theorem sramT_reset_read_zero : sramRespData sramCfgDCacheDirty (sramStep sramCfgDCacheDirty (sramStep sramCfgDCacheDirty sramTD4 sramInIdle) (sramInRead ⟨2, by decide⟩)) ⟨0, by decide⟩ = 0#32 :=`
+- **sramT_reset_drop_write** (line 677): `theorem sramT_reset_drop_write : (∀ a j, (sramRun sramCfgDCacheDirty sramTDInit [sramInIdle, sramInIdle, sramInIdle, sramInWrite ⟨0, by decide⟩ (fun _ => 0xAAAA5555#32) 0b11#2]).mem a j = 0#32) :=`
+
+### `Ventus/Mem/ShareMem.lean`
+
+- **sm_bytes_word_roundtrip** (line 167): `theorem sm_bytes_word_roundtrip (w : BitVec 32) : smBytesToWord (smWordToBytes w) = w :=`
+- **smPrioOH_sub** (line 257): `theorem smPrioOH_sub (x : BitVec 32) : smPrioOH x &&& x = smPrioOH x :=`
+- **smPrioOH_onehot** (line 260): `theorem smPrioOH_onehot (x : BitVec 32) : smPrioOH x &&& (smPrioOH x - 1#32) = 0#32 :=`
+- **smPrioOH_ne_zero** (line 264): `theorem smPrioOH_ne_zero (x : BitVec 32) (h : x ≠ 0#32) : smPrioOH x ≠ 0#32 :=`
+- **smTwoOrMore_not_onehot** (line 267): `theorem smTwoOrMore_not_onehot (x : BitVec 32) (h : smTwoOrMore x = true) : x ≠ 0#32 ∧ x &&& (x - 1#32) ≠ 0#32 :=`
+- **smReqReady_no_vW1** (line 399): `theorem smReqReady_no_vW1 (s : SmState) (h : smReqReady s = true) : s.vW1 = false :=`
+- **smReqReady_no_hold** (line 406): `theorem smReqReady_no_hold (s : SmState) (h : smReqReady s = true) : s.arb.bcReg = false :=`
+- **smFire_no_write_exec** (line 413): `theorem smFire_no_write_exec (s : SmState) (i : SmIn) (h : smFire s i = true) : s.vW1 = false :=`
+- **smI21_alias** (line 424): `theorem smI21_alias (a b : BitVec 32) (whb : BitVec 2) (h : a &&& 0x00007FFF#32 = b &&& 0x00007FFF#32) : smSetIdxOfAddr a = smSetIdxOfAddr b ∧ lsuBlkOf a = lsuBlkOf b ∧ lsuWordOff1H whb a = lsuWordOff1H whb b :=`
+- **smI21_dead_rows** (line 435): `theorem smI21_dead_rows (a : BitVec 32) : smSetIdxOfAddr a &&& 0x300#10 = 0#10 :=`
+- **smI21_window** (line 448): `theorem smI21_window : smIsShared smAlo = true ∧ smIsShared smAhi = true ∧ smIsShared smAhi2 = true ∧ smIsShared smAhi3 = true :=`
+- **smI21_true_rows_differ** (line 454): `theorem smI21_true_rows_differ : smAlo.extractLsb' 7 10 ≠ smAhi.extractLsb' 7 10 ∧ smAlo.extractLsb' 7 10 ≠ smAhi2.extractLsb' 7 10 ∧ smAlo.extractLsb' 7 10 ≠ smAhi3.extractLsb' 7 10 :=`
+- **smI21_witness_fields** (line 462): `theorem smI21_witness_fields : smSetIdxOfAddr smAlo = smSetIdxOfAddr smAhi ∧ smSetIdxOfAddr smAlo = smSetIdxOfAddr smAhi2 ∧ smSetIdxOfAddr smAlo = smSetIdxOfAddr smAhi3 ∧ lsuBlkOf smAlo = lsuBlkOf smAhi :=`
+- **smI21_witness** (line 498): `theorem smI21_witness : smRspValid smW2s8 = true ∧ (smRspBits smW2s8).isWrite = false ∧ (smRspBits smW2s8).instrId = 7#3 ∧ (smRspBits smW2s8).data ⟨0, by decide⟩ = 0x22222222#32 ∧ (smRspBits smW2s8).data ⟨0, by decide⟩ ≠ 0x11111111#32 :=`
+- **smI21_req_alias** (line 507): `theorem smI21_req_alias : (smReqOfAddr smAlo true 0#3 0#32).setIdx = (smReqOfAddr smAhi true 0#3 0#32).setIdx ∧ (smReqOfAddr smAlo true 0#3 0#32).perLaneAddr ⟨0, by decide⟩ = (smReqOfAddr smAhi true 0#3 0#32).perLaneAddr ⟨0, by decide⟩ :=`
+- **smT1_mem** (line 529): `theorem smT1_mem : (smT1s2.banks ⟨16, by decide⟩).mem ⟨0, by decide⟩ ⟨0, by decide⟩ = 0xBE#8 ∧ (smT1s2.banks ⟨16, by decide⟩).mem ⟨0, by decide⟩ ⟨1, by decide⟩ = 0xBA#8 ∧ (smT1s2.banks ⟨16, by decide⟩).mem ⟨0, by decide⟩ ⟨2, by decide⟩ = 0xFE#8 ∧ (smT1s2.banks ⟨16, by decide⟩).mem ⟨0, by decide⟩ ⟨3, by decide⟩ = 0xCA#8 ∧ (smT1s2.banks ⟨17, by decide⟩).mem ⟨0, by decide⟩ ⟨0, by decide⟩ = 0#8 :=`
+- **smT1_write_rsp** (line 539): `theorem smT1_write_rsp : smRspValid smT1s2 = true ∧ (smRspBits smT1s2).isWrite = true ∧ (smRspBits smT1s2).instrId = 5#3 ∧ (smRspBits smT1s2).activeMask ⟨0, by decide⟩ = true ∧ (smRspBits smT1s2).activeMask ⟨1, by decide⟩ = false :=`
+- **smT1_read_rsp** (line 547): `theorem smT1_read_rsp : smRspValid smT1s5 = true ∧ (smRspBits smT1s5).isWrite = false ∧ (smRspBits smT1s5).instrId = 7#3 ∧ (smRspBits smT1s5).data ⟨0, by decide⟩ = smT1d ∧ (smRspBits smT1s5).activeMask ⟨0, by decide⟩ = true :=`
+- **smT1_ready** (line 555): `theorem smT1_ready : smReqReady smInit = true ∧ smReqReady smT1s1 = false ∧ smReqReady smT1s2 = true :=`
+- **smT3_no_conflict** (line 575): `theorem smT3_no_conflict : (smObsArb smInit (smInOf (smReqParallel true 1#3))).bankConflict = false ∧ (smObsArb smInit (smInOf (smReqParallel true 1#3))).dataArrayEn ⟨16, by decide⟩ = true ∧ (smObsArb smInit (smInOf (smReqParallel true 1#3))).dataArrayEn ⟨19, by decide⟩ = true ∧ (smObsArb smInit (smInOf (smReqParallel true 1#3))).dataArrayEn ⟨20, by decide⟩ = false ∧ (smObsArb smInit (smInOf (smReqParallel true 1#3))).activeLane ⟨3, by decide⟩ = true :=`
+- **smT3_parallel_mem** (line 583): `theorem smT3_parallel_mem : smBytesToWord ((smT3s2.banks ⟨16, by decide⟩).mem ⟨0, by decide⟩) = 0x1000#32 ∧ smBytesToWord ((smT3s2.banks ⟨17, by decide⟩).mem ⟨0, by decide⟩) = 0x1001#32 ∧ smBytesToWord ((smT3s2.banks ⟨18, by decide⟩).mem ⟨0, by decide⟩) = 0x1002#32 ∧ smBytesToWord ((smT3s2.banks ⟨19, by decide⟩).mem ⟨0, by decide⟩) = 0x1003#32 :=`
+- **smT4_conflict_detect** (line 609): `theorem smT4_conflict_detect : (smObsArb smInit (smInOf smReqConflict)).bankConflict = true ∧ (smObsArb smInit (smInOf smReqConflict)).activeLane ⟨0, by decide⟩ = true ∧ (smObsArb smInit (smInOf smReqConflict)).activeLane ⟨1, by decide⟩ = false ∧ (smObsArb smT4s1 smInNop).activeLane ⟨1, by decide⟩ = true ∧ (smObsArb smT4s1 smInNop).activeLane ⟨0, by decide⟩ = false ∧ smReqReady smT4s1 = false :=`
+- **smT4_serialized_mem** (line 622): `theorem smT4_serialized_mem : smBytesToWord ((smT4s3.banks ⟨16, by decide⟩).mem ⟨0, by decide⟩) = 0x00005AA5#32 :=`
+- **smT4_two_rsps** (line 627): `theorem smT4_two_rsps : smRspValid smT4s2 = true ∧ (smRspBits smT4s2).activeMask ⟨0, by decide⟩ = true ∧ (smRspBits smT4s2).activeMask ⟨1, by decide⟩ = false ∧ (smRspBits smT4s2).isWrite = true ∧ smRspValid smT4s3 = true ∧ (smRspBits smT4s3).activeMask ⟨0, by decide⟩ = false ∧ (smRspBits smT4s3).activeMask ⟨1, by decide⟩ = true :=`
+- **smT5_read_port_quiet** (line 639): `theorem smT5_read_port_quiet : (∀ b : Fin 32, (smVRcomb smT4s1 smInNop && (smObsArb smT4s1 smInNop).dataArrayEn b) = false) ∧ (∀ b : Fin 32, (smVRcomb smT4s2 smInNop && (smObsArb smT4s2 smInNop).dataArrayEn b) = false) ∧ (∀ b : Fin 32, (smVRcomb smT1s1 smInNop && (smObsArb smT1s1 smInNop).dataArrayEn b) = false) :=`
+- **smT6_read_pipelined** (line 661): `theorem smT6_read_pipelined : smReqReady smT6s7 = true ∧ smRspValid smT6s8 = true ∧ (smRspBits smT6s8).data ⟨0, by decide⟩ = 0xAAAA0000#32 ∧ (smRspBits smT6s8).instrId = 3#3 ∧ smRspValid smT6s9 = true ∧ (smRspBits smT6s9).data ⟨0, by decide⟩ = 0xBBBB1111#32 ∧ (smRspBits smT6s9).instrId = 4#3 :=`
+
+### `Ventus/MultiSM.lean`
+
+- **msmT_sm0_wire** (line 81): `theorem msmT_sm0_wire (p0 p1 : SmProg) (s : MsmState) (i0 i1 : SmIn) : (msmStep p0 p1 s i0 i1).sm0 = { (smdStep p0 { s.sm0 with dc :=`
+- **msmT_sm1_wire** (line 88): `theorem msmT_sm1_wire (p0 p1 : SmProg) (s : MsmState) (i0 i1 : SmIn) : (msmStep p0 p1 s i0 i1).sm1 = { (smdStep p1 { s.sm1 with dc :=`
+- **msmT_view_same** (line 95): `theorem msmT_view_same (p0 p1 : SmProg) (s : MsmState) (i0 i1 : SmIn) : (msmStep p0 p1 s i0 i1).sm0.dc.l2 = (msmStep p0 p1 s i0 i1).sm1.dc.l2 :=`
+- **msmT_wbUpd_spec** (line 99): `theorem msmT_wbUpd_spec (l : BitVec 25 → Fin 32 → BitVec 32) (bas : List (BitVec 25)) (rowf : BitVec 25 → Fin 32 → BitVec 32) (ba : BitVec 25) (w : Fin 32) : msmWbUpd l bas rowf ba w = (if ba ∈ bas then rowf ba w else l ba w) :=`
+- **msmT_merge_priority** (line 127): `theorem msmT_merge_priority (l : BitVec 25 → Fin 32 → BitVec 32) (bas0 bas1 : List (BitVec 25)) (row0 row1 : BitVec 25 → Fin 32 → BitVec 32) (ba : BitVec 25) (w : Fin 32) : msmWbUpd (msmWbUpd l bas1 row1) bas0 row0 ba w = (if ba ∈ bas0 then row0 ba w else if ba ∈ bas1 then row1 ba w else l ba w) :=`
+- **msmTraceA_ok** (line 273): `theorem msmTraceA_ok : msmFinOkA msmRunChkA.1 msmRunChkA.2 = true :=`
+
+### `Ventus/MultiSMCTA.lean`
+
+- **mctTraceA_evt** (line 781): `theorem mctTraceA_evt : mctEvtOkA mctRunChkA.1 = true :=`
+- **mctTraceA_ok** (line 837): `theorem mctTraceA_ok : mctFinOkA mctRunChkA.1 mctRunChkA.2 = true :=`
+- **mctTraceB_ok** (line 949): `theorem mctTraceB_ok : mctFinOkB mctRunChkB.1 mctRunChkB.2 = true :=`
+- **mctRtWfEmpty** (line 961): `theorem mctRtWfEmpty : RtWf rtEmpty rtNUM_SGPR where npos :=`
+- **mctRtOkA** (line 970): `theorem mctRtOkA : rtEventOk rtEmpty rtNUM_SGPR (.alloc ⟨0, by decide⟩ 256) :=`
+- **mctRtWfA** (line 976): `theorem mctRtWfA : RtWf mctRamBCu0A rtNUM_SGPR :=`
+- **mctRtOkC** (line 980): `theorem mctRtOkC : rtEventOk mctRamBCu0A rtNUM_SGPR (.alloc ⟨1, by decide⟩ 256) :=`
+- **mctRtB_disjoint** (line 995): `theorem mctRtB_disjoint : rtAllocBase mctRamBCu0A rtNUM_SGPR ⟨1, by decide⟩ 256 = 256 ∧ mctRamBCu0A.addr2 (mctRamBCu0A.walk 0) < rtAllocBase mctRamBCu0A rtNUM_SGPR ⟨1, by decide⟩ 256 :=`
+
+### `Ventus/MultiSML2.lean`
+
+- **mslTraceA_ok** (line 558): `theorem mslTraceA_ok : mslFinOkA mslRunChkA.1 mslRunChkA.2 = true :=`
+- **mslTraceB_ok** (line 621): `theorem mslTraceB_ok : mslFinOkB mslRunChkB.1 mslRunChkB.2 = true :=`
+
+### `Ventus/Pipe.lean`
+
+- **pipe_bv3_cases** (line 60): `theorem pipe_bv3_cases (i : BitVec 3) : i = 0#3 ∨ i = 1#3 ∨ i = 2#3 ∨ i = 3#3 ∨ i = 4#3 ∨ i = 5#3 ∨ i = 6#3 ∨ i = 7#3 :=`
+- **pipe_conn_id** (line 74): `theorem pipe_conn_id {α : Type} (x : α) : pipeConn x = x :=`
+- **pipe_extFlush_valid** (line 83): `theorem pipe_extFlush_valid (a b : Bool) : pipeExtFlushValid a b = (a || b) :=`
+- **pipe_extFlush_bits_flush** (line 84): `theorem pipe_extFlush_bits_flush (a b : BitVec 3) : pipeExtFlushBits true a b = a :=`
+- **pipe_extFlush_bits_cache** (line 85): `theorem pipe_extFlush_bits_cache (a b : BitVec 3) : pipeExtFlushBits false a b = b :=`
+- **pipe_pcRsp_valid** (line 109): `theorem pipe_pcRsp_valid (v : Bool) : pipePcRspValid v = v :=`
+- **pipe_pcRsp_status_pass** (line 110): `theorem pipe_pcRsp_status_pass (st : BitVec 2) : pipePcRspStatus true st = st :=`
+- **pipe_pcRsp_status_forced** (line 111): `theorem pipe_pcRsp_status_forced (st : BitVec 2) : pipePcRspStatus false st = 1#2 :=`
+- **pipe_w2_full_blocks_enq** (line 116): `theorem pipe_w2_full_blocks_enq (rspValid : Bool) (st : BitVec 2) : pipeIbEnqFire rspValid st false = false ∧ pipePcRspStatus false st = 1#2 :=`
+- **pipe_w2_enq_iff** (line 121): `theorem pipe_w2_enq_iff (rspValid : Bool) (st : BitVec 2) : pipeIbEnqFire rspValid st true = (rspValid && (st &&& 1#2 == 0#2)) :=`
+- **pipeScoreboardBusy_bit** (line 139): `theorem pipeScoreboardBusy_bit (d : Fin 8 → Bool) (i : BitVec 3) : ((pipeScoreboardBusy d >>> i.zeroExtend 8) &&& 1#8 = 1#8) ↔ d (wsFin i) = true :=`
+- **pipe_flush_two_sinks** (line 153): `theorem pipe_flush_two_sinks (f : Bool × BitVec 3) : pipeFlushWidControl f = pipeFlushWidIbuffer f :=`
+- **pipe_ib2i_fire_eq** (line 175): `theorem pipe_ib2i_fire_eq (v r w : Bool) : pipeIb2iInFire v r w = pipeIbOutFire v r w :=`
+- **pipe_ib2i_gated** (line 180): `theorem pipe_ib2i_gated (v r : Bool) : pipeIb2iInFire v r false = false ∧ pipeIbOutFire v r false = false :=`
+- **pipe_sb_fire_routing** (line 217): `theorem pipe_sb_fire_routing (i wid : BitVec 3) (f : Bool) : pipeSbOpColVIn i wid f = true ↔ f = true ∧ wid = i :=`
+- **pipe_sb_fire_silent** (line 223): `theorem pipe_sb_fire_silent (i wid : BitVec 3) (f : Bool) (h : wid ≠ i) : pipeSbOpColVIn i wid f = false :=`
+- **pipe_sb_ifFire_spec** (line 229): `theorem pipe_sb_ifFire_spec (i xWid vWid : BitVec 3) (xFire vFire : Bool) : pipeSbIfFire i xWid vWid xFire vFire = true ↔ (xFire = true ∧ xWid = i) ∨ (vFire = true ∧ vWid = i) :=`
+- **pipe_sb_ifCtrl_x** (line 236): `theorem pipe_sb_ifCtrl_x (i xWid : BitVec 3) (xFire : Bool) (xb vb : SbCtrl) (h : ((i == xWid) && xFire) = true) : pipeSbIfCtrl i xWid xFire xb vb = xb :=`
+- **pipe_sb_ifCtrl_v** (line 241): `theorem pipe_sb_ifCtrl_v (i xWid : BitVec 3) (xFire : Bool) (xb vb : SbCtrl) (h : ((i == xWid) && xFire) = false) : pipeSbIfCtrl i xWid xFire xb vb = vb :=`
+- **pipe_sb_brCtrl_spec** (line 246): `theorem pipe_sb_brCtrl_spec (i brWid wcWid cmpWid : BitVec 3) (brFire wcFire cmpValid : Bool) : pipeSbBrCtrl i brWid wcWid cmpWid brFire wcFire cmpValid = true ↔ (brFire = true ∧ brWid = i) ∨ (wcFire = true ∧ wcWid = i) ∨ (cmpValid = true ∧ cmpWid = i) :=`
+- **pipe_vmask_sub_outMask** (line 269): `theorem pipe_vmask_sub_outMask (m om : BitVec 32) : pipeExeDataVMask m om &&& ~~~om = 0#32 :=`
+- **pipe_vmask_sub_instrMask** (line 275): `theorem pipe_vmask_sub_instrMask (m om : BitVec 32) : pipeExeDataVMask m om &&& ~~~m = 0#32 :=`
+- **pipe_flushDCache_fire_agree** (line 293): `theorem pipe_flushDCache_fire_agree (v r : Bool) : (pipeFlushDCacheValidFwd v && r) = (v && pipeFlushDCacheReadyBwd r) :=`
+- **pipe_issue_partition** (line 314): `theorem pipe_issue_partition (c : PipeIssueChan) : (pipeIssueXLive c && pipeIssueVLive c) = false ∧ (pipeIssueXLive c || pipeIssueVLive c) = true :=`
+- **pipe_dead_channel_no_fire** (line 320): `theorem pipe_dead_channel_no_fire (v : Bool) : (v && false) = false :=`
+- **pipe_i2_mask_chain** (line 404): `theorem pipe_i2_mask_chain (instrMask outMask valuMask : BitVec 32) : (valuMask &&& pipeExeDataVMask instrMask outMask) &&& ~~~outMask = 0#32 ∧ (~~~valuMask &&& pipeExeDataVMask instrMask outMask) &&& ~~~outMask = 0#32 :=`
+- **pipe_i2_first_link** (line 412): `theorem pipe_i2_first_link (bi : BjBranchIn 32) : bjIfMask bi &&& ~~~bi.maskInit = 0#32 ∧ bjElseMask bi &&& ~~~bi.maskInit = 0#32 :=`
+- **pipe_i3_branch_complete_or_fetch** (line 421): `theorem pipe_i3_branch_complete_or_fetch (s : BjSysState 32 32) (bi : BjBranchIn 32) : ((bjSysStep s (.branch bi)).2.complete || (bjSysStep s (.branch bi)).2.fetchValid) = true :=`
+- **pipe_i3_join_fetch** (line 427): `theorem pipe_i3_join_fetch (s : BjSysState 32 32) (pc : BitVec 32) : (bjSysStep s (.join pc)).2.fetchValid = true :=`
+- **pipe_sb_beqReg_cleared** (line 432): `theorem pipe_sb_beqReg_cleared (s : SbState) (inp : SbInputs) (hbr : inp.br_ctrl = true) : (sbStep s inp).beqReg = 0#1 :=`
+- **pipe_i3_beqReg_clear_via_wiring** (line 445): `theorem pipe_i3_beqReg_clear_via_wiring (s : SbState) (inp : SbInputs) (i brWid wcWid cmpWid : BitVec 3) (brFire wcFire cmpFire : Bool) (oc of_ : Bool) (hcomp : cmpFire = oc) (hcmpw : cmpWid = i) (hbr : brFire = of_) (hbrw : brWid = i) (hco : (oc || of_) = true) (hbrctrl : inp.br_ctrl = pipeSbBrCtrl i brWid wcWid cmpWid brFire wcFire cmpFire) : (sbStep s inp).beqReg = 0#1 :=`
+- **pipe_i3_vbranch_clears** (line 462): `theorem pipe_i3_vbranch_clears (s : SbState) (inp : SbInputs) (bs : BjSysState 32 32) (bi : BjBranchIn 32) (i brWid wcWid cmpWid : BitVec 3) (brFire wcFire cmpFire : Bool) (hcomp : cmpFire = (bjSysStep bs (.branch bi)).2.complete) (hcmpw : cmpWid = i) (hbr : brFire = (bjSysStep bs (.branch bi)).2.fetchValid) (hbrw : brWid = i) (hbrctrl : inp.br_ctrl = pipeSbBrCtrl i brWid wcWid cmpWid brFire wcFire cmpFire) : (sbStep s inp).beqReg = 0#1 :=`
+- **pipe_i3_join_clears** (line 472): `theorem pipe_i3_join_clears (s : SbState) (inp : SbInputs) (bs : BjSysState 32 32) (pc : BitVec 32) (i brWid wcWid cmpWid : BitVec 3) (brFire wcFire cmpFire : Bool) (hcomp : cmpFire = (bjSysStep bs (.join pc)).2.complete) (hcmpw : cmpWid = i) (hbr : brFire = (bjSysStep bs (.join pc)).2.fetchValid) (hbrw : brWid = i) (hbrctrl : inp.br_ctrl = pipeSbBrCtrl i brWid wcWid cmpWid brFire wcFire cmpFire) : (sbStep s inp).beqReg = 0#1 :=`
+- **pipe_i4_gate_chain** (line 488): `theorem pipe_i4_gate_chain (d : Fin 8 → Bool) (bar exe act : BitVec 8) (i : BitVec 3) (s : SbState) (c : SbCtrl) (hd : d (wsFin i) = sbDelay s c) (hocc : sbReadOpColV s = true) (ibValid ib2iRdy : Bool) : pipeIb2iInFire ibValid ib2iRdy (pipeWarpReadyBit bar (pipeScoreboardBusy d) exe act i) = false :=`
+- **pipe_i4_gate_chain_beq** (line 505): `theorem pipe_i4_gate_chain_beq (d : Fin 8 → Bool) (bar exe act : BitVec 8) (i : BitVec 3) (s : SbState) (c : SbCtrl) (hd : d (wsFin i) = sbDelay s c) (hbeq : sbReadB s = true) (ibValid ib2iRdy : Bool) : pipeIb2iInFire ibValid ib2iRdy (pipeWarpReadyBit bar (pipeScoreboardBusy d) exe act i) = false :=`
+- **pipe_i31_witness** (line 524): `theorem pipe_i31_witness : ∃ outSimtValid outSimtReady : Bool, pipePcReconvValid outSimtValid = true ∧ (outSimtValid && outSimtReady) = false :=`
+- **pipe_i31_valid_passthrough** (line 530): `theorem pipe_i31_valid_passthrough (v : Bool) : pipePcReconvValid v = v :=`
+
+### `Ventus/SIMT/BranchJoin.lean`
+
+- **bjMemUpdate_of_ne** (line 112): `theorem bjMemUpdate_of_ne {depth nT : Nat} (m : Fin depth → BjEntry nT) (i j : Fin depth) (v : BjEntry nT) (h : i ≠ j) : bjMemUpdate m i v j = m j :=`
+- **bjStackStep_push_eq** (line 134): `theorem bjStackStep_push_eq {depth nT : Nat} [NeZero depth] (s : BjStackState depth nT) (i : BjStackIn nT) (h : i.push = true) : bjStackStep s i = { mem :=`
+- **bjStackStep_push_wr** (line 142): `theorem bjStackStep_push_wr {depth nT : Nat} [NeZero depth] (s : BjStackState depth nT) (i : BjStackIn nT) (h : i.push = true) : (bjStackStep s i).wr = s.wr + 2 :=`
+- **bjStackStep_push_rd** (line 146): `theorem bjStackStep_push_rd {depth nT : Nat} [NeZero depth] (s : BjStackState depth nT) (i : BjStackIn nT) (h : i.push = true) : (bjStackStep s i).rd = s.wr + 1 :=`
+- **bjStackStep_pop_eq** (line 150): `theorem bjStackStep_pop_eq {depth nT : Nat} [NeZero depth] (s : BjStackState depth nT) (i : BjStackIn nT) (h : i.push = false) (hj : bjStackJump s i = true) : bjStackStep s i = { mem :=`
+- **bjStackStep_pop_wr** (line 155): `theorem bjStackStep_pop_wr {depth nT : Nat} [NeZero depth] (s : BjStackState depth nT) (i : BjStackIn nT) (h : i.push = false) (hj : bjStackJump s i = true) : (bjStackStep s i).wr = s.wr - 1 :=`
+- **bjStackStep_pop_rd** (line 160): `theorem bjStackStep_pop_rd {depth nT : Nat} [NeZero depth] (s : BjStackState depth nT) (i : BjStackIn nT) (h : i.push = false) (hj : bjStackJump s i = true) : (bjStackStep s i).rd = s.rd - 1 :=`
+- **bjTwo_eq_one_add_one** (line 167): `theorem bjTwo_eq_one_add_one {depth : Nat} [NeZero depth] : (2 : BitVec (bjPtrWidth depth)) = 1 + 1 :=`
+- **tA_beat1** (line 315): `theorem tA_beat1 : tA_r1.2.complete = true ∧ tA_r1.2.fetchValid = false ∧ tA_r1.1.tmask = 0b1000 ∧ tA_r1.1.stack.wr = 2 ∧ tA_r1.1.stack.rd = 1 :=`
+- **tA_beat1_mem** (line 319): `theorem tA_beat1_mem : tA_r1.1.stack.mem (bjIdx 1) = ⟨0x300, 0x200, 0b0111⟩ ∧ tA_r1.1.stack.mem (bjIdx 0) = ⟨0x300, 0x300, 0b1111⟩ :=`
+- **tA_beat2** (line 324): `theorem tA_beat2 : tA_r2.2.popJump = true ∧ tA_r2.2.popPC = 0x200 ∧ tA_r2.2.popMask = 0b0111 ∧ tA_r2.2.fetchValid = true ∧ tA_r2.2.fetchJump = true ∧ tA_r2.2.fetchPC = 0x200 ∧ tA_r2.1.tmask = 0b0111 ∧ tA_r2.1.stack.wr = 1 ∧ tA_r2.1.stack.rd = 0 :=`
+- **tA_beat3** (line 331): `theorem tA_beat3 : tA_r3.2.popJump = true ∧ tA_r3.2.popPC = 0x300 ∧ tA_r3.2.popMask = 0b1111 ∧ tA_r3.2.fetchPC = 0x300 ∧ tA_r3.1.tmask = 0b1111 ∧ tA_r3.1.stack.wr = 0 ∧ tA_r3.1.stack.rd = 7 :=`
+- **tA_beat4** (line 337): `theorem tA_beat4 : tA_r4.2.popJump = false ∧ tA_r4.2.fetchValid = true ∧ tA_r4.2.fetchJump = false ∧ tA_r4.2.fetchPC = 0 ∧ tA_r4.1.tmask = 0b1111 ∧ tA_r4.1.stack.wr = 0 ∧ tA_r4.1.stack.rd = 7 :=`
+- **tB_beat1** (line 355): `theorem tB_beat1 : tB_r1.2.complete = false ∧ tB_r1.2.fetchValid = true ∧ tB_r1.2.fetchJump = true ∧ tB_r1.2.fetchPC = 0x200 ∧ tB_r1.1.tmask = 0b1000 ∧ tB_r1.1.stack.wr = 2 ∧ tB_r1.1.stack.rd = 1 ∧ tB_r1.1.stack.mem (bjIdx 1) = ⟨0x300, 0x104, 0b0111⟩ :=`
+- **tB_beat2** (line 362): `theorem tB_beat2 : tB_r2.2.popJump = true ∧ tB_r2.2.popPC = 0x104 ∧ tB_r2.2.popMask = 0b0111 ∧ tB_r2.1.tmask = 0b0111 ∧ tB_r2.1.stack.wr = 1 ∧ tB_r2.1.stack.rd = 0 :=`
+- **tB_beat3** (line 367): `theorem tB_beat3 : tB_r3.2.popJump = true ∧ tB_r3.2.popPC = 0x300 ∧ tB_r3.2.popMask = 0b1111 ∧ tB_r3.1.tmask = 0b1111 ∧ tB_r3.1.stack.wr = 0 ∧ tB_r3.1.stack.rd = 7 :=`
+- **tC_ifOnly** (line 379): `theorem tC_ifOnly : tC_r1.2.complete = true ∧ tC_r1.2.fetchValid = false ∧ tC_r1.1.tmask = 0b1111 ∧ tC_r1.1.stack.wr = 0 ∧ tC_r1.1.stack.rd = 0 :=`
+- **tD_elseOnly** (line 392): `theorem tD_elseOnly : tD_r1.2.complete = false ∧ tD_r1.2.fetchValid = true ∧ tD_r1.2.fetchJump = true ∧ tD_r1.2.fetchPC = 0x200 ∧ tD_r1.1.tmask = 0b1111 ∧ tD_r1.1.stack.wr = 0 ∧ tD_r1.1.stack.rd = 0 :=`
+- **tE_nestA** (line 415): `theorem tE_nestA : tE_r1.1.stack.wr = 2 ∧ tE_r1.1.stack.rd = 1 ∧ tE_r1.1.tmask = 0b0011 ∧ tE_r1.2.fetchPC = 0x200 :=`
+- **tE_nestB** (line 419): `theorem tE_nestB : tE_r2.1.stack.wr = 4 ∧ tE_r2.1.stack.rd = 3 ∧ tE_r2.1.tmask = 0b0010 ∧ tE_r2.2.fetchPC = 0x280 ∧ tE_r2.1.stack.mem (bjIdx 3) = ⟨0x300, 0x204, 0b0001⟩ ∧ tE_r2.1.stack.mem (bjIdx 2) = ⟨0x300, 0x300, 0b0011⟩ :=`
+- **tE_joinB1** (line 426): `theorem tE_joinB1 : tE_r3.2.popJump = true ∧ tE_r3.2.popPC = 0x204 ∧ tE_r3.2.popMask = 0b0001 ∧ tE_r3.1.tmask = 0b0001 ∧ tE_r3.1.stack.wr = 3 ∧ tE_r3.1.stack.rd = 2 :=`
+- **tE_joinB2** (line 431): `theorem tE_joinB2 : tE_r4.2.popJump = true ∧ tE_r4.2.popPC = 0x300 ∧ tE_r4.2.popMask = 0b0011 ∧ tE_r4.1.tmask = 0b0011 ∧ tE_r4.1.stack.wr = 2 ∧ tE_r4.1.stack.rd = 1 :=`
+- **tE_joinA1** (line 436): `theorem tE_joinA1 : tE_r5.2.popJump = true ∧ tE_r5.2.popPC = 0x104 ∧ tE_r5.2.popMask = 0b1100 ∧ tE_r5.1.tmask = 0b1100 ∧ tE_r5.1.stack.wr = 1 ∧ tE_r5.1.stack.rd = 0 :=`
+- **tE_joinA2** (line 441): `theorem tE_joinA2 : tE_r6.2.popJump = true ∧ tE_r6.2.popPC = 0x400 ∧ tE_r6.2.popMask = 0b1111 ∧ tE_r6.1.tmask = 0b1111 ∧ tE_r6.1.stack.wr = 0 ∧ tE_r6.1.stack.rd = 7 :=`
+- **tF_empty_pop** (line 450): `theorem tF_empty_pop : tF_r1.2.popJump = false ∧ tF_r1.2.fetchValid = true ∧ tF_r1.2.fetchJump = false ∧ tF_r1.2.fetchPC = 0 ∧ tF_r1.1.tmask = 0b1111 ∧ tF_r1.1.stack.wr = 0 ∧ tF_r1.1.stack.rd = 0 :=`
+- **tG_nomatch** (line 460): `theorem tG_nomatch : tG_r1.2.popJump = false ∧ tG_r1.2.fetchValid = true ∧ tG_r1.2.fetchJump = false ∧ tG_r1.1.tmask = 0b1000 ∧ tG_r1.1.stack.wr = 2 ∧ tG_r1.1.stack.rd = 1 :=`
+- **bjT1_ptr_conserve** (line 477): `theorem bjT1_ptr_conserve {depth nT : Nat} [NeZero depth] (s : BjStackState depth nT) (ip i1 i2 : BjStackIn nT) (hp : ip.push = true) (h1p : i1.push = false) (h2p : i2.push = false) (hinv : s.rd = s.wr - 1) (hj1 : bjStackJump (bjStackStep s ip) i1 = true) (hj2 : bjStackJump (bjStackStep (bjStackStep s ip) i1) i2 = true) : (bjStackStep (bjStackStep (bjStackStep s ip) i1) i2).wr = s.wr ∧ (bjStackStep (bjStackStep (bjStackStep s ip) i1) i2).rd = s.rd :=`
+- **bjT2_mask_restore** (line 502): `theorem bjT2_mask_restore {depth nT : Nat} [NeZero depth] (s : BjSysState depth nT) (bi : BjBranchIn nT) (hdiv : bjDivOccur bi = true) (hwr : s.stack.wr.toNat + 1 < depth) (hovf : (s.stack.wr + 1).toNat = s.stack.wr.toNat + 1) (pc1 pc2 : BitVec 32) (hj1 : bjCanPop (bjSysStep s (.branch bi)).1.stack pc1 = true) (hj2 : bjCanPop (bjSysStep (bjSysStep s (.branch bi)).1 (.join pc1)).1.stack pc2 = true) : (bjSysStep (bjSysStep (bjSysStep s (.branch bi)).1 (.join pc1)).1 (.join pc2)).1.tmask = s.tmask ∧ (bjSysStep (bjSysStep s (.branch bi)).1 (.join pc1)).1.tmask = (bjPushentry bi).newMask :=`
+- **bjT3_underflow_safe** (line 606): `theorem bjT3_underflow_safe {depth nT : Nat} [NeZero depth] (s : BjStackState depth nT) (i : BjStackIn nT) (hwr : s.wr = 0) (hp : i.push = false) : bjStackStep s i = s :=`
+- **bjT4_mask_partition** (line 614): `theorem bjT4_mask_partition (bi : BjBranchIn 32) : bjIfMask bi &&& bjElseMask bi = 0 ∧ bjIfMask bi ||| bjElseMask bi = bi.maskInit :=`
+- **bjT5_push_priority** (line 622): `theorem bjT5_push_priority {depth nT : Nat} [NeZero depth] (s : BjStackState depth nT) (i : BjStackIn nT) (hp : i.push = true) : bjStackStep s i = bjStackStep s { i with pop :=`
+
+### `Ventus/SIMT/BranchJoinBounds.lean`
+
+- **bjbFoldl_add** (line 54): `theorem bjbFoldl_add {α : Type} (l : List α) (f : α → Nat) (a : Nat) : l.foldl (fun acc i => acc + f i) a = a + l.foldl (fun acc i => acc + f i) 0 :=`
+- **bjbFoldl_split** (line 64): `theorem bjbFoldl_split {α : Type} (l : List α) {f f1 f2 : α → Nat} (h : ∀ x ∈ l, f x = f1 x + f2 x) (a1 a2 : Nat) : l.foldl (fun acc i => acc + f i) (a1 + a2) = l.foldl (fun acc i => acc + f1 i) a1 + l.foldl (fun acc i => acc + f2 i) a2 :=`
+- **bjbFoldl_eq_zero** (line 79): `theorem bjbFoldl_eq_zero {α : Type} (l : List α) (f : α → Nat) (h : l.foldl (fun acc i => acc + f i) 0 = 0) : ∀ x ∈ l, f x = 0 :=`
+- **bjbPopcount_or_of_disjoint** (line 94): `theorem bjbPopcount_or_of_disjoint {n : Nat} {a b : BitVec n} (h : a &&& b = 0) : bjPopcount (a ||| b) = bjPopcount a + bjPopcount b :=`
+- **bjbPopcount_partition** (line 114): `theorem bjbPopcount_partition {n : Nat} (v m : BitVec n) : bjPopcount (v &&& m) + bjPopcount (~~~v &&& m) = bjPopcount m :=`
+- **bjbPopcount_pos** (line 132): `theorem bjbPopcount_pos {n : Nat} {m : BitVec n} (h : m ≠ 0) : 1 ≤ bjPopcount m :=`
+- **bjbPopcount_le_of_sub** (line 150): `theorem bjbPopcount_le_of_sub {n : Nat} {a b : BitVec n} (h : a &&& b = a) : bjPopcount a ≤ bjPopcount b :=`
+- **bjbDivOccur_iff** (line 175): `theorem bjbDivOccur_iff {nT : Nat} (bi : BjBranchIn nT) : bjDivOccur bi = true ↔ bjIfMask bi ≠ 0 ∧ bjElseMask bi ≠ 0 :=`
+- **bjbTakeif_if_half** (line 182): `theorem bjbTakeif_if_half {nT : Nat} (bi : BjBranchIn nT) (hdiv : bjDivOccur bi = true) (htk : bjTakeif bi = true) : 2 * bjPopcount (bjIfMask bi) ≤ bjPopcount bi.maskInit :=`
+- **bjbTakeif_else_half** (line 199): `theorem bjbTakeif_else_half {nT : Nat} (bi : BjBranchIn nT) (hdiv : bjDivOccur bi = true) (htk : bjTakeif bi = false) : 2 * bjPopcount (bjElseMask bi) ≤ bjPopcount bi.maskInit :=`
+- **bjbDiscipline_popcount** (line 221): `theorem bjbDiscipline_popcount {depth nT : Nat} (s : BjSysState depth nT) (bi : BjBranchIn nT) (h : bjbMaskDiscipline s bi) : bjPopcount bi.maskInit ≤ bjPopcount s.tmask :=`
+- **bjbDivOccur_sides_pos** (line 227): `theorem bjbDivOccur_sides_pos {nT : Nat} (bi : BjBranchIn nT) (hdiv : bjDivOccur bi = true) : 1 ≤ bjPopcount (bjIfMask bi) ∧ 1 ≤ bjPopcount (bjElseMask bi) :=`
+- **bjbLegal_init** (line 322): `theorem bjbLegal_init : bjbLegal ⟨[], 32⟩ :=`
+- **bjbTopCond_mono** (line 326): `theorem bjbTopCond_mono (stk : List BjbLevel) {c c' : Nat} (h : bjbTopCond stk c) (hc : c' ≤ c) : bjbTopCond stk c' :=`
+- **bjbChain_push_below** (line 337): `theorem bjbChain_push_below {cur : Nat} {stk : List BjbLevel} (hchain : bjbChain none stk) (htop : bjbTopCond stk cur) (hcur2 : 2 ≤ cur) : bjbChain (some cur) stk :=`
+- **bjbChain_promote** (line 354): `theorem bjbChain_promote {hi : Nat} {stk : List BjbLevel} (h : bjbChain (some hi) stk) : bjbChain none stk ∧ bjbTopCond stk hi :=`
+- **bjbLegal_step** (line 366): `theorem bjbLegal_step (st : BjbAbsState) (e : BjbAbsEvent) (h : bjbLegal st) : bjbLegal (bjbAbsStep st e) :=`
+- **bjbLegal_run** (line 438): `theorem bjbLegal_run (st : BjbAbsState) (es : List BjbAbsEvent) (h : bjbLegal st) : bjbLegal (bjbAbsRun st es) :=`
+- **bjbWr_add_le_botM** (line 452): `theorem bjbWr_add_le_botM (ahi : Nat) (stk : List BjbLevel) (h : bjbChain (some ahi) stk) : bjbWr stk + ahi ≤ bjbBotM ahi stk :=`
+- **bjbBotM_le_32** (line 474): `theorem bjbBotM_le_32 (ahi : Nat) (stk : List BjbLevel) (h : bjbChain (some ahi) stk) (hahi : ahi ≤ 32) : bjbBotM ahi stk ≤ 32 :=`
+- **bjbWr_le_32** (line 483): `theorem bjbWr_le_32 (st : BjbAbsState) (h : bjbLegal st) : bjbWr st.stk ≤ 32 :=`
+- **bjbMain_no_overflow** (line 500): `theorem bjbMain_no_overflow (st : BjbAbsState) (es : List BjbAbsEvent) (h : bjbLegal st) : bjbWr (bjbAbsRun st es).stk ≤ 32 ∧ bjbLegal (bjbAbsRun st es) :=`
+- **bjbTight_peel_peak** (line 513): `theorem bjbTight_peel_peak : bjbWr (bjbAbsRun ⟨[], 32⟩ (bjbPeelFrom 32 30 ++ [.push 1 1])).stk = 32 :=`
+- **bjbTight_peak_legal** (line 518): `theorem bjbTight_peak_legal : bjbLegal (bjbAbsRun ⟨[], 32⟩ (bjbPeelFrom 32 30 ++ [.push 1 1])) :=`
+- **bjbTight_peel_drain** (line 523): `theorem bjbTight_peel_drain : let s :=`
+- **bjbWr_nop** (line 535): `theorem bjbWr_nop {depth nT : Nat} [NeZero depth] (s : BjSysState depth nT) : (bjSysStep s .nop).1.stack.wr = s.stack.wr :=`
+- **bjbWr_branch** (line 539): `theorem bjbWr_branch {depth nT : Nat} [NeZero depth] (s : BjSysState depth nT) (bi : BjBranchIn nT) : (bjSysStep s (.branch bi)).1.stack.wr = if bjDivOccur bi then s.stack.wr + 2 else s.stack.wr :=`
+- **bjbWr_join** (line 547): `theorem bjbWr_join {depth nT : Nat} [NeZero depth] (s : BjSysState depth nT) (pc : BitVec 32) : (bjSysStep s (.join pc)).1.stack.wr = if bjStackJump s.stack (bjJoinIn pc) then s.stack.wr - 1 else s.stack.wr :=`
+- **pcB1_beat** (line 601): `theorem pcB1_beat : pcS1.1.stack.wr = 2 ∧ pcS1.1.tmask = 0b000001 ∧ (pcB1.maskInit &&& pcInit.tmask) = pcB1.maskInit :=`
+- **pcJ1_beat** (line 606): `theorem pcJ1_beat : pcS2.1.stack.wr = 1 ∧ pcS2.1.tmask = 0b111110 :=`
+- **pcB2_beat** (line 609): `theorem pcB2_beat : pcS3.1.stack.wr = 3 ∧ pcS3.1.tmask = 0b000010 ∧ (pcB2.maskInit &&& pcS2.1.tmask) = pcB2.maskInit :=`
+- **pcJ2_beat** (line 613): `theorem pcJ2_beat : pcS4.1.stack.wr = 2 ∧ pcS4.1.tmask = 0b111100 :=`
+- **pcB3_beat** (line 615): `theorem pcB3_beat : pcS5.1.stack.wr = 4 ∧ pcS5.1.tmask = 0b000100 ∧ (pcB3.maskInit &&& pcS4.1.tmask) = pcB3.maskInit :=`
+- **pcJ3_beat** (line 619): `theorem pcJ3_beat : pcS6.1.stack.wr = 3 ∧ pcS6.1.tmask = 0b111000 :=`
+- **pcB4_beat** (line 621): `theorem pcB4_beat : pcS7.1.stack.wr = 5 ∧ pcS7.1.tmask = 0b001000 ∧ (pcB4.maskInit &&& pcS6.1.tmask) = pcB4.maskInit :=`
+- **pcJ4_beat** (line 625): `theorem pcJ4_beat : pcS8.1.stack.wr = 4 ∧ pcS8.1.tmask = 0b110000 :=`
+- **pcB5_peak** (line 628): `theorem pcB5_peak : pcS9.1.stack.wr = 6 ∧ pcS9.1.stack.wr.toNat = 6 ∧ pcS9.1.tmask = 0b100000 ∧ (pcB5.maskInit &&& pcS8.1.tmask) = pcB5.maskInit :=`
+- **pcJ5a_beat** (line 634): `theorem pcJ5a_beat : pcS10.1.stack.wr = 5 ∧ pcS10.1.tmask = 0b010000 :=`
+- **pcJ5b_beat** (line 636): `theorem pcJ5b_beat : pcS11.1.stack.wr = 4 ∧ pcS11.1.tmask = 0b110000 :=`
+- **pcDrain** (line 639): `theorem pcDrain : pcS15.1.stack.wr = 0 ∧ pcS15.1.tmask = 0b111111 :=`
+- **ha_halve_level1** (line 674): `theorem ha_halve_level1 : haS1.1.stack.wr = 2 ∧ haS1.1.tmask = 0xFFFF0000 :=`
+- **ha_halve_level2** (line 676): `theorem ha_halve_level2 : haS2.1.stack.wr = 4 ∧ haS2.1.tmask = 0xFF000000 :=`
+- **ha_halve_level3** (line 678): `theorem ha_halve_level3 : haS3.1.stack.wr = 6 ∧ haS3.1.tmask = 0xF0000000 :=`
+- **ha_halve_level4** (line 680): `theorem ha_halve_level4 : haS4.1.stack.wr = 8 ∧ haS4.1.tmask = 0xC0000000 :=`
+- **ha_halve_level5** (line 683): `theorem ha_halve_level5 : haS5.1.stack.wr = 10 ∧ haS5.1.tmask = 0x80000000 :=`
+- **ha_halve_level6_nodiv** (line 686): `theorem ha_halve_level6_nodiv : haS6.1.stack.wr = 10 ∧ haS6.1.tmask = 0x80000000 :=`
+
+### `Ventus/SIMT/BranchJoinOverflow.lean`
+
+- **bjoT0_slot_math** (line 139): `theorem bjoT0_slot_math : 2 * 16 % 32 = 0 ∧ (2 * 16 + 1) % 32 = 1 :=`
+- **bjoT1_wr_unwrapped** (line 142): `theorem bjoT1_wr_unwrapped : bjoStateAfterPush.stack.wr = 34 :=`
+- **bjoT2_slot_alias** (line 146): `theorem bjoT2_slot_alias : (bjIdx (32 : BitVec (bjPtrWidth 32))).val = 0 ∧ (bjIdx (33 : BitVec (bjPtrWidth 32))).val = 1 :=`
+- **bjoT3a_slots_before** (line 152): `theorem bjoT3a_slots_before : (bjRun bjoInit [.branch (bjoBranch 0)]).stack.mem ⟨0, by decide⟩ = ⟨bjoReconPC 0, bjoReconPC 0, 0xFFFFFFFF⟩ ∧ (bjRun bjoInit [.branch (bjoBranch 0)]).stack.mem ⟨1, by decide⟩ = ⟨bjoReconPC 0, bjoPCbranch 0, 0xFFFFFFFE⟩ :=`
+- **bjoT3b_slots_after** (line 162): `theorem bjoT3b_slots_after : bjoStateAfterPush.stack.mem ⟨0, by decide⟩ = ⟨bjoReconPC 16, bjoReconPC 16, 1⟩ ∧ bjoStateAfterPush.stack.mem ⟨1, by decide⟩ = ⟨bjoReconPC 16, bjoPCbranch 16, 0xFFFFFFFE⟩ :=`
+- **bjoT4_mid** (line 169): `theorem bjoT4_mid : bjoStateAfterPop.stack.wr = 2 ∧ bjoStateAfterPop.stack.rd = 1 ∧ bjoIdealAfterPop.stk.length = 2 :=`
+- **bjoT5_witness_lost_join** (line 178): `theorem bjoT5_witness_lost_join : bjoConcreteFinal.2.popJump = false ∧ bjoConcreteFinal.2.fetchJump = false ∧ bjoIdealFinal.2.popJump = true ∧ bjoIdealFinal.2.popPC = bjoPCbranch 0 ∧ bjoIdealFinal.2.popMask = 0xFFFFFFFE :=`
+- **bjoT6_witness_ghost_pop** (line 188): `theorem bjoT6_witness_ghost_pop : (bjSysStep bjoStateAfterPop (.join (bjoReconPC 16))).2.popJump = true ∧ (bjSysStep bjoStateAfterPop (.join (bjoReconPC 16))).2.popPC = bjoPCbranch 16 ∧ (bjoIdealStep bjoIdealAfterPop (.join (bjoReconPC 16))).2.popJump = false :=`
+
+### `Ventus/SIMT/PCcontrol.lean`
+
+- **pccTestAlign0** (line 107): `theorem pccTestAlign0 : pccAlign 0x0#32 = (0x0#32, 0b11#2) :=`
+- **pccTestAlign8** (line 108): `theorem pccTestAlign8 : pccAlign 0x8#32 = (0x8#32, 0b11#2) :=`
+- **pccTestAlign10** (line 109): `theorem pccTestAlign10 : pccAlign 0x10#32 = (0x10#32, 0b11#2) :=`
+- **pccTestAlign4** (line 111): `theorem pccTestAlign4 : pccAlign 0x4#32 = (0x0#32, 0b10#2) :=`
+- **pccTestAlignC** (line 112): `theorem pccTestAlignC : pccAlign 0xC#32 = (0x8#32, 0b10#2) :=`
+- **pccTestAlignHi** (line 114): `theorem pccTestAlignHi : pccAlign 0xFFFFFFFC#32 = (0xFFFFFFF8#32, 0b10#2) :=`
+- **pccTestAlign1** (line 116): `theorem pccTestAlign1 : pccAlign 0x1#32 = (0x0#32, 0b10#2) :=`
+- **pccTestAlign5** (line 117): `theorem pccTestAlign5 : pccAlign 0x5#32 = (0x0#32, 0b00#2) :=`
+- **pccTestReplay** (line 129): `theorem pccTestReplay : pccStep ⟨0x100#32, 0b10#2⟩ ⟨0x200#32, true, 2#2, 0b01#2⟩ = ⟨0x100#32, 0b10#2⟩ :=`
+- **pccTestSeq** (line 133): `theorem pccTestSeq : pccStep ⟨0x100#32, 0b10#2⟩ pccSeqIn = ⟨0x108#32, 0b11#2⟩ :=`
+- **pccTestBranch** (line 137): `theorem pccTestBranch : pccStep ⟨0x100#32, 0b10#2⟩ ⟨0x204#32, false, 1#2, 0b01#2⟩ = ⟨0x200#32, 0b10#2⟩ :=`
+- **pccTestMiss** (line 141): `theorem pccTestMiss : pccStep ⟨0x100#32, 0b10#2⟩ ⟨0x180#32, false, 3#2, 0b01#2⟩ = ⟨0x180#32, 0b01#2⟩ :=`
+- **pccTestHold** (line 145): `theorem pccTestHold : pccStep ⟨0x100#32, 0b10#2⟩ ⟨0x200#32, false, 0#2, 0b01#2⟩ = ⟨0x100#32, 0b10#2⟩ :=`
+- **pccTestRunSeq** (line 149): `theorem pccTestRunSeq : (pccRun ⟨0x100#32, 0b11#2⟩ (List.replicate 4 pccSeqIn)).pout = 0x120#32 :=`
+- **pccTestReset** (line 153): `theorem pccTestReset : pccStep (pccInit 0b00#2) pccResetIn = ⟨0#32, 0b11#2⟩ :=`
+- **pccT1a_align** (line 165): `theorem pccT1a_align (pc : BitVec 32) : (pccAlign pc).1 &&& 7#32 = 0 ∧ (pccAlign pc).1 ≤ pc ∧ pc - (pccAlign pc).1 ≤ 7#32 :=`
+- **pccT1b_mask_bit0** (line 173): `theorem pccT1b_mask_bit0 (pc : BitVec 32) : (pccAlign pc).2.getLsbD 0 = true ↔ pc ≤ pc &&& 0xFFFFFFF8#32 :=`
+- **pccT1b_mask_bit1** (line 178): `theorem pccT1b_mask_bit1 (pc : BitVec 32) : (pccAlign pc).2.getLsbD 1 = true ↔ pc ≤ (pc &&& 0xFFFFFFF8#32) + 4#32 :=`
+- **pccT1c_mask_contiguous** (line 185): `theorem pccT1c_mask_contiguous (pc : BitVec 32) : (pccAlign pc).2.getLsbD 0 = true → (pccAlign pc).2.getLsbD 1 = true :=`
+- **pccT1c_mask_word_aligned** (line 190): `theorem pccT1c_mask_word_aligned (pc : BitVec 32) (h : pc &&& 3#32 = 0) : (pccAlign pc).2 = if pc &&& 7#32 = 0 then 0b11#2 else 0b10#2 :=`
+- **pccT2_replay** (line 196): `theorem pccT2_replay (s : PccState) (i : PccIn) (hr : i.replay = true) : pccStep s i = s :=`
+- **pccT2_seq** (line 200): `theorem pccT2_seq (s : PccState) (i : PccIn) (hr : i.replay = false) (hs : i.src = 2#2) : pccStep s i = ⟨s.pout + 8#32, 3#2⟩ :=`
+- **pccT2_src1** (line 205): `theorem pccT2_src1 (s : PccState) (i : PccIn) (hr : i.replay = false) (hs : i.src = 1#2) : pccStep s i = ⟨(pccAlign i.newPC).1, (pccAlign i.newPC).2⟩ :=`
+- **pccT2_src3** (line 210): `theorem pccT2_src3 (s : PccState) (i : PccIn) (hr : i.replay = false) (hs3 : i.src = 3#2) : pccStep s i = ⟨i.newPC, i.maskI⟩ :=`
+- **pccT2_hold** (line 215): `theorem pccT2_hold (s : PccState) (i : PccIn) (hr : i.replay = false) (hs2 : i.src ≠ 2#2) (hs1 : i.src ≠ 1#2) (hs3 : i.src ≠ 3#2) : pccStep s i = s :=`
+- **pccT3_seq_advance** (line 222): `theorem pccT3_seq_advance (s : PccState) (n : Nat) : (pccRun s (List.replicate n pccSeqIn)).pout = s.pout + 8#32 * BitVec.ofNat 32 n :=`
+- **pccT4_src1_determines** (line 240): `theorem pccT4_src1_determines (s s' : PccState) (i : PccIn) (hr : i.replay = false) (hs : i.src = 1#2) : pccStep s i = ⟨(pccAlign i.newPC).1, pccAlignMask i.newPC⟩ ∧ pccStep s i = pccStep s' i :=`
+- **pccReset_deterministic** (line 249): `theorem pccReset_deterministic (m : BitVec 2) : pccStep (pccInit m) pccResetIn = ⟨0#32, 0b11#2⟩ :=`
+
+### `Ventus/SIMT/PcReconv.lean`
+
+- **pcrQ1FStep_correct** (line 116): `theorem pcrQ1FStep_correct (q : PcrQ1F α) (i : PcrQ1FIn α) : pcrQ1FStep q i = pcrQ1FStepRef q i :=`
+- **pcrSan_flowthrough** (line 125): `theorem pcrSan_flowthrough : let q : PcrQ1F (BitVec 8) :=`
+- **pcrSan_store** (line 131): `theorem pcrSan_store : let q : PcrQ1F (BitVec 8) :=`
+- **pcrSan_full_hold** (line 137): `theorem pcrSan_full_hold : let q : PcrQ1F (BitVec 8) :=`
+- **pcrSan_full_drain_no_enq** (line 143): `theorem pcrSan_full_drain_no_enq : let q : PcrQ1F (BitVec 8) :=`
+- **pcrT_vbranch_valid_gated** (line 162): `theorem pcrT_vbranch_valid_gated (inputV simtR valuR : Bool) : pcrOutSIMTValid true inputV simtR valuR = true → simtR = true :=`
+- **pcrT_join_valid_ungated** (line 168): `theorem pcrT_join_valid_ungated (inputV simtR valuR : Bool) : pcrOutSIMTValid false inputV simtR valuR = inputV :=`
+- **pcrT_lockstep** (line 191): `theorem pcrT_lockstep (p : PcrPair α β) (enqV : Bool) (cb : α) (rb : β) (deqR : Bool) (h : pcrLockstep p) : pcrLockstep (pcrPairStep p enqV cb rb deqR) :=`
+- **pcrT_enqFire_eq** (line 198): `theorem pcrT_enqFire_eq (p : PcrPair α β) (h : pcrLockstep p) (enqV deqR : Bool) : pcrDoEnq p.ctl enqV deqR = pcrDoEnq p.rpc enqV deqR :=`
+- **pcrT_deqFire_eq** (line 204): `theorem pcrT_deqFire_eq (p : PcrPair α β) (h : pcrLockstep p) (enqV deqR : Bool) : pcrDeqFire p.ctl enqV deqR = pcrDeqFire p.rpc enqV deqR :=`
+- **pcrT_pending_stable** (line 211): `theorem pcrT_pending_stable (q : PcrQ1F α) (i : PcrQ1FIn α) (h : q.full = true) : (pcrQ1FStep q i).data = q.data :=`
+- **pcrT_count_equal** (line 224): `theorem pcrT_count_equal (p : PcrPair α β) (t : List (Bool × α × β × Bool)) (n : Nat) (h : pcrLockstep p) : (pcrRunC p n n t).1 = (pcrRunC p n n t).2 :=`
+- **pcrPairInit_lockstep** (line 239): `theorem pcrPairInit_lockstep (cd : α) (rd : β) : pcrLockstep (pcrPairInit cd rd) :=`
+- **pcrMain_i31_excluded** (line 245): `theorem pcrMain_i31_excluded (cd : α) (rd : β) (t : List (Bool × α × β × Bool)) (n : Nat) : (pcrRunC (pcrPairInit cd rd) n n t).1 = (pcrRunC (pcrPairInit cd rd) n n t).2 :=`
+- **pcrW1_store** (line 273): `theorem pcrW1_store : wS1.ctl.full = true ∧ wS1.rpc.full = true ∧ wS1.ctl.data = wA ∧ wS1.rpc.data = wAr :=`
+- **pcrW2_stall_no_dup** (line 278): `theorem pcrW2_stall_no_dup : pcrDoEnq wS1.rpc true false = false ∧ pcrDoEnq wS1.ctl true false = false ∧ wS2.rpc.full = true ∧ wS2.rpc.data = wAr ∧ wS2.ctl.data = wA :=`
+- **pcrW3_drain_A** (line 284): `theorem pcrW3_drain_A : pcrDeqFire wS2.ctl true true = true ∧ pcrDeqFire wS2.rpc true true = true ∧ pcrDeqBits wS2.ctl wB = wA ∧ pcrDeqBits wS2.rpc wBr = wAr ∧ pcrDoEnq wS2.ctl true true = false ∧ pcrDoEnq wS2.rpc true true = false ∧ wS3.ctl.full = false ∧ wS3.rpc.full = false :=`
+- **pcrW4_flow_B_once** (line 291): `theorem pcrW4_flow_B_once : pcrDeqFire wS3.ctl true true = true ∧ pcrDeqFire wS3.rpc true true = true ∧ pcrDeqBits wS3.ctl wB = wB ∧ pcrDeqBits wS3.rpc wBr = wBr ∧ pcrDoEnq wS3.rpc true true = false ∧ wS4.ctl.full = false ∧ wS4.rpc.full = false :=`
+- **pcrW5_count** (line 297): `theorem pcrW5_count : (pcrRunC wS0 0 0 wTrace).1 = 1 ∧ (pcrRunC wS0 0 0 wTrace).2 = 1 :=`
+
+### `Ventus/SM.lean`
+
+- **smT1_fetch_enq** (line 608): `theorem smT1_fetch_enq : (smCAt 1).fetchV = true ∧ (smCAt 1).ibEnqFire = true :=`
+- **smT2_fetch_grp** (line 613): `theorem smT2_fetch_grp : (smCAt 1).fetchWid = 0#3 ∧ (smCAt 1).fetchGrp.mask = 3#2 :=`
+- **smT3_ib_queue** (line 618): `theorem smT3_ib_queue : ((smSAt 2).ib.lanes 0).absTags = [0#8, 1#8] :=`
+- **smT4_cu_accept** (line 623): `theorem smT4_cu_accept : (smCAt 3).i2iXFire = true ∧ (smCAt 3).i2iXWid = 0#3 :=`
+- **smT5_cu_collect** (line 628): `theorem smT5_cu_collect : (smCuAt (smSAt 4) 1).state = 1#2 :=`
+- **smT6_wb_x1** (line 634): `theorem smT6_wb_x1 : (smCAt 6).wbXFire = true ∧ (smCAt 6).wbXIdxw = 1#8 ∧ (smCAt 6).wbXData = 1#32 :=`
+
+### `Ventus/SMCSR.lean`
+
+- **smcsrT_csrWbData_wire** (line 550): `theorem smcsrT_csrWbData_wire (prog : SmProg) (s : SmcsrState) (inp : SmcsrIn) : (smcsrComb prog s inp).csrWbData = csrExeWbWxdRd s.csrF (wsFin (smcsrComb prog s inp).outXWid) (smcsrComb prog s inp).csrInp :=`
+- **smcsrT_wbXData_sel** (line 557): `theorem smcsrT_wbXData_sel (prog : SmProg) (s : SmcsrState) (inp : SmcsrIn) : (smcsrComb prog s inp).wbXData = (if (smcsrComb prog s inp).wbXChoice.val = 0 then (smcsrComb prog s inp).aluOut else (smcsrComb prog s inp).csrWbData) :=`
+- **smcsrT_step_csrF** (line 565): `theorem smcsrT_step_csrF (prog : SmProg) (s : SmcsrState) (inp : SmcsrIn) (k : Fin 8) : (smcsrStep prog s inp).csrF k = csrStep (s.csrF k) (csrPerWarpInput (smcsrComb prog s inp).csrInp (smcsrComb prog s inp).fireCsr (smcsrComb prog s inp).outXWid inp.base.reqWid (BitVec.ofNat 3 k.val)) :=`
+- **smcsrT_i33_vl_dead** (line 574): `theorem smcsrT_i33_vl_dead (prog : SmProg) (s : SmcsrState) (inp : SmcsrIn) (k : Fin 8) : ((smcsrStep prog s inp).csrF k).vl = (s.csrF k).vl :=`
+- **smcsrTrace_ok** (line 767): `theorem smcsrTrace_ok : smcsrRunChk smcsrProg smcsrIns = smcsrExp :=`
+
+### `Ventus/SMICache.lean`
+
+- **smicT1_first_miss_replay** (line 433): `theorem smicT1_first_miss_replay : (smicCAt 3).rspV = true ∧ (smicCAt 3).rspSt = 1#2 ∧ (smicCAt 3).base.ibEnqFire = false ∧ (smicCAt 3).base.pccIn 0 = ⟨0#32, false, 3#2, 3#2⟩ :=`
+- **smicT2_fetch_stall** (line 441): `theorem smicT2_fetch_stall : ((List.range 9).all fun k => !(smicCAt k).base.ibEnqFire) = true ∧ (smCAt 1).ibEnqFire = true :=`
+- **smicT3_false_miss_replay** (line 450): `theorem smicT3_false_miss_replay : (smicCAt 4).memRspV = true ∧ (smicCAt 6).rspV = true ∧ (smicCAt 6).rspSt = 3#2 ∧ (smicCAt 6).rspAddr = 0#32 ∧ (smicCAt 6).rspWid = 0#3 ∧ (smicCAt 6).base.pccIn 0 = ⟨0#32, false, 3#2, 3#2⟩ :=`
+- **smicT3b_no_duplicate_memreq** (line 459): `theorem smicT3b_no_duplicate_memreq : ((List.range 45).filter fun k => (smicCAt k).memReqV) = [3] :=`
+- **smicT4_hit_enq** (line 465): `theorem smicT4_hit_enq : (smicCAt 9).rspV = true ∧ (smicCAt 9).rspSt = 0#2 ∧ (smicCAt 9).base.ibEnqFire = true ∧ ((smicSAt 10).sm.ib.lanes 0).absTags = [0#8, 1#8] :=`
+- **smicT5_wb_refine** (line 474): `theorem smicT5_wb_refine : smicWbEv 45 = smWbEv 45 ∧ smWbEv 45 = [(1#8, 1#32), (2#8, 3#32), (4#8, 4#32)] :=`
+- **smicT6_endprg** (line 480): `theorem smicT6_endprg : (smicSAt 45).sm.ws.warpActive = 0#8 :=`
+- **smicT7_all_hit** (line 488): `theorem smicT7_all_hit : ((List.range' 45 26).all fun k => !smicRspRawMiss (smicCAt2 k)) = true ∧ ((List.range' 45 3).all fun k => !(smicCAt2 k).base.ibEnqFire) = true ∧ (smicCAt2 48).base.ibEnqFire = true :=`
+- **smicT7b_q2_forced_replay** (line 498): `theorem smicT7b_q2_forced_replay : (smicCAt2 51).rspV = true ∧ (smicCAt2 51).rspSt = 0#2 ∧ (smicCAt2 51).rspStF = 1#2 ∧ (smicCAt2 51).base.ibEnqFire = false ∧ (smicCAt2 57).base.ibEnqFire = true ∧ (smicCAt2 57).rspAddr = 0x18#32 :=`
+- **smicT8_warm_refine** (line 506): `theorem smicT8_warm_refine : smicWbEv2 45 71 = [(1#8, 1#32), (2#8, 3#32), (4#8, 4#32)] :=`
+
+### `Ventus/SMMaskedMem.lean`
+
+- **smmmDlTrace_deadlock** (line 198): `theorem smmmDlTrace_deadlock : (smmmDlRunChk smmmDlProg smmmDlIns).finOk = true :=`
+
+### `Ventus/SMMem.lean`
+
+- **smmT_shreq_setidx_wire** (line 675): `theorem smmT_shreq_setidx_wire (prog : SmProg) (s : SmmState) (inp : SmIn) : ((smmComb prog s inp).shIn.req.setIdx) = ((smmComb prog s inp).lsuOut.sharedBits.setIdx).zeroExtend 10 :=`
+- **smmT_mshr_addrTag_wire** (line 680): `theorem smmT_mshr_addrTag_wire (prog : SmProg) (s : SmmState) (inp : SmIn) : ((smmComb prog s inp).mshrIn.addrTag) = smmMshrTagOf ((smmComb prog s inp).lsuOut.mshrTag) :=`
+- **smmT_mshr_dcvalid_wire** (line 686): `theorem smmT_mshr_dcvalid_wire (prog : SmProg) (s : SmmState) (inp : SmIn) : ((smmComb prog s inp).mshrIn.dcValid) = (smmComb prog s inp).shRspV :=`
+- **smmT_wbValids_bit2** (line 690): `theorem smmT_wbValids_bit2 (a l c : Bool) : (((BitVec.ofBool a).zeroExtend 6 ||| ((BitVec.ofBool l).zeroExtend 6 <<< 2) ||| ((BitVec.ofBool c).zeroExtend 6 <<< 3)) &&& 4#6) = ((BitVec.ofBool l).zeroExtend 6 <<< 2) :=`
+- **smmT_wbVValids_bit2** (line 697): `theorem smmT_wbVValids_bit2 (v l : Bool) : (((BitVec.ofBool v).zeroExtend 6 ||| ((BitVec.ofBool l).zeroExtend 6 <<< 2)) &&& 4#6) = ((BitVec.ofBool l).zeroExtend 6 <<< 2) :=`
+- **smmT_wbVValids_lsu_wire** (line 703): `theorem smmT_wbVValids_lsu_wire (prog : SmProg) (s : SmmState) (inp : SmIn) : ((smmComb prog s inp).wbVValids &&& (1#6 <<< 2)) = ((BitVec.ofBool (smmComb prog s inp).lsuWbVV).zeroExtend 6 <<< 2) :=`
+- **smmT_wbXValids_lsu_wire** (line 709): `theorem smmT_wbXValids_lsu_wire (prog : SmProg) (s : SmmState) (inp : SmIn) : ((smmComb prog s inp).wbXValids &&& (1#6 <<< 2)) = ((BitVec.ofBool (smmComb prog s inp).lsuWbXV).zeroExtend 6 <<< 2) :=`
+- **smmT_lsuRspRdy_wire** (line 715): `theorem smmT_lsuRspRdy_wire (prog : SmProg) (s : SmmState) (inp : SmIn) : (smmComb prog s inp).lsuRspRdy = Mem.lsu2wbRspReady ⟨(smmComb prog s inp).rspValid, ⟨(smmComb prog s inp).rspTag, (smmComb prog s inp).rspData⟩, wbArbInReady (smmComb prog s inp).wbXValids true ⟨2, by decide⟩, wbArbInReady (smmComb prog s inp).wbVValids true ⟨2, by decide⟩⟩ :=`
+- **smmT_boards_step_wire** (line 724): `theorem smmT_boards_step_wire (prog : SmProg) (s : SmmState) (inp : SmIn) : (smmStep prog s inp).boards = Mem.lsuSbStepAll s.boards (smmComb prog s inp).fireLsu (smmComb prog s inp).lsuReqWid (smmComb prog s inp).lsuRspFire (smmComb prog s inp).rspWid :=`
+- **smmT_fenceEnd_wire** (line 731): `theorem smmT_fenceEnd_wire (prog : SmProg) (s : SmmState) (inp : SmIn) (w : Fin 8) : ((smmComb prog s inp).sbIn w).fence_end = Mem.lsuSbEmpty (s.boards (BitVec.ofNat 3 w.val)) (Mem.lsuSbLeftOf (smmComb prog s inp).fireLsu (smmComb prog s inp).lsuReqWid (BitVec.ofNat 3 w.val)) (Mem.lsuSbRightOf (smmComb prog s inp).lsuRspFire (smmComb prog s inp).rspWid (BitVec.ofNat 3 w.val)) :=`
+- **smmTraceA_ok** (line 951): `theorem smmTraceA_ok : smmRunChkA smmProgA smmInsA = smmExpA :=`
+- **smmTraceB_ok** (line 1080): `theorem smmTraceB_ok : smmRunChkB smmProgB smmInsB = smmExpB :=`
+
+### `Ventus/SMMemDc.lean`
+
+- **smdT_dcacheReady_wire** (line 1227): `theorem smdT_dcacheReady_wire (prog : SmProg) (s : SmdState) (inp : SmIn) : (smdComb prog s inp).lsuIn.dcacheReady = (smdDcCombOf s.dc (Mem.mshrDcRdy s.mshr)).reqRdy :=`
+- **smdT_shRspRdy_wire** (line 1233): `theorem smdT_shRspRdy_wire (prog : SmProg) (s : SmdState) (inp : SmIn) : (smdComb prog s inp).shIn.rspReady = (Mem.mshrDcRdy s.mshr && !(smdDcCombOf s.dc (Mem.mshrDcRdy s.mshr)).rspV) :=`
+- **smdT_arb_mux_wire** (line 1239): `theorem smdT_arb_mux_wire (prog : SmProg) (s : SmdState) (inp : SmIn) : let dcc :=`
+- **smdT_dcstep_wire** (line 1248): `theorem smdT_dcstep_wire (prog : SmProg) (s : SmdState) (inp : SmIn) : (smdStep prog s inp).dc = smdDcStep s.dc (smdComb prog s inp).lsuOut.dcacheValid (smdComb prog s inp).lsuOut.dcacheBits (Mem.mshrDcRdy s.mshr) :=`
+- **smdT_mergeWord** (line 1254): `theorem smdT_mergeWord (o n : BitVec 32) : smdMergeWord o n 0xF#4 = n ∧ smdMergeWord o n 0x0#4 = o ∧ smdMergeWord o n 0x3#4 = (o &&& 0xFFFF0000#32) ||| (n &&& 0x0000FFFF#32) :=`
+- **smdT_micro** (line 1290): `theorem smdT_micro : (((smdDcMicroTrace.drop 2).head?.bind (fun d => d.rspQ)).map (·.instrId) == some 3#3) && (((smdDcMicroTrace.drop 2).head?.bind (fun d => d.rspQ)).map (·.isWrite) == some true) && (((smdDcMicroTrace.drop 2).head?.bind (fun d => d.rspQ)).map (·.mask) == some 0xFFFFFFFF#32) && (smdDcMicroTrace.any (fun dc => dc.rspQ.map (fun r => r.instrId == 4#3 && !r.isWrite && r.dat ⟨0, by decide⟩ == 0xAB00#32 && r.dat ⟨31, by decide⟩ == 0xAB1F#32) == some true)) && (match smdDcMicroTrace.getLast? with | ...`
+- **smdTraceC_ok** (line 1633): `theorem smdTraceC_ok : smdRunChkC smdProgC smdInsC = smdExpC :=`
+- **smdTraceD_ok** (line 1655): `theorem smdTraceD_ok : smdRunChkD smdProgD smdInsD = smdExpD :=`
+
+### `Ventus/SMMemMask.lean`
+
+- **smmmTrace_ok** (line 274): `theorem smmmTrace_ok : smmmRunChk smmmProg smmmIns = smmmExp :=`
+
+### `Ventus/SMTrace.lean`
+
+- **smtA_ok** (line 361): `theorem smtA_ok : smtRunChk smtProg smtCfgA smtInsA = smtExpA :=`
+- **smtB_ok** (line 373): `theorem smtB_ok : smtRunChk smtProg smtCfgB smtInsB = smtExpB :=`
+
+### `Ventus/SMVec.lean`
+
+- **smvT_bj_step_wire** (line 468): `theorem smvT_bj_step_wire (prog : SmProg) (s : SmvState) (inp : SmIn) : (smvStep prog s inp).base.bj = (bjSysStep s.base.bj (smvComb prog s inp).bjEv).1 :=`
+- **smvT_mask_partition** (line 473): `theorem smvT_mask_partition (bi : BjBranchIn 32) : bjIfMask bi &&& bjElseMask bi = 0 ∧ bjIfMask bi ||| bjElseMask bi = bi.maskInit :=`
+- **smvT_complete_or_fetch** (line 479): `theorem smvT_complete_or_fetch (s : BjSysState 4 32) (bi : BjBranchIn 32) : ((bjSysStep s (.branch bi)).2.complete || (bjSysStep s (.branch bi)).2.fetchValid) = true :=`
+- **smvT_join_fetch** (line 484): `theorem smvT_join_fetch (s : BjSysState 4 32) (pc : BitVec 32) : (bjSysStep s (.join pc)).2.fetchValid = true :=`
+- **smvTrace_ok** (line 700): `theorem smvTrace_ok : smvRunChk smvProg smvIns = smvExp :=`
+- **smvT_module_replay** (line 713): `theorem smvT_module_replay : let sfin :=`
+- **smvT_mask_restore_scene** (line 728): `theorem smvT_mask_restore_scene : let s0 :=`
+
+### `Ventus/SMVecWb.lean`
+
+- **smwT_wbData_fidelity** (line 469): `theorem smwT_wbData_fidelity (fn : BitVec 6) (rev : Bool) (mask : BitVec 32) (r1 r2 r3 : Fin 32 → BitVec 32) (t : Fin 32) : smwWbData fn rev mask r1 r2 r3 t = exvLaneRdV2 fn rev (mask.getLsbD t.val) (r1 t) (r2 t) (r3 t) (BitVec.ofNat 32 t.val) :=`
+- **smwT_rfInV_rd_wire** (line 475): `theorem smwT_rfInV_rd_wire (prog : SmProg) (s : SmvState) (inp : SmIn) (i : Fin 4) : ((smwComb prog s inp).rfInV i).rd = (smwComb prog s inp).wbVOutData :=`
+- **smwT_rfInV_rdidx_wire** (line 479): `theorem smwT_rfInV_rdidx_wire (prog : SmProg) (s : SmvState) (inp : SmIn) (i : Fin 4) : ((smwComb prog s inp).rfInV i).rdidx = (smwComb prog s inp).wbVAddr :=`
+- **smwT_rfInV_wen_wire** (line 484): `theorem smwT_rfInV_wen_wire (prog : SmProg) (s : SmvState) (inp : SmIn) (i : Fin 4) : ((smwComb prog s inp).rfInV i).rdwen = ((smwComb prog s inp).wbVWen && ((smwComb prog s inp).wbVBank == BitVec.ofNat 2 i.val)) :=`
+- **smwT_rfInV_mask_wire** (line 490): `theorem smwT_rfInV_mask_wire (prog : SmProg) (s : SmvState) (inp : SmIn) (i : Fin 4) : ((smwComb prog s inp).rfInV i).rdwmask = (smwComb prog s inp).wbVMaskFn :=`
+- **smwT_sbIn_wbV_wire** (line 495): `theorem smwT_sbIn_wbV_wire (prog : SmProg) (s : SmvState) (inp : SmIn) (w : Fin 8) : ((smwComb prog s inp).sbIn w).wb_v_fire = ((smwComb prog s inp).wbVFire && ((smwComb prog s inp).wbVWid == BitVec.ofNat 3 w.val)) :=`
+- **smwT_wbV_fire_eq_valid** (line 502): `theorem smwT_wbV_fire_eq_valid (prog : SmProg) (s : SmvState) (inp : SmIn) : (smwComb prog s inp).wbVFire = (smwComb prog s inp).wbVValid :=`
+- **smwT_wb_value_fidelity** (line 510): `theorem smwT_wb_value_fidelity (c : SmwComb) (rf : RfVState) (i : Fin 4) (t : Fin 32) (hwen : (c.rfInV i).rdwen = true) (hidx : (c.rfInV i).rdidx = c.wbVAddr) (hrd : (c.rfInV i).rd = c.wbVOutData) : (rfVStep rf (c.rfInV i)).mem c.wbVAddr.toFin t = if (c.rfInV i).rdwmask t then c.wbVOutData t else rf.mem c.wbVAddr.toFin t :=`
+- **smwT_wb_value_fidelity_sm** (line 520): `theorem smwT_wb_value_fidelity_sm (prog : SmProg) (s : SmvState) (inp : SmIn) (i : Fin 4) (t : Fin 32) (hwen : ((smwComb prog s inp).rfInV i).rdwen = true) : (rfVStep (smVrfAt s.base i) ((smwComb prog s inp).rfInV i)).mem ((smwComb prog s inp).wbVAddr).toFin t = if ((smwComb prog s inp).rfInV i).rdwmask t then (smwComb prog s inp).wbVOutData t else (smVrfAt s.base i).mem ((smwComb prog s inp).wbVAddr).toFin t :=`
+- **smwT_wb_clears_busy** (line 535): `theorem smwT_wb_clears_busy (prog : SmProg) (s : SmvState) (inp : SmIn) (w : Fin 8) (hf : (smwComb prog s inp).wbVFire = true) (hw : (smwComb prog s inp).wbVWid = BitVec.ofNat 3 w.val) (hd : (smwComb prog s inp).wbVWvd = true) (hns : (((smwComb prog s inp).sbIn w).if_fire && ((smwComb prog s inp).sbIn w).if_ctrl.wvd && (((smwComb prog s inp).sbIn w).if_ctrl.reg_idxw == (smwComb prog s inp).wbVIdxw)) = false) : sbRead false ((smwStep prog s inp).base.sb w).vectorReg (smwComb prog s inp).wbVIdxw = false :=`
+- **smwTrace_ok** (line 771): `theorem smwTrace_ok : smwRunChk smwProg smwIns = smwExp :=`
+
+### `Ventus/Schedule/CollectorUnit.lean`
+
+- **cuT_deadlock_state** (line 680): `theorem cuT_deadlock_state : (cuRun cuInit cuTrDead).state = cuSAdd :=`
+- **cuT_deadlock_rdy** (line 681): `theorem cuT_deadlock_rdy : cuControlRdy (cuRun cuInit cuTrDead) = false :=`
+- **cuT_deadlock_ready** (line 684): `theorem cuT_deadlock_ready : (cuRun cuInit cuTrDead).ready = 7#4 :=`
+- **cuT_deadlock_ready3** (line 685): `theorem cuT_deadlock_ready3 : ((cuRun cuInit cuTrDead).ready &&& 8#4) = 0#4 :=`
+- **cuBv2_cases** (line 693): `theorem cuBv2_cases (x : BitVec 2) : x = cuSIdle ∨ x = cuSAdd ∨ x = cuSOut ∨ x = 3#2 :=`
+- **cuBv2_plain** (line 697): `theorem cuBv2_plain (x : BitVec 2) : x = 0#2 ∨ x = 1#2 ∨ x = 2#2 ∨ x = 3#2 :=`
+- **cuControlFire_state** (line 699): `theorem cuControlFire_state (s : CuState) (i : CuInputs) (h : cuControlFire s i = true) : s.state = cuSIdle :=`
+- **cuControlFire_false_of_not_idle** (line 704): `theorem cuControlFire_false_of_not_idle (s : CuState) (i : CuInputs) (hs : s.state ≠ cuSIdle) : cuControlFire s i = false :=`
+- **cuBankFireK_false** (line 709): `theorem cuBankFireK_false (s : CuState) (i : CuInputs) (k : Nat) (hs : s.state ≠ cuSAdd) (hf : cuControlFire s i = false) : cuBankFireK s i k = false :=`
+- **cuBankFireK_bankV** (line 715): `theorem cuBankFireK_bankV (s : CuState) (i : CuInputs) (k : Nat) (h : cuBankFireK s i k = true) : i.bankV k = true :=`
+- **cuPreBank_state** (line 721): `theorem cuPreBank_state (s : CuState) (i : CuInputs) : (cuPreBank s i).state = cuStateTrans s i :=`
+- **cuPreBank_valid** (line 725): `theorem cuPreBank_valid (s : CuState) (i : CuInputs) : (cuPreBank s i).valid = if s.state == cuSOut then 0#4 else (cuAccept s i).valid :=`
+- **cuPreBank_ready** (line 730): `theorem cuPreBank_ready (s : CuState) (i : CuInputs) : (cuPreBank s i).ready = if s.state == cuSOut then 0#4 else (cuAccept s i).ready :=`
+- **cuPreBank_controlReg** (line 735): `theorem cuPreBank_controlReg (s : CuState) (i : CuInputs) : (cuPreBank s i).controlReg = (cuAccept s i).controlReg :=`
+- **cuPreBank_rsReg0** (line 739): `theorem cuPreBank_rsReg0 (s : CuState) (i : CuInputs) : (cuPreBank s i).rsReg0 = (cuAccept s i).rsReg0 :=`
+- **cuAccept_valid** (line 744): `theorem cuAccept_valid (s : CuState) (i : CuInputs) : (cuAccept s i).valid = if cuControlFire s i then 0xF#4 else s.valid :=`
+- **cuAccept_ready** (line 748): `theorem cuAccept_ready (s : CuState) (i : CuInputs) : (cuAccept s i).ready = if cuControlFire s i then cuReadyWire i.ctrl else s.ready :=`
+- **cuAccept_controlReg** (line 752): `theorem cuAccept_controlReg (s : CuState) (i : CuInputs) : (cuAccept s i).controlReg = if cuControlFire s i then i.ctrl else s.controlReg :=`
+- **cuBankPort_state** (line 757): `theorem cuBankPort_state (pre : CuState) (i : CuInputs) (st : CuState) (k : Nat) : (cuBankPort pre i st k).state = st.state :=`
+- **cuBankPort_valid** (line 763): `theorem cuBankPort_valid (pre : CuState) (i : CuInputs) (st : CuState) (k : Nat) : (cuBankPort pre i st k).valid = st.valid :=`
+- **cuBankPort_controlReg** (line 769): `theorem cuBankPort_controlReg (pre : CuState) (i : CuInputs) (st : CuState) (k : Nat) : (cuBankPort pre i st k).controlReg = st.controlReg :=`
+- **cuBankPort_ready** (line 776): `theorem cuBankPort_ready (pre : CuState) (i : CuInputs) (st : CuState) (k : Nat) : (cuBankPort pre i st k).ready = st.ready ||| (if cuBankFireK pre i k then 1#4 <<< (i.bankB k).regOrder.zeroExtend 4 else 0#4) :=`
+- **cuBankPort_rsReg0** (line 786): `theorem cuBankPort_rsReg0 (pre : CuState) (i : CuInputs) (st : CuState) (k : Nat) (h : cuBankFireK pre i k = false ∨ (i.bankB k).regOrder ≠ 0#2) : (cuBankPort pre i st k).rsReg0 = st.rsReg0 :=`
+- **cuBankPort_ready_bit0** (line 798): `theorem cuBankPort_ready_bit0 (pre : CuState) (i : CuInputs) (st : CuState) (k : Nat) (hb : (st.ready &&& 1#4) = 1#4) : ((cuBankPort pre i st k).ready &&& 1#4) = 1#4 :=`
+- **cuBankShift_bit3** (line 806): `theorem cuBankShift_bit3 (r : BitVec 2) (h : r ≠ 3#2) : ((1#4 <<< r.zeroExtend 4) &&& 8#4) = 0#4 :=`
+- **cuBankPort_ready_bit3** (line 810): `theorem cuBankPort_ready_bit3 (pre : CuState) (i : CuInputs) (st : CuState) (k : Nat) (h : cuBankFireK pre i k = true → (i.bankB k).regOrder ≠ 3#2) (hb : (st.ready &&& 8#4) = 0#4) : ((cuBankPort pre i st k).ready &&& 8#4) = 0#4 :=`
+- **cuBankPort_ready_full** (line 824): `theorem cuBankPort_ready_full (pre : CuState) (i : CuInputs) (st : CuState) (k : Nat) (hb : st.ready = 0xF#4) : (cuBankPort pre i st k).ready = 0xF#4 :=`
+- **cuStep_state** (line 831): `theorem cuStep_state (s : CuState) (i : CuInputs) : (cuStep s i).state = cuStateTrans s i :=`
+- **cuStep_valid** (line 835): `theorem cuStep_valid (s : CuState) (i : CuInputs) : (cuStep s i).valid = (if s.state == cuSOut then 0#4 else if cuControlFire s i then 0xF#4 else s.valid) :=`
+- **cuStep_controlReg** (line 840): `theorem cuStep_controlReg (s : CuState) (i : CuInputs) : (cuStep s i).controlReg = if cuControlFire s i then i.ctrl else s.controlReg :=`
+- **cuReadyWire_bit0** (line 845): `theorem cuReadyWire_bit0 (c : CuCtrl) : (cuReadyWire c &&& 1#4) = if cuRwK c 0 then 1#4 else 0#4 :=`
+- **cuReadyWire_bit3** (line 851): `theorem cuReadyWire_bit3 (c : CuCtrl) : (cuReadyWire c &&& 8#4) = if cuRwK c 3 then 8#4 else 0#4 :=`
+- **cuReadyWire_ne_full_of_rw3** (line 858): `theorem cuReadyWire_ne_full_of_rw3 (c : CuCtrl) (h : cuRwK c 3 = false) : cuReadyWire c ≠ 0xF#4 :=`
+- **cuT2_controlReg_accept** (line 871): `theorem cuT2_controlReg_accept (s : CuState) (i : CuInputs) (hf : cuControlFire s i = true) : (cuStep s i).controlReg = i.ctrl :=`
+- **cuT2_controlReg_hold** (line 875): `theorem cuT2_controlReg_hold (s : CuState) (i : CuInputs) (hf : cuControlFire s i = false) : (cuStep s i).controlReg = s.controlReg :=`
+- **cuT2_issue_control** (line 880): `theorem cuT2_issue_control (s : CuState) : (cuIssueBits s).control = s.controlReg :=`
+- **cuInv_init** (line 892): `theorem cuInv_init : cuInv cuInit :=`
+- **cuInv_step** (line 895): `theorem cuInv_step (s : CuState) (i : CuInputs) (h : cuInv s) : cuInv (cuStep s i) :=`
+- **cuT1_run** (line 997): `theorem cuT1_run (s : CuState) (ins : List CuInputs) (h : cuInv s) : cuInv (cuRun s ins) :=`
+- **cuT1_sout_valid_eq_ready** (line 1006): `theorem cuT1_sout_valid_eq_ready (ins : List CuInputs) (h : (cuRun cuInit ins).state = cuSOut) : (cuRun cuInit ins).valid = (cuRun cuInit ins).ready :=`
+- **cuT4_sout_fire** (line 1013): `theorem cuT4_sout_fire (s : CuState) (i : CuInputs) (hs : s.state = cuSOut) (hr : i.issueReady = true) : (cuStep s i).state = cuSIdle ∧ (cuStep s i).valid = 0#4 ∧ (cuStep s i).ready = 0#4 :=`
+- **cuT3_imm_shortcut** (line 1034): `theorem cuT3_imm_shortcut (s : CuState) (i : CuInputs) (hf : cuControlFire s i = true) (hsel : i.ctrl.sel_alu1 = cuA1_IMM) (hx : cuXbarOk i) : (cuStep s i).rsReg0 = cuBcast (rfImmGen i.ctrl.sel_imm i.ctrl.inst i.ctrl.imm_ext) ∧ ((cuStep s i).ready &&& 1#4) = 1#4 :=`
+- **cuWmask_accept** (line 1071): `theorem cuWmask_accept (s : CuState) (i : CuInputs) (hf : cuControlFire s i = true) (hm : i.ctrl.mask = true) (h3 : ∀ k, cuBankFireK s i k = true → (i.bankB k).regOrder ≠ 3#2) : cuWmaskInv (cuStep s i) :=`
+- **cuWmask_step** (line 1093): `theorem cuWmask_step (s : CuState) (i : CuInputs) (h : cuWmaskInv s) (h3 : ∀ k, cuBankFireK s i k = true → (i.bankB k).regOrder ≠ 3#2) : cuWmaskInv (cuStep s i) :=`
+- **cuWmask_run** (line 1120): `theorem cuWmask_run (s : CuState) (ins : List CuInputs) (h : cuWmaskInv s) (h3 : ∀ j ∈ ins, ∀ k, j.bankV k = true → (j.bankB k).regOrder ≠ 3#2) : cuWmaskInv (cuRun s ins) :=`
+- **cuWmask_deadlock** (line 1136): `theorem cuWmask_deadlock (i0 : CuInputs) (ins : List CuInputs) (hv0 : i0.controlValid = true) (hm : i0.ctrl.mask = true) (h3 : ∀ j ∈ (i0 :: ins), ∀ k, j.bankV k = true → (j.bankB k).regOrder ≠ 3#2) : (cuRun (cuStep cuInit i0) ins).state = cuSAdd ∧ cuControlRdy (cuRun (cuStep cuInit i0) ins) = false :=`
+- **cuQ129_bankInRdy_accept** (line 1158): `theorem cuQ129_bankInRdy_accept (s : CuState) (i : CuInputs) (k : Nat) (hf : cuControlFire s i = true) : cuBankInRdyK s i k = !cuRwK i.ctrl k :=`
+
+### `Ventus/Schedule/I4Fix.lean`
+
+- **i4f_sbUtilStep_clear_set** (line 71): `theorem i4f_sbUtilStep_clear_set {n : Nat} (z : Bool) (r : BitVec n) (se ce : Bool) (sa ca : BitVec 8) : sbUtilStep z r [.clear ce ca, .set se sa] = i4fSbClearSet z r se sa ce ca :=`
+- **i4f_set_wins** (line 90): `theorem i4f_set_wins {r : BitVec 256} {ce : Bool} {a ca : BitVec 8} : sbRead false (i4fSbClearSet false r true a ce ca) a = true :=`
+- **i4f_clear_works** (line 96): `theorem i4f_clear_works {r : BitVec 256} {sa a : BitVec 8} : sbRead false (i4fSbClearSet false r false sa true a) a = false :=`
+- **i4f_race_gone** (line 102): `theorem i4f_race_gone (r : BitVec 1) : i4fSbOpColFix r true true = 1#1 :=`
+- **i4f_orig_race_loses** (line 110): `theorem i4f_orig_race_loses (r : BitVec 1) : i4fSbOpColOrig r true true = 0#1 :=`
+- **i4f_occFix_spec** (line 119): `theorem i4f_occFix_spec (r : BitVec 1) (i o : Bool) : (i4fSbOpColFix r i o == 1#1) = (i || ((r == 1#1) && !o)) :=`
+- **i4f_occOrig_spec** (line 127): `theorem i4f_occOrig_spec (r : BitVec 1) (i o : Bool) : (i4fSbOpColOrig r i o == 1#1) = ((i || (r == 1#1)) && !o) :=`
+- **i4fT_bit_orig_race** (line 135): `theorem i4fT_bit_orig_race : i4fSbOpColOrig 1#1 true true = 0#1 :=`
+- **i4fT_bit_fix_race** (line 136): `theorem i4fT_bit_fix_race : i4fSbOpColFix 1#1 true true = 1#1 :=`
+- **i4fT_bit_fix_clear** (line 137): `theorem i4fT_bit_fix_clear : i4fSbOpColFix 1#1 false true = 0#1 :=`
+- **i4fT_bit_fix_set** (line 138): `theorem i4fT_bit_fix_set : i4fSbOpColFix 0#1 true false = 1#1 :=`
+- **i4fT_bit_fix_hold** (line 139): `theorem i4fT_bit_fix_hold : i4fSbOpColFix 1#1 false false = 1#1 :=`
+- **i4f_swap_irrelevant** (line 169): `theorem i4f_swap_irrelevant {r : BitVec 256} {se ce : Bool} {sa ca : BitVec 8} (h : (se && ce && (sa == ca)) = false) : sbSetClear false r se sa ce ca = i4fSbClearSet false r se sa ce ca :=`
+- **i4f_orig_eq_fix_of_no_race** (line 176): `theorem i4f_orig_eq_fix_of_no_race (r : BitVec 1) (i o : Bool) (h : (i && o) = false) : i4fSbOpColOrig r i o = i4fSbOpColFix r i o :=`
+- **i4f_sbStepFix_eq_orig** (line 184): `theorem i4f_sbStepFix_eq_orig (s : SbState) (i : SbInputs) (hV : (i.opColV_in && i.opColV_out) = false) (hX : (i.opColX_in && i.opColX_out) = false) : i4fSbStepFix s i = sbStep s i :=`
+- **i4f_sbRun_equiv** (line 195): `theorem i4f_sbRun_equiv (s : SbState) (ins : List SbInputs) (hV : ∀ j ∈ ins, (j.opColV_in && j.opColV_out) = false) (hX : ∀ j ∈ ins, (j.opColX_in && j.opColX_out) = false) : i4fSbRunFix s ins = sbRun s ins :=`
+- **i4fT_sb_norace_in** (line 211): `theorem i4fT_sb_norace_in : (i4fSbRunFix sbInit [sbInOpColVIn]).opColV = (sbRun sbInit [sbInOpColVIn]).opColV :=`
+- **i4fT_sb_norace_inout** (line 214): `theorem i4fT_sb_norace_inout : (i4fSbRunFix sbInit [sbInOpColVIn, sbInOpColVOut]).opColV = (sbRun sbInit [sbInOpColVIn, sbInOpColVOut]).opColV :=`
+- **i4fT_sb_race_orig** (line 218): `theorem i4fT_sb_race_orig : (sbRun sbInit [{ sbInNop with opColV_in :=`
+- **i4fT_sb_race_fix** (line 221): `theorem i4fT_sb_race_fix : (i4fSbRunFix sbInit [{ sbInNop with opColV_in :=`
+- **i4fSysStepG_cu0** (line 310): `theorem i4fSysStepG_cu0 (f : BitVec 1 → Bool → Bool → BitVec 1) (s : I4fSysState) (i : I4fSysIn) : (i4fSysStepG f s i).cu0 = cuStep s.cu0 (i4fCuIn (i4fDemuxD s i) i i4fJ0) :=`
+- **i4fSysStepG_cu1** (line 314): `theorem i4fSysStepG_cu1 (f : BitVec 1 → Bool → Bool → BitVec 1) (s : I4fSysState) (i : I4fSysIn) : (i4fSysStepG f s i).cu1 = cuStep s.cu1 (i4fCuIn (i4fDemuxD s i) i i4fJ1) :=`
+- **i4fSysStepG_occ** (line 318): `theorem i4fSysStepG_occ (f : BitVec 1 → Bool → Bool → BitVec 1) (s : I4fSysState) (i : I4fSysIn) : (i4fSysStepG f s i).occ = f s.occ ((i.offer && (s.occ == 0#1)) && (i4fDemuxD s i).in0Rdy) (cuIssueFire s.cu0 (i4fCuIn (i4fDemuxD s i) i i4fJ0) || cuIssueFire s.cu1 (i4fCuIn (i4fDemuxD s i) i i4fJ1)) :=`
+- **i4f_controlFire_cuIn** (line 326): `theorem i4f_controlFire_cuIn (s : CuState) (d : OcDemuxRes 2) (i : I4fSysIn) (j : Fin 2) : cuControlFire s (i4fCuIn d i j) = (d.valid j && cuControlRdy s) :=`
+- **i4f_issueFire_cuIn** (line 330): `theorem i4f_issueFire_cuIn (s : CuState) (d : OcDemuxRes 2) (i : I4fSysIn) (j : Fin 2) : cuIssueFire s (i4fCuIn d i j) = ((s.state == cuSOut) && i.issueRdy) :=`
+- **i4f_cuIn_issueReady** (line 334): `theorem i4f_cuIn_issueReady (d : OcDemuxRes 2) (i : I4fSysIn) (j : Fin 2) : (i4fCuIn d i j).issueReady = i.issueRdy :=`
+- **i4f_bv1_ne** (line 340): `theorem i4f_bv1_ne (x : BitVec 1) : (x == 0#1) = !(x == 1#1) :=`
+- **i4f_st_add_out_excl** (line 343): `theorem i4f_st_add_out_excl (st : BitVec 2) : ((st == cuSAdd) && (st == cuSOut)) = false :=`
+- **i4f_busy_iff** (line 349): `theorem i4f_busy_iff (s : CuState) (h : cuInv s) : i4fCuBusy s = ((s.state == cuSAdd) || (s.state == cuSOut)) :=`
+- **i4f_controlRdy_eq_not_busy** (line 366): `theorem i4f_controlRdy_eq_not_busy (s : CuState) (h : cuInv s) : cuControlRdy s = !i4fCuBusy s :=`
+- **i4f_cuStep_busy** (line 380): `theorem i4f_cuStep_busy (s : CuState) (i : CuInputs) (h : cuInv s) : i4fCuBusy (cuStep s i) = (cuControlFire s i || ((s.state == cuSAdd) || ((s.state == cuSOut) && !i.issueReady))) :=`
+- **i4f_demux_valid_def** (line 406): `theorem i4f_demux_valid_def {n : Nat} (outRdy : Fin n → Bool) (in0V in1V : Bool) (b0 b1 : CuCtrl) (j : Fin n) : (ocDemux outRdy in0V in1V b0 b1).valid j = ((ocOrR outRdy && decide (j.val = ocPrioLowest outRdy) && in0V) || (ocOrR (ocRdy2 outRdy) && decide (j.val = ocPrioLowest (ocRdy2 outRdy)) && in1V)) :=`
+- **i4f_demux_in0Rdy_def** (line 413): `theorem i4f_demux_in0Rdy_def {n : Nat} (outRdy : Fin n → Bool) (in0V in1V : Bool) (b0 b1 : CuCtrl) : (ocDemux outRdy in0V in1V b0 b1).in0Rdy = ocOrR outRdy :=`
+- **i4f_demuxD_valid0** (line 418): `theorem i4f_demuxD_valid0 (s : I4fSysState) (i : I4fSysIn) : (i4fDemuxD s i).valid i4fJ0 = (cuControlRdy s.cu0 && (i.offer && (s.occ == 0#1))) :=`
+- **i4f_demuxD_valid1** (line 426): `theorem i4f_demuxD_valid1 (s : I4fSysState) (i : I4fSysIn) : (i4fDemuxD s i).valid i4fJ1 = (!cuControlRdy s.cu0 && cuControlRdy s.cu1 && (i.offer && (s.occ == 0#1))) :=`
+- **i4f_demuxD_in0Rdy** (line 435): `theorem i4f_demuxD_in0Rdy (s : I4fSysState) (i : I4fSysIn) : (i4fDemuxD s i).in0Rdy = (cuControlRdy s.cu0 || cuControlRdy s.cu1) :=`
+- **i4fSys_init_inv** (line 445): `theorem i4fSys_init_inv : i4fSysInv i4fSysInit :=`
+- **i4fSys_step_inv_fix** (line 449): `theorem i4fSys_step_inv_fix (s : I4fSysState) (i : I4fSysIn) (h : i4fSysInv s) : i4fSysInv (i4fSysStepG i4fSbOpColFix s i) :=`
+- **i4fSys_run_inv_fix** (line 510): `theorem i4fSys_run_inv_fix (s : I4fSysState) (ins : List I4fSysIn) (h : i4fSysInv s) : i4fSysInv (i4fSysRunG i4fSbOpColFix s ins) :=`
+- **i4f_occ_tracks_busy** (line 520): `theorem i4f_occ_tracks_busy (ins : List I4fSysIn) : ((i4fSysRunG i4fSbOpColFix i4fSysInit ins).occ == 1#1) = (i4fCuBusy (i4fSysRunG i4fSbOpColFix i4fSysInit ins).cu0 || i4fCuBusy (i4fSysRunG i4fSbOpColFix i4fSysInit ins).cu1) :=`
+- **i4f_no_two_busy_fix** (line 529): `theorem i4f_no_two_busy_fix (ins : List I4fSysIn) : ¬(i4fCuBusy (i4fSysRunG i4fSbOpColFix i4fSysInit ins).cu0 = true ∧ i4fCuBusy (i4fSysRunG i4fSbOpColFix i4fSysInit ins).cu1 = true) :=`
+- **i4f_witness_shape_unreachable** (line 536): `theorem i4f_witness_shape_unreachable (ins : List I4fSysIn) : ¬((i4fSysRunG i4fSbOpColFix i4fSysInit ins).cu0.state = cuSAdd ∧ (i4fSysRunG i4fSbOpColFix i4fSysInit ins).cu1.state = cuSOut) :=`
+- **i4fSys_step_eq_orig** (line 545): `theorem i4fSys_step_eq_orig (s : I4fSysState) (i : I4fSysIn) (h : i4fSysInv s) : i4fSysStepG i4fSbOpColFix s i = i4fSysStepG i4fSbOpColOrig s i :=`
+- **i4fSys_run_eq_orig** (line 589): `theorem i4fSys_run_eq_orig (s : I4fSysState) (ins : List I4fSysIn) (h : i4fSysInv s) : i4fSysRunG i4fSbOpColFix s ins = i4fSysRunG i4fSbOpColOrig s ins :=`
+- **i4f_no_two_busy_orig** (line 600): `theorem i4f_no_two_busy_orig (ins : List I4fSysIn) : ¬(i4fCuBusy (i4fSysRunG i4fSbOpColOrig i4fSysInit ins).cu0 = true ∧ i4fCuBusy (i4fSysRunG i4fSbOpColOrig i4fSysInit ins).cu1 = true) :=`
+- **i4fT_gated_C_blocked** (line 623): `theorem i4fT_gated_C_blocked : i4fWs3.cu1.state = cuSIdle ∧ i4fWs3.cu0.state = cuSAdd ∧ i4fWs3.cu0.controlReg = ocI4ctrlB ∧ i4fWs3.occ = 1#1 :=`
+- **i4fT_gated_fix_eq_orig** (line 628): `theorem i4fT_gated_fix_eq_orig : (i4fSysRunG i4fSbOpColFix i4fSysInit [i4fW0, i4fW1, i4fW2]).occ = (i4fSysRunG i4fSbOpColOrig i4fSysInit [i4fW0, i4fW1, i4fW2]).occ ∧ (i4fSysRunG i4fSbOpColFix i4fSysInit [i4fW0, i4fW1, i4fW2]).cu0.state = (i4fSysRunG i4fSbOpColOrig i4fSysInit [i4fW0, i4fW1, i4fW2]).cu0.state ∧ (i4fSysRunG i4fSbOpColFix i4fSysInit [i4fW0, i4fW1, i4fW2]).cu1.state = (i4fSysRunG i4fSbOpColOrig i4fSysInit [i4fW0, i4fW1, i4fW2]).cu1.state :=`
+- **i4fT_race_orig** (line 644): `theorem i4fT_race_orig : (i4fSysRunU i4fSbOpColOrig i4fSysInit [i4fU0, i4fU1]).occ = 0#1 ∧ (i4fSysRunU i4fSbOpColOrig i4fSysInit [i4fU0, i4fU1]).cu1.state = cuSAdd ∧ (i4fSysRunU i4fSbOpColOrig i4fSysInit [i4fU0, i4fU1]).cu1.controlReg = ocI4ctrlB :=`
+- **i4fT_race_fix** (line 652): `theorem i4fT_race_fix : (i4fSysRunU i4fSbOpColFix i4fSysInit [i4fU0, i4fU1]).occ = 1#1 ∧ (i4fSysRunU i4fSbOpColFix i4fSysInit [i4fU0, i4fU1]).cu1.state = cuSAdd ∧ (i4fSysRunU i4fSbOpColFix i4fSysInit [i4fU0, i4fU1]).cu1.controlReg = ocI4ctrlB :=`
+- **i4fT_ungated_fix_still_oob** (line 661): `theorem i4fT_ungated_fix_still_oob : (i4fSysRunU i4fSbOpColFix i4fSysInit [i4fW0, i4fW1, i4fW2]).cu1.state = cuSIdle ∧ (i4fSysRunU i4fSbOpColFix i4fSysInit [i4fW0, i4fW1, i4fW2]).cu1.controlReg = ocI4ctrlC ∧ (i4fSysRunU i4fSbOpColFix i4fSysInit [i4fW0, i4fW1, i4fW2]).cu0.state = cuSAdd ∧ (i4fSysRunU i4fSbOpColFix i4fSysInit [i4fW0, i4fW1, i4fW2]).cu0.controlReg = ocI4ctrlB :=`
+- **i4fT_B_issues_first** (line 680): `theorem i4fT_B_issues_first : i4fPs4.cu0.state = cuSIdle ∧ i4fPs4.occ = 0#1 ∧ i4fPs4.cu1.state = cuSIdle :=`
+- **i4fT_C_after_B** (line 685): `theorem i4fT_C_after_B : i4fPs5.cu0.state = cuSOut ∧ i4fPs5.cu0.controlReg = ocI4ctrlC ∧ i4fPs5.cu1.state = cuSIdle :=`
+
+### `Ventus/Schedule/IBuffer.lean`
+
+- **ibBv1_cases** (line 260): `theorem ibBv1_cases (p : BitVec 1) : p = 0#1 ∨ p = 1#1 :=`
+- **ibBv2_cases** (line 263): `theorem ibBv2_cases (m : BitVec 2) : m = 0#2 ∨ m = 1#2 ∨ m = 2#2 ∨ m = 3#2 :=`
+- **ibQ_step_abs** (line 267): `theorem ibQ_step_abs (q : IbQ α) (enqV : Bool) (x : α) (deqR : Bool) : (q.step enqV x deqR).abs = (if q.canDeq && deqR then q.abs.drop 1 else q.abs) ++ (if enqV && q.canEnq then [x] else []) :=`
+- **ibQ_abs_eq_read_cons** (line 277): `theorem ibQ_abs_eq_read_cons (q : IbQ α) (h : q.canDeq = true) : q.abs = q.deqBits :: q.abs.drop 1 :=`
+- **ibQ_abs_length_le** (line 284): `theorem ibQ_abs_length_le (q : IbQ α) : q.abs.length ≤ ibSizeIbuffer :=`
+- **ibQ_no_overflow** (line 289): `theorem ibQ_no_overflow (q : IbQ α) (enqV : Bool) (x : α) (deqR : Bool) (h : q.canEnq = false) : (q.step enqV x deqR).abs = (if q.canDeq && deqR then q.abs.drop 1 else q.abs) :=`
+- **ibQ_no_underflow** (line 297): `theorem ibQ_no_underflow (q : IbQ α) (enqV : Bool) (x : α) (deqR : Bool) (h : q.canDeq = false) : (q.step enqV x deqR).abs = q.abs ++ (if enqV && q.canEnq then [x] else []) :=`
+- **ibQ_flush_abs** (line 304): `theorem ibQ_flush_abs (q : IbQ α) : q.flushStep.abs = [] :=`
+- **ibQ_canEnq_flush_indep** (line 308): `theorem ibQ_canEnq_flush_indep (q : IbQ α) : q.flushStep.canEnq = true :=`
+- **ibSd_pending_cons** (line 371): `theorem ibSd_pending_cons (sd : IbGrp α) (h : sd.mask ≠ 0#2) : ibSdPending sd = ibSdEmit sd :: ibSdPending ⟨sd.c0, sd.c1, ibMaskNext sd.mask⟩ :=`
+- **ibSd_pending_eq_of_maskNext_zero** (line 382): `theorem ibSd_pending_eq_of_maskNext_zero (sd : IbGrp α) (h : ibMaskNext sd.mask = 0#2) : ibSdPending sd = if sd.mask = 0#2 then [] else [ibSdEmit sd] :=`
+- **ibFlatMap_if** (line 506): `theorem ibFlatMap_if (c : Prop) [Decidable c] (g : IbGrp α) : List.flatMap ibGrpFlat (if c then [g] else []) = (if c then ibGrpFlat g else []) :=`
+- **ibLane_step_abs** (line 512): `theorem ibLane_step_abs [Inhabited α] (s : IbLane α) (i : IbLaneIn α) (hf : i.flush = false) : (s.obs i.outRdy).toList ++ (s.step i).abs = s.abs ++ (if s.enqFire i.enqV then ibGrpFlat i.grp else []) :=`
+- **ibLane_step_flush_abs** (line 583): `theorem ibLane_step_flush_abs [Inhabited α] (s : IbLane α) (i : IbLaneIn α) (hf : i.flush = true) : (s.step i).abs = [] :=`
+- **ibLane_irrevocable** (line 589): `theorem ibLane_irrevocable [Inhabited α] (s : IbLane α) (i : IbLaneIn α) (hf : i.flush = false) (hr : i.outRdy = false) (hv : s.outV = true) : (s.step i).outV = true ∧ (s.step i).outBits = s.outBits :=`
+- **ibLane_run_abs** (line 615): `theorem ibLane_run_abs [Inhabited α] (s : IbLane α) (is : List (IbLaneIn α)) (hf : ∀ i ∈ is, i.flush = false) : (s.run is).2 ++ (s.run is).1.abs = s.abs ++ s.accepted is :=`
+- **ibLane_run_prefix** (line 632): `theorem ibLane_run_prefix [Inhabited α] (is : List (IbLaneIn α)) (hf : ∀ i ∈ is, i.flush = false) : ∃ t, ((IbLane.empty (α :=`
+- **ibTopRun_get** (line 697): `theorem ibTopRun_get (t : IbTop) (is : List IbTopIn) (w : Fin 8) : (ibTopRun t is).lanes w = ((t.lanes w).run (is.map fun i => ibTopLaneIn i w)).1 :=`
+- **ibTop_warp_prefix** (line 709): `theorem ibTop_warp_prefix (t : IbTop) (is : List IbTopIn) (w : Fin 8) (he : t.lanes w = IbLane.empty) (hf : ∀ i ∈ is, (ibTopLaneIn i w).flush = false) : ∃ tl, (((t.lanes w).run (is.map fun i => ibTopLaneIn i w)).2) ++ tl = (t.lanes w).accepted (is.map fun i => ibTopLaneIn i w) :=`
+- **ibT_interleave_w0** (line 747): `theorem ibT_interleave_w0 : (ibTopWarpOuts ibTrInterleave ⟨0, by decide⟩).map IbInsn.tag = [10, 11] :=`
+- **ibT_interleave_w1** (line 751): `theorem ibT_interleave_w1 : (ibTopWarpOuts ibTrInterleave ⟨1, by decide⟩).map IbInsn.tag = [20] :=`
+- **ibT_lift** (line 756): `theorem ibT_lift : ((ibTopRun ibTopEmpty ibTrInterleave).lanes ⟨0, by decide⟩).abs.map IbInsn.tag = ((IbLane.empty (α :=`
+- **ibT_flush_race_ready** (line 771): `theorem ibT_flush_race_ready : IbTop.inRdy ibTopEmpty (ibTopIn true (ibGrpW 3 77 78 3#2) true 3 0b00001000#8) = true :=`
+- **ibT_flush_enq_drop** (line 776): `theorem ibT_flush_enq_drop : ibTopWarpOuts ibTrFlushRace ⟨3, by decide⟩ = [] :=`
+- **ibT_no_flush_ok** (line 781): `theorem ibT_no_flush_ok : (ibTopWarpOuts [ ibTopIn true (ibGrpW 3 77 78 3#2) false 0 0b00001000#8 , ibTopIn false (ibGrpW 0 0 0 0#2) false 0 0b00001000#8 , ibTopIn false (ibGrpW 0 0 0 0#2) false 0 0b00001000#8 , ibTopIn false (ibGrpW 0 0 0 0#2) false 0 0b00001000#8 ] ⟨3, by decide⟩).map IbInsn.tag = [77, 78] :=`
+- **ibT_flush_local** (line 790): `theorem ibT_flush_local : (((ibTopRun ibTopEmpty [ ibTopIn true (ibGrpW 0 60 61 3#2) false 0 0 , ibTopIn false (ibGrpW 0 0 0 0#2) true 1 0 ]).lanes ⟨0, by decide⟩).abs.map IbInsn.tag) = [60, 61] :=`
+
+### `Ventus/Schedule/Issue.lean`
+
+- **issRoute_shape** (line 144): `theorem issRoute_shape (c : IssCtrl) : issRoute c = [.vALU, .SIMT] ∨ ∃ t, issRoute c = [t] :=`
+- **iss_route_tc** (line 151): `theorem iss_route_tc (c : IssCtrl) (h : c.tc = true) : issRoute c = [.TC] :=`
+- **iss_route_sfu** (line 154): `theorem iss_route_sfu (c : IssCtrl) (h1 : c.tc = false) (h2 : c.sfu = true) : issRoute c = [.SFU] :=`
+- **iss_route_fp** (line 157): `theorem iss_route_fp (c : IssCtrl) (h1 : c.tc = false) (h2 : c.sfu = false) (h3 : c.fp = true) : issRoute c = [.vFPU] :=`
+- **iss_route_csr** (line 160): `theorem iss_route_csr (c : IssCtrl) (h1 : c.tc = false) (h2 : c.sfu = false) (h3 : c.fp = false) (h4 : c.csrOrR = true) : issRoute c = [.CSR] :=`
+- **iss_route_mul** (line 164): `theorem iss_route_mul (c : IssCtrl) (h1 : c.tc = false) (h2 : c.sfu = false) (h3 : c.fp = false) (h4 : c.csrOrR = false) (h5 : c.mul = true) : issRoute c = [.MUL] :=`
+- **iss_route_mem** (line 168): `theorem iss_route_mem (c : IssCtrl) (h1 : c.tc = false) (h2 : c.sfu = false) (h3 : c.fp = false) (h4 : c.csrOrR = false) (h5 : c.mul = false) (h6 : c.mem = true) : issRoute c = [.LSU] :=`
+- **iss_route_dual** (line 173): `theorem iss_route_dual (c : IssCtrl) (h1 : c.tc = false) (h2 : c.sfu = false) (h3 : c.fp = false) (h4 : c.csrOrR = false) (h5 : c.mul = false) (h6 : c.mem = false) (h7 : c.isvec = true) (h8 : c.simt_stack = true) (h9 : c.simt_stack_op = false) : issRoute c = [.vALU, .SIMT] :=`
+- **iss_route_simt** (line 179): `theorem iss_route_simt (c : IssCtrl) (h1 : c.tc = false) (h2 : c.sfu = false) (h3 : c.fp = false) (h4 : c.csrOrR = false) (h5 : c.mul = false) (h6 : c.mem = false) (h7 : c.isvec = true) (h8 : c.simt_stack = true) (h9 : c.simt_stack_op = true) : issRoute c = [.SIMT] :=`
+- **iss_route_valu** (line 185): `theorem iss_route_valu (c : IssCtrl) (h1 : c.tc = false) (h2 : c.sfu = false) (h3 : c.fp = false) (h4 : c.csrOrR = false) (h5 : c.mul = false) (h6 : c.mem = false) (h7 : c.isvec = true) (h8 : c.simt_stack = false) : issRoute c = [.vALU] :=`
+- **iss_route_ws** (line 190): `theorem iss_route_ws (c : IssCtrl) (h1 : c.tc = false) (h2 : c.sfu = false) (h3 : c.fp = false) (h4 : c.csrOrR = false) (h5 : c.mul = false) (h6 : c.mem = false) (h7 : c.isvec = false) (h8 : c.barrier = true) : issRoute c = [.ws] :=`
+- **iss_route_salu** (line 195): `theorem iss_route_salu (c : IssCtrl) (h1 : c.tc = false) (h2 : c.sfu = false) (h3 : c.fp = false) (h4 : c.csrOrR = false) (h5 : c.mul = false) (h6 : c.mem = false) (h7 : c.isvec = false) (h8 : c.barrier = false) : issRoute c = [.sALU] :=`
+- **issIsDualPort_eq_true** (line 201): `theorem issIsDualPort_eq_true {p : IssPort} (h : issIsDualPort p = true) : p = .vALU ∨ p = .SIMT :=`
+- **iss_valid_routed** (line 207): `theorem iss_valid_routed (c : IssCtrl) (v : Bool) (r : IssPort → Bool) (p : IssPort) (hp : issOutValid c v r p = true) : (issRoute c = [.vALU, .SIMT] ∧ (p = .vALU ∨ p = .SIMT)) ∨ (∃ t, issRoute c = [t] ∧ p = t) :=`
+- **iss_mutex** (line 230): `theorem iss_mutex (c : IssCtrl) (v : Bool) (r : IssPort → Bool) (p q : IssPort) (hp : issOutValid c v r p = true) (hq : issOutValid c v r q = true) (hpq : p ≠ q) : issRoute c = [.vALU, .SIMT] ∧ ((p = .vALU ∧ q = .SIMT) ∨ (p = .SIMT ∧ q = .vALU)) :=`
+- **iss_dual_valid_coupled** (line 256): `theorem iss_dual_valid_coupled (c : IssCtrl) (v : Bool) (r : IssPort → Bool) (hd : issRoute c = [.vALU, .SIMT]) : issOutValid c v r .vALU = (v && r .vALU && r .SIMT) ∧ issOutValid c v r .SIMT = (v && r .vALU && r .SIMT) :=`
+- **iss_inReady_single** (line 265): `theorem iss_inReady_single (c : IssCtrl) (r : IssPort → Bool) (t : IssPort) (ht : issRoute c = [t]) : issInReady c r = r t :=`
+- **iss_inReady_dual** (line 269): `theorem iss_inReady_dual (c : IssCtrl) (r : IssPort → Bool) (hd : issRoute c = [.vALU, .SIMT]) : issInReady c r = (r .vALU && r .SIMT) :=`
+- **iss_classify_agree** (line 356): `theorem iss_classify_agree (c : IssCtrl) : issIsVec c = issRouteSide c ↔ ¬((c.csrOrR && !c.tc && !c.sfu && !c.fp && (c.mul || c.mem)) || (!c.tc && !c.sfu && !c.fp && !c.csrOrR && !c.mul && !c.mem && c.isvec && c.barrier)) :=`
+- **iss_split_fire_iff** (line 377): `theorem iss_split_fire_iff (isvec inValid arbXready arbVready : Bool) : (inValid && (if isvec then arbVready else arbXready)) = ((inValid && !isvec && arbXready) || (inValid && isvec && arbVready)) :=`
+- **iss_split_side** (line 384): `theorem iss_split_side (c : IssCtrl) : issIsVec c = issRouteSide c ∨ (c.csrOrR && !c.tc && !c.sfu && !c.fp && (c.mul || c.mem)) = true ∨ (!c.tc && !c.sfu && !c.fp && !c.csrOrR && !c.mul && !c.mem && c.isvec && c.barrier) = true :=`
+- **issV2_en_bit0** (line 423): `theorem issV2_en_bit0 (c : IssCtrl) : (issV2En c).getLsbD 0 = !(c.simt_stack && c.simt_stack_op) :=`
+- **issV2_en_bit1** (line 427): `theorem issV2_en_bit1 (c : IssCtrl) : (issV2En c).getLsbD 1 = c.simt_stack :=`
+- **issV2_route_agree** (line 433): `theorem issV2_route_agree (c : IssCtrl) : issRoute c = [issV2Route c] ∨ (issRoute c = [.vALU, .SIMT] ∧ issV2Route c = .vALU) ∨ (issRoute c = [.SIMT] ∧ issV2Route c = .vALU) :=`
+- **issV2_valu_only_needs_simt_ready** (line 442): `theorem issV2_valu_only_needs_simt_ready (simtReady : Bool) : issV2ArbReady true simtReady = simtReady :=`
+- **issV2_valu_only_would_suffice** (line 446): `theorem issV2_valu_only_would_suffice (simtReady : Bool) : (true && (!(1#2 : BitVec 2).getLsbD 1 || simtReady)) = true :=`
+- **issO2m_mutex** (line 472): `theorem issO2m_mutex {n : Nat} (rdy : Nat → Bool) (i j : Fin n) (hi : issO2mValid rdy i = true) (hj : issO2mValid rdy j = true) : i = j :=`
+- **issO2m_fire_without_valid** (line 499): `theorem issO2m_fire_without_valid {n : Nat} (rdy : Nat → Bool) (j : Fin n) (hr : rdy j.val = true) (hnone : ∀ k, j.val < k → k < n → rdy k = false) : issO2mValid rdy j && rdy j.val = true :=`
+- **iss_ib2iss_fire_integrity** (line 537): `theorem iss_ib2iss_fire_integrity {n : Nat} (hn : 0 < n) (v : BitVec n) (lg : Fin n) (r : Bool) (hv : rraOutValid hn v lg = true) : v.getLsbD (rraChoice hn v lg).val && rraInReady hn v lg r (rraChoice hn v lg) = r :=`
+- **iss_ib2iss_bits_of_fire** (line 545): `theorem iss_ib2iss_bits_of_fire {n : Nat} (hn : 0 < n) {α : Type} (bits : Fin n → α) (v : BitVec n) (lg : Fin n) : rraOutBits hn bits v lg = bits (rraChoice hn v lg) :=`
+
+### `Ventus/Schedule/OperandCollector.lean`
+
+- **ocPow2_getLsbD** (line 120): `theorem ocPow2_getLsbD {n m j : Nat} (hm : m < n) : (BitVec.ofNat n (2 ^ m)).getLsbD j = decide (j = m) :=`
+- **ocPack_getLsbD_lt** (line 131): `theorem ocPack_getLsbD_lt {n : Nat} (f : Fin n → Bool) {m j : Nat} (hm : m ≤ n) : (ocPack f m).getLsbD j = (if h : j < m then f ⟨j, by omega⟩ else false) :=`
+- **ocPack_getLsbD** (line 163): `theorem ocPack_getLsbD {n : Nat} (f : Fin n → Bool) {j : Nat} (hj : j < n) : (ocPack f n).getLsbD j = f ⟨j, hj⟩ :=`
+- **ocPrioLowest_spec** (line 184): `theorem ocPrioLowest_spec {n : Nat} (f : Fin n → Bool) (j : Fin n) (hj : f j = true) : ∃ c : Fin n, ocPrioLowest f = c.val ∧ f c = true ∧ (∀ k : Fin n, k.val < c.val → f k = false) ∧ c.val ≤ j.val :=`
+- **ocPrioLowest_of_none** (line 211): `theorem ocPrioLowest_of_none {n : Nat} (f : Fin n → Bool) (h : ∀ j : Fin n, f j = false) : ocPrioLowest f = 0 :=`
+- **ocOrR_eq_true_iff** (line 229): `theorem ocOrR_eq_true_iff {n : Nat} (f : Fin n → Bool) : ocOrR f = true ↔ ∃ j : Fin n, f j = true :=`
+- **ocOrR_eq_false_iff** (line 240): `theorem ocOrR_eq_false_iff {n : Nat} (f : Fin n → Bool) : ocOrR f = false ↔ ∀ j : Fin n, f j = false :=`
+- **ocA_filter_rt0** (line 308): `theorem ocA_filter_rt0 (reqs : Fin 32 → CuArbReq) (rv : Fin 32 → Bool) (i : Fin 4) (p : Fin 32) (h : (reqs p).rsType = 0#2) : ocScaFilt reqs rv i p = false ∧ ocVecFilt reqs rv i p = false :=`
+- **ocA_filter_rt3** (line 314): `theorem ocA_filter_rt3 (reqs : Fin 32 → CuArbReq) (rv : Fin 32 → Bool) (i : Fin 4) (p : Fin 32) (h : (reqs p).rsType = 3#2) : ocScaFilt reqs rv i p = false ∧ ocVecFilt reqs rv i p = false :=`
+- **ocA_filt_sca_eq_true** (line 320): `theorem ocA_filt_sca_eq_true (reqs : Fin 32 → CuArbReq) (rv : Fin 32 → Bool) (i : Fin 4) (p : Fin 32) : ocScaFilt reqs rv i p = true → rv p = true ∧ (reqs p).bankID = BitVec.ofNat 2 i.val ∧ (reqs p).rsType = 1#2 :=`
+- **ocA_filt_vec_eq_true** (line 328): `theorem ocA_filt_vec_eq_true (reqs : Fin 32 → CuArbReq) (rv : Fin 32 → Bool) (i : Fin 4) (p : Fin 32) : ocVecFilt reqs rv i p = true → rv p = true ∧ (reqs p).bankID = BitVec.ofNat 2 i.val ∧ (reqs p).rsType = 2#2 :=`
+- **ocA_grant_sca** (line 337): `theorem ocA_grant_sca (reqs : Fin 32 → CuArbReq) (rv : Fin 32 → Bool) (i : Fin 4) (lg : Fin 32) (h : ocScaOutValid reqs rv i lg = true) : (reqs (ocScaChoice reqs rv i lg)).rsType = 1#2 ∧ (reqs (ocScaChoice reqs rv i lg)).bankID = BitVec.ofNat 2 i.val ∧ rv (ocScaChoice reqs rv i lg) = true :=`
+- **ocA_grant_vec** (line 348): `theorem ocA_grant_vec (reqs : Fin 32 → CuArbReq) (rv : Fin 32 → Bool) (i : Fin 4) (lg : Fin 32) (h : ocVecOutValid reqs rv i lg = true) : (reqs (ocVecChoice reqs rv i lg)).rsType = 2#2 ∧ (reqs (ocVecChoice reqs rv i lg)).bankID = BitVec.ofNat 2 i.val ∧ rv (ocVecChoice reqs rv i lg) = true :=`
+- **ocA_no_grant3** (line 361): `theorem ocA_no_grant3 (reqs : Fin 32 → CuArbReq) (rv : Fin 32 → Bool) (hrt : ∀ p : Fin 32, p.val % 4 = 3 → (reqs p).rsType = 0#2) (i : Fin 4) (lg : Fin 32) : ((ocScaChoice reqs rv i lg).val % 4 = 3 → ocScaOutValid reqs rv i lg = false) ∧ ((ocVecChoice reqs rv i lg).val % 4 = 3 → ocVecOutValid reqs rv i lg = false) :=`
+- **ocD_bank_addr_wiring** (line 394): `theorem ocD_bank_addr_wiring (reqs : Fin 32 → CuArbReq) (pack : BitVec 32) (lg : Fin 32) (h : rraOutValid (by decide) pack lg = true) : ocBankReadAddr reqs pack lg = (reqs (rraChoice (by decide) pack lg)).rsAddr ∧ rraGrant pack lg (rraChoice (by decide) pack lg) = true :=`
+- **ocE1_read_fire_of_valid** (line 402): `theorem ocE1_read_fire_of_valid (v : BitVec 32) (lg : Fin 32) (h : rraOutValid (by decide) v lg = true) : rraStep (by decide) v true lg = rraChoice (by decide) v lg :=`
+- **ocXHitS_eq_true** (line 467): `theorem ocXHitS_eq_true (x : OcXbarIn) (i : Fin 4) (j k : Nat) : ocXHitS x i j k = true → x.chosenS i >>> 2 = BitVec.ofNat 5 j ∧ x.validS i = true ∧ (x.chosenS i % 4#5) = BitVec.ofNat 5 k :=`
+- **ocXHitV_eq_true** (line 475): `theorem ocXHitV_eq_true (x : OcXbarIn) (i : Fin 4) (j k : Nat) : ocXHitV x i j k = true → x.chosenV i >>> 2 = BitVec.ofNat 5 j ∧ x.validV i = true ∧ (x.chosenV i % 4#5) = BitVec.ofNat 5 k :=`
+- **ocXHitS_regOrder** (line 484): `theorem ocXHitS_regOrder (x : OcXbarIn) (i : Fin 4) (j k : Nat) (hk : k < 4) : ocXHitS x i j k = true → (x.chosenS i).extractLsb' 0 2 = BitVec.ofNat 2 k :=`
+- **ocXHitV_regOrder** (line 493): `theorem ocXHitV_regOrder (x : OcXbarIn) (i : Fin 4) (j k : Nat) (hk : k < 4) : ocXHitV x i j k = true → (x.chosenV i).extractLsb' 0 2 = BitVec.ofNat 2 k :=`
+- **ocNotTrue** (line 530): `theorem ocNotTrue {b : Bool} (h : b = false) : ¬ b = true :=`
+- **ocXbarGo_valid** (line 536): `theorem ocXbarGo_valid (x : OcXbarIn) (j k : Nat) {m : Nat} (hm : m ≤ 4) : (ocXbarGo x j k m).valid = true ↔ ∃ i : Fin 4, i.val < m ∧ (ocXHitS x i j k = true ∨ ocXHitV x i j k = true) :=`
+- **ocXbar_valid_iff** (line 572): `theorem ocXbar_valid_iff (x : OcXbarIn) (j k : Nat) : (ocXbar x j k).valid = true ↔ ∃ i : Fin 4, ocXHitS x i j k = true ∨ ocXHitV x i j k = true :=`
+- **ocXbar_regOrder_of_valid** (line 585): `theorem ocXbar_regOrder_of_valid (x : OcXbarIn) (j k : Nat) (hk : k < 4) (h : (ocXbar x j k).valid = true) : (ocXbar x j k).regOrder = BitVec.ofNat 2 k :=`
+- **ocXbarGo_of_uniq_sca** (line 612): `theorem ocXbarGo_of_uniq_sca (x : OcXbarIn) (b : Fin 4) (j k : Nat) (hk : k < 4) (hhit : ocXHitS x b j k = true) (hnoV : ocXHitV x b j k = false) (huniq : ∀ m : Fin 4, m ≠ b → ocXHitS x m j k = false ∧ ocXHitV x m j k = false) : ∀ m : Nat, m ≤ 4 → ocXbarGo x j k m = if b.val < m then ⟨true, BitVec.ofNat 2 k, cuBcast (x.dataS b), cuRow0⟩ else ⟨false, 0#2, cuRow0, cuRow0⟩ :=`
+- **ocXbar_route_sca** (line 656): `theorem ocXbar_route_sca (x : OcXbarIn) (b : Fin 4) (j k : Nat) (hk : k < 4) (hhit : ocXHitS x b j k = true) (hnoV : ocXHitV x b j k = false) (huniq : ∀ m : Fin 4, m ≠ b → ocXHitS x m j k = false ∧ ocXHitV x m j k = false) : ocXbar x j k = ⟨true, BitVec.ofNat 2 k, cuBcast (x.dataS b), cuRow0⟩ :=`
+- **ocXbarGo_of_uniq_vec** (line 665): `theorem ocXbarGo_of_uniq_vec (x : OcXbarIn) (b : Fin 4) (j k : Nat) (hk : k < 4) (hhit : ocXHitV x b j k = true) (hnoS : ocXHitS x b j k = false) (huniq : ∀ m : Fin 4, m ≠ b → ocXHitS x m j k = false ∧ ocXHitV x m j k = false) : ∀ m : Nat, m ≤ 4 → ocXbarGo x j k m = if b.val < m then ⟨true, BitVec.ofNat 2 k, x.dataV b, x.dataV0 b⟩ else ⟨false, 0#2, cuRow0, cuRow0⟩ :=`
+- **ocXbar_route_vec** (line 709): `theorem ocXbar_route_vec (x : OcXbarIn) (b : Fin 4) (j k : Nat) (hk : k < 4) (hhit : ocXHitV x b j k = true) (hnoS : ocXHitS x b j k = false) (huniq : ∀ m : Fin 4, m ≠ b → ocXHitS x m j k = false ∧ ocXHitV x m j k = false) : ocXbar x j k = ⟨true, BitVec.ofNat 2 k, x.dataV b, x.dataV0 b⟩ :=`
+- **ocHit_chosen_eq** (line 718): `theorem ocHit_chosen_eq (c : BitVec 5) (j k : Nat) (hj : j < 8) (hk : k < 4) (h1 : c >>> 2 = BitVec.ofNat 5 j) (h2 : c % 4#5 = BitVec.ofNat 5 k) : c.toNat = 4 * j + k :=`
+- **ocE3_no_clash** (line 735): `theorem ocE3_no_clash (reqs : Fin 32 → CuArbReq) (rv : Fin 32 → Bool) (i m : Fin 4) (lgS lgV : Fin 32) (j k : Nat) (hj : j < 8) (hk : k < 4) (hvs : ocScaOutValid reqs rv i lgS = true) (hvv : ocVecOutValid reqs rv m lgV = true) (hS : (BitVec.ofNat 5 (ocScaChoice reqs rv i lgS).val) >>> 2 = BitVec.ofNat 5 j ∧ (BitVec.ofNat 5 (ocScaChoice reqs rv i lgS).val) % 4#5 = BitVec.ofNat 5 k) (hV : (BitVec.ofNat 5 (ocVecChoice reqs rv m lgV).val) >>> 2 = BitVec.ofNat 5 j ∧ (BitVec.ofNat 5 (ocVecChoice reqs rv m lgV).val) % 4#5 = BitVec.ofNat 5 k) : False :=`
+- **ocXbar_port3_never_valid** (line 759): `theorem ocXbar_port3_never_valid (x : OcXbarIn) (hS : ∀ i : Fin 4, x.validS i = true → (x.chosenS i % 4#5) ≠ 3#5) (hV : ∀ i : Fin 4, x.validV i = true → (x.chosenV i % 4#5) ≠ 3#5) (j : Nat) : (ocXbar x j 3).valid = false :=`
+- **ocCuBankPort_rsType3** (line 831): `theorem ocCuBankPort_rsType3 (pre : CuState) (inp : CuInputs) (st : CuState) (k : Nat) : (cuBankPort pre inp st k).rsType3 = st.rsType3 :=`
+- **ocCuAccept_rsType3** (line 838): `theorem ocCuAccept_rsType3 (s : CuState) (inp : CuInputs) : (cuAccept s inp).rsType3 = (if cuControlFire s inp then 0#2 else s.rsType3) :=`
+- **ocCuStep_rsType3** (line 843): `theorem ocCuStep_rsType3 (s : CuState) (inp : CuInputs) (h : s.rsType3 = 0#2) : (cuStep s inp).rsType3 = 0#2 :=`
+- **ocI12_cu_rsType3_run_aux** (line 860): `theorem ocI12_cu_rsType3_run_aux (s : CuState) (h : s.rsType3 = 0#2) (ins : List CuInputs) : (cuRun s ins).rsType3 = 0#2 :=`
+- **ocI12_cu_rsType3_run** (line 866): `theorem ocI12_cu_rsType3_run (ins : List CuInputs) : (cuRun cuInit ins).rsType3 = 0#2 :=`
+- **ocI12_slot3_rt0** (line 872): `theorem ocI12_slot3_rt0 (s : CuState) (inp : CuInputs) (h : s.rsType3 = 0#2) : (cuOutArbBits s inp 3).rsType = 0#2 :=`
+- **ocI12_xbar_hyp_of_arb** (line 879): `theorem ocI12_xbar_hyp_of_arb (reqs : Fin 32 → CuArbReq) (rv : Fin 32 → Bool) (hrt : ∀ p : Fin 32, p.val % 4 = 3 → (reqs p).rsType = 0#2) (x : OcXbarIn) (lgS lgV : Fin 4 → Fin 32) (hxS : ∀ i, x.validS i = ocScaOutValid reqs rv i (lgS i) ∧ x.chosenS i = BitVec.ofNat 5 (ocScaChoice reqs rv i (lgS i)).val) (hxV : ∀ i, x.validV i = ocVecOutValid reqs rv i (lgV i) ∧ x.chosenV i = BitVec.ofNat 5 (ocVecChoice reqs rv i (lgV i)).val) (i : Fin 4) : (x.validS i = true → (x.chosenS i % 4#5) ≠ 3#5) ∧ (x.validV i = true → (x.chosenV i % 4#5) ≠ 3#5) :=`
+- **ocI12_closure** (line 928): `theorem ocI12_closure (x : OcXbarIn) (j : Nat) (hS : ∀ i : Fin 4, x.validS i = true → (x.chosenS i % 4#5) ≠ 3#5) (hV : ∀ i : Fin 4, x.validV i = true → (x.chosenV i % 4#5) ≠ 3#5) (inp : CuInputs) (hs : ocXSourced x inp j) : ∀ k, inp.bankV k = true → (inp.bankB k).regOrder ≠ 3#2 :=`
+- **ocI12_deadlock_system** (line 968): `theorem ocI12_deadlock_system (i0 : CuInputs) (ins : List CuInputs) (hv0 : i0.controlValid = true) (hm : i0.ctrl.mask = true) (hx : ∀ c ∈ (i0 :: ins), ∃ (x : OcXbarIn) (j : Nat), (∀ i : Fin 4, x.validS i = true → (x.chosenS i % 4#5) ≠ 3#5) ∧ (∀ i : Fin 4, x.validV i = true → (x.chosenV i % 4#5) ≠ 3#5) ∧ ocXSourced x c j) : (cuRun (cuStep cuInit i0) ins).state = cuSAdd ∧ cuControlRdy (cuRun (cuStep cuInit i0) ins) = false :=`
+- **ocRdy2_prio_ne** (line 1010): `theorem ocRdy2_prio_ne {n : Nat} (outRdy : Fin n → Bool) (h : ocOrR (ocRdy2 outRdy) = true) : ocPrioLowest (ocRdy2 outRdy) ≠ ocPrioLowest outRdy :=`
+- **ocDemux_controlV_lowest** (line 1024): `theorem ocDemux_controlV_lowest {n : Nat} (outRdy : Fin n → Bool) (in0V in1V : Bool) (b0 b1 : CuCtrl) (j : Fin n) (hj : outRdy j = true) (hmin : ∀ k : Fin n, k.val < j.val → outRdy k = false) : (ocDemux outRdy in0V in1V b0 b1).valid j = in0V ∧ (ocDemux outRdy in0V in1V b0 b1).bits j = b0 :=`
+- **ocDemux_controlX_second** (line 1064): `theorem ocDemux_controlX_second {n : Nat} (outRdy : Fin n → Bool) (in0V in1V : Bool) (b0 b1 : CuCtrl) (l j : Fin n) (hl : outRdy l = true) (hlmin : ∀ k : Fin n, k.val < l.val → outRdy k = false) (hj : outRdy j = true) (hjl : j ≠ l) (hjmin : ∀ k : Fin n, k.val < j.val → k ≠ l → outRdy k = false) : (ocDemux outRdy in0V in1V b0 b1).valid j = in1V ∧ (ocDemux outRdy in0V in1V b0 b1).bits j = b1 :=`
+- **ocDemux_in0Rdy** (line 1113): `theorem ocDemux_in0Rdy {n : Nat} (outRdy : Fin n → Bool) (in0V in1V : Bool) (b0 b1 : CuCtrl) : (ocDemux outRdy in0V in1V b0 b1).in0Rdy = ocOrR outRdy :=`
+- **ocDemux_in1Rdy** (line 1117): `theorem ocDemux_in1Rdy {n : Nat} (outRdy : Fin n → Bool) (in0V in1V : Bool) (b0 b1 : CuCtrl) : (ocDemux outRdy in0V in1V b0 b1).in1Rdy = ocOrR (ocRdy2 outRdy) :=`
+- **ocDemux_E4_single_ready** (line 1125): `theorem ocDemux_E4_single_ready {n : Nat} (j : Fin n) (in1V : Bool) (b0 b1 : CuCtrl) : (ocDemux (fun k => decide (k = j)) false in1V b0 b1).in1Rdy = false ∧ ∀ k : Fin n, (ocDemux (fun k => decide (k = j)) false in1V b0 b1).valid k = false :=`
+- **ocI11_witness** (line 1218): `theorem ocI11_witness : ocWbScaAddr 1792#12 0#8 = 192#8 ∧ (1792 / 4 + 0 / 4 : Nat) = 448 ∧ (448 : Nat) ≠ 192 :=`
+- **ocI11_alias** (line 1224): `theorem ocI11_alias (b : BitVec 12) (r : BitVec 8) : ocWbScaAddr (b + 1024#12) r = ocWbScaAddr b r :=`
+- **ocI11_full_alias** (line 1232): `theorem ocI11_full_alias (b : BitVec 12) (r : BitVec 8) (w : BitVec 3) : ocWbScaAddr (b + 1024#12) r = ocWbScaAddr b r ∧ ocWbScaBankId r (w + 4#3) = ocWbScaBankId r w :=`
+- **ocI11_read_witness** (line 1247): `theorem ocI11_read_witness : (cuOutArbBits cuInit { cuInNop with controlValid :=`
+- **ocD_vec_base_no_trunc** (line 1254): `theorem ocD_vec_base_no_trunc (v : BitVec 11) (h : v < 1024#11) : ((v >>> 2).extractLsb' 0 8).zeroExtend 11 = v >>> 2 :=`
+- **ocD_wb_x0_suppress** (line 1258): `theorem ocD_wb_x0_suppress (wxd valid : Bool) : ocScaWen wxd valid 0#8 = false :=`
+- **ocD_wb_wen_of_ne0** (line 1263): `theorem ocD_wb_wen_of_ne0 (wxd valid : Bool) (r : BitVec 8) (h : r ≠ 0#8) : ocScaWen wxd valid r = (wxd && valid) :=`
+- **ocCuBankPort_of_not_fire** (line 1303): `theorem ocCuBankPort_of_not_fire (pre : CuState) (i : CuInputs) (st : CuState) (k : Nat) (h : cuBankFireK pre i k = false) : cuBankPort pre i st k = st :=`
+- **ocE1_cu_issue_stable** (line 1310): `theorem ocE1_cu_issue_stable (s : CuState) (i : CuInputs) (hs : s.state = cuSOut) (hr : i.issueReady = false) : cuIssueBits (cuStep s i) = cuIssueBits s ∧ cuIssueValid (cuStep s i) = true :=`
+- **ocE1_dual_stable** (line 1347): `theorem ocE1_dual_stable {n : Nat} (hn : 0 < n) (v v' : BitVec n) (lg : Fin n) (h : v' = v) : rraChoice hn v' (rraStep hn v false lg) = rraChoice hn v lg :=`
+- **ocI4_demux_T** (line 1410): `theorem ocI4_demux_T : (ocDemux (n :=`
+- **ocI4_demux_T1** (line 1416): `theorem ocI4_demux_T1 : (ocDemux (n :=`
+- **ocI4_T_alloc_B** (line 1421): `theorem ocI4_T_alloc_B : ocI4s1.cu0.state = cuSAdd ∧ ocI4s1.cu0.controlReg = ocI4ctrlB ∧ ocI4s1.cu1.state = cuSIdle :=`
+- **ocI4_T1_alloc_C** (line 1427): `theorem ocI4_T1_alloc_C : ocI4s2.cu1.state = cuSOut ∧ ocI4s2.cu1.controlReg = ocI4ctrlC ∧ ocI4s2.cu0.state = cuSAdd ∧ ocI4s2.cu0.controlReg = ocI4ctrlB :=`
+- **ocI4_C_issues_before_B** (line 1437): `theorem ocI4_C_issues_before_B : ocI4ctrlB.wid = ocI4ctrlC.wid ∧ cuIssueValid ocI4s2.cu1 = true ∧ ocI4s2.cu1.controlReg = ocI4ctrlC ∧ ocI4s2.cu0.state = cuSAdd ∧ ocI4s2.cu0.controlReg = ocI4ctrlB ∧ ocI4s3.cu1.state = cuSIdle ∧ ocI4s3.cu0.state = cuSAdd ∧ ocI4s3.cu0.controlReg = ocI4ctrlB :=`
+
+### `Ventus/Schedule/RRArbiter.lean`
+
+- **rraCtrl_succ** (line 88): `theorem rraCtrl_succ (req : Nat → Bool) (k : Nat) : rraCtrl req (k + 1) = (rraCtrl req k && !req k) :=`
+- **rraCtrl_eq_true_iff** (line 92): `theorem rraCtrl_eq_true_iff {req : Nat → Bool} {k : Nat} : rraCtrl req k = true ↔ ∀ j, j < k → req j = false :=`
+- **rraFindNat_some_spec** (line 122): `theorem rraFindNat_some_spec {p : Nat → Bool} {lo fuel j : Nat} (h : rraFindNat p lo fuel = some j) : lo ≤ j ∧ j < lo + fuel ∧ p j = true ∧ ∀ k, lo ≤ k → k < j → p k = false :=`
+- **rraFindNat_none_spec** (line 143): `theorem rraFindNat_none_spec {p : Nat → Bool} {lo fuel : Nat} (h : rraFindNat p lo fuel = none) : ∀ k, lo ≤ k → k < lo + fuel → p k = false :=`
+- **rraFindNat_some_of_spec** (line 160): `theorem rraFindNat_some_of_spec {p : Nat → Bool} {lo fuel j : Nat} : lo ≤ j → j < lo + fuel → p j = true → (∀ k, lo ≤ k → k < j → p k = false) → rraFindNat p lo fuel = some j :=`
+- **rraFindNat_none_of_spec** (line 176): `theorem rraFindNat_none_of_spec {p : Nat → Bool} {lo fuel : Nat} (h : ∀ k, lo ≤ k → k < lo + fuel → p k = false) : rraFindNat p lo fuel = none :=`
+- **rraFindNat_succ** (line 188): `theorem rraFindNat_succ (p : Nat → Bool) (lo f : Nat) : rraFindNat p lo (f + 1) = (match rraFindNat p lo f with | ...`
+- **rraLoopNat_spec** (line 221): `theorem rraLoopNat_spec (p : Nat → Bool) (cur hi : Nat) : rraLoopNat p cur hi = (rraFindNat p 0 (hi + 1)).getD cur :=`
+- **rraFindNat_vm_eq** (line 270): `theorem rraFindNat_vm_eq {n : Nat} (v : BitVec n) {lg : Nat} (hlg : lg < n) : rraFindNat (rraVM v lg) 0 n = rraFindNat (fun j => v.getLsbD j) (lg + 1) (n - (lg + 1)) :=`
+- **rraChoiceHw_eq** (line 293): `theorem rraChoiceHw_eq {n : Nat} (v : BitVec n) {lg : Nat} (hlg : lg < n) : rraChoiceHw v lg = rraChoiceNat v lg :=`
+- **rraGetLsbD_false_of_ge** (line 342): `theorem rraGetLsbD_false_of_ge {n : Nat} (v : BitVec n) {j : Nat} (h : n ≤ j) : v.getLsbD j = false :=`
+- **rraChoiceNat_lt** (line 350): `theorem rraChoiceNat_lt {n : Nat} (hn : 0 < n) (v : BitVec n) {lg : Nat} (hlg : lg < n) : rraChoiceNat v lg < n :=`
+- **rraRunN_succ_step** (line 404): `theorem rraRunN_succ_step {n : Nat} (hn : 0 < n) (v : BitVec n) (r : Bool) (lg : Fin n) (t : Nat) : rraRunN hn v r lg (t + 1) = rraRunN hn v r (rraStep hn v r lg) t :=`
+- **rraRotDist_of_lt** (line 422): `theorem rraRotDist_of_lt {n lg i : Nat} (h : lg < i) (hi : i < n) : rraRotDist (n :=`
+- **rraRotDist_of_eq** (line 429): `theorem rraRotDist_of_eq {n lg i : Nat} (hn : 0 < n) (h : i = lg) (hl : lg < n) : rraRotDist (n :=`
+- **rraRotDist_of_gt** (line 437): `theorem rraRotDist_of_gt {n lg i : Nat} (h : i < lg) (hl : lg < n) : rraRotDist (n :=`
+- **rraRotDist_ge_one** (line 443): `theorem rraRotDist_ge_one {n lg i : Nat} : 1 ≤ rraRotDist (n :=`
+- **rraRotDist_le** (line 446): `theorem rraRotDist_le {n lg i : Nat} (hn : 0 < n) : rraRotDist (n :=`
+- **rraRotDist_between** (line 453): `theorem rraRotDist_between {n lg i j : Nat} (hl : lg < n) (hi : i < n) (hj : j < n) (h : rraRotDist (n :=`
+- **rraChoiceNat_valid** (line 504): `theorem rraChoiceNat_valid {n : Nat} (v : BitVec n) {lg : Nat} (hlg : lg < n) (hex : ∃ j, v.getLsbD j = true) : v.getLsbD (rraChoiceNat v lg) = true :=`
+- **rraChoiceNat_first** (line 529): `theorem rraChoiceNat_first {n : Nat} (v : BitVec n) {lg : Nat} (hlg : lg < n) {j : Nat} (hvj : v.getLsbD j = true) (hjn : j < n) (hne : j ≠ rraChoiceNat v lg) : rraRotDist (n :=`
+- **rra2_choice_valid** (line 606): `theorem rra2_choice_valid {n : Nat} (hn : 0 < n) (v : BitVec n) (lg : Fin n) : v.getLsbD (rraChoice hn v lg).val = true ↔ ∃ i : Fin n, v.getLsbD i.val = true :=`
+- **rra2_choice_first** (line 615): `theorem rra2_choice_first {n : Nat} (hn : 0 < n) (v : BitVec n) (lg j : Fin n) (hvj : v.getLsbD j.val = true) (hne : j.val ≠ (rraChoice hn v lg).val) : rraRotDist (n :=`
+- **rra2_choice_default** (line 622): `theorem rra2_choice_default {n : Nat} (hn : 0 < n) (v : BitVec n) (lg : Fin n) (hnone : ∀ i : Fin n, v.getLsbD i.val = false) : (rraChoice hn v lg).val = n - 1 :=`
+- **rraCtrl_req_lt** (line 645): `theorem rraCtrl_req_lt {n : Nat} (v : BitVec n) (lg i : Fin n) : rraCtrl (rraReq v lg.val) i.val = true ↔ ∀ j, lg.val < j → j < i.val → v.getLsbD j = false :=`
+- **rraCtrl_req_add** (line 668): `theorem rraCtrl_req_add {n : Nat} (v : BitVec n) (lg i : Fin n) : rraCtrl (rraReq v lg.val) (i.val + n) = true ↔ (∀ j, lg.val < j → j < n → v.getLsbD j = false) ∧ ∀ j, j < i.val → v.getLsbD j = false :=`
+- **rraGrant_eq_true_iff** (line 707): `theorem rraGrant_eq_true_iff {n : Nat} (v : BitVec n) (lg i : Fin n) : rraGrant v lg i = true ↔ (lg.val < i.val ∧ ∀ j, lg.val < j → j < i.val → v.getLsbD j = false) ∨ (i.val ≤ lg.val ∧ (∀ j, lg.val < j → j < n → v.getLsbD j = false) ∧ ∀ j, j < i.val → v.getLsbD j = false) :=`
+- **rra1_choice_granted** (line 756): `theorem rra1_choice_granted {n : Nat} (hn : 0 < n) (v : BitVec n) (lg : Fin n) (hv : v.getLsbD (rraChoice hn v lg).val = true) : rraGrant v lg (rraChoice hn v lg) = true :=`
+- **rra1_grant_valid_eq_choice** (line 819): `theorem rra1_grant_valid_eq_choice {n : Nat} (hn : 0 < n) (v : BitVec n) (lg i : Fin n) (hvi : v.getLsbD i.val = true) (hg : rraGrant v lg i = true) : i = rraChoice hn v lg :=`
+- **rra1_mutex** (line 869): `theorem rra1_mutex {n : Nat} (hn : 0 < n) (v : BitVec n) (lg i j : Fin n) (hvi : v.getLsbD i.val = true) (hgi : rraGrant v lg i = true) (hvj : v.getLsbD j.val = true) (hgj : rraGrant v lg j = true) : i = j :=`
+- **rra3_choice_stable** (line 883): `theorem rra3_choice_stable {n : Nat} (hn : 0 < n) (v v' : BitVec n) (lg : Fin n) (hcv : v'.getLsbD (rraChoice hn v lg).val = true) (hno : ∀ j : Fin n, rraRotDist (n :=`
+- **rra3_step_not_ready** (line 901): `theorem rra3_step_not_ready {n : Nat} (hn : 0 < n) (v : BitVec n) (lg : Fin n) : rraStep hn v false lg = lg :=`
+- **rra3_not_stable** (line 932): `theorem rra3_not_stable : ¬ Stable rraCexTrace :=`
+- **rra4_step_of_fire** (line 947): `theorem rra4_step_of_fire {n : Nat} (hn : 0 < n) (v : BitVec n) (lg : Fin n) (hv : v.getLsbD (rraChoice hn v lg).val = true) : rraStep hn v true lg = rraChoice hn v lg :=`
+- **rra4_step_of_not_valid** (line 955): `theorem rra4_step_of_not_valid {n : Nat} (hn : 0 < n) (v : BitVec n) (r : Bool) (lg : Fin n) (hv : v.getLsbD (rraChoice hn v lg).val = false) : rraStep hn v r lg = lg :=`
+- **rra4_step_of_not_ready** (line 963): `theorem rra4_step_of_not_ready {n : Nat} (hn : 0 < n) (v : BitVec n) (lg : Fin n) : rraStep hn v false lg = lg :=`
+- **rra5_aux** (line 974): `theorem rra5_aux {n : Nat} (hn : 0 < n) (v : BitVec n) (i : Fin n) (hv : v.getLsbD i.val = true) : ∀ d : Nat, ∀ lg : Fin n, rraRotDist (n :=`
+- **rra5_no_starvation** (line 1021): `theorem rra5_no_starvation {n : Nat} (hn : 0 < n) (v : BitVec n) (i lg : Fin n) (hv : v.getLsbD i.val = true) : ∃ t, t ≤ n - 1 ∧ rraChoice hn v (rraRunN hn v true lg t) = i :=`
+
+### `Ventus/Schedule/Scoreboard.lean`
+
+- **sbUtilStep_set_clear** (line 123): `theorem sbUtilStep_set_clear {n : Nat} (z : Bool) (r : BitVec n) (se ce : Bool) (sa ca : BitVec 8) : sbUtilStep z r [.set se sa, .clear ce ca] = sbSetClear z r se sa ce ca :=`
+- **sbStep_vectorReg** (line 200): `theorem sbStep_vectorReg (s : SbState) (i : SbInputs) : (sbStep s i).vectorReg = sbUtilStep false s.vectorReg [.set (i.if_fire && i.if_ctrl.wvd) i.if_ctrl.reg_idxw, .clear (i.wb_v_fire && i.wb_v_wvd) i.wb_v_idxw] :=`
+- **sbStep_scalarReg** (line 205): `theorem sbStep_scalarReg (s : SbState) (i : SbInputs) : (sbStep s i).scalarReg = sbUtilStep true s.scalarReg [.set (i.if_fire && i.if_ctrl.wxd) i.if_ctrl.reg_idxw, .clear (i.wb_x_fire && i.wb_x_wxd) i.wb_x_idxw] :=`
+- **sbStep_beqReg** (line 210): `theorem sbStep_beqReg (s : SbState) (i : SbInputs) : (sbStep s i).beqReg = sbUtilStep false s.beqReg [.set (i.if_fire && (i.if_ctrl.branch != 0#2 || i.if_ctrl.barrier)) 0#8, .clear i.br_ctrl 0#8] :=`
+- **sbStep_opColV** (line 215): `theorem sbStep_opColV (s : SbState) (i : SbInputs) : (sbStep s i).opColV = sbUtilStep false s.opColV [.set i.opColV_in 0#8, .clear i.opColV_out 0#8] :=`
+- **sbStep_opColX** (line 219): `theorem sbStep_opColX (s : SbState) (i : SbInputs) : (sbStep s i).opColX = sbUtilStep false s.opColX [.set i.opColX_in 0#8, .clear i.opColX_out 0#8] :=`
+- **sbStep_fenceReg** (line 223): `theorem sbStep_fenceReg (s : SbState) (i : SbInputs) : (sbStep s i).fenceReg = sbUtilStep false s.fenceReg [.set (i.if_fire && i.if_ctrl.fence) 0#8, .clear i.fence_end 0#8] :=`
+- **sb_clear_wins** (line 414): `theorem sb_clear_wins {z : Bool} {r : BitVec 256} {se : Bool} {sa a : BitVec 8} : sbRead z (sbSetClear z r se sa true a) a = false :=`
+- **sb_set_visible** (line 421): `theorem sb_set_visible {r : BitVec 256} {ce : Bool} {a ca : BitVec 8} (h : (ce && (ca == a)) = false) : sbRead false (sbSetClear false r true a ce ca) a = true :=`
+- **sb_set_visible_scalar** (line 429): `theorem sb_set_visible_scalar {r : BitVec 256} {ce : Bool} {a ca : BitVec 8} (h0 : (a == 0#8) = false) (h : (ce && (ca == a)) = false) : sbRead true (sbSetClear true r true a ce ca) a = true :=`
+- **sb1_scalar_x0** (line 438): `theorem sb1_scalar_x0 (r : BitVec 256) : sbRead true r 0#8 = false :=`
+- **sb1_run_scalar_x0** (line 443): `theorem sb1_run_scalar_x0 (s : SbState) (ins : List SbInputs) : sbRead true (sbRun s ins).scalarReg 0#8 = false :=`
+- **sb2_raw** (line 449): `theorem sb2_raw (s : SbState) (i : SbInputs) (c : SbCtrl) (a : BitVec 8) (hif : i.if_fire = true) (hwvd : i.if_ctrl.wvd = true) (haddr : i.if_ctrl.reg_idxw = a) (hnc : (i.wb_v_fire && i.wb_v_wvd && (i.wb_v_idxw == a)) = false) (hsel : c.sel_alu1 = sbA1_VRS1) (hr1 : c.reg_idx1 = a) : sbDelay (sbStep s i) c = true :=`
+- **sb2_raw_scalar** (line 463): `theorem sb2_raw_scalar (s : SbState) (i : SbInputs) (c : SbCtrl) (a : BitVec 8) (hif : i.if_fire = true) (hwxd : i.if_ctrl.wxd = true) (haddr : i.if_ctrl.reg_idxw = a) (ha0 : (a == 0#8) = false) (hnc : (i.wb_x_fire && i.wb_x_wxd && (i.wb_x_idxw == a)) = false) (hsel : c.sel_alu1 = sbA1_RS1) (hr1 : c.reg_idx1 = a) : sbDelay (sbStep s i) c = true :=`
+- **sb3_wb_clear** (line 478): `theorem sb3_wb_clear (s : SbState) (i : SbInputs) (a : BitVec 8) (hbf : i.wb_v_fire = true) (hbw : i.wb_v_wvd = true) (hba : i.wb_v_idxw = a) (hns : (i.if_fire && i.if_ctrl.wvd && (i.if_ctrl.reg_idxw == a)) = false) : sbRead false (sbStep s i).vectorReg a = false :=`
+- **sb4_clear_priority** (line 486): `theorem sb4_clear_priority (s : SbState) (i : SbInputs) (a : BitVec 8) (hif : i.if_fire = true) (hwvd : i.if_ctrl.wvd = true) (haddr : i.if_ctrl.reg_idxw = a) (hbf : i.wb_v_fire = true) (hbw : i.wb_v_wvd = true) (hba : i.wb_v_idxw = a) : sbRead false (sbStep s i).vectorReg a = false :=`
+- **sb5_delay_complete** (line 496): `theorem sb5_delay_complete (s : SbState) (c : SbCtrl) : sbDelay s c = false ↔ sbRead1 s c = false ∧ sbRead2 s c = false ∧ sbRead3 s c = false ∧ sbReadM s c = false ∧ sbReadW s c = false ∧ sbReadB s = false ∧ sbReadF s c = false ∧ sbReadOpColV s = false ∧ sbReadOpColX s = false :=`
+
+### `Ventus/Schedule/WarpScheduler.lean`
+
+- **wsRd8_wr8_self** (line 146): `theorem wsRd8_wr8_self (a : Array (BitVec 8)) (i : Fin 8) (v : BitVec 8) : wsRd8 (wsWr8 a i v) i = (if i.val < a.size then v else 0#8) :=`
+- **wsRdB_wrB_self** (line 150): `theorem wsRdB_wrB_self (a : Array Bool) (i : Fin 8) (v : Bool) : wsRdB (wsWrB a i v) i = (if i.val < a.size then v else false) :=`
+- **wsRd8_wr8_of_ne** (line 155): `theorem wsRd8_wr8_of_ne (a : Array (BitVec 8)) {i j : Fin 8} (v : BitVec 8) (h : i ≠ j) : wsRd8 (wsWr8 a i v) j = wsRd8 a j :=`
+- **wsRdB_wrB_of_ne** (line 160): `theorem wsRdB_wrB_of_ne (a : Array Bool) {i j : Fin 8} (v : Bool) (h : i ≠ j) : wsRdB (wsWrB a i v) j = wsRdB a j :=`
+- **wsStep_currentWarp** (line 344): `theorem wsStep_currentWarp (s : WsState) (i : WsInputs) : (wsStep s i).currentWarp = wsNextWarp (i.pcIbufRdy &&& s.warpActive) s.currentWarp :=`
+- **wsStep_warpActive** (line 346): `theorem wsStep_warpActive (s : WsState) (i : WsInputs) : (wsStep s i).warpActive = wsStepActive s.warpActive i :=`
+- **wsStep_barData** (line 348): `theorem wsStep_barData (s : WsState) (i : WsInputs) : (wsStep s i).barData = wsStepData s.barData s.barCur s.barExp s.barBelong i :=`
+- **wsStep_endprgCnt** (line 350): `theorem wsStep_endprgCnt (s : WsState) (i : WsInputs) : (wsStep s i).endprgCntArr = wsStepCnt s.endprgCntArr i :=`
+- **wsStep_wgValid** (line 352): `theorem wsStep_wgValid (s : WsState) (i : WsInputs) : (wsStep s i).wgValidArr = wsStepValid s.endprgCntArr s.wgValidArr i :=`
+- **ws1_ready_spec** (line 506): `theorem ws1_ready_spec (bar sb exe act : BitVec 8) (i : BitVec 3) : ((wsWarpReady bar sb exe act >>> i.zeroExtend 8) &&& 1#8 = 1#8) ↔ ((act >>> i.zeroExtend 8) &&& 1#8 = 1#8 ∧ (bar >>> i.zeroExtend 8) &&& 1#8 = 0#8 ∧ (sb >>> i.zeroExtend 8) &&& 1#8 = 0#8 ∧ (exe >>> i.zeroExtend 8) &&& 1#8 = 0#8) :=`
+- **ws2_release_iff** (line 514): `theorem ws2_release_iff (cur exp : BitVec 8) (wf : BitVec 3) : wsBarRelease cur exp wf = true ↔ (cur ||| (1#8 <<< wf.zeroExtend 8)) = exp :=`
+- **ws2_release_clears** (line 520): `theorem ws2_release_clears (data belong : BitVec 8) (wid : BitVec 3) : wsBarDataNext data belong wid true &&& belong = 0#8 :=`
+- **ws2_arrive_barred** (line 526): `theorem ws2_arrive_barred (data belong : BitVec 8) (wid : BitVec 3) : ((wsBarDataNext data belong wid false >>> wid.zeroExtend 8) &&& 1#8) = 1#8 :=`
+- **ws2_barred_not_ready** (line 532): `theorem ws2_barred_not_ready (data sb exe act : BitVec 8) (i : BitVec 3) (h : ((data >>> i.zeroExtend 8) &&& 1#8) = 1#8) : ((wsWarpReady data sb exe act >>> i.zeroExtend 8) &&& 1#8) = 0#8 :=`
+- **ws2_release_ready_again** (line 539): `theorem ws2_release_ready_again (data belong sb exe act : BitVec 8) (wid i : BitVec 3) (hb : ((belong >>> i.zeroExtend 8) &&& 1#8) = 1#8) (ha : ((act >>> i.zeroExtend 8) &&& 1#8) = 1#8) (hs : ((sb >>> i.zeroExtend 8) &&& 1#8) = 0#8) (he : ((exe >>> i.zeroExtend 8) &&& 1#8) = 0#8) : ((wsWarpReady (wsBarDataNext data belong wid true) sb exe act >>> i.zeroExtend 8) &&& 1#8) = 1#8 :=`
+- **ws2_cur_sem** (line 549): `theorem ws2_cur_sem (cur exp : BitVec 8) (wf : BitVec 3) : (if wsBarRelease cur exp wf then 0#8 else cur ||| (1#8 <<< wf.zeroExtend 8)) = if (cur ||| (1#8 <<< wf.zeroExtend 8)) = exp then 0#8 else cur ||| (1#8 <<< wf.zeroExtend 8) :=`
+- **ws3_next_warp_min** (line 557): `theorem ws3_next_warp_min (m : BitVec 8) (cur k : BitVec 3) (hk : ((m >>> k.zeroExtend 8) &&& 1#8) = 1#8) (hmin : m &&& ((1#8 <<< k.zeroExtend 8) - 1#8) = 0#8) : wsNextWarp m cur = k :=`
+- **ws3_next_warp_fallback** (line 565): `theorem ws3_next_warp_fallback (cur : BitVec 3) : wsNextWarp 0#8 cur = cur :=`
+- **ws3_next_warp_ready** (line 572): `theorem ws3_next_warp_ready (m : BitVec 8) (cur : BitVec 3) (hm : m ≠ 0#8) : ((m >>> (wsNextWarp m cur).zeroExtend 8) &&& 1#8) = 1#8 :=`
+- **ws4_flush_entry_avoids** (line 580): `theorem ws4_flush_entry_avoids (m : BitVec 8) (h1 : ((m >>> 1) &&& 1#8) = 1#8) (h2 : ((m >>> 2) &&& 1#8) = 1#8) : wsOHToUInt m ≠ 1#3 ∧ wsOHToUInt m ≠ 2#3 :=`
+- **wsMask0_bit1** (line 587): `theorem wsMask0_bit1 (cnt : Fin 8 → BitVec 8) (v : Fin 8 → Bool) : ((wsMask0 cnt v >>> 1) &&& 1#8) = 1#8 ↔ (cnt (wsFin 1#3) = 0#8 ∧ v (wsFin 1#3) = true) :=`
+- **wsMask0_bit2** (line 594): `theorem wsMask0_bit2 (cnt : Fin 8 → BitVec 8) (v : Fin 8 → Bool) : ((wsMask0 cnt v >>> 2) &&& 1#8) = 1#8 ↔ (cnt (wsFin 2#3) = 0#8 ∧ v (wsFin 2#3) = true) :=`
+- **wsMask0_ne_zero_of_stuck** (line 606): `theorem wsMask0_ne_zero_of_stuck (s : WsState) (h : wsStuck s) : wsMask0 s.endprgCnt s.wgValid ≠ 0#8 :=`
+- **ws4_step_stuck** (line 618): `theorem ws4_step_stuck (s : WsState) (i : WsInputs) (h : wsStuck s) (hnr : i.warpReqFire = false) : wsStuck (wsStep s i) :=`
+- **ws4_run_stuck** (line 682): `theorem ws4_run_stuck (s : WsState) (ins : List WsInputs) (h : wsStuck s) (hnr : ∀ x ∈ ins, x.warpReqFire = false) : wsStuck (wsRun s ins) :=`
+- **ws4_stuck_forever** (line 691): `theorem ws4_stuck_forever (s : WsState) (ins : List WsInputs) (h : wsStuck s) (hnr : ∀ x ∈ ins, x.warpReqFire = false) : wsMask0 (wsRun s ins).endprgCnt (wsRun s ins).wgValid ≠ 0#8 ∧ (wsRun s ins).wgValid (wsFin 1#3) = true ∧ (wsRun s ins).wgValid (wsFin 2#3) = true :=`
+
+### `Ventus/Schedule/Writeback.lean`
+
+- **wbArbGrant_eq_true_iff** (line 97): `theorem wbArbGrant_eq_true_iff {n : Nat} (v : BitVec n) (i : Fin n) : wbArbGrant v i = true ↔ ∀ j, j < i.val → v.getLsbD j = false :=`
+- **wbArbChoiceHw_eq** (line 114): `theorem wbArbChoiceHw_eq {n : Nat} (v : BitVec n) : wbArbChoiceHw v = wbArbChoiceNat v :=`
+- **wbArbChoiceNat_lt** (line 138): `theorem wbArbChoiceNat_lt {n : Nat} (v : BitVec n) (hn : 0 < n) : wbArbChoiceNat v < n :=`
+- **wbCtrl_false_iff** (line 172): `theorem wbCtrl_false_iff {req : Nat → Bool} {k : Nat} : rraCtrl req k = false ↔ ∃ j, j < k ∧ req j = true :=`
+- **wb_arb_out_valid** (line 195): `theorem wb_arb_out_valid {n : Nat} (hn : 0 < n) (v : BitVec n) : wbArbOutValid v = true ↔ ∃ i : Fin n, v.getLsbD i.val = true :=`
+- **wb_arb_mutex** (line 222): `theorem wb_arb_mutex {n : Nat} (v : BitVec n) (r : Bool) (i j : Fin n) (hfi : wbArbInFire v r i = true) (hfj : wbArbInFire v r j = true) : i = j :=`
+- **wb_arb_choice_valid** (line 241): `theorem wb_arb_choice_valid {n : Nat} (hn : 0 < n) (v : BitVec n) {i : Fin n} (hvi : v.getLsbD i.val = true) : v.getLsbD (wbArbChoice hn v).val = true ∧ (wbArbChoice hn v).val ≤ i.val :=`
+- **wb_arb_fire_integrity** (line 265): `theorem wb_arb_fire_integrity {n : Nat} (hn : 0 < n) (v : BitVec n) (r : Bool) (hv : v.getLsbD (wbArbChoice hn v).val = true) : wbArbInFire v r (wbArbChoice hn v) = r :=`
+- **wb_arb_progress** (line 285): `theorem wb_arb_progress {n : Nat} (hn : 0 < n) (v : BitVec n) {i : Fin n} (hvi : v.getLsbD i.val = true) : wbArbInFire v true (wbArbChoice hn v) = true :=`
+- **wb_bank_wen_eq** (line 350): `theorem wb_bank_wen_eq (valid wvd : Bool) : wbBankWenV (valid && wbOutReady) wvd = (wvd && valid) :=`
+- **wb_bank_wen_x_x0** (line 355): `theorem wb_bank_wen_x_x0 (fire wxd : Bool) : wbBankWenX fire wxd 0#8 = false :=`
+- **wb_gate_closed_of_delay** (line 360): `theorem wb_gate_closed_of_delay : wbGateOpen true = false :=`
+- **wb_i9_gate_closed** (line 365): `theorem wb_i9_gate_closed (s : SbState) (c : SbCtrl) (a : BitVec 8) (hbusy : sbRead false s.vectorReg a = true) (hsel : c.sel_alu1 = sbA1_VRS1) (hr1 : c.reg_idx1 = a) : wbGateOpen (sbDelay s c) = false :=`
+- **wb_i9_clear_visible** (line 375): `theorem wb_i9_clear_visible (s : SbState) (i : SbInputs) (a : BitVec 8) (hbf : i.wb_v_fire = true) (hbw : i.wb_v_wvd = true) (hba : i.wb_v_idxw = a) (hns : (i.if_fire && i.if_ctrl.wvd && (i.if_ctrl.reg_idxw == a)) = false) : sbRead false (sbStep s i).vectorReg a = false :=`
+- **wb_i9_timing** (line 385): `theorem wb_i9_timing {tW tFire tRead : Nat} (hFire : tW + 1 ≤ tFire) (hRead : tFire ≤ tRead) : tW + 1 ≤ tRead :=`
+- **wb_i9_bypass_same_cycle** (line 393): `theorem wb_i9_bypass_same_cycle (s : RfVState) (i : RfVInputs) (h : (rfVStep s i).bypass = true) : i.rsidx = i.rdidx ∧ i.rdwen = true :=`
+- **wb_i9_unreachable** (line 406): `theorem wb_i9_unreachable (rf : RfVState) (a c : BitVec 8) (v x : RfVRow) (m m' : RfVMask) (rsx : BitVec 8) (t : Fin 32) : (rfVStep (rfVStep rf ⟨rsx, a, v, true, m⟩) ⟨a, c, x, false, m'⟩).bypass = false ∧ rfVOut (rfVStep (rfVStep rf ⟨rsx, a, v, true, m⟩) ⟨a, c, x, false, m'⟩) t = (if m t then v t else rf.mem a.toFin t) :=`
+- **wb_i9_scalar** (line 416): `theorem wb_i9_scalar (s : RfSState) (a c rsx : BitVec 8) (v x : BitVec 32) : rfSOut (rfSStep (rfSStep s ⟨rsx, a, v, true⟩) ⟨a, c, x, false⟩) = v :=`
+- **wb_i9_chain** (line 423): `theorem wb_i9_chain (s : SbState) (i : SbInputs) (c : SbCtrl) (a : BitVec 8) (hbusy : sbRead false s.vectorReg a = true) (hsel : c.sel_alu1 = sbA1_VRS1) (hr1 : c.reg_idx1 = a) (hbf : i.wb_v_fire = true) (hbw : i.wb_v_wvd = true) (hba : i.wb_v_idxw = a) (hns : (i.if_fire && i.if_ctrl.wvd && (i.if_ctrl.reg_idxw == a)) = false) : wbGateOpen (sbDelay s c) = false ∧ sbRead false (sbStep s i).vectorReg a = false :=`
+
+### `Ventus/Spec/Contracts.lean`
+
+- **spec_count_total** (line 238): `theorem spec_count_total : specContracts.length = 41 :=`
+- **spec_count_discharged** (line 240): `theorem spec_count_discharged : specCountStatus .discharged = 23 :=`
+- **spec_count_pending** (line 242): `theorem spec_count_pending : specCountStatus .pending = 0 :=`
+- **spec_count_axiomatic** (line 244): `theorem spec_count_axiomatic : specCountStatus .axiomatic = 17 :=`
+- **spec_count_refuted** (line 246): `theorem spec_count_refuted : specCountStatus .refuted = 1 :=`
+- **spec_count_partition** (line 248): `theorem spec_count_partition : specCountStatus .discharged + specCountStatus .pending + specCountStatus .axiomatic + specCountStatus .refuted = specContracts.length :=`
+
+### `Ventus/Spec/Discharge1.lean`
+
+- **dcg1_hIb2i_no_distortion** (line 88): `theorem dcg1_hIb2i_no_distortion {n : Nat} (hn : 0 < n) (v : BitVec n) (lg : Fin n) (outRdy : Bool) (hv : rraOutValid hn v lg = true) : rraInReady hn v lg outRdy (rraChoice hn v lg) = outRdy :=`
+- **dcg1_hIb2i_ready_closed** (line 101): `theorem dcg1_hIb2i_ready_closed {n : Nat} (hn : 0 < n) (v : BitVec n) (lg : Fin n) (outRdy warpRdy : Bool) (hv : rraOutValid hn v lg = true) : pipeIbOutReady (rraInReady hn v lg outRdy (rraChoice hn v lg)) warpRdy = (outRdy && warpRdy) :=`
+- **dcg1_hIb2i_fire_eq** (line 110): `theorem dcg1_hIb2i_fire_eq (v r w : Bool) : pipeIb2iInFire v r w = pipeIbOutFire v r w :=`
+- **dcg1_hIb2i_bits_closed** (line 115): `theorem dcg1_hIb2i_bits_closed {n : Nat} (hn : 0 < n) {α : Type} (bits : Fin n → α) (v : BitVec n) (lg : Fin n) : rraOutBits hn bits v lg = bits (rraChoice hn v lg) :=`
+- **dcg1_hDelay_wire** (line 137): `theorem dcg1_hDelay_wire (sb : Fin 8 → SbState) (cc : Fin 8 → SbCtrl) (i : BitVec 3) : ((pipeScoreboardBusy (fun j => sbDelay (sb j) (cc j)) >>> i.zeroExtend 8) &&& 1#8 = 1#8) ↔ sbDelay (sb (wsFin i)) (cc (wsFin i)) = true :=`
+- **dcg1_hDelay_gate_closed** (line 146): `theorem dcg1_hDelay_gate_closed (sb : Fin 8 → SbState) (cc : Fin 8 → SbCtrl) (bar exe act : BitVec 8) (i : BitVec 3) (hocc : sbReadOpColV (sb (wsFin i)) = true) (ibValid ib2iRdy : Bool) : pipeIb2iInFire ibValid ib2iRdy (pipeWarpReadyBit bar (pipeScoreboardBusy (fun j => sbDelay (sb j) (cc j))) exe act i) = false :=`
+- **dcg1_hWid_complete** (line 167): `theorem dcg1_hWid_complete (w : BitVec 3) : dcg1BjCompleteWid w = w :=`
+- **dcg1_hWid_fetchCtl** (line 169): `theorem dcg1_hWid_fetchCtl (w : BitVec 3) : dcg1BjFetchCtlWid w = w :=`
+- **dcg1_hWid_same_source** (line 171): `theorem dcg1_hWid_same_source (w : BitVec 3) : dcg1BjCompleteWid w = dcg1BjFetchCtlWid w :=`
+- **dcg1_hWid_event** (line 183): `theorem dcg1_hWid_event (s : BjSysState 32 32) (e : BjEvent 32) (w : BitVec 3) : let o :=`
+- **dcg1_wbA3_serialization** (line 200): `theorem dcg1_wbA3_serialization (ins : List I4fSysIn) : dcg1WbA3Serialized (i4fSysRunG i4fSbOpColOrig i4fSysInit ins) :=`
+- **dcg1_wbA3_blocked_while_busy** (line 207): `theorem dcg1_wbA3_blocked_while_busy (s : I4fSysState) (i : I4fSysIn) (hocc : s.occ = 1#1) (j : Fin 2) : (i4fDemuxD s i).valid j = false :=`
+- **dcg1_wbA3_next_blocked** (line 218): `theorem dcg1_wbA3_next_blocked (ins : List I4fSysIn) (i : I4fSysIn) (hocc : (i4fSysRunG i4fSbOpColOrig i4fSysInit ins).occ = 1#1) (j : Fin 2) : (i4fDemuxD (i4fSysRunG i4fSbOpColOrig i4fSysInit ins) i).valid j = false :=`
+- **dcg1_wbA3_occ_tracks_busy_orig** (line 226): `theorem dcg1_wbA3_occ_tracks_busy_orig (ins : List I4fSysIn) : ((i4fSysRunG i4fSbOpColOrig i4fSysInit ins).occ == 1#1) = (i4fCuBusy (i4fSysRunG i4fSbOpColOrig i4fSysInit ins).cu0 || i4fCuBusy (i4fSysRunG i4fSbOpColOrig i4fSysInit ins).cu1) :=`
+- **dcg1_allocRegInv_init** (line 244): `theorem dcg1_allocRegInv_init : dcg1AllocRegInv wgbInit :=`
+- **dcg1_allocRegInv_step** (line 249): `theorem dcg1_allocRegInv_step (s : WgbState) (i : WgbInputs) (henv : WgbEnvOk s i) (h0 : dcg1AllocRegInv s) : dcg1AllocRegInv (wgbStep s i) :=`
+- **dcg1_allocRegInv_run** (line 303): `theorem dcg1_allocRegInv_run (s : WgbState) (ins : List WgbInputs) (ht : dcg1WgbTraceOk s ins) : dcg1AllocRegInv s → dcg1AllocRegInv (wgbRun s ins) :=`
+- **dcg1_allocRegInv_run_init** (line 314): `theorem dcg1_allocRegInv_run_init (ins : List WgbInputs) (ht : dcg1WgbTraceOk wgbInit ins) : dcg1AllocRegInv (wgbRun wgbInit ins) :=`
+- **dcg1_hAllocPending_rdAct** (line 320): `theorem dcg1_hAllocPending_rdAct (s : WgbState) (i : WgbInputs) (h : wgbRdAct s i = true) : 0 < wgbPending s :=`
+- **dcg1_hAllocPending_offer** (line 329): `theorem dcg1_hAllocPending_offer (s : WgbState) (h : dcg1AllocRegInv s) (hv : s.allocValidR = true) : 0 < wgbPending s :=`
+- **dcg1_hAllocPending_fire** (line 335): `theorem dcg1_hAllocPending_fire (s : WgbState) (i : WgbInputs) (h : dcg1AllocRegInv s) (hfire : (s.allocValidR && i.allocReady) = true) : 0 < wgbPending s :=`
+- **dcg1_hAllocPending_accept** (line 342): `theorem dcg1_hAllocPending_accept (s : WgbState) (i : WgbInputs) (henv : WgbEnvOk s i) (h : wgbClearAct s i = true) : 0 < wgbPending s :=`
+- **dcg1_wsM7_fifo_full** (line 361): `theorem dcg1_wsM7_fifo_full : dcg1WsM7Full.fifo.length = 16 :=`
+- **dcg1_wsM7_counterexample** (line 366): `theorem dcg1_wsM7_counterexample : (c2wOut dcg1WsM7Full (c2wInRsp 0#3 false)).warpRspReady = false ∧ c2wEnqFire dcg1WsM7Full (c2wInRsp 0#3 false) = false :=`
+- **dcg1_wsM7_assumption_false** (line 381): `theorem dcg1_wsM7_assumption_false : ¬ (∀ (s : C2wState) (i : C2wInputs), s.fifo.length ≤ 16 → i.warpRspValid = true → (c2wOut s i).warpRspReady = true) :=`
+- **dcg1_pcc_step_aligned** (line 400): `theorem dcg1_pcc_step_aligned (s : PccState) (i : PccIn) (hs : s.pout &&& 7#32 = 0#32) (h3 : i.replay = false → i.src = 3#2 → i.newPC &&& 7#32 = 0#32) : (pccStep s i).pout &&& 7#32 = 0#32 :=`
+- **dcg1_pcc_run_aligned** (line 429): `theorem dcg1_pcc_run_aligned (s : PccState) (ins : List PccIn) (hs : s.pout &&& 7#32 = 0#32) (henv : ∀ j ∈ ins, j.replay = false → j.src = 3#2 → j.newPC &&& 7#32 = 0#32) : (pccRun s ins).pout &&& 7#32 = 0#32 :=`
+- **dcg1_icD8_align_assert** (line 444): `theorem dcg1_icD8_align_assert (a : BitVec 32) (h : a &&& 7#32 = 0#32) : icGetBlockOffset a &&& 1#5 = 0#5 :=`
+- **dcg1_icD8_rsp_consumes_env** (line 470): `theorem dcg1_icD8_rsp_consumes_env (s : IcMshrState) (i : IcMshrIn) (hrv : i.rspValid = true) (hb : s.busy = false) (henv : dcg1IcRspEnvOk s i) : icRspOutValid s i = true ∧ icRspOutBA s i = s.blockAddr i.rspIdx ∧ (icMshrStep s i).subValid i.rspIdx (icNext2Cancel s i) = false :=`
+
+### `Ventus/Spec/Discharge2.lean`
+
+- **dcg2_wba2_prefix** (line 88): `theorem dcg2_wba2_prefix (t : IbTop) (is : List IbTopIn) (w : Fin 8) (he : t.lanes w = IbLane.empty) (hf : ∀ i ∈ is, (ibTopLaneIn i w).flush = false) : List.IsPrefix (dcg2EmitSeq t is w) (dcg2AcceptSeq t is w) :=`
+- **dcg2_wba2_accept_length_le** (line 96): `theorem dcg2_wba2_accept_length_le (t : IbTop) (is : List IbTopIn) (w : Fin 8) (he : t.lanes w = IbLane.empty) (hf : ∀ i ∈ is, (ibTopLaneIn i w).flush = false) : (dcg2EmitSeq t is w).length ≤ (dcg2AcceptSeq t is w).length :=`
+- **dcg2_wba2_getElem** (line 106): `theorem dcg2_wba2_getElem (t : IbTop) (is : List IbTopIn) (w : Fin 8) (he : t.lanes w = IbLane.empty) (hf : ∀ i ∈ is, (ibTopLaneIn i w).flush = false) (k : Nat) (hk : k < (dcg2EmitSeq t is w).length) : (dcg2EmitSeq t is w)[k]? = (dcg2AcceptSeq t is w)[k]? :=`
+- **dcg2_wba2_take** (line 115): `theorem dcg2_wba2_take (t : IbTop) (is : List IbTopIn) (w : Fin 8) (he : t.lanes w = IbLane.empty) (hf : ∀ i ∈ is, (ibTopLaneIn i w).flush = false) : dcg2EmitSeq t is w = (dcg2AcceptSeq t is w).take (dcg2EmitSeq t is w).length :=`
+- **dcg2_wba2_chain** (line 127): `theorem dcg2_wba2_chain (t : IbTop) (is : List IbTopIn) (w : Fin 8) (he : t.lanes w = IbLane.empty) (hf : ∀ i ∈ is, (ibTopLaneIn i w).flush = false) : List.IsPrefix (dcg2EmitSeq t is w) (dcg2AcceptSeq t is w) ∧ (∀ v r wr, pipeIb2iInFire v r wr = pipeIbOutFire v r wr) ∧ (∀ v r, pipeIb2iInFire v r false = false ∧ pipeIbOutFire v r false = false) :=`
+- **dcg2T_stall_emit** (line 157): `theorem dcg2T_stall_emit : (dcg2EmitSeq ibTopEmpty dcg2IbStall ⟨0, by decide⟩).map IbInsn.tag = [10, 11, 12] :=`
+- **dcg2T_stall_accept** (line 161): `theorem dcg2T_stall_accept : (dcg2AcceptSeq ibTopEmpty dcg2IbStall ⟨0, by decide⟩).map IbInsn.tag = [10, 11, 12] :=`
+- **dcg2_bjb1_inputWid_eq** (line 176): `theorem dcg2_bjb1_inputWid_eq (wid : BitVec 3) : dcg2BjInputWid wid = wid :=`
+- **dcg2_bjb1_read_submask** (line 181): `theorem dcg2_bjb1_read_submask (instrMask : BitVec 32) (tm : Fin 8 → BitVec 32) (wid : BitVec 3) : pipeExeDataVMask instrMask (tm (wsFin (dcg2BjInputWid wid))) &&& ~~~(tm (wsFin wid)) = 0#32 :=`
+- **dcg2_bjb1_consume** (line 194): `theorem dcg2_bjb1_consume {depth : Nat} [NeZero depth] (s : BjSysState depth 32) (bi : BjBranchIn 32) (tm : Fin 8 → BitVec 32) (wid bufWid : BitVec 3) (instrMask : BitVec 32) (hmi : bi.maskInit = pipeExeDataVMask instrMask (tm (wsFin wid))) (htr : bufWid = wid) (htm : s.tmask = tm (wsFin bufWid)) : bjbMaskDiscipline s bi :=`
+- **dcg2BbVal_0** (line 222): `theorem dcg2BbVal_0 (a b : Bool) : (dcg2BbVal a b).getLsbD 0 = a :=`
+- **dcg2BbVal_1** (line 225): `theorem dcg2BbVal_1 (a b : Bool) : (dcg2BbVal a b).getLsbD 1 = b :=`
+- **dcg2_hbb_grant** (line 230): `theorem dcg2_hbb_grant (in0v : Bool) (h0 : in0v = false) : wbArbGrant (dcg2BbVal in0v true) ⟨1, by decide⟩ = true :=`
+- **dcg2_hbb_blocked** (line 242): `theorem dcg2_hbb_blocked (in1v : Bool) : wbArbGrant (dcg2BbVal true in1v) ⟨1, by decide⟩ = false :=`
+- **dcg2_hbb_accept** (line 258): `theorem dcg2_hbb_accept (s : WsState) (i : WsInputs) : (wsOut s i).branchReady = !(i.pcRspValid && i.pcRspMiss) :=`
+- **dcg2_hbb_accept_iff_no_flushCache** (line 262): `theorem dcg2_hbb_accept_iff_no_flushCache (s : WsState) (i : WsInputs) : (wsOut s i).branchReady = !(wsOut s i).flushCacheValid :=`
+- **dcg2_hbb_fire1** (line 266): `theorem dcg2_hbb_fire1 (in0v : Bool) (h0 : in0v = false) (r : Bool) (hr : r = true) : wbArbInFire (dcg2BbVal in0v true) r ⟨1, by decide⟩ = true :=`
+- **dcg2_hbb_fire** (line 278): `theorem dcg2_hbb_fire (s : WsState) (i : WsInputs) (in0v : Bool) (h0 : in0v = false) (hfc : (i.pcRspValid && i.pcRspMiss) = false) : wbArbInFire (dcg2BbVal in0v true) (wsOut s i).branchReady ⟨1, by decide⟩ = true :=`
+- **dcg2_hbb_no_fire_iff** (line 285): `theorem dcg2_hbb_no_fire_iff (in0v : Bool) (r : Bool) : wbArbInFire (dcg2BbVal in0v true) r ⟨1, by decide⟩ = false ↔ in0v = true ∨ r = false :=`
+- **dcg2_hbb_bounded_wait** (line 315): `theorem dcg2_hbb_bounded_wait (in0v fcv : Nat → Bool) (t0 B : Nat) (hex : ∃ t, t0 ≤ t ∧ t ≤ t0 + B ∧ in0v t = false ∧ fcv t = false) : ∃ t, t0 ≤ t ∧ t ≤ t0 + B ∧ wbArbInFire (dcg2BbVal (in0v t) true) (!fcv t) ⟨1, by decide⟩ = true :=`
+- **dcg2_wba1_stride_disjoint** (line 354): `theorem dcg2_wba1_stride_disjoint (B p : Nat) {w1 w2 : Nat} (hw : w1 ≠ w2) (hp : 0 < p) : (B + w1 * p) + p ≤ B + w2 * p ∨ (B + w2 * p) + p ≤ B + w1 * p :=`
+- **dcg2_wba1_bank_map_eq** (line 368): `theorem dcg2_wba1_bank_map_eq (k b r : Nat) (hk : 0 < k) (hb : k ∣ b) : b / k + r / k = (b + r) / k :=`
+- **dcg2_wba1_linear_sep** (line 374): `theorem dcg2_wba1_linear_sep {x1 y1 x2 y2 q1 q2 : Nat} (hq1 : q1 < y1) (hq2 : q2 < y2) (h : x1 + y1 ≤ x2 ∨ x2 + y2 ≤ x1) : x1 + q1 ≠ x2 + q2 :=`
+- **dcg2_wba1_bank_disjoint** (line 382): `theorem dcg2_wba1_bank_disjoint (k : Nat) (hk : 0 < k) {b1 s1 b2 s2 : Nat} (hb1 : k ∣ b1) (hs1 : k ∣ s1) (hb2 : k ∣ b2) (hs2 : k ∣ s2) (hdisj : b1 + s1 ≤ b2 ∨ b2 + s2 ≤ b1) {r1 r2 : Nat} (hr1 : r1 < s1) (hr2 : r2 < s2) : b1 / k + r1 / k ≠ b2 / k + r2 / k :=`
+- **dcg2_dvd_add_wf** (line 423): `theorem dcg2_dvd_add_wf {k B p w : Nat} (hB : k ∣ B) (hp : k ∣ p) : k ∣ B + w * p :=`
+- **dcg2_wba1_within_wg** (line 432): `theorem dcg2_wba1_within_wg (k : Nat) (hk : 1 ≤ k) {B p : Nat} {w1 w2 : Nat} (hw : w1 ≠ w2) (hp : 0 < p) (halB : k ∣ B) (halp : k ∣ p) {ridx1 ridx2 : Nat} (hr1 : ridx1 < p) (hr2 : ridx2 < p) : (B + w1 * p) / k + ridx1 / k ≠ (B + w2 * p) / k + ridx2 / k :=`
+- **dcg2_wba1_across_wg** (line 444): `theorem dcg2_wba1_across_wg (k : Nat) (hk : 1 ≤ k) {B1 S1 B2 S2 p : Nat} (hdisj0 : B1 + S1 ≤ B2 ∨ B2 + S2 ≤ B1) {w1 w2 : Nat} (hle1 : w1 * p + p ≤ S1) (hle2 : w2 * p + p ≤ S2) (hal1 : k ∣ B1) (hal2 : k ∣ B2) (halp : k ∣ p) {ridx1 ridx2 : Nat} (hr1 : ridx1 < p) (hr2 : ridx2 < p) : (B1 + w1 * p) / k + ridx1 / k ≠ (B2 + w2 * p) / k + ridx2 / k :=`
+- **dcg2_wba1_wg_vgpr_disjoint** (line 463): `theorem dcg2_wba1_wg_vgpr_disjoint (s : CtasState) (h : CtasInv s) (cu : Fin 2) {sl1 sl2 : Fin 8} (hne : sl1 ≠ sl2) {r1 r2 : CtasWgRec} (h1 : s.live cu sl1 = some r1) (h2 : s.live cu sl2 = some r2) : r1.vgprBase + r1.vgprSize ≤ r2.vgprBase ∨ r2.vgprBase + r2.vgprSize ≤ r1.vgprBase :=`
+- **dcg2_wba1_vgpr_bank_addr_unique** (line 481): `theorem dcg2_wba1_vgpr_bank_addr_unique (s : CtasState) (h : CtasInv s) (cu : Fin 2) (k : Nat) (hk : 1 ≤ k) {sl1 sl2 : Fin 8} {r1 r2 : CtasWgRec} (h1 : s.live cu sl1 = some r1) (h2 : s.live cu sl2 = some r2) {w1 w2 : Nat} (hw1 : w1 < r1.numWf) (hw2 : w2 < r2.numWf) {p : Nat} (hp0 : 0 < p) (hfit1 : r1.numWf * p ≤ r1.vgprSize) (hfit2 : r2.numWf * p ≤ r2.vgprSize) (halB1 : k ∣ r1.vgprBase) (halB2 : k ∣ r2.vgprBase) (halp : k ∣ p) {ridx1 ridx2 : Nat} (hr1 : ridx1 < p) (hr2 : ridx2 < p) (haddr : (r1.vgprBase + w1 * p) / k + ridx1 / k = (r2.vgprBase + w2 * p) / k + ridx2 / k) : sl1 = sl2 ∧ w1 = w2 :=`
+- **dcg2_cuif_splitVgpr_init** (line 526): `theorem dcg2_cuif_splitVgpr_init : dcg2CuifSplitVgprInv cuifInit :=`
+- **dcg2_split_step_bv10** (line 530): `theorem dcg2_split_step_bv10 (base : BitVec 10) (n c : BitVec 4) (p : BitVec 11) (hc2 : 2#4 ≤ c) (hle : c ≤ n) : ((base + (n - c).zeroExtend 10 * p.extractLsb' 0 10).zeroExtend 11 + p).extractLsb' 0 10 = base + (n - (c - 1#4)).zeroExtend 10 * p.extractLsb' 0 10 :=`
+- **dcg2_split_zero_bv10** (line 537): `theorem dcg2_split_zero_bv10 (base : BitVec 10) (n : BitVec 4) (p : BitVec 11) : base + (n - n).zeroExtend 10 * p.extractLsb' 0 10 = base :=`
+- **dcg2_cuif_splitVgpr_step** (line 543): `theorem dcg2_cuif_splitVgpr_step (s : CuifState) (i : CuifInputs) (hinv : CuifInv s) (h : dcg2CuifSplitVgprInv s) : dcg2CuifSplitVgprInv (cuifStep s i) :=`
+- **dcg2_cuif_splitVgpr_run** (line 623): `theorem dcg2_cuif_splitVgpr_run (ins : List CuifInputs) (henv : ∀ (pre : List CuifInputs) (i : CuifInputs), CuifEnvOk (cuifRun cuifInit pre) i) : dcg2CuifSplitVgprInv (cuifRun cuifInit ins) :=`
+- **dcg2_cuif_split_base** (line 641): `theorem dcg2_cuif_split_base (s : CuifState) (h : CuifInv s) (hv : dcg2CuifSplitVgprInv s) (hc : s.splitCnt ≠ 0#4) : ∃ h' t, s.fifo = h' :: t ∧ cuifWfNewTag s = cuifWfTag h'.wgSlotId ((h'.numWf - s.splitCnt).extractLsb' 0 3) ∧ s.splitVgpr = h'.vgprBase + (h'.numWf - s.splitCnt).zeroExtend 10 * h'.numVgprPerWf.extractLsb' 0 10 :=`
+- **dcg2T_split_load** (line 670): `theorem dcg2T_split_load : (cuifRun cuifInit (dcg2TsplitV.take 2)).splitVgpr = 5#10 :=`
+- **dcg2T_split_f0** (line 673): `theorem dcg2T_split_f0 : (cuifRun cuifInit (dcg2TsplitV.take 3)).splitVgpr = 37#10 :=`
+- **dcg2T_split_f1** (line 676): `theorem dcg2T_split_f1 : (cuifRun cuifInit (dcg2TsplitV.take 4)).splitVgpr = 69#10 :=`
+- **dcg2T_split_tag0** (line 679): `theorem dcg2T_split_tag0 : cuifWfNewTag (cuifRun cuifInit (dcg2TsplitV.take 2)) = cuifWfTag 4#3 0#3 :=`
+- **dcg2T_split_tag1** (line 682): `theorem dcg2T_split_tag1 : cuifWfNewTag (cuifRun cuifInit (dcg2TsplitV.take 3)) = cuifWfTag 4#3 1#3 :=`
+- **dcg2_bit_clear_of_compl** (line 718): `theorem dcg2_bit_clear_of_compl (w : BitVec 8) (id : BitVec 3) (h : (~~~w >>> id.zeroExtend 8) &&& 1#8 = 1#8) : (w >>> id.zeroExtend 8) &&& 1#8 = 0#8 :=`
+- **dcg2_ctaA1** (line 728): `theorem dcg2_ctaA1 (as : AlcState) (cs : CuifState) (i : AlcInputs) (hagree : dcg2Agree as cs) (hvalid : cuifRtDeallocValid cs = true) (hwire : i.deallocV = true ∧ i.deallocCu = cs.cuReg ∧ i.deallocSlot = cs.slotReg ∧ i.deallocNumWf = cs.infoRd.numWf) : AlcEnvOk as i :=`
+- **dcg2_ctaA1_source** (line 742): `theorem dcg2_ctaA1_source (s : CuifState) (h : CuifInv s) (hg : s.gfsm = .update) (hf : cuifFinish s = true) : s.liveMem (cuifGaddr s.cuReg s.slotReg) = true ∧ s.infoRd = s.infoMem (cuifGaddr s.cuReg s.slotReg) ∧ s.cntRd.toNat + 1 = s.infoRd.numWf.toNat :=`
+- **dcg2_ctaE1** (line 755): `theorem dcg2_ctaE1 (as : AlcState) (cs : CuifState) (i : CuifInputs) (hinv : AlcInv as) (hagree : dcg2Agree as cs) (h1 : as.fsm = .alloc) (h2 : as.fsmR1 ≠ .alloc) (hwire : i.enqWg.cuId = as.cu ∧ i.enqWg.wgSlotId = as.wgslotId ∧ i.enqWg.numWf = as.wg.numWf) (hwf : 1 ≤ as.wg.numWf.toNat ∧ as.wg.numWf.toNat ≤ 8) : cuifEnqFire cs i = true → 1 ≤ i.enqWg.numWf.toNat ∧ i.enqWg.numWf.toNat ≤ 8 ∧ ¬ cuifSlotBusy cs i.enqWg.cuId i.enqWg.wgSlotId :=`
+
+### `Ventus/Spec/Discharge3.lean`
+
+- **dcg3_bjb1_chain_wid** (line 137): `theorem dcg3_bjb1_chain_wid (w : BitVec 3) (o : BitVec 1) (pc i3 : BitVec 32) (im om : BitVec 32) : (dcg3Bjb1CombChain w o pc i3 im om).wid = w :=`
+- **dcg3_bjb1_chain_maskInit** (line 142): `theorem dcg3_bjb1_chain_maskInit (w : BitVec 3) (o : BitVec 1) (pc i3 : BitVec 32) (im om : BitVec 32) : (dcg3Bjb1CombChain w o pc i3 im om).maskInit = pipeExeDataVMask im om :=`
+- **dcg3_bjb1_chain_opcode** (line 147): `theorem dcg3_bjb1_chain_opcode (w : BitVec 3) (o : BitVec 1) (pc i3 : BitVec 32) (im om : BitVec 32) : (dcg3Bjb1CombChain w o pc i3 im om).opcode = o :=`
+- **dcg3_bjb1_chain_pcBranch** (line 152): `theorem dcg3_bjb1_chain_pcBranch (w : BitVec 3) (o : BitVec 1) (pc i3 : BitVec 32) (im om : BitVec 32) : (dcg3Bjb1CombChain w o pc i3 im om).pcBranch = i3 :=`
+- **dcg3_bjb1_chain_pcExecute** (line 157): `theorem dcg3_bjb1_chain_pcExecute (w : BitVec 3) (o : BitVec 1) (pc i3 : BitVec 32) (im om : BitVec 32) : (dcg3Bjb1CombChain w o pc i3 im om).pcExecute = pc :=`
+- **dcg3_bjb1_inputWid_same_source** (line 164): `theorem dcg3_bjb1_inputWid_same_source (w : BitVec 3) (o : BitVec 1) (pc i3 : BitVec 32) (im om : BitVec 32) : dcg2BjInputWid w = (dcg3Bjb1CombChain w o pc i3 im om).wid :=`
+- **dcg3_bjb1_wid_pair_gate** (line 176): `theorem dcg3_bjb1_wid_pair_gate (x : Dcg3VExeBits) : ((dcg3IssueOutSimtBits x).wid == dcg3ValuSimtWid x) = true :=`
+- **dcg3_queue_hist_fidelity** (line 184): `theorem dcg3_queue_hist_fidelity {α : Type} {cap : Nat} (h0 : Hist α cap) (ops : List (AOp α)) (hf : Hist α cap) (hrun : h0.run ops = some hf) (i : Nat) (hi : i < hf.deqHist.length) : hf.deqHist[i]? = hf.enqHist[i]? :=`
+- **dcg3_bjb1_flow_through** (line 193): `theorem dcg3_bjb1_flow_through {α : Type} (x : α) : aSteps (AQueue.empty : AQueue α 1) [.enq x, .deq] = some ([x], AQueue.empty) :=`
+- **dcg3_bjb1_consumed_entry** (line 202): `theorem dcg3_bjb1_consumed_entry (h0 : Hist Dcg3SimtExe 1) (ops : List (AOp Dcg3SimtExe)) (hf : Hist Dcg3SimtExe 1) (hrun : h0.run ops = some hf) (w : BitVec 3) (o : BitVec 1) (pc i3 : BitVec 32) (im om : BitVec 32) (i : Nat) (hi : i < hf.deqHist.length) (henq : hf.enqHist[i]? = some (dcg3Bjb1CombChain w o pc i3 im om)) : hf.deqHist[i]? = some (dcg3Bjb1CombChain w o pc i3 im om) :=`
+- **dcg3_deq_mem_enq** (line 212): `theorem dcg3_deq_mem_enq {α : Type} {cap : Nat} (h0 : Hist α cap) (ops : List (AOp α)) (hf : Hist α cap) (hrun : h0.run ops = some hf) (e : α) (he : e ∈ hf.deqHist) : e ∈ hf.enqHist :=`
+- **dcg3_bjb1_end_to_end** (line 226): `theorem dcg3_bjb1_end_to_end {depth : Nat} [NeZero depth] (s : BjSysState depth 32) (bi : BjBranchIn 32) (tm : Fin 8 → BitVec 32) (h0 : Hist Dcg3SimtExe 1) (ops : List (AOp Dcg3SimtExe)) (hf : Hist Dcg3SimtExe 1) (hrun : h0.run ops = some hf) (e : Dcg3SimtExe) (he : e ∈ hf.deqHist) (hsrc : ∀ x ∈ hf.enqHist, ∃ w o p i3 m, x = dcg3Bjb1CombChain w o p i3 m (tm (wsFin w))) (hbi : bi.maskInit = e.maskInit) (htm : s.tmask = tm (wsFin e.wid)) : bjbMaskDiscipline s bi :=`
+- **dcg3_bjb1_consume_closed** (line 242): `theorem dcg3_bjb1_consume_closed {depth : Nat} [NeZero depth] (s : BjSysState depth 32) (bi : BjBranchIn 32) (tm : Fin 8 → BitVec 32) (w : BitVec 3) (instrMask : BitVec 32) (hmi : bi.maskInit = pipeExeDataVMask instrMask (tm (wsFin w))) (htm : s.tmask = tm (wsFin w)) : bjbMaskDiscipline s bi :=`
+- **dcg3_wba1_csr_vgpr_of_cta** (line 276): `theorem dcg3_wba1_csr_vgpr_of_cta (s : Ventus.Arith.CsrState) (i : Ventus.Arith.CsrInputs) (h : i.ctaValid = true) : (Ventus.Arith.csrStep s i).vgprBase = i.ctaVgprBase :=`
+- **dcg3_wba1_csr_tag_of_cta** (line 284): `theorem dcg3_wba1_csr_tag_of_cta (s : Ventus.Arith.CsrState) (i : Ventus.Arith.CsrInputs) (h : i.ctaValid = true) : (Ventus.Arith.csrStep s i).wfTagDispatch = BitVec.zeroExtend 6 (i.ctaWfTag.extractLsb' 0 3) :=`
+- **dcg3_wba1_csrExe_write_point** (line 294): `theorem dcg3_wba1_csrExe_write_point (f : Fin 8 → Ventus.Arith.CsrState) (fire : Bool) (wid ctaWid : BitVec 3) (i : Ventus.Arith.CsrInputs) (k : Fin 8) (hcta : i.ctaValid = true) (hk : (ctaWid == BitVec.ofNat 3 k.val) = true) : (Ventus.Arith.csrExeStep f fire wid ctaWid i k).vgprBase = i.ctaVgprBase ∧ (Ventus.Arith.csrExeStep f fire wid ctaWid i k).wfTagDispatch = BitVec.zeroExtend 6 (i.ctaWfTag.extractLsb' 0 3) :=`
+- **dcg3_cta_vgpr_path_eq** (line 318): `theorem dcg3_cta_vgpr_path_eq (v : BitVec 10) : dcg3CtaVgprPath v = BitVec.zeroExtend 11 v :=`
+- **dcg3_wba1_dispatch_consistent** (line 324): `theorem dcg3_wba1_dispatch_consistent (s : CuifState) (h : CuifInv s) (hv : dcg2CuifSplitVgprInv s) (hc : s.splitCnt ≠ 0#4) : ∃ h' t, s.fifo = h' :: t ∧ cuifWfNewTag s = cuifWfTag h'.wgSlotId ((h'.numWf - s.splitCnt).extractLsb' 0 3) ∧ dcg3CtaVgprPath s.splitVgpr = BitVec.zeroExtend 11 (h'.vgprBase + (h'.numWf - s.splitCnt).zeroExtend 10 * h'.numVgprPerWf.extractLsb' 0 10) :=`
+- **dcg3_wba1_csr_gets_split_base** (line 337): `theorem dcg3_wba1_csr_gets_split_base (f : Fin 8 → Ventus.Arith.CsrState) (fire : Bool) (wid ctaWid : BitVec 3) (i : Ventus.Arith.CsrInputs) (k : Fin 8) (v : BitVec 10) (hcta : i.ctaValid = true) (hk : (ctaWid == BitVec.ofNat 3 k.val) = true) (hsrc : i.ctaVgprBase = dcg3CtaVgprPath v) : (Ventus.Arith.csrExeStep f fire wid ctaWid i k).vgprBase = BitVec.zeroExtend 11 v :=`
+- **dcg3_wba1_capstone** (line 349): `theorem dcg3_wba1_capstone (s : CuifState) (hinv : CuifInv s) (hv : dcg2CuifSplitVgprInv s) (hc : s.splitCnt ≠ 0#4) (f : Fin 8 → Ventus.Arith.CsrState) (fire : Bool) (wid ctaWid : BitVec 3) (i : Ventus.Arith.CsrInputs) (k : Fin 8) (hcta : i.ctaValid = true) (hk : (ctaWid == BitVec.ofNat 3 k.val) = true) (hsrcV : i.ctaVgprBase = dcg3CtaVgprPath s.splitVgpr) (hsrcT : i.ctaWfTag = cuifWfNewTag s) : ∃ h' t, s.fifo = h' :: t ∧ (Ventus.Arith.csrExeStep f fire wid ctaWid i k).vgprBase = BitVec.zeroExtend 11 (h'.vgprBase + (h'.numWf - s.splitCnt).zeroExtend 10 * h'.numVgprPerWf.extractLsb' 0 10) ∧ (Ventus.Arith.csrExeStep f fire wid ctaWid i k).wfTagDispatch = BitVec.zeroExtend 6 ((h'.numWf - s.splitCnt).extractLsb' 0 3) :=`
+- **dcg3_dvd_add** (line 418): `theorem dcg3_dvd_add {k a b : Nat} (ha : k ∣ a) (hb : k ∣ b) : k ∣ a + b :=`
+- **dcg3_dvd_zero** (line 424): `theorem dcg3_dvd_zero (k : Nat) : k ∣ 0 :=`
+- **dcg3_rtEmpty_aligned** (line 427): `theorem dcg3_rtEmpty_aligned (k : Nat) : dcg3RtAligned rtEmpty k :=`
+- **dcg3_rt_gapLo_aligned** (line 434): `theorem dcg3_rt_gapLo_aligned (ram : RtRam) (k : Nat) (hal : dcg3RtAligned ram k) (i : Nat) (hi : i ≤ ram.cnt) : k ∣ rtGapLo ram i :=`
+- **dcg3_rt_alloc_base_aligned** (line 447): `theorem dcg3_rt_alloc_base_aligned (ram : RtRam) (N k : Nat) (hwf : RtWf ram N) (hal : dcg3RtAligned ram k) (slot : Fin 8) (wgsize : Nat) (hok : rtEventOk ram N (.alloc slot wgsize)) : k ∣ rtAllocBase ram N slot wgsize :=`
+- **dcg3_rt_alloc_step_aligned** (line 468): `theorem dcg3_rt_alloc_step_aligned (ram : RtRam) (N k : Nat) (hwf : RtWf ram N) (hal : dcg3RtAligned ram k) (slot : Fin 8) (wgsize : Nat) (hok : rtEventOk ram N (.alloc slot wgsize)) (hsize : k ∣ wgsize) : dcg3RtAligned (rtStep ram N (.alloc slot wgsize)) k :=`
+- **dcg3_rt_dealloc_step_aligned** (line 523): `theorem dcg3_rt_dealloc_step_aligned (ram : RtRam) (N k : Nat) (hwf : RtWf ram N) (hal : dcg3RtAligned ram k) (slot : Fin 8) (hok : rtEventOk ram N (.dealloc slot)) : dcg3RtAligned (rtStep ram N (.dealloc slot)) k :=`
+- **dcg3_rt_run_aligned_aux** (line 551): `theorem dcg3_rt_run_aligned_aux (N k : Nat) : ∀ (l : List RtEvent) (ram : RtRam), RtWf ram N → dcg3RtAligned ram k → (∀ e ∈ l, ∀ s z, e = .alloc s z → k ∣ z) → (∀ pre e, List.IsPrefix (pre ++ [e]) l → rtEventOk (dcg3RtRun ram N pre) N e) → dcg3RtAligned (dcg3RtRun ram N l) k ∧ RtWf (dcg3RtRun ram N l) N :=`
+- **dcg3_wba1_rt_run_aligned** (line 588): `theorem dcg3_wba1_rt_run_aligned (N k : Nat) (hN : 0 < N) (es : List RtEvent) (hsizes : ∀ e ∈ es, ∀ s z, e = .alloc s z → k ∣ z) (hok : ∀ pre e, List.IsPrefix (pre ++ [e]) es → rtEventOk (dcg3RtRun rtEmpty N pre) N e) : dcg3RtAligned (dcg3RtRun rtEmpty N es) k ∧ RtWf (dcg3RtRun rtEmpty N es) N :=`
+- **dcg3_wba1_next_alloc_aligned** (line 599): `theorem dcg3_wba1_next_alloc_aligned (N k : Nat) (hN : 0 < N) (es : List RtEvent) (hsizes : ∀ e ∈ es, ∀ s z, e = .alloc s z → k ∣ z) (hok : ∀ pre e, List.IsPrefix (pre ++ [e]) es → rtEventOk (dcg3RtRun rtEmpty N pre) N e) (slot : Fin 8) (wgsize : Nat) (hok' : rtEventOk (dcg3RtRun rtEmpty N es) N (.alloc slot wgsize)) : k ∣ rtAllocBase (dcg3RtRun rtEmpty N es) N slot wgsize :=`
+- **dcg3T_misalign_base** (line 616): `theorem dcg3T_misalign_base : rtAllocBase dcg3RtMisalign rtNUM_VGPR 3 4 = 5 :=`
+- **dcg3T_misalign_not_aligned** (line 618): `theorem dcg3T_misalign_not_aligned : ¬ (4 : Nat) ∣ 5 :=`
+- **dcg3_wba1_misalign_collision** (line 625): `theorem dcg3_wba1_misalign_collision : (5 / 4 + 3 / 4 : Nat) = (4 / 4 + 0 / 4 : Nat) ∧ (5 + 3 : Nat) / 4 ≠ (4 + 0) / 4 :=`
+- **dcg3_wba1_perWf_unaligned_breaks** (line 631): `theorem dcg3_wba1_perWf_unaligned_breaks (B : Nat) (hB : 4 ∣ B) : ¬ 4 ∣ B + 5 :=`
+- **dcg3_wba1_fit_violation** (line 664): `theorem dcg3_wba1_fit_violation (B S p nw : Nat) (hfit : S < nw * p) (hlast : (nw - 1) * p < S) : B + (nw - 1) * p < B + S ∧ B + S < B + nw * p :=`
+- **dcg3_wba1_hw_assert_too_weak** (line 682): `theorem dcg3_wba1_hw_assert_too_weak : (∀ k, k < 7 → 0 + k * 32 + 32 < rtNUM_VGPR) ∧ ¬ (8 * 32 ≤ 32) :=`
+
+### `Ventus/Spec/EndprgInflight.lean`
+
+- **eif_endprg_preserves_inflight** (line 172): `theorem eif_endprg_preserves_inflight (s : EifState) (wid wg wf : BitVec 3) : (eifStep s (.endprg wid wg wf)).inflight = s.inflight :=`
+- **eif_endprg_clears_active** (line 177): `theorem eif_endprg_clears_active (act : BitVec 8) (wid wg wf : BitVec 3) : ((wsStepActive act (wsInEndprg wid wg wf true) >>> wid.zeroExtend 8) &&& 1#8) = 0#8 :=`
+- **eif_step_endprg_clears_active** (line 187): `theorem eif_step_endprg_clears_active (s : EifState) (wid wg wf : BitVec 3) : (((eifStep s (.endprg wid wg wf)).ws.warpActive >>> wid.zeroExtend 8) &&& 1#8) = 0#8 :=`
+- **eif_stepIdx_rsp_clears** (line 193): `theorem eif_stepIdx_rsp_clears (u : BitVec 8) (a w : BitVec 3) (reqFire : Bool) : ((c2wStepIdx u a reqFire true w >>> w.zeroExtend 8) &&& 1#8) = 0#8 :=`
+- **eif_step_endprg_frees_slot** (line 200): `theorem eif_step_endprg_frees_slot (s : EifState) (wid wg wf : BitVec 3) (h : s.c2w.fifo.length < 16) : (((eifStep s (.endprg wid wg wf)).c2w.idxUsing >>> wid.zeroExtend 8) &&& 1#8) = 0#8 :=`
+- **eif_lateWb_uses_current_base** (line 219): `theorem eif_lateWb_uses_current_base (s : EifState) (w : EifWb) (rest : List EifWb) : (eifStep { s with inflight :=`
+- **eifW_dispatch1_alloc** (line 241): `theorem eifW_dispatch1_alloc : (c2wOut eifW0.c2w (c2wInReq 0x08#6)).warpReqWid = 0#3 :=`
+- **eifW1_occupied** (line 242): `theorem eifW1_occupied : eifW1.ws.warpActive = 0b00000001#8 ∧ eifW1.c2w.idxUsing = 0b00000001#8 ∧ eifW1.vbase (c2wFin 0#3) = 0#11 :=`
+- **eifW2_inflight** (line 245): `theorem eifW2_inflight : eifW2.inflight.length = 1 :=`
+- **eifW_endprg_with_inflight** (line 249): `theorem eifW_endprg_with_inflight : eifW3.inflight = eifW2.inflight ∧ eifW3.ws.warpActive = 0#8 ∧ eifW3.c2w.idxUsing = 0#8 :=`
+- **eifW_flushDCache_after** (line 256): `theorem eifW_flushDCache_after : (wsOut eifW3.ws wsInNop).flushDCacheValid = true :=`
+- **eifW_reuse** (line 260): `theorem eifW_reuse : (c2wOut eifW3.c2w (c2wInReq 0x11#6)).warpReqWid = 0#3 ∧ eifW4.c2w.idxUsing = 0b00000001#8 ∧ eifW4.vbase (c2wFin 0#3) = 128#11 ∧ eifW4.ws.warpActive = 0b00000001#8 :=`
+- **eifW_pollution** (line 269): `theorem eifW_pollution : ocWbVecAddr 0#11 8#8 = 2#8 ∧ ocWbVecAddr 128#11 8#8 = 34#8 ∧ ocWbVecAddr (eifW4.vbase (c2wFin 0#3)) 8#8 = 34#8 ∧ rf_read eifW5.rf (eifFin256 34#8) = 0xDEADBEEF#32 ∧ rf_read eifW5.rf (eifFin256 2#8) = 0#32 ∧ eifW5.inflight.length = 0 :=`
+- **eif_guarded_endprg_safe** (line 297): `theorem eif_guarded_endprg_safe (s : EifState) (wid wg wf : BitVec 3) (h : eifEndprgGuardOK s wid = true) : (eifStepG s (.endprg wid wg wf)).inflight = s.inflight ∧ eifInflightOf s wid = false :=`
+- **eifW_guard_violated** (line 309): `theorem eifW_guard_violated : eifEndprgGuardOK eifW2 0#3 = false :=`
+- **eifW_guarded_blocks** (line 313): `theorem eifW_guarded_blocks : (eifStepG eifW2 (.endprg 0#3 0#3 0#3)).ws.warpActive = 0b00000001#8 ∧ (eifStepG eifW2 (.endprg 0#3 0#3 0#3)).c2w.idxUsing = 0b00000001#8 ∧ (eifStepG eifW2 (.endprg 0#3 0#3 0#3)).inflight.length = 1 ∧ (eifStepG (eifStepG (eifStepG eifW2 (.endprg 0#3 0#3 0#3)) .lateWb) (.endprg 0#3 0#3 0#3)).ws.warpActive = 0#8 :=`
+
+### `Ventus/Spec/FloatSpec.lean`
+
+- **fsF32_len** (line 93): `theorem fsF32_len : fsF32.len = 32 :=`
+- **fsF16_len** (line 94): `theorem fsF16_len : fsF16.len = 16 :=`
+- **fsF64_len** (line 95): `theorem fsF64_len : fsF64.len = 64 :=`
+- **fsT_fmt_f32** (line 633): `theorem fsT_fmt_f32 : fsF32.bias = 127 ∧ fsF32.emin = -126 ∧ fsF32.emax = 127 :=`
+- **fsT_fmt_f16** (line 635): `theorem fsT_fmt_f16 : fsF16.bias = 15 ∧ fsF16.emin = -14 ∧ fsF16.emax = 15 :=`
+- **fsT_fmt_f64** (line 636): `theorem fsT_fmt_f64 : fsF64.bias = 1023 :=`
+- **fsT_pack_one** (line 639): `theorem fsT_pack_one : fsPack fsF32 false 127 0 = 0x3F800000#32 :=`
+- **fsT_unpack_neg5** (line 641): `theorem fsT_unpack_neg5 : fsSignB fsF32 0xC0A00000#32 = true ∧ fsExpField fsF32 0xC0A00000#32 = 129 ∧ fsFrac fsF32 0xC0A00000#32 = 0x200000 :=`
+- **fsT_pack_roundtrip** (line 646): `theorem fsT_pack_roundtrip : fsPack fsF32 (fsSignB fsF32 0x3DCCCCCD#32) (fsExpField fsF32 0x3DCCCCCD#32) (fsFrac fsF32 0x3DCCCCCD#32) = 0x3DCCCCCD#32 :=`
+- **fsT_rm_roundtrip** (line 651): `theorem fsT_rm_roundtrip : [FsRM.RNE, .RTZ, .RDN, .RUP, .RMM].all (fun r => fsRMOfBits r.toBits == some r) = true :=`
+- **fsT_rm_reserved** (line 655): `theorem fsT_rm_reserved : fsRMOfBits 7#3 = none :=`
+- **fsT_canon_nan** (line 658): `theorem fsT_canon_nan : fsCanonNaN fsF32 = 0x7FC00000#32 ∧ fsCanonNaN fsF16 = 0x7E00#16 ∧ fsCanonNaN fsF64 = 0x7FF8000000000000#64 :=`
+- **fsT_classify** (line 664): `theorem fsT_classify : fsClassify fsF32 0xFF800000#32 = 0b0000000001#10 ∧ fsClassify fsF32 0xBF800000#32 = 0b0000000010#10 ∧ fsClassify fsF32 0x80400000#32 = 0b0000000100#10 ∧ fsClassify fsF32 0x80000000#32 = 0b0000001000#10 ∧ fsClassify fsF32 0x00000000#32 = 0b0000010000#10 ∧ fsClassify fsF32 0x00000001#32 = 0b0000100000#10 ∧ fsClassify fsF32 0x3F800000#32 = 0b0001000000#10 ∧ fsClassify fsF32 0x7F800000#32 = 0b0010000000#10 ∧ fsClassify fsF32 0x7F800001#32 = 0b0100000000#10 ∧ fsClassify fsF32 0x7FC00000#32 = 0b1000000000#10 :=`
+- **fsT_add_point1_point2** (line 679): `theorem fsT_add_point1_point2 : fsAdd fsF32 .RNE 0x3DCCCCCD#32 0x3E4CCCCD#32 = 0x3E99999A#32 :=`
+- **fsT_add_tie_even** (line 682): `theorem fsT_add_tie_even : fsAdd fsF32 .RNE 0x3F800000#32 0x33800000#32 = 0x3F800000#32 :=`
+- **fsT_add_tie_rup** (line 685): `theorem fsT_add_tie_rup : fsAdd fsF32 .RUP 0x3F800000#32 0x33800000#32 = 0x3F800001#32 :=`
+- **fsT_add_ulp** (line 688): `theorem fsT_add_ulp : fsAdd fsF32 .RNE 0x3F800000#32 0x34000000#32 = 0x3F800001#32 :=`
+- **fsT_sub_tie_rne** (line 691): `theorem fsT_sub_tie_rne : fsSub fsF32 .RNE 0x3F800000#32 0x33000000#32 = 0x3F800000#32 :=`
+- **fsT_sub_tie_rtz** (line 694): `theorem fsT_sub_tie_rtz : fsSub fsF32 .RTZ 0x3F800000#32 0x33000000#32 = 0x3F7FFFFF#32 :=`
+- **fsT_add_subnorm** (line 697): `theorem fsT_add_subnorm : fsAdd fsF32 .RNE 0x00000001#32 0x00000001#32 = 0x00000002#32 :=`
+- **fsT_add_subnorm_carry** (line 700): `theorem fsT_add_subnorm_carry : fsAdd fsF32 .RNE 0x007FFFFF#32 0x00000001#32 = 0x00800000#32 :=`
+- **fsT_add_ovf_rne** (line 703): `theorem fsT_add_ovf_rne : fsAdd fsF32 .RNE 0x7F7FFFFF#32 0x7F7FFFFF#32 = 0x7F800000#32 :=`
+- **fsT_add_ovf_rtz** (line 706): `theorem fsT_add_ovf_rtz : fsAdd fsF32 .RTZ 0x7F7FFFFF#32 0x7F7FFFFF#32 = 0x7F7FFFFF#32 :=`
+- **fsT_add_ovf_rdn** (line 709): `theorem fsT_add_ovf_rdn : fsAdd fsF32 .RDN 0x7F7FFFFF#32 0x7F7FFFFF#32 = 0x7F7FFFFF#32 :=`
+- **fsT_add_ovf_rup_rmm** (line 712): `theorem fsT_add_ovf_rup_rmm : fsAdd fsF32 .RUP 0x7F7FFFFF#32 0x7F7FFFFF#32 = 0x7F800000#32 ∧ fsAdd fsF32 .RMM 0x7F7FFFFF#32 0x7F7FFFFF#32 = 0x7F800000#32 :=`
+- **fsT_add_inf_cancel** (line 716): `theorem fsT_add_inf_cancel : fsAdd fsF32 .RNE 0x7F800000#32 0xFF800000#32 = 0x7FC00000#32 :=`
+- **fsT_add_nan** (line 719): `theorem fsT_add_nan : fsAdd fsF32 .RNE 0x7FC00001#32 0x3F800000#32 = 0x7FC00000#32 ∧ fsAdd fsF32 .RNE 0x7F800001#32 0x3F800000#32 = 0x7FC00000#32 :=`
+- **fsT_add_zero_sign** (line 723): `theorem fsT_add_zero_sign : fsAdd fsF32 .RNE 0x00000000#32 0x80000000#32 = 0x00000000#32 ∧ fsAdd fsF32 .RDN 0x00000000#32 0x80000000#32 = 0x80000000#32 :=`
+- **fsT_add_neg_zero** (line 727): `theorem fsT_add_neg_zero : fsAdd fsF32 .RNE 0x80000000#32 0x80000000#32 = 0x80000000#32 :=`
+- **fsT_sub_exact_zero** (line 730): `theorem fsT_sub_exact_zero : fsSub fsF32 .RNE 0x3F800000#32 0x3F800000#32 = 0x00000000#32 ∧ fsSub fsF32 .RDN 0x3F800000#32 0x3F800000#32 = 0x80000000#32 :=`
+- **fsT_add_f16** (line 734): `theorem fsT_add_f16 : fsAdd fsF16 .RNE 0x3C00#16 0x3C00#16 = 0x4000#16 :=`
+- **fsT_add_f64** (line 737): `theorem fsT_add_f64 : fsAdd fsF64 .RNE 0x3FB999999999999A#64 0x3FC999999999999A#64 = 0x3FD3333333333334#64 :=`
+- **fsT_mul_point** (line 743): `theorem fsT_mul_point : fsMul fsF32 .RNE 0x3DCCCCCD#32 0x3E4CCCCD#32 = 0x3CA3D70B#32 :=`
+- **fsT_mul_inf_zero** (line 746): `theorem fsT_mul_inf_zero : fsMul fsF32 .RNE 0x7F800000#32 0x00000000#32 = 0x7FC00000#32 :=`
+- **fsT_mul_neg** (line 749): `theorem fsT_mul_neg : fsMul fsF32 .RNE 0xC0000000#32 0x40400000#32 = 0xC0C00000#32 :=`
+- **fsT_mul_subnorm_tie** (line 752): `theorem fsT_mul_subnorm_tie : fsMul fsF32 .RNE 0x00000001#32 0x3F000000#32 = 0x00000000#32 ∧ fsMul fsF32 .RUP 0x00000001#32 0x3F000000#32 = 0x00000001#32 :=`
+- **fsT_mul_ovf** (line 756): `theorem fsT_mul_ovf : fsMul fsF32 .RNE 0x7F7FFFFF#32 0x40000000#32 = 0x7F800000#32 ∧ fsMul fsF32 .RTZ 0x7F7FFFFF#32 0x40000000#32 = 0x7F7FFFFF#32 :=`
+- **fsT_mul_f16_underflow** (line 760): `theorem fsT_mul_f16_underflow : fsMul fsF16 .RNE 0x0001#16 0x0001#16 = 0x0000#16 :=`
+- **fsT_div_third** (line 765): `theorem fsT_div_third : fsDiv fsF32 .RNE 0x3F800000#32 0x40400000#32 = 0x3EAAAAAB#32 :=`
+- **fsT_div_third_rtz** (line 768): `theorem fsT_div_third_rtz : fsDiv fsF32 .RTZ 0x3F800000#32 0x40400000#32 = 0x3EAAAAAA#32 :=`
+- **fsT_div_specials** (line 771): `theorem fsT_div_specials : fsDiv fsF32 .RNE 0x3F800000#32 0x00000000#32 = 0x7F800000#32 ∧ fsDiv fsF32 .RNE 0xBF800000#32 0x00000000#32 = 0xFF800000#32 ∧ fsDiv fsF32 .RNE 0x00000000#32 0x00000000#32 = 0x7FC00000#32 ∧ fsDiv fsF32 .RNE 0x7F800000#32 0xFF800000#32 = 0x7FC00000#32 :=`
+- **fsT_div_inf_exact** (line 777): `theorem fsT_div_inf_exact : fsDiv fsF32 .RNE 0x3F800000#32 0x7F800000#32 = 0x00000000#32 ∧ fsDiv fsF32 .RNE 0x3DCCCCCD#32 0x3E4CCCCD#32 = 0x3F000000#32 :=`
+- **fsT_sqrt_exact** (line 783): `theorem fsT_sqrt_exact : fsSqrt fsF32 .RNE 0x40800000#32 = 0x40000000#32 ∧ fsSqrt fsF32 .RNE 0x3E800000#32 = 0x3F000000#32 :=`
+- **fsT_sqrt_two** (line 787): `theorem fsT_sqrt_two : fsSqrt fsF32 .RNE 0x40000000#32 = 0x3FB504F3#32 :=`
+- **fsT_sqrt_subnormal** (line 791): `theorem fsT_sqrt_subnormal : fsSqrt fsF32 .RNE 0x00000001#32 = 0x1A3504F3#32 :=`
+- **fsT_sqrt_specials** (line 794): `theorem fsT_sqrt_specials : fsSqrt fsF32 .RNE 0xBF800000#32 = 0x7FC00000#32 ∧ fsSqrt fsF32 .RNE 0x80000000#32 = 0x80000000#32 ∧ fsSqrt fsF32 .RNE 0x7F800000#32 = 0x7F800000#32 :=`
+- **fsT_sqrt_f64** (line 799): `theorem fsT_sqrt_f64 : fsSqrt fsF64 .RNE 0x4000000000000000#64 = 0x3FF6A09E667F3BCD#64 :=`
+- **fsT_fma_fused** (line 807): `theorem fsT_fma_fused : fsFmadd fsF32 .RNE 0x3F800800#32 0x3F800800#32 0xBF800000#32 = 0x3A000400#32 :=`
+- **fsT_fma_inf_zero** (line 811): `theorem fsT_fma_inf_zero : fsFmadd fsF32 .RNE 0x7F800000#32 0x00000000#32 0x3F800000#32 = 0x7FC00000#32 :=`
+- **fsT_fma_variants** (line 816): `theorem fsT_fma_variants : fsFmadd fsF32 .RNE 0x3F800000#32 0x3F800000#32 0x3F800000#32 = 0x40000000#32 ∧ fsFmsub fsF32 .RNE 0x40000000#32 0x40400000#32 0x3F800000#32 = 0x40A00000#32 ∧ fsFnmadd fsF32 .RNE 0x3F800000#32 0x3F800000#32 0x3F800000#32 = 0x00000000#32 :=`
+- **fsT_fma_inf_cancel** (line 822): `theorem fsT_fma_inf_cancel : fsFmadd fsF32 .RNE 0x7F800000#32 0x40000000#32 0xFF800000#32 = 0x7FC00000#32 :=`
+- **fsT_minmax_nan** (line 827): `theorem fsT_minmax_nan : fsMin fsF32 0x7FC00000#32 0x3F800000#32 = 0x3F800000#32 ∧ fsMax fsF32 0x3F800000#32 0x7FC00000#32 = 0x3F800000#32 ∧ fsMin fsF32 0x7FC00000#32 0x7F800001#32 = 0x7FC00000#32 :=`
+- **fsT_minmax_zero** (line 832): `theorem fsT_minmax_zero : fsMin fsF32 0x00000000#32 0x80000000#32 = 0x80000000#32 ∧ fsMax fsF32 0x00000000#32 0x80000000#32 = 0x00000000#32 :=`
+- **fsT_minmax_value** (line 836): `theorem fsT_minmax_value : fsMin fsF32 0xC0A00000#32 0x40400000#32 = 0xC0A00000#32 ∧ fsMax fsF32 0xFF800000#32 0x3F800000#32 = 0x3F800000#32 :=`
+- **fsT_cmp** (line 841): `theorem fsT_cmp : fsFeq fsF32 0x80000000#32 0x00000000#32 = true ∧ fsFeq fsF32 0x7FC00000#32 0x7FC00000#32 = false ∧ fsFlt fsF32 0xFF800000#32 0x00000000#32 = true ∧ fsFlt fsF32 0x3F800000#32 0x3F800000#32 = false ∧ fsFle fsF32 0x3F800000#32 0x3F800000#32 = true ∧ fsFle fsF32 0x7FC00000#32 0x3F800000#32 = false ∧ fsFlt fsF32 0x3DCCCCCD#32 0x3E4CCCCD#32 = true :=`
+- **fsT_itof_intmax** (line 853): `theorem fsT_itof_intmax : fsIToF fsF32 .RNE 32 true 0x7FFFFFFF#32 = 0x4F000000#32 ∧ fsIToF fsF32 .RTZ 32 true 0x7FFFFFFF#32 = 0x4EFFFFFF#32 :=`
+- **fsT_itof_uint** (line 857): `theorem fsT_itof_uint : fsIToF fsF32 .RNE 32 false 0xFFFFFFFF#32 = 0x4F800000#32 ∧ fsIToF fsF32 .RNE 32 true 0xFFFFFFFF#32 = 0xBF800000#32 :=`
+- **fsT_itof_tie** (line 861): `theorem fsT_itof_tie : fsIToF fsF32 .RNE 32 true 0x01000001#32 = 0x4B800000#32 ∧ fsIToF fsF32 .RMM 32 true 0x01000001#32 = 0x4B800001#32 :=`
+- **fsT_ftoi_round** (line 865): `theorem fsT_ftoi_round : fsFToI fsF32 .RNE 32 true 0x40600000#32 = 4#32 ∧ fsFToI fsF32 .RNE 32 true 0x40200000#32 = 2#32 ∧ fsFToI fsF32 .RNE 32 true 0xC0200000#32 = 0xFFFFFFFE#32 :=`
+- **fsT_ftoi_sat** (line 871): `theorem fsT_ftoi_sat : fsFToI fsF32 .RNE 32 true 0x7149F2CA#32 = 0x7FFFFFFF#32 ∧ fsFToI fsF32 .RNE 32 true 0xF149F2CA#32 = 0x80000000#32 ∧ fsFToI fsF32 .RNE 32 true 0x7FC00000#32 = 0x7FFFFFFF#32 ∧ fsFToI fsF32 .RNE 32 true 0x7F800000#32 = 0x7FFFFFFF#32 ∧ fsFToI fsF32 .RNE 32 true 0xFF800000#32 = 0x80000000#32 :=`
+- **fsT_ftoi_unsigned** (line 878): `theorem fsT_ftoi_unsigned : fsFToI fsF32 .RNE 32 false 0xBF800000#32 = 0#32 ∧ fsFToI fsF32 .RNE 32 false 0x7149F2CA#32 = 0xFFFFFFFF#32 ∧ fsFToI fsF32 .RTZ 32 true 0x406CCCCD#32 = 3#32 :=`
+- **fsT_ftof_narrow** (line 884): `theorem fsT_ftof_narrow : fsFToF fsF32 fsF16 .RNE 0x3F800000#32 = 0x3C00#16 ∧ fsFToF fsF32 fsF16 .RNE 0x477FE000#32 = 0x7BFF#16 ∧ fsFToF fsF32 fsF16 .RNE 0x477FF000#32 = 0x7C00#16 :=`
+- **fsT_ftof_subnormal** (line 890): `theorem fsT_ftof_subnormal : fsFToF fsF32 fsF16 .RNE 0x33800000#32 = 0x0001#16 ∧ fsFToF fsF32 fsF16 .RNE 0x33000000#32 = 0x0000#16 ∧ fsFToF fsF32 fsF16 .RNE 0x33C00000#32 = 0x0002#16 ∧ fsFToF fsF32 fsF16 .RNE 0x38800000#32 = 0x0400#16 :=`
+- **fsT_ftof_widen** (line 897): `theorem fsT_ftof_widen : fsFToF fsF16 fsF32 .RNE 0x3C01#16 = 0x3F802000#32 ∧ fsFToF fsF16 fsF32 .RNE 0x0001#16 = 0x33800000#32 ∧ fsFToF fsF16 fsF32 .RNE 0x7C00#16 = 0x7F800000#32 ∧ fsFToF fsF16 fsF32 .RNE 0x7E00#16 = 0x7FC00000#32 :=`
+- **fsT_ftof_f64** (line 903): `theorem fsT_ftof_f64 : fsFToF fsF64 fsF32 .RNE 0x3FD3333333333334#64 = 0x3E99999A#32 ∧ fsFToF fsF32 fsF64 .RNE 0x3F800000#32 = 0x3FF0000000000000#64 :=`
+- **fsT_spec_bin_ok** (line 909): `theorem fsT_spec_bin_ok : specFpuBinOk .fadd .RNE 0x3DCCCCCD#32 0x3E4CCCCD#32 0x3E99999A#32 :=`
+- **fsT_spec_fdiv_ok** (line 913): `theorem fsT_spec_fdiv_ok : specFdivDivOk .RNE 0x3F800000#32 0x40400000#32 0x3EAAAAAB#32 ∧ specFdivSqrtOk .RNE 0x40000000#32 0x3FB504F3#32 :=`
+- **fsT_spec_fma_ok** (line 918): `theorem fsT_spec_fma_ok : specFpuFmaOk .fmadd .RNE 0x3F800800#32 0x3F800800#32 0xBF800000#32 0x3A000400#32 :=`
+
+### `Ventus/Spec/FlushOrdering.lean`
+
+- **flo_flush_done_src** (line 120): `theorem flo_flush_done_src (f : FloFlush) (fire : Bool) (d : BitVec 10) : (floFlushStep f fire d).done = true → f.done = true ∨ ((f.phase == 0#2) = false ∧ (f.phase == 1#2) = false ∧ (f.dirty == 0#10) = true) :=`
+- **flo_flush_two_steps** (line 144): `theorem flo_flush_two_steps (d0 d1 : BitVec 10) (f0 f1 : Bool) : (floFlushStep (floFlushStep ⟨0#2, 0#10, false⟩ f0 d0) f1 d1).done = false :=`
+- **floStep_c2w_of_eq** (line 230): `theorem floStep_c2w_of_eq (s t : FloState) (op : FloOp) (hc : s.c2w = t.c2w) (hu : s.cuif = t.cuif) : (floStep s op).c2w = (floStep t op).c2w :=`
+- **floStep_cuif_of_eq** (line 240): `theorem floStep_cuif_of_eq (s t : FloState) (op : FloOp) (hc : s.c2w = t.c2w) (hu : s.cuif = t.cuif) : (floStep s op).cuif = (floStep t op).cuif :=`
+- **floRun_report_indep** (line 255): `theorem floRun_report_indep (ops : List FloOp) (s t : FloState) (hc : s.c2w = t.c2w) (hu : s.cuif = t.cuif) : (floRun s ops).c2w = (floRun t ops).c2w ∧ (floRun s ops).cuif = (floRun t ops).cuif :=`
+- **flo_report_chain_no_flush_input** (line 266): `theorem flo_report_chain_no_flush_input (ops : List FloOp) (s : FloState) (f : FloFlush) : (floRun s ops).c2w = (floRun { s with flu :=`
+- **floStep_c2w_dcDirty** (line 272): `theorem floStep_c2w_dcDirty (s : FloState) (op : FloOp) (d : BitVec 10) : (floStep s op).c2w = (floStep s { op with dcDirty :=`
+- **floStep_cuif_dcDirty** (line 275): `theorem floStep_cuif_dcDirty (s : FloState) (op : FloOp) (d : BitVec 10) : (floStep s op).cuif = (floStep s { op with dcDirty :=`
+- **floCuifLoaded_ok** (line 295): `theorem floCuifLoaded_ok : floCuifLoaded.liveMem (cuifGaddr 0#1 1#3) = true ∧ (floCuifLoaded.infoMem (cuifGaddr 0#1 1#3)).numWf = 1#4 ∧ floCuifLoaded.cntMem (cuifGaddr 0#1 1#3) = 0#4 ∧ floCuifLoaded.gfsm = .getWf :=`
+- **floW1_dispatch** (line 321): `theorem floW1_dispatch : floW1.ws.endprgCnt (wsFin 1#3) = 1#8 ∧ floW1.ws.wgValid (wsFin 1#3) = true ∧ (floW1.ws.warpActive &&& 1#8) = 1#8 ∧ floW1.c2w.idxUsing = 1#8 ∧ floW1.c2w.data (c2wFin 0#3) = 0x08#6 :=`
+- **floW_flush_starts_after_endprg** (line 330): `theorem floW_flush_starts_after_endprg : (wsOut floW1.ws wsInNop).flushDCacheValid = false ∧ (wsOut floW2.ws wsInNop).flushDCacheValid = true :=`
+- **floW2_endprg** (line 335): `theorem floW2_endprg : floW2.ws.endprgCnt (wsFin 1#3) = 0#8 ∧ floW2.ws.warpActive = 0#8 ∧ floW2.c2w.fifo = [0#3] :=`
+- **floW3_flush_accepted** (line 343): `theorem floW3_flush_accepted : floW3.flu.phase = 1#2 ∧ floW3.flu.done = false ∧ floW3.ws.wgValid (wsFin 1#3) = false ∧ floW3.c2w.fifo = [] ∧ floW3.cuif.gfsm = .update ∧ floW3.cuif.slotReg = 1#3 ∧ floW3.cuif.infoRd.numWf = 1#4 ∧ floW3.cuif.infoRd.wgId = 0xCAFE#32 :=`
+- **floW_report_precedes_flush** (line 355): `theorem floW_report_precedes_flush : floReportFire floW3 floOpHost = true ∧ floW3.flu.done = false ∧ floW3.flu.phase = 1#2 ∧ floW4.flu.done = false ∧ (floStep floW4 floOpNop).flu.done = true :=`
+- **floW_report_any_dirty** (line 364): `theorem floW_report_any_dirty (d : BitVec 10) : floReportFire (floStep floW2 (floOpFlushFire d)) floOpHost = true :=`
+- **floW_dirty_delays_flush** (line 374): `theorem floW_dirty_delays_flush : let s3 :=`
+- **flo_guarded_report_safe** (line 406): `theorem flo_guarded_report_safe (s : FloState) (op : FloOp) : floReportFireG s op = true → s.flu.done = true :=`
+- **floWG_blocked_then_safe** (line 427): `theorem floWG_blocked_then_safe : floReportFireG floWG3 floOpHost = false ∧ floReportFireG floWG4 floOpHost = false ∧ floWG5.flu.done = true ∧ floReportFireG floWG5 floOpHost = true :=`
+
+### `Ventus/Top.lean`
+
+- **top_p_nsms** (line 124): `theorem top_p_nsms : topNSms = topNCluster * topNSmInCluster :=`
+- **top_p_cu** (line 127): `theorem top_p_cu : topNumberCU = topNSms :=`
+- **top_p_sm_index_cover** (line 130): `theorem top_p_sm_index_cover : (0 * topNSmInCluster + 0 = 0) ∧ (0 * topNSmInCluster + 1 = 1) ∧ topNCluster * topNSmInCluster = topNSms :=`
+- **top_p_l1src_formula** (line 135): `theorem top_p_l1src_formula : topL1SourceBits = 3 + 2 + 8 :=`
+- **top_p_l2src_formula** (line 138): `theorem top_p_l2src_formula : topL2SourceBits = topL1SourceBits + 1 + 0 + 1 + 1 :=`
+- **top_p_l2src_match** (line 143): `theorem top_p_l2src_match : topL2SourceBits = 16 ∧ topL1SourceBits = 13 :=`
+- **top_p_tl_widths** (line 150): `theorem top_p_tl_widths : (3 : Nat) = 3 ∧ 7 = Nat.log2 128 ∧ 128 = 32 * 4 ∧ 1024 = 32 * 32 :=`
+- **top_l2_bank_single** (line 159): `theorem top_l2_bank_single (a : BitVec 32) : topL2BankSel a = 0#1 :=`
+- **top_conn_id** (line 171): `theorem top_conn_id {α : Type} (x : α) : topConn x = x :=`
+- **top_manual_fire_agree** (line 179): `theorem top_manual_fire_agree (v r : Bool) : (topFwdV v && r) = (v && topBwdR r) :=`
+- **top_hostMap_wgId** (line 247): `theorem top_hostMap_wgId (h : TopHost2CtaData) : (topHostMap h).wgId = h.wgId :=`
+- **top_hostMap_numWf** (line 248): `theorem top_hostMap_numWf (h : TopHost2CtaData) : (topHostMap h).numWf = h.numWf :=`
+- **top_hostMap_thread** (line 249): `theorem top_hostMap_thread (h : TopHost2CtaData) : (topHostMap h).numThreadPerWf = h.wfSize :=`
+- **top_hostMap_startPc** (line 250): `theorem top_hostMap_startPc (h : TopHost2CtaData) : (topHostMap h).startPc = h.startPc :=`
+- **top_hostMap_wgX** (line 251): `theorem top_hostMap_wgX (h : TopHost2CtaData) : (topHostMap h).numWgX = h.size3dX :=`
+- **top_hostMap_wgY** (line 252): `theorem top_hostMap_wgY (h : TopHost2CtaData) : (topHostMap h).numWgY = h.size3dY :=`
+- **top_hostMap_wgZ** (line 253): `theorem top_hostMap_wgZ (h : TopHost2CtaData) : (topHostMap h).numWgZ = h.size3dZ :=`
+- **top_hostMap_pdsBase** (line 254): `theorem top_hostMap_pdsBase (h : TopHost2CtaData) : (topHostMap h).pdsBase = h.pdsBase :=`
+- **top_hostMap_pdsPer** (line 255): `theorem top_hostMap_pdsPer (h : TopHost2CtaData) : (topHostMap h).numPdsPerWf = h.pdsPerWf :=`
+- **top_hostMap_csr** (line 256): `theorem top_hostMap_csr (h : TopHost2CtaData) : (topHostMap h).csrKernel = h.csrKnl :=`
+- **top_hostMap_lds** (line 257): `theorem top_hostMap_lds (h : TopHost2CtaData) : (topHostMap h).numLds = h.ldsTotal :=`
+- **top_hostMap_sgpr** (line 258): `theorem top_hostMap_sgpr (h : TopHost2CtaData) : (topHostMap h).numSgpr = h.sgprTotal :=`
+- **top_hostMap_vgpr** (line 259): `theorem top_hostMap_vgpr (h : TopHost2CtaData) : (topHostMap h).numVgpr = h.vgprTotal :=`
+- **top_hostMap_sgprPer** (line 260): `theorem top_hostMap_sgprPer (h : TopHost2CtaData) : (topHostMap h).numSgprPerWf = h.sgprPerWf :=`
+- **top_hostMap_vgprPer** (line 261): `theorem top_hostMap_vgprPer (h : TopHost2CtaData) : (topHostMap h).numVgprPerWf = h.vgprPerWf :=`
+- **top_hostMap_gds** (line 262): `theorem top_hostMap_gds (h : TopHost2CtaData) : (topHostMap h).gdsBase = h.gdsBase :=`
+- **top_hostMap_field_count** (line 268): `theorem top_hostMap_field_count : 16 + 3 = 19 :=`
+- **top_c2w_count** (line 327): `theorem top_c2w_count (c : TopCuWfNew) : (topCta2WarpMap c).wgWfCount = c.numWf :=`
+- **top_c2w_size** (line 328): `theorem top_c2w_size (c : TopCuWfNew) : (topCta2WarpMap c).wfSize = c.numThreadPerWf :=`
+- **top_c2w_wfTag** (line 329): `theorem top_c2w_wfTag (c : TopCuWfNew) : (topCta2WarpMap c).wfTag = c.wfTag :=`
+- **top_c2w_startPc** (line 330): `theorem top_c2w_startPc (c : TopCuWfNew) : (topCta2WarpMap c).startPc = c.startPc :=`
+- **top_c2w_gds** (line 331): `theorem top_c2w_gds (c : TopCuWfNew) : (topCta2WarpMap c).gdsBase = c.gdsBase :=`
+- **top_c2w_pds** (line 332): `theorem top_c2w_pds (c : TopCuWfNew) : (topCta2WarpMap c).pdsBase = c.pdsBase :=`
+- **top_c2w_csr** (line 333): `theorem top_c2w_csr (c : TopCuWfNew) : (topCta2WarpMap c).csrKnl = c.csrKernel :=`
+- **top_c2w_wgidX** (line 334): `theorem top_c2w_wgidX (c : TopCuWfNew) : (topCta2WarpMap c).wgidX = c.numWgX :=`
+- **top_c2w_wgidY** (line 335): `theorem top_c2w_wgidY (c : TopCuWfNew) : (topCta2WarpMap c).wgidY = c.numWgY :=`
+- **top_c2w_wgidZ** (line 336): `theorem top_c2w_wgidZ (c : TopCuWfNew) : (topCta2WarpMap c).wgidZ = c.numWgZ :=`
+- **top_c2w_wgId** (line 337): `theorem top_c2w_wgId (c : TopCuWfNew) : (topCta2WarpMap c).wgId = c.wgId :=`
+- **top_c2w_zext_lossless** (line 340): `theorem top_c2w_zext_lossless (c : TopCuWfNew) : (topCta2WarpMap c).ldsBase.extractLsb' 0 17 = c.ldsBase ∧ (topCta2WarpMap c).sgprBase.extractLsb' 0 11 = c.sgprBase ∧ (topCta2WarpMap c).vgprBase.extractLsb' 0 10 = c.vgprBase :=`
+- **top_warp2cta_tag** (line 353): `theorem top_warp2cta_tag (t : BitVec 6) : topWarp2CtaTag t = t :=`
+- **top_sm_memReq_source_chain** (line 367): `theorem top_sm_memReq_source_chain (x : BitVec 14) : (((x.zeroExtend 32).extractLsb' 0 14).zeroExtend 32).extractLsb' 0 14 = x :=`
+- **top_sm2cluster_size_zero** (line 381): `theorem top_sm2cluster_size_zero : topSm2ClusterSize = 0#7 :=`
+- **top_rsp_route_exactly_one** (line 400): `theorem top_rsp_route_exactly_one (v : Bool) (src : BitVec 16) : (topSm2ClusterRspValid 0#1 v src && topSm2ClusterRspValid 1#1 v src) = false :=`
+- **top_l2dist_valid_passthrough** (line 411): `theorem top_l2dist_valid_passthrough (v : Bool) (a : BitVec 32) : topL2DistValid v a = v :=`
+- **top_l2dist_ready_passthrough** (line 419): `theorem top_l2dist_ready_passthrough (r : Bool) : topL2DistInReady r = r :=`
+- **top_l2dist_bits_passthrough** (line 423): `theorem top_l2dist_bits_passthrough {α : Type} (b : α) : topConn b = b :=`
+- **top_cluster2l2_req_src** (line 430): `theorem top_cluster2l2_req_src (s : BitVec 16) : topCluster2L2ReqSrc s = s :=`
+- **top_cluster_rsp_lossless** (line 438): `theorem top_cluster_rsp_lossless (s : BitVec 16) (h : s.extractLsb' 15 1 = 0#1) : topCluster2L2RspSrc s = s :=`
+- **top_pcResetStep_le5** (line 468): `theorem top_pcResetStep_le5 (c : BitVec 4) (h : c ≤ 5#4) : topPcResetStep c ≤ 5#4 :=`
+- **top_pcReset_stable5** (line 473): `theorem top_pcReset_stable5 : topPcResetStep 5#4 = 5#4 :=`
+- **top_pcReset_high_first5** (line 477): `theorem top_pcReset_high_first5 : ∀ k, k < 5 → topPcReset (topPcCntAt k) = true :=`
+- **top_pcCntAt_eq5** (line 481): `theorem top_pcCntAt_eq5 (m : Nat) : topPcCntAt (5 + m) = 5#4 :=`
+- **top_pcReset_low_after5** (line 490): `theorem top_pcReset_low_after5 (k : Nat) (hk : 5 ≤ k) : topPcReset (topPcCntAt k) = false :=`
+- **top_shared_setIdx_conn** (line 503): `theorem top_shared_setIdx_conn (a : BitVec 32) : smSetIdxOfAddr a = topSharedSetIdxConn (lsuSetOf a) :=`
+- **top_shared_setIdx_high_zero** (line 509): `theorem top_shared_setIdx_high_zero (s : BitVec 8) : topSharedSetIdxConn s ≤ 255#10 :=`
+- **top_axi_id_consistent** (line 524): `theorem top_axi_id_consistent : topAxiIdBits = topL2SourceBits :=`
+- **top_axiAdapter_mismatch** (line 528): `theorem top_axiAdapter_mismatch : topAxiAdapterIdBits ≠ topAxiIdBits :=`
+- **top_cycleCnt_const** (line 533): `theorem top_cycleCnt_const : topCycleCntConst = 0#20 :=`
+- **top_icacheInv_never** (line 542): `theorem top_icacheInv_never (sm : Fin 2) : topIcacheInvBroadcast topAxiTopIcacheInv sm = false :=`
+- **top_icache_opcode** (line 552): `theorem top_icache_opcode : topIcacheReqOpcode = 4#3 :=`
+- **top_icache_mask_lane** (line 558): `theorem top_icache_mask_lane : topIcacheAMaskLane = 0xF#4 :=`
+- **top_icache_data_zero** (line 563): `theorem top_icache_data_zero : topIcacheAData = 0#1024 :=`
+- **top_inst_cnt_distrib** (line 579): `theorem top_inst_cnt_distrib {α : Type} (x : α) : topConn x = x :=`
+- **top_src_layout** (line 644): `theorem top_src_layout (sm cid : BitVec 1) (src : BitVec 13) : (topEndToEndSrc sm cid src).extractLsb' 15 1 = 0#1 ∧ (topEndToEndSrc sm cid src).extractLsb' 14 1 = sm ∧ (topEndToEndSrc sm cid src).extractLsb' 13 1 = cid ∧ (topEndToEndSrc sm cid src).extractLsb' 0 13 = src :=`
+- **top_rsp_route_home** (line 654): `theorem top_rsp_route_home (cid : BitVec 1) (src : BitVec 13) (v : Bool) : topSm2ClusterRspValid 0#1 v (topEndToEndSrc 0#1 cid src) = v ∧ topSm2ClusterRspValid 1#1 v (topEndToEndSrc 0#1 cid src) = false ∧ topSm2ClusterRspValid 1#1 v (topEndToEndSrc 1#1 cid src) = v ∧ topSm2ClusterRspValid 0#1 v (topEndToEndSrc 1#1 cid src) = false :=`
+- **top_rsp_ready_mux** (line 663): `theorem top_rsp_ready_mux (r0 r1 : Bool) (cid : BitVec 1) (src : BitVec 13) : topSm2ClusterRspReady r0 r1 (topEndToEndSrc 0#1 cid src) = r0 ∧ topSm2ClusterRspReady r0 r1 (topEndToEndSrc 1#1 cid src) = r1 :=`
+- **top_rsp_dsource_roundtrip** (line 673): `theorem top_rsp_dsource_roundtrip (sm cid : BitVec 1) (src : BitVec 13) : (topSm2ClusterRspDSource (topEndToEndSrc sm cid src)).extractLsb' 13 1 = cid ∧ (topSm2ClusterRspDSource (topEndToEndSrc sm cid src)).extractLsb' 0 13 = src :=`
+- **top_cluster_rsp_packed_lossless** (line 682): `theorem top_cluster_rsp_packed_lossless (sm cid : BitVec 1) (src : BitVec 13) : topCluster2L2RspSrc (topEndToEndSrc sm cid src) = topEndToEndSrc sm cid src :=`
+- **top_i21_dead_rows_conn** (line 690): `theorem top_i21_dead_rows_conn (s : BitVec 8) : (smRowOfSetIdx (topSharedSetIdxConn s)).val < 256 :=`
+
+### `VentusF/Arith.lean`
+
+- **farith_mulres_eq_orig_of_ne_mulhsu** (line 62): `theorem farith_mulres_eq_orig_of_ne_mulhsu (func : BitVec 5) (r : BitVec 66) (m : BitVec 32) (h : func ≠ mulFN_MULHSU) : farithMulRes func r m = mulRes func r m :=`
+- **farith_mul_mulhsu_fixed** (line 70): `theorem farith_mul_mulhsu_fixed (a b c : BitVec 32) : farithMulWrapOut mulFN_MULHSU a b c = ((BitVec.signExtend 66 a) * (BitVec.zeroExtend 66 b)).extractLsb' 32 32 :=`
+- **farith_i15_witness** (line 79): `theorem farith_i15_witness : mulWrapOut mulFN_MULHSU 0xFFFFFFFF#32 0xFFFFFFFF#32 0#32 = 1#32 ∧ farithMulWrapOut mulFN_MULHSU 0xFFFFFFFF#32 0xFFFFFFFF#32 0#32 = 0xFFFFFFFF#32 ∧ ((BitVec.signExtend 66 0xFFFFFFFF#32) * (BitVec.zeroExtend 66 0xFFFFFFFF#32)).extractLsb' 32 32 = 0xFFFFFFFF#32 :=`
+- **farith_mulhsu_divergence_gone** (line 88): `theorem farith_mulhsu_divergence_gone : ∃ a b : BitVec 32, farithMulWrapOut mulFN_MULHSU a b 0#32 ≠ ((BitVec.signExtend 66 a) * (BitVec.zeroExtend 66 b)).extractLsb' 0 32 :=`
+- **farith_mul_regr** (line 96): `theorem farith_mul_regr (func : BitVec 5) (a b c : BitVec 32) (h : func ≠ mulFN_MULHSU) : farithMulWrapOut func a b c = mulWrapOut func a b c :=`
+- **farith_mul_regr_mul** (line 102): `theorem farith_mul_regr_mul : farithMulWrapOut mulFN_MUL 6#32 7#32 0#32 = 42#32 :=`
+- **farith_mul_regr_mulh** (line 104): `theorem farith_mul_regr_mulh : farithMulWrapOut mulFN_MULH 0x80000000#32 0x7FFFFFFF#32 0#32 = 0xC0000000#32 :=`
+- **farith_mul_regr_mulhu** (line 107): `theorem farith_mul_regr_mulhu : farithMulWrapOut mulFN_MULHU 0xFFFFFFFF#32 0xFFFFFFFF#32 0#32 = 0xFFFFFFFE#32 :=`
+- **farith_mul_regr_macc** (line 110): `theorem farith_mul_regr_macc : farithMulWrapOut mulFN_MACC 3#32 4#32 5#32 = 17#32 :=`
+- **farith_amo_opcode** (line 132): `theorem farith_amo_opcode (inst : BitVec 32) : farithAmoIllegal inst = (inst.extractLsb' 0 7 == 0x2F#7) :=`
+- **farith_dec_row_unchanged** (line 138): `theorem farith_dec_row_unchanged (inst : BitVec 32) : (farithDecode inst).1 = decDecode inst :=`
+- **farith_dec_nonamo_regr** (line 142): `theorem farith_dec_nonamo_regr (inst : BitVec 32) (h : farithAmoIllegal inst = false) : farithDecode inst = (decDecode inst, false) :=`
+- **farith_dec_amo_flagged** (line 147): `theorem farith_dec_amo_flagged (inst : BitVec 32) (h : farithAmoIllegal inst = true) : (farithDecode inst).2 = true :=`
+- **farith_amo_imf_all_miss** (line 158): `theorem farith_amo_imf_all_miss : decTableIMF.all farithAmoMiss = true :=`
+- **farith_match_false_of_low7** (line 161): `theorem farith_match_false_of_low7 (pat : DecBitPat) (inst : BitVec 32) (hop : inst.extractLsb' 0 7 = 0x2F#7) (hm : ((pat.value.extractLsb' 0 7 &&& pat.mask.extractLsb' 0 7) != (0x2F#7 &&& pat.mask.extractLsb' 0 7)) = true) : decMatch pat inst = false :=`
+- **farith_lookupEntry_default** (line 170): `theorem farith_lookupEntry_default (inst : BitVec 32) (t : List DecEntry) (h : ∀ e ∈ t, decMatch e.pat inst = false) : decLookupEntry inst t = decDefaultRow :=`
+- **farith_amo_falls_default** (line 184): `theorem farith_amo_falls_default (inst : BitVec 32) (h : farithAmoIllegal inst = true) : decDecode inst = decDefaultRow :=`
+- **farith_i16_witness_amoadd** (line 208): `theorem farith_i16_witness_amoadd : decDecode 0x0062A22F#32 = decDefaultRow ∧ farithDecode 0x0062A22F#32 = (decDefaultRow, true) :=`
+- **farith_i16_witness_lr** (line 214): `theorem farith_i16_witness_lr : farithDecode 0x100423AF#32 = (decDefaultRow, true) :=`
+- **farith_i16_witness_sc** (line 218): `theorem farith_i16_witness_sc : farithDecode 0x18B524AF#32 = (decDefaultRow, true) :=`
+- **farith_i16_regr_add** (line 222): `theorem farith_i16_regr_add : farithDecode 0x006283B3#32 = (decDecode 0x006283B3#32, false) :=`
+- **farith_i16_regr_vsetvli** (line 224): `theorem farith_i16_regr_vsetvli : farithDecode 0x300170D7#32 = (decDecode 0x300170D7#32, false) :=`
+- **farith_csr_vl_read** (line 272): `theorem farith_csr_vl_read (s : CsrState) : farithCsrRead s csrAddrVl = s.vl :=`
+- **farith_csr_read_regr** (line 276): `theorem farith_csr_read_regr (s : CsrState) (addr : BitVec 12) (h : (addr == csrAddrVl) = false) : farithCsrRead s addr = csrRead s addr :=`
+- **farith_csr_vl_write** (line 283): `theorem farith_csr_vl_write (s : CsrState) (i : CsrInputs) (hwen : csrWen i.csrOp i.write = true) (hc : i.custom0 = false) (hv : i.isvec = true) : (farithCsrStep s i).vl = (if BitVec.ult i.in1 csrVLMAX then i.in1 else csrVLMAX) :=`
+- **farith_csr_vl_rw** (line 291): `theorem farith_csr_vl_rw (s : CsrState) (v : BitVec 32) : farithCsrRead (farithCsrStep s { csrInNop with csrOp :=`
+- **farith_i33_witness** (line 300): `theorem farith_i33_witness : csrRead (csrStep csrInit { csrInNop with csrOp :=`
+- **farith_csr_fcsr_write_mask** (line 308): `theorem farith_csr_fcsr_write_mask (s : CsrState) (v : BitVec 32) : farithCsrRead (farithCsrStep s (csrInWrite csrOpW csrAddrFcsr v)) csrAddrFcsr = v &&& 0xFF#32 :=`
+- **farith_csr_fcsr_write_frm** (line 315): `theorem farith_csr_fcsr_write_frm (s : CsrState) (v : BitVec 32) : (farithCsrStep s (csrInWrite csrOpW csrAddrFcsr v)).frm = v.extractLsb' 5 3 :=`
+- **farith_i32_witness** (line 321): `theorem farith_i32_witness : csrRead (csrStep csrInit (csrInWrite csrOpW csrAddrFcsr 0xE5#32)) csrAddrFcsr = 0#32 ∧ farithCsrRead (farithCsrStep csrInit (csrInWrite csrOpW csrAddrFcsr 0xE5#32)) csrAddrFcsr = 0xE5#32 :=`
+- **farith_csr_step_regr** (line 330): `theorem farith_csr_step_regr (s : CsrState) (i : CsrInputs) (h1 : (csrWen i.csrOp i.write && !i.custom0 && i.isvec) = false) (h2 : (csrWen i.csrOp i.write && !i.custom0 && !i.isvec && (i.addr == csrAddrFcsr)) = false) : farithCsrStep s i = csrStep s i :=`
+- **farith_csr_regr_frm** (line 338): `theorem farith_csr_regr_frm (s : CsrState) (v : BitVec 32) : farithCsrStep s (csrInWrite csrOpW csrAddrFrm v) = csrStep s (csrInWrite csrOpW csrAddrFrm v) :=`
+- **farith_csr_regr_fflags** (line 342): `theorem farith_csr_regr_fflags (s : CsrState) (v : BitVec 32) : farithCsrStep s (csrInWrite csrOpW csrAddrFflags v) = csrStep s (csrInWrite csrOpW csrAddrFflags v) :=`
+- **farith_csr_regr_mscratch** (line 346): `theorem farith_csr_regr_mscratch (s : CsrState) (v : BitVec 32) : farithCsrStep s (csrInWrite csrOpW csrAddrMscratch v) = csrStep s (csrInWrite csrOpW csrAddrMscratch v) :=`
+- **farith_csr_regr_read_fcsr** (line 350): `theorem farith_csr_regr_read_fcsr (s : CsrState) : farithCsrRead s csrAddrFcsr = csrRead s csrAddrFcsr :=`
+- **farith_i11_witness** (line 369): `theorem farith_i11_witness : farithOcWbScaAddr 1792#12 0#8 = 448#9 ∧ ocWbScaAddr 1792#12 0#8 = 192#8 ∧ (448 : Nat) ≠ 192 :=`
+- **farith_i11_alias_gone** (line 377): `theorem farith_i11_alias_gone (b : BitVec 12) (r : BitVec 8) (h : BitVec.ult b 3072#12 = true) : farithOcWbScaAddr (b + 1024#12) r ≠ farithOcWbScaAddr b r :=`
+- **farith_i11_full_alias_gone** (line 385): `theorem farith_i11_full_alias_gone (b : BitVec 12) (r : BitVec 8) (w : BitVec 3) (h : BitVec.ult b 3072#12 = true) : ¬ (farithOcWbScaAddr (b + 1024#12) r = farithOcWbScaAddr b r ∧ ocWbScaBankId r (w + 4#3) = ocWbScaBankId r w) :=`
+- **farith_i11_regr** (line 393): `theorem farith_i11_regr (b : BitVec 12) (r : BitVec 8) (h : BitVec.ult (((b >>> 2).extractLsb' 0 9) + BitVec.zeroExtend 9 (r >>> 2)) 256#9 = true) : BitVec.zeroExtend 9 (ocWbScaAddr b r) = farithOcWbScaAddr b r :=`
+- **farith_i11_depth** (line 401): `theorem farith_i11_depth : (2 : Nat) ^ 9 = 512 :=`
+- **farith_i45_guard_iff** (line 416): `theorem farith_i45_guard_iff (k z : Nat) : farithAllocAlignOk k z = true ↔ k ∣ z :=`
+- **farith_i45_guard_reject_witness** (line 421): `theorem farith_i45_guard_reject_witness : farithAllocAlignOk 4 5 = false :=`
+- **farith_i45_guard_accept_witness** (line 424): `theorem farith_i45_guard_accept_witness : farithAllocAlignOk 4 8 = true :=`
+
+### `VentusF/Audit.lean`
+
+- **aud_count_total** (line 116): `theorem aud_count_total : audPremises.length = 9 :=`
+- **aud_count_discharged** (line 118): `theorem aud_count_discharged : audCountStatus .discharged = 2 :=`
+- **aud_count_axiomatic** (line 120): `theorem aud_count_axiomatic : audCountStatus .axiomatic = 5 :=`
+- **aud_count_residual** (line 122): `theorem aud_count_residual : audCountStatus .residual = 2 :=`
+- **aud_count_partition** (line 124): `theorem aud_count_partition : audCountStatus .discharged + audCountStatus .axiomatic + audCountStatus .residual = audPremises.length :=`
+- **aud_contracts_axiomatic_count** (line 131): `theorem aud_contracts_axiomatic_count : Ventus.Spec.specCountStatus .axiomatic = 17 :=`
+
+### `VentusF/CapD1.lean`
+
+- **capd1_bv2_cases** (line 38): `theorem capd1_bv2_cases (b : BitVec 2) : b = 0#2 ∨ b = 1#2 ∨ b = 2#2 ∨ b = 3#2 :=`
+- **capd1_rf1RdX_eq_isaRdX** (line 51): `theorem capd1_rf1RdX_eq_isaRdX (s : FsmState) (is : IsaState) (w : Fin 8) (x : Fin 32) (hsim : rf1Sim s is w) : rf1RdX s w x = isaRdX is x :=`
+- **capd1_headCtrl_row** (line 63): `theorem capd1_headCtrl_row (prog : SmProg) (s : FsmState) (w : Fin 8) : (rf2HeadCtrl prog s w).row = decDecode (prog.imem (smPcOfTag (s.ib.outBits w).tag)) :=`
+- **capd1_headCtrl_inst** (line 68): `theorem capd1_headCtrl_inst (prog : SmProg) (s : FsmState) (w : Fin 8) : (rf2HeadCtrl prog s w).inst = prog.imem (smPcOfTag (s.ib.outBits w).tag) :=`
+- **capd1_headRow_of_headOk** (line 72): `theorem capd1_headRow_of_headOk (prog : SmProg) (s : FsmState) (is : IsaState) (w : Fin 8) (hp : rf3ProgOk prog is) (hhead : capHeadOk s is w) : (rf2HeadCtrl prog s w).row = decDecode (isaFetch is) :=`
+- **capd1_headInst_of_headOk** (line 79): `theorem capd1_headInst_of_headOk (prog : SmProg) (s : FsmState) (is : IsaState) (w : Fin 8) (hp : rf3ProgOk prog is) (hhead : capHeadOk s is w) : (rf2HeadCtrl prog s w).inst = isaFetch is :=`
+- **capd1_headCtrl_pc_of_headOk** (line 86): `theorem capd1_headCtrl_pc_of_headOk (prog : SmProg) (s : FsmState) (is : IsaState) (w : Fin 8) (hhead : capHeadOk s is w) : (rf2HeadCtrl prog s w).pc = is.pc :=`
+- **capd1_lookup_prop** (line 96): `theorem capd1_lookup_prop (x : BitVec 32) (t : List DecEntry) (P : DecCtrlRow → Prop) (hd : P decDefaultRow) (h : ∀ e ∈ t, P e.row) : P (decLookupEntry x t) :=`
+- **capd1_selOk_default** (line 116): `theorem capd1_selOk_default : capd1SelOk decDefaultRow :=`
+- **capd1_cusOk_default** (line 121): `theorem capd1_cusOk_default : capd1CusOk decDefaultRow :=`
+- **capd1_selOk_audit** (line 128): `theorem capd1_selOk_audit : ∀ e ∈ (decTableIMF ++ decTableV ++ decTableVL ++ decTableVC), capd1SelOk e.row :=`
+- **capd1_cusOk_audit** (line 144): `theorem capd1_cusOk_audit : ∀ e ∈ (decTableIMF ++ decTableV ++ decTableVL ++ decTableVC), capd1CusOk e.row :=`
+- **capd1_mem_imf** (line 157): `theorem capd1_mem_imf : ∀ e ∈ decTableIMF, e ∈ (decTableIMF ++ decTableV ++ decTableVL ++ decTableVC) :=`
+- **capd1_mem_v** (line 160): `theorem capd1_mem_v : ∀ e ∈ decTableV, e ∈ (decTableIMF ++ decTableV ++ decTableVL ++ decTableVC) :=`
+- **capd1_mem_vl** (line 164): `theorem capd1_mem_vl : ∀ e ∈ decTableVL, e ∈ (decTableIMF ++ decTableV ++ decTableVL ++ decTableVC) :=`
+- **capd1_mem_vc** (line 167): `theorem capd1_mem_vc : ∀ e ∈ decTableVC, e ∈ (decTableIMF ++ decTableV ++ decTableVL ++ decTableVC) :=`
+- **capd1_selOk_of_dec** (line 173): `theorem capd1_selOk_of_dec (inst : BitVec 32) : capd1SelOk (decDecode inst) :=`
+- **capd1_cusOk_of_dec** (line 197): `theorem capd1_cusOk_of_dec (inst : BitVec 32) : capd1CusOk (decDecode inst) :=`
+- **capd1_selOk_of_salu** (line 221): `theorem capd1_selOk_of_salu (inst : BitVec 32) (hcls : isaClassOfRow (decDecode inst) = .salu) : (decDecode inst).selAlu1 ≠ 2#2 ∧ (decDecode inst).selAlu2 ≠ 2#2 :=`
+- **capd1_cusOk_of_salu** (line 226): `theorem capd1_cusOk_of_salu (inst : BitVec 32) (hcls : isaClassOfRow (decDecode inst) = .salu) : (decDecode inst).custom0 = false :=`
+- **capd1_huniq_of_sole** (line 238): `theorem capd1_huniq_of_sole (prog : SmProg) (s : FsmState) (j : Fin 8) (hsole : ∀ i : Fin 8, i ≠ j → (fsmCuAt s i).state = cuSIdle) : ∀ i : Fin 8, (rf2ReqX prog s).getLsbD i.val = true → i = j :=`
+- **capd1_outVV_of_noVec** (line 253): `theorem capd1_outVV_of_noVec (prog : SmProg) (s : FsmState) (hnv : ∀ i : Fin 8, cuIssueValid (fsmCuAt s i) = true → smInstIsVec (rf2CuIssCtrl prog s i) = false) : rf2OutVV prog s = false :=`
+- **capd1_noVec_of_sole_salu** (line 266): `theorem capd1_noVec_of_sole_salu (prog : SmProg) (s : FsmState) (is : IsaState) (j : Fin 8) (hsole : ∀ i : Fin 8, i ≠ j → (fsmCuAt s i).state = cuSIdle) (hrow : (rf2CuIssCtrl prog s j).row = decDecode (isaFetch is)) (hcls : isaClassify (isaFetch is) = .salu) (halu : capSaluAluOk (isaFetch is)) : ∀ i : Fin 8, cuIssueValid (fsmCuAt s i) = true → smInstIsVec (rf2CuIssCtrl prog s i) = false :=`
+- **capd1_regIdx_ofNat** (line 319): `theorem capd1_regIdx_ofNat (x : Fin 32) : (0#3 : BitVec 3) ++ (BitVec.ofNat 5 x.val) = BitVec.ofNat 8 x.val :=`
+- **capd1_hsrc1** (line 329): `theorem capd1_hsrc1 (prog : SmProg) (s : FsmState) (is : IsaState) (w j : Fin 8) (hp : rf3ProgOk prog is) (hsim : rf1Sim s is w) (hctrl : (fsmCuAt s j).controlReg = smToCuCtrl (rf2HeadCtrl prog s w)) (hhead : capHeadOk s is w) (hcls : isaClassify (isaFetch is) = .salu) (hsvc : capd1SvcOk s w j) : (cuIssueBits (fsmCuAt s j)).alu_src1 ⟨0, by decide⟩ = isaIn1Row is (isaFetch is) (decDecode (isaFetch is)) 0 :=`
+- **capd1_hsrc2** (line 403): `theorem capd1_hsrc2 (prog : SmProg) (s : FsmState) (is : IsaState) (w j : Fin 8) (hp : rf3ProgOk prog is) (hsim : rf1Sim s is w) (hctrl : (fsmCuAt s j).controlReg = smToCuCtrl (rf2HeadCtrl prog s w)) (hhead : capHeadOk s is w) (hcls : isaClassify (isaFetch is) = .salu) (hsvc : capd1SvcOk s w j) : (cuIssueBits (fsmCuAt s j)).alu_src2 ⟨0, by decide⟩ = isaIn2Row is (isaFetch is) (decDecode (isaFetch is)) 0 :=`
+- **capd1_issuePack_of_svc** (line 482): `theorem capd1_issuePack_of_svc (prog : SmProg) (s : FsmmState) (is : IsaState) (w j : Fin 8) (hp : rf3ProgOk prog is) (hsim : rf1Sim s.base is w) (hcls : isaClassify (isaFetch is) = .salu) (halu : capSaluAluOk (isaFetch is)) (hst : (fsmCuAt s.base j).state = cuSOut) (hctrl : (fsmCuAt s.base j).controlReg = smToCuCtrl (rf2HeadCtrl prog s.base w)) (hhead : capHeadOk s.base is w) (hsole : ∀ i : Fin 8, i ≠ j → (fsmCuAt s.base i).state = cuSIdle) (hsvc : capd1SvcOk s.base w j) : capIssuePack prog s is w j :=`
+- **capd1_ite_rsReg0** (line 504): `theorem capd1_ite_rsReg0 (c : Prop) [Decidable c] (a b : CuState) : (if c then a else b).rsReg0 = (if c then a.rsReg0 else b.rsReg0) :=`
+- **capd1_ite_rsReg1** (line 508): `theorem capd1_ite_rsReg1 (c : Prop) [Decidable c] (a b : CuState) : (if c then a else b).rsReg1 = (if c then a.rsReg1 else b.rsReg1) :=`
+- **capd1_cuBP_rsReg0_nf** (line 513): `theorem capd1_cuBP_rsReg0_nf (pre st : CuState) (i : CuInputs) (k : Nat) (h : cuBankFireK pre i k = true → (i.bankB k).regOrder ≠ 0#2) : (cuBankPort pre i st k).rsReg0 = st.rsReg0 :=`
+- **capd1_cuBP_rsReg1_nf** (line 536): `theorem capd1_cuBP_rsReg1_nf (pre st : CuState) (i : CuInputs) (k : Nat) (h : cuBankFireK pre i k = true → (i.bankB k).regOrder ≠ 1#2) : (cuBankPort pre i st k).rsReg1 = st.rsReg1 :=`
+- **capd1_fschBP_rsReg0_nf** (line 559): `theorem capd1_fschBP_rsReg0_nf (pre st : CuState) (i : CuInputs) (k : Nat) (h : cuBankFireK pre i k = true → (i.bankB k).regOrder ≠ 0#2) : (fschCuBankPort pre i st k).rsReg0 = st.rsReg0 :=`
+- **capd1_fschBP_rsReg1_nf** (line 571): `theorem capd1_fschBP_rsReg1_nf (pre st : CuState) (i : CuInputs) (k : Nat) (h : cuBankFireK pre i k = true → (i.bankB k).regOrder ≠ 1#2) : (fschCuBankPort pre i st k).rsReg1 = st.rsReg1 :=`
+- **capd1_fsPreBank_rsReg0** (line 584): `theorem capd1_fsPreBank_rsReg0 (s : CuState) (i : CuInputs) : (fschCuPreBank s i).rsReg0 = (fschCuAccept s i).rsReg0 :=`
+- **capd1_fsPreBank_rsReg1** (line 589): `theorem capd1_fsPreBank_rsReg1 (s : CuState) (i : CuInputs) : (fschCuPreBank s i).rsReg1 = (fschCuAccept s i).rsReg1 :=`
+- **capd1_fsAccept_rsReg0** (line 595): `theorem capd1_fsAccept_rsReg0 (s : CuState) (i : CuInputs) : (fschCuAccept s i).rsReg0 = (cuAccept s i).rsReg0 :=`
+- **capd1_fsAccept_rsReg1** (line 598): `theorem capd1_fsAccept_rsReg1 (s : CuState) (i : CuInputs) : (fschCuAccept s i).rsReg1 = (cuAccept s i).rsReg1 :=`
+- **capd1_cuAccept_rsReg0** (line 602): `theorem capd1_cuAccept_rsReg0 (s : CuState) (i : CuInputs) : (cuAccept s i).rsReg0 = if cuControlFire s i then (if i.ctrl.sel_alu1 == cuA1_IMM then cuBcast (cuImmOut s i.ctrl) else if i.ctrl.sel_alu1 == cuA1_PC then cuBcast i.ctrl.pc else s.rsReg0) else s.rsReg0 :=`
+- **capd1_cuAccept_rsReg1** (line 612): `theorem capd1_cuAccept_rsReg1 (s : CuState) (i : CuInputs) : (cuAccept s i).rsReg1 = if cuControlFire s i then (if i.ctrl.sel_alu2 == cuA2_IMM then cuBcast (cuImmOut s i.ctrl) else if i.ctrl.sel_alu2 == cuA2_SIZE then cuBcast 4#32 else s.rsReg1) else s.rsReg1 :=`
+- **capd1_fschStep_rsReg0_of_nf** (line 623): `theorem capd1_fschStep_rsReg0_of_nf (s : CuState) (i : CuInputs) (h : ∀ k : Nat, k < 4 → cuBankFireK s i k = true → (i.bankB k).regOrder ≠ 0#2) : (fschCuStep s i).rsReg0 = (cuAccept s i).rsReg0 :=`
+- **capd1_fschStep_rsReg1_of_nf** (line 635): `theorem capd1_fschStep_rsReg1_of_nf (s : CuState) (i : CuInputs) (h : ∀ k : Nat, k < 4 → cuBankFireK s i k = true → (i.bankB k).regOrder ≠ 1#2) : (fschCuStep s i).rsReg1 = (cuAccept s i).rsReg1 :=`
+- **capd1_accept_rsReg0_imm** (line 648): `theorem capd1_accept_rsReg0_imm (s : CuState) (i : CuInputs) (hf : cuControlFire s i = true) (hsel : i.ctrl.sel_alu1 = cuA1_IMM) (hnf : ∀ k : Nat, k < 4 → cuBankFireK s i k = true → (i.bankB k).regOrder ≠ 0#2) : (fschCuStep s i).rsReg0 = cuBcast (rfImmGen i.ctrl.sel_imm i.ctrl.inst i.ctrl.imm_ext) :=`
+- **capd1_accept_rsReg0_pc** (line 660): `theorem capd1_accept_rsReg0_pc (s : CuState) (i : CuInputs) (hf : cuControlFire s i = true) (hsel : i.ctrl.sel_alu1 = cuA1_PC) (hnf : ∀ k : Nat, k < 4 → cuBankFireK s i k = true → (i.bankB k).regOrder ≠ 0#2) : (fschCuStep s i).rsReg0 = cuBcast i.ctrl.pc :=`
+- **capd1_accept_rsReg1_imm** (line 668): `theorem capd1_accept_rsReg1_imm (s : CuState) (i : CuInputs) (hf : cuControlFire s i = true) (hsel : i.ctrl.sel_alu2 = cuA2_IMM) (hnf : ∀ k : Nat, k < 4 → cuBankFireK s i k = true → (i.bankB k).regOrder ≠ 1#2) : (fschCuStep s i).rsReg1 = cuBcast (rfImmGen i.ctrl.sel_imm i.ctrl.inst i.ctrl.imm_ext) :=`
+- **capd1_accept_rsReg1_size** (line 680): `theorem capd1_accept_rsReg1_size (s : CuState) (i : CuInputs) (hf : cuControlFire s i = true) (hsel : i.ctrl.sel_alu2 = cuA2_SIZE) (hnf : ∀ k : Nat, k < 4 → cuBankFireK s i k = true → (i.bankB k).regOrder ≠ 1#2) : (fschCuStep s i).rsReg1 = cuBcast 4#32 :=`
+- **capd1_fschStep_rsReg0_of_ret0** (line 690): `theorem capd1_fschStep_rsReg0_of_ret0 (s : CuState) (i : CuInputs) (hst : s.state = cuSAdd) (hrdy : cuBankInRdyK s i 0 = true) (hbv : i.bankV 0 = true) (hro : (i.bankB 0).regOrder = 0#2) (hrt : s.rsType0 = cuA1_RS1) (hcus : s.customCtrlReg = false) (hnf : ∀ k : Nat, k < 4 → k ≠ 0 → cuBankFireK s i k = true → (i.bankB k).regOrder ≠ 0#2) : (fschCuStep s i).rsReg0 = (if (s.regIdx0 != 0#8) = true then cuBcast ((i.bankB 0).data ⟨0, by decide⟩) else cuRow0) :=`
+- **capd1_fschStep_rsReg1_of_ret1** (line 736): `theorem capd1_fschStep_rsReg1_of_ret1 (s : CuState) (i : CuInputs) (hst : s.state = cuSAdd) (hrdy : cuBankInRdyK s i 1 = true) (hbv : i.bankV 1 = true) (hro : (i.bankB 1).regOrder = 1#2) (hrt : s.rsType1 = cuA2_RS2) (hnf : ∀ k : Nat, k < 4 → k ≠ 1 → cuBankFireK s i k = true → (i.bankB k).regOrder ≠ 1#2) : (fschCuStep s i).rsReg1 = (if (s.regIdx1 != 0#8) = true then cuBcast ((i.bankB 1).data ⟨0, by decide⟩) else cuRow0) :=`
+- **capd1_cuIn_regOrder_of_bv** (line 791): `theorem capd1_cuIn_regOrder_of_bv (prog : SmProg) (s : FsmmState) (inp : SmIn) (j : Fin 8) (k : Nat) (hk : k < 4) (hbv : ((fsmmComb prog s inp).cuIn j).bankV k = true) : (((fsmmComb prog s inp).cuIn j).bankB k).regOrder = BitVec.ofNat 2 k :=`
+- **capd1_chS_hit** (line 803): `theorem capd1_chS_hit (j : Fin 8) (k : Nat) (hk : k < 4) : (BitVec.ofNat 5 (j.val * 4 + k) >>> 2) = BitVec.ofNat 5 j.val ∧ (BitVec.ofNat 5 (j.val * 4 + k) % 4#5) = BitVec.ofNat 5 k :=`
+- **capd1_chS_of_hilo** (line 819): `theorem capd1_chS_of_hilo (c : BitVec 5) (j : Fin 8) (k : Nat) (hk : k < 4) (hhi : c >>> 2 = BitVec.ofNat 5 j.val) (hlo : c % 4#5 = BitVec.ofNat 5 k) : c = BitVec.ofNat 5 (j.val * 4 + k) :=`
+- **capd1_deliver** (line 846): `theorem capd1_deliver (prog : SmProg) (s : FsmmState) (inp : SmIn) (j : Fin 8) (k : Nat) (hk : k < 4) (b : Fin 4) (hsvc : capd1XbarSvcAt s.base j k b) : ((fsmmComb prog s inp).cuIn j).bankV k = true ∧ ((fsmmComb prog s inp).cuIn j).bankB k = ⟨BitVec.ofNat 2 k, cuBcast (rfSOut (fsmSrfAt s.base b)), cuRow0⟩ :=`
+- **capd1_step_chS** (line 922): `theorem capd1_step_chS (prog : SmProg) (s : FsmmState) (inp : SmIn) (i : Fin 4) : fsmChSAt (fsmmStep prog s inp).base i = (fsmmComb prog s inp).chosenS i :=`
+- **capd1_step_chSv** (line 928): `theorem capd1_step_chSv (prog : SmProg) (s : FsmmState) (inp : SmIn) (i : Fin 4) : fsmChSvAt (fsmmStep prog s inp).base i = (fsmmComb prog s inp).chosenSv i :=`
+- **capd1_step_chV** (line 934): `theorem capd1_step_chV (prog : SmProg) (s : FsmmState) (inp : SmIn) (i : Fin 4) : fsmChVAt (fsmmStep prog s inp).base i = (fsmmComb prog s inp).chosenV i :=`
+- **capd1_step_chVv** (line 940): `theorem capd1_step_chVv (prog : SmProg) (s : FsmmState) (inp : SmIn) (i : Fin 4) : fsmChVvAt (fsmmStep prog s inp).base i = (fsmmComb prog s inp).chosenVv i :=`
+- **capd1_step_srf** (line 947): `theorem capd1_step_srf (prog : SmProg) (s : FsmmState) (inp : SmIn) (i : Fin 4) : fsmSrfAt (fsmmStep prog s inp).base i = rfSStep (fsmSrfAt s.base i) ((fsmmComb prog s inp).rfInS i) :=`
+- **capd1_step_csr** (line 956): `theorem capd1_step_csr (prog : SmProg) (s : FsmmState) (inp : SmIn) (hreq : inp.reqFire = false) : (fsmmStep prog s inp).base.csr = s.base.csr :=`
+- **capd1_comb_chosenSv** (line 981): `theorem capd1_comb_chosenSv (prog : SmProg) (s : FsmmState) (inp : SmIn) (i : Fin 4) : (fsmmComb prog s inp).chosenSv i = ocScaOutValid (capd1Reqs prog s inp) (capd1Rv prog s inp) i (fsmLgSAt s.base i) :=`
+- **capd1_comb_chosenS** (line 985): `theorem capd1_comb_chosenS (prog : SmProg) (s : FsmmState) (inp : SmIn) (i : Fin 4) : (fsmmComb prog s inp).chosenS i = BitVec.ofNat 5 (ocScaChoice (capd1Reqs prog s inp) (capd1Rv prog s inp) i (fsmLgSAt s.base i)).val :=`
+- **capd1_comb_chosenVv** (line 990): `theorem capd1_comb_chosenVv (prog : SmProg) (s : FsmmState) (inp : SmIn) (i : Fin 4) : (fsmmComb prog s inp).chosenVv i = ocVecOutValid (capd1Reqs prog s inp) (capd1Rv prog s inp) i (fsmLgVAt s.base i) :=`
+- **capd1_comb_chosenV** (line 994): `theorem capd1_comb_chosenV (prog : SmProg) (s : FsmmState) (inp : SmIn) (i : Fin 4) : (fsmmComb prog s inp).chosenV i = BitVec.ofNat 5 (ocVecChoice (capd1Reqs prog s inp) (capd1Rv prog s inp) i (fsmLgVAt s.base i)).val :=`
+- **capd1_ofNat5_inj** (line 1000): `theorem capd1_ofNat5_inj {a b : Nat} (ha : a < 32) (hb : b < 32) (h : BitVec.ofNat 5 a = BitVec.ofNat 5 b) : a = b :=`
+- **capd1_fin4_of_ofNat2** (line 1007): `theorem capd1_fin4_of_ofNat2 {b b' : Fin 4} (h : BitVec.ofNat 2 b.val = BitVec.ofNat 2 b'.val) : b = b' :=`
+- **capd1_svcAt_of_grant** (line 1018): `theorem capd1_svcAt_of_grant (prog : SmProg) (s : FsmmState) (inp : SmIn) (j : Fin 8) (k : Nat) (hk : k < 4) (b : Fin 4) (hg : (fsmmComb prog s inp).chosenSv b = true) (hch : (fsmmComb prog s inp).chosenS b = BitVec.ofNat 5 (j.val * 4 + k)) : capd1XbarSvcAt (fsmmStep prog s inp).base j k b :=`
+- **capd1_rfSOut_step** (line 1076): `theorem capd1_rfSOut_step (m : RfSState) (i : RfSInputs) : rfSOut (rfSStep m i) = rf_read (rfSStep m i).mem i.rsidx.toFin :=`
+- **capd1_serve0_step** (line 1109): `theorem capd1_serve0_step (prog : SmProg) (s : FsmmState) (inp : SmIn) (j : Fin 8) (b : Fin 4) (hsvc : capd1XbarSvcAt s.base j 0 b) (hst : (fsmCuAt s.base j).state = cuSAdd) (hr0 : (((fsmCuAt s.base j).ready >>> 0#4) &&& 1#4 == 1#4) = false) (hrt : (fsmCuAt s.base j).rsType0 = cuA1_RS1) (hcus : (fsmCuAt s.base j).customCtrlReg = false) : (fsmCuAt (fsmmStep prog s inp).base j).rsReg0 = (if ((fsmCuAt s.base j).regIdx0 != 0#8) = true then cuBcast (rfSOut (fsmSrfAt s.base b)) else cuRow0) :=`
+- **capd1_serve1_step** (line 1145): `theorem capd1_serve1_step (prog : SmProg) (s : FsmmState) (inp : SmIn) (j : Fin 8) (b : Fin 4) (hsvc : capd1XbarSvcAt s.base j 1 b) (hst : (fsmCuAt s.base j).state = cuSAdd) (hr1 : (((fsmCuAt s.base j).ready >>> 1#4) &&& 1#4 == 1#4) = false) (hrt : (fsmCuAt s.base j).rsType1 = cuA2_RS2) : (fsmCuAt (fsmmStep prog s inp).base j).rsReg1 = (if ((fsmCuAt s.base j).regIdx1 != 0#8) = true then cuBcast (rfSOut (fsmSrfAt s.base b)) else cuRow0) :=`
+- **capd1_serve0_data** (line 1187): `theorem capd1_serve0_data (prog : SmProg) (s : FsmmState) (inp : SmIn) (j : Fin 8) (b : Fin 4) (w : Fin 8) (x : Fin 32) (hreq : inp.reqFire = false) (hg : (fsmmComb prog s inp).chosenSv b = true) (hch : (fsmmComb prog s inp).chosenS b = BitVec.ofNat 5 (j.val * 4)) (hacc : cuControlFire (fsmCuAt s.base j) ((fsmmComb prog s inp).cuIn j) = false) (hrt : (fsmCuAt s.base j).rsType0 = cuA1_RS1) (hidx : (fsmCuAt s.base j).regIdx0 = BitVec.ofNat 8 x.val) (hwid : (fsmCuAt s.base j).controlReg.wid = BitVec.ofNat 3 w.val) (hx : x ≠ 0) : rfSOut (fsmSrfAt (fsmmStep prog s inp).base b) = rf1RdX (fsmmStep prog s inp).base w x :=`
+- **capd1_serve1_data** (line 1275): `theorem capd1_serve1_data (prog : SmProg) (s : FsmmState) (inp : SmIn) (j : Fin 8) (b : Fin 4) (w : Fin 8) (x : Fin 32) (hreq : inp.reqFire = false) (hg : (fsmmComb prog s inp).chosenSv b = true) (hch : (fsmmComb prog s inp).chosenS b = BitVec.ofNat 5 (j.val * 4 + 1)) (hacc : cuControlFire (fsmCuAt s.base j) ((fsmmComb prog s inp).cuIn j) = false) (hrt : (fsmCuAt s.base j).rsType1 = cuA2_RS2) (hidx : (fsmCuAt s.base j).regIdx1 = BitVec.ofNat 8 x.val) (hwid : (fsmCuAt s.base j).controlReg.wid = BitVec.ofNat 3 w.val) (hx : x ≠ 0) : rfSOut (fsmSrfAt (fsmmStep prog s inp).base b) = rf1RdX (fsmmStep prog s inp).base w x :=`
+- **capd1_serve0_two_beat** (line 1367): `theorem capd1_serve0_two_beat (prog : SmProg) (s : FsmmState) (inp0 inp1 : SmIn) (j : Fin 8) (b : Fin 4) (w : Fin 8) (x : Fin 32) (hreq : inp0.reqFire = false) (hg : (fsmmComb prog s inp0).chosenSv b = true) (hch : (fsmmComb prog s inp0).chosenS b = BitVec.ofNat 5 (j.val * 4)) (hacc : cuControlFire (fsmCuAt s.base j) ((fsmmComb prog s inp0).cuIn j) = false) (hrt0 : (fsmCuAt s.base j).rsType0 = cuA1_RS1) (hidx0 : (fsmCuAt s.base j).regIdx0 = BitVec.ofNat 8 x.val) (hwid : (fsmCuAt s.base j).controlReg.wid = BitVec.ofNat 3 w.val) (hst1 : (fsmCuAt (fsmmStep prog s inp0).base j).state = cuSAdd) (hr01 : (((fsmCuAt (fsmmStep prog s inp0).base j).ready >>> 0#4) &&& 1#4 == 1#4) = false) (hrt1 : (fsmCuAt (fsmmStep prog s inp0).base j).rsType0 = cuA1_RS1) (hcus1 : (fsmCuAt (fsmmStep prog s inp0).base j).customCtrlReg = false) (hidx2 : (fsmCuAt (fsmmStep prog s inp0).base j).regIdx0 = BitVec.ofNat 8 x.val) (hx : x ≠ 0) : (fsmCuAt (fsmmStep prog (fsmmStep prog s inp0) inp1).base j).rsReg0 = cuBcast (rf1RdX (fsmmStep prog s inp0).base w x) :=`
+- **capd1_fsmm_nop_no_wbXFire** (line 1478): `theorem capd1_fsmm_nop_no_wbXFire (prog : SmProg) (s : FsmmState) (inp : SmIn) (hq : rf2CuQ prog s.base) (hmq : rf3MemQ s) : (fsmmComb prog s inp).wbXFire = false :=`
+- **capd1_fsmmStep_srf_mem** (line 1521): `theorem capd1_fsmmStep_srf_mem (prog : SmProg) (s : FsmmState) (inp : SmIn) (i : Fin 4) (hq : rf2CuQ prog s.base) (hmq : rf3MemQ s) : (fsmSrfAt (fsmmStep prog s inp).base i).mem = (fsmSrfAt s.base i).mem :=`
+- **capd1_rdX_step** (line 1537): `theorem capd1_rdX_step (prog : SmProg) (s : FsmmState) (w : Fin 8) (x : Fin 32) (hq : rf2CuQ prog s.base) (hmq : rf3MemQ s) : rf1RdX (fsmmStep prog s smInNop).base w x = rf1RdX s.base w x :=`
+- **capd1_rdX_run_freeze** (line 1550): `theorem capd1_rdX_run_freeze (prog : SmProg) (w : Fin 8) (x : Fin 32) : ∀ (n : Nat) (s : FsmmState), (∀ t : Nat, t < n → rf2CuQ prog (fsmmRun prog s (List.replicate t smInNop)).base) → (∀ t : Nat, t < n → rf3MemQ (fsmmRun prog s (List.replicate t smInNop))) → rf1RdX (fsmmRun prog s (List.replicate n smInNop)).base w x = rf1RdX s.base w x :=`
+- **capd1_cuAccept_of_nf** (line 1580): `theorem capd1_cuAccept_of_nf (s : CuState) (i : CuInputs) (hcf : cuControlFire s i = false) : cuAccept s i = s :=`
+- **capd1_fschAccept_of_nf** (line 1587): `theorem capd1_fschAccept_of_nf (s : CuState) (i : CuInputs) (hcf : cuControlFire s i = false) : fschCuAccept s i = s :=`
+- **capd1_fschBP_rsType0** (line 1594): `theorem capd1_fschBP_rsType0 (pre st : CuState) (i : CuInputs) (k : Nat) : (fschCuBankPort pre i st k).rsType0 = st.rsType0 :=`
+- **capd1_fschBP_rsType1** (line 1618): `theorem capd1_fschBP_rsType1 (pre st : CuState) (i : CuInputs) (k : Nat) : (fschCuBankPort pre i st k).rsType1 = st.rsType1 :=`
+- **capd1_fschBP_regIdx0** (line 1642): `theorem capd1_fschBP_regIdx0 (pre st : CuState) (i : CuInputs) (k : Nat) : (fschCuBankPort pre i st k).regIdx0 = st.regIdx0 :=`
+- **capd1_fschBP_regIdx1** (line 1665): `theorem capd1_fschBP_regIdx1 (pre st : CuState) (i : CuInputs) (k : Nat) : (fschCuBankPort pre i st k).regIdx1 = st.regIdx1 :=`
+- **capd1_fschBP_customCtrlReg** (line 1688): `theorem capd1_fschBP_customCtrlReg (pre st : CuState) (i : CuInputs) (k : Nat) : (fschCuBankPort pre i st k).customCtrlReg = st.customCtrlReg :=`
+- **capd1_fschStep_core_pres** (line 1713): `theorem capd1_fschStep_core_pres (s : CuState) (i : CuInputs) (hcf : cuControlFire s i = false) : (fschCuStep s i).controlReg = s.controlReg ∧ (fschCuStep s i).rsType0 = s.rsType0 ∧ (fschCuStep s i).rsType1 = s.rsType1 ∧ (fschCuStep s i).regIdx0 = s.regIdx0 ∧ (fschCuStep s i).regIdx1 = s.regIdx1 ∧ (fschCuStep s i).customCtrlReg = s.customCtrlReg :=`
+- **capd1_fschRun_core_pres** (line 1778): `theorem capd1_fschRun_core_pres (s : CuState) (ins : List CuInputs) (h : ∀ t : Nat, t < ins.length → cuControlFire (fschCuRun s (ins.take t)) (ins.getD t cuInNop) = false) : (fschCuRun s ins).controlReg = s.controlReg ∧ (fschCuRun s ins).rsType0 = s.rsType0 ∧ (fschCuRun s ins).rsType1 = s.rsType1 ∧ (fschCuRun s ins).regIdx0 = s.regIdx0 ∧ (fschCuRun s ins).regIdx1 = s.regIdx1 ∧ (fschCuRun s ins).customCtrlReg = s.customCtrlReg :=`
+- **capd1_fschRun_rsReg0_stable** (line 1803): `theorem capd1_fschRun_rsReg0_stable (s : CuState) (ins : List CuInputs) (hcf : ∀ t : Nat, t < ins.length → cuControlFire (fschCuRun s (ins.take t)) (ins.getD t cuInNop) = false) (hnf : ∀ t : Nat, t < ins.length → ∀ k : Nat, k < 4 → cuBankFireK (fschCuRun s (ins.take t)) (ins.getD t cuInNop) k = true → ((ins.getD t cuInNop).bankB k).regOrder ≠ 0#2) : (fschCuRun s ins).rsReg0 = s.rsReg0 :=`
+- **capd1_fschRun_rsReg1_stable** (line 1838): `theorem capd1_fschRun_rsReg1_stable (s : CuState) (ins : List CuInputs) (hcf : ∀ t : Nat, t < ins.length → cuControlFire (fschCuRun s (ins.take t)) (ins.getD t cuInNop) = false) (hnf : ∀ t : Nat, t < ins.length → ∀ k : Nat, k < 4 → cuBankFireK (fschCuRun s (ins.take t)) (ins.getD t cuInNop) k = true → ((ins.getD t cuInNop).bankB k).regOrder ≠ 1#2) : (fschCuRun s ins).rsReg1 = s.rsReg1 :=`
+- **capd1_cuTrace_length** (line 1875): `theorem capd1_cuTrace_length (prog : SmProg) (s : FsmmState) (ins : List SmIn) (j : Fin 8) : (prjCuTrace prog s ins j).length = ins.length :=`
+- **capd1_cuTrace_getD** (line 1886): `theorem capd1_cuTrace_getD (prog : SmProg) (s : FsmmState) (ins : List SmIn) (j : Fin 8) (t : Nat) (ht : t < ins.length) : (prjCuTrace prog s ins j).getD t cuInNop = (fsmmComb prog (fsmmRun prog s (ins.take t)) (ins.getD t smInNop)).cuIn j :=`
+- **capd1_run_rsReg0_stable** (line 1905): `theorem capd1_run_rsReg0_stable (prog : SmProg) (s : FsmmState) (n : Nat) (j : Fin 8) (hacc : ∀ t : Nat, t < n → cuControlFire (fsmCuAt (fsmmRun prog s (List.replicate t smInNop)).base j) ((fsmmComb prog (fsmmRun prog s (List.replicate t smInNop)) smInNop).cuIn j) = false) (hrdy0 : ∀ t : Nat, t < n → ((fsmCuAt (fsmmRun prog s (List.replicate t smInNop)).base j).ready >>> 0#4) &&& 1#4 = 1#4) : (fsmCuAt (fsmmRun prog s (List.replicate n smInNop)).base j).rsReg0 = (fsmCuAt s.base j).rsReg0 :=`
+- **capd1_run_rsReg1_stable** (line 1948): `theorem capd1_run_rsReg1_stable (prog : SmProg) (s : FsmmState) (n : Nat) (j : Fin 8) (hacc : ∀ t : Nat, t < n → cuControlFire (fsmCuAt (fsmmRun prog s (List.replicate t smInNop)).base j) ((fsmmComb prog (fsmmRun prog s (List.replicate t smInNop)) smInNop).cuIn j) = false) (hrdy1 : ∀ t : Nat, t < n → ((fsmCuAt (fsmmRun prog s (List.replicate t smInNop)).base j).ready >>> 1#4) &&& 1#4 = 1#4) : (fsmCuAt (fsmmRun prog s (List.replicate n smInNop)).base j).rsReg1 = (fsmCuAt s.base j).rsReg1 :=`
+- **capd1_cuIn_noRace** (line 1995): `theorem capd1_cuIn_noRace (prog : SmProg) (s : FsmmState) (inp : SmIn) (j : Fin 8) (h3 : ((fsmmComb prog s inp).cuIn j).bv3 = false) (h2 : ((fsmmComb prog s inp).cuIn j).controlValid = true → ((fsmmComb prog s inp).cuIn j).bv2 = false) : fschCuNoRaceIn ((fsmmComb prog s inp).cuIn j) :=`
+- **capd1_accept_hnf** (line 2045): `theorem capd1_accept_hnf (prog : SmProg) (s : FsmmState) (inp : SmIn) (j : Fin 8) (r : Nat) (hr : r < 4) (hst : (fsmCuAt s.base j).state = cuSIdle) (hrw : cuRwK ((fsmmComb prog s inp).cuIn j).ctrl r = true) : ∀ k : Nat, k < 4 → cuBankFireK (fsmCuAt s.base j) ((fsmmComb prog s inp).cuIn j) k = true → (((fsmmComb prog s inp).cuIn j).bankB k).regOrder ≠ BitVec.ofNat 2 r :=`
+- **capd1_accept_pack** (line 2073): `theorem capd1_accept_pack (prog : SmProg) (s : FsmmState) (inp : SmIn) (w l j : Fin 8) (hbit : (prgXReq prog s inp).getLsbD w.val = true) (huniq : ∀ i : Fin 8, (prgXReq prog s inp).getLsbD i.val = true → i = w) (hl : cuControlRdy (fsmCuAt s.base l) = true) (hj : cuControlRdy (fsmCuAt s.base j) = true) (hne : l ≠ j) (hsel : j.val = ocPrioLowest (ocRdy2 (prgCuRdy s))) (hnr : fschCuNoRaceIn ((fsmmComb prog s inp).cuIn j)) : (fsmCuAt (fsmmStep prog s inp).base j).controlReg = smToCuCtrl (rf2HeadCtrl prog s.base w) ∧ (fsmCuAt (fsmmStep prog s inp).base j).valid = 0xF#4 ∧ ((smToCuCtrl (rf2HeadCtrl prog s.base w)).sel_alu1 = cuA1_IMM → (fsmCuAt (fsmmStep prog s inp).base j).rsReg0 = cuBcast (rfImmGen (smToCuCtrl (rf2HeadCtrl prog s.base w)).sel_imm (smToCuCtrl (rf2HeadCtrl prog s.base w)).inst (smToCuCtrl (rf2HeadCtrl prog s.base w)).imm_ext)) ∧ ((smToCuCtrl (rf2HeadCtrl prog s.base w)).sel_alu1 = cuA1_PC → (fsmCuAt (fsmmStep prog s inp).base j).rsReg0 = cuBcast (smToCuCtrl (rf2HeadCtrl prog s.base w)).pc) ∧ ((smToCuCtrl (rf2HeadCtrl prog s.base w)).sel_alu2 = cuA2_IMM → (fsmCuAt (fsmmStep prog s inp).base j).rsReg1 = cuBcast (rfImmGen (smToCuCtrl (rf2HeadCtrl prog s.base w)).sel_imm (smToCuCtrl (rf2HeadCtrl prog s.base w)).inst (smToCuCtrl (rf2HeadCtrl prog s.base w)).imm_ext)) ∧ ((smToCuCtrl (rf2HeadCtrl prog s.base w)).sel_alu2 = cuA2_SIZE → (fsmCuAt (fsmmStep prog s inp).base j).rsReg1 = cuBcast 4#32) :=`
+- **capd1_countP_le** (line 2156): `theorem capd1_countP_le {α : Type} (l : List α) (a b : α → Bool) (h : ∀ x ∈ l, b x = true → a x = true) : l.countP b ≤ l.countP a :=`
+- **capd1_countP_lt** (line 2173): `theorem capd1_countP_lt {α : Type} (l : List α) (a b : α → Bool) (h : ∀ x ∈ l, b x = true → a x = true) (j : α) (hj : j ∈ l) (hja : a j = true) (hjb : b j = false) : l.countP b < l.countP a :=`
+- **capd1_rra_shrink_fair** (line 2202): `theorem capd1_rra_shrink_fair {n : Nat} (hn : 0 < n) (v : Nat → BitVec n) (lg : Nat → Fin n) (p : Fin n) (hpers : ∀ t : Nat, (v t).getLsbD p.val = true) (hshrink : ∀ t : Nat, (v (t + 1)) &&& (v t) = v (t + 1)) (hdrop : ∀ t : Nat, ∀ q : Fin n, q ≠ p → rraOutValid hn (v t) (lg t) = true → rraChoice hn (v t) (lg t) = q → (v (t + 2)).getLsbD q.val = false) : ∃ t : Nat, t ≤ 2 * n + 1 ∧ rraOutValid hn (v t) (lg t) = true ∧ rraChoice hn (v t) (lg t) = p :=`
+- **capd1_step_lgS** (line 2293): `theorem capd1_step_lgS (prog : SmProg) (s : FsmmState) (inp : SmIn) (i : Fin 4) : fsmLgSAt (fsmmStep prog s inp).base i = rraStep (by decide) (ocScaPack (capd1Reqs prog s inp) (capd1Rv prog s inp) i) true (fsmLgSAt s.base i) :=`
+- **capd1_grant_eventually** (line 2308): `theorem capd1_grant_eventually (prog : SmProg) (s : FsmmState) (j : Fin 8) (k : Nat) (hk : k < 4) (b : Fin 4) (hpers : ∀ t : Nat, (ocScaPack (capd1Reqs prog (fsmmRun prog s (List.replicate t smInNop)) smInNop) (capd1Rv prog (fsmmRun prog s (List.replicate t smInNop)) smInNop) b).getLsbD (j.val * 4 + k) = true) (hshrink : ∀ t : Nat, (ocScaPack (capd1Reqs prog (fsmmRun prog s (List.replicate (t + 1) smInNop)) smInNop) (capd1Rv prog (fsmmRun prog s (List.replicate (t + 1) smInNop)) smInNop) b) &&& (ocScaPack (capd1Reqs prog (fsmmRun prog s (List.replicate t smInNop)) smInNop) (capd1Rv prog (fsmmRun prog s (List.replicate t smInNop)) smInNop) b) = (ocScaPack (capd1Reqs prog (fsmmRun prog s (List.replicate (t + 1) smInNop)) smInNop) (capd1Rv prog (fsmmRun prog s (List.replicate (t + 1) smInNop)) smInNop) b)) (hdrop : ∀ t : Nat, ∀ q : Fin 32, q ≠ ⟨j.val * 4 + k, by have :=`
+- **capd1_bv4_or1_bit0** (line 2357): `theorem capd1_bv4_or1_bit0 (a : BitVec 4) : (((a ||| 1#4) >>> 0#4) &&& 1#4) = 1#4 :=`
+- **capd1_bv4_or_mono_bit0** (line 2361): `theorem capd1_bv4_or_mono_bit0 (a b : BitVec 4) (h : ((a >>> 0#4) &&& 1#4) = 1#4) : (((a ||| b) >>> 0#4) &&& 1#4) = 1#4 :=`
+- **capd1_fschBP_ready** (line 2367): `theorem capd1_fschBP_ready (pre st : CuState) (i : CuInputs) (k : Nat) : (fschCuBankPort pre i st k).ready = st.ready ||| (if cuBankFireK pre i k then 1#4 <<< (i.bankB k).regOrder.zeroExtend 4 else 0#4) :=`
+- **capd1_serve0_step_ready** (line 2378): `theorem capd1_serve0_step_ready (s : CuState) (i : CuInputs) (hf : cuBankFireK s i 0 = true) (hro : (i.bankB 0).regOrder = 0#2) : (((fschCuStep s i).ready >>> 0#4) &&& 1#4) = 1#4 :=`
+- **capd1_serve1_step_ready** (line 2393): `theorem capd1_serve1_step_ready (s : CuState) (i : CuInputs) (hf : cuBankFireK s i 1 = true) (hro : (i.bankB 1).regOrder = 1#2) : (((fschCuStep s i).ready >>> 1#4) &&& 1#4) = 1#4 :=`
+
+### `VentusF/CapExist.lean`
+
+- **cape_ofNat_toNat** (line 137): `theorem cape_ofNat_toNat (y : BitVec 32) : BitVec.ofNat 32 y.toNat = y :=`
+- **cape_mul8_ushift3** (line 142): `theorem cape_mul8_ushift3 (x : BitVec 32) (h : x &&& 7#32 = 0#32) : 8#32 * BitVec.ofNat 32 ((x >>> 3#32).toNat) = x :=`
+- **cape_pcOk_iff** (line 150): `theorem cape_pcOk_iff (s : FsmState) (w : Fin 8) (pc : BitVec 32) : rf1PcOk s w pc ↔ (rf1Pc s w) &&& 7#32 = 0#32 :=`
+- **cape_pcOk_mono** (line 173): `theorem cape_pcOk_mono (s : FsmState) (w : Fin 8) (pc pc' : BitVec 32) (h : rf1PcOk s w pc) : rf1PcOk s w pc' :=`
+- **cape_pcT_of_sim** (line 179): `theorem cape_pcT_of_sim {s : FsmState} {is : IsaState} {w : Fin 8} (hsim : rf1Sim s is w) : rf1PcOk s w (is.pc + 4#32) :=`
+- **cape_comb_mulData** (line 192): `theorem cape_comb_mulData (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).mulData = fsmMulData ((rf2OutVC prog s.base).row.aluFn.extractLsb' 0 5) ((capeOutVBits prog s.base).alu_src1 ⟨0, by decide⟩) ((capeOutVBits prog s.base).alu_src2 ⟨0, by decide⟩) ((capeOutVBits prog s.base).alu_src3 ⟨0, by decide⟩) :=`
+- **cape_comb_wbVChoice** (line 200): `theorem cape_comb_wbVChoice (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).wbVChoice = wbArbChoice (by decide) (fsmmComb prog s inp).wbVValids :=`
+- **cape_comb_wbVWid** (line 205): `theorem cape_comb_wbVWid (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).wbVWid = (if (fsmmComb prog s inp).wbVChoice.val = 2 then (fsmmComb prog s inp).rspTag.warp_id else (capeOutVBits prog s.base).control.wid) :=`
+- **cape_comb_wbVIdxw** (line 211): `theorem cape_comb_wbVIdxw (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).wbVIdxw = (if (fsmmComb prog s inp).wbVChoice.val = 2 then (fsmmComb prog s inp).rspTag.reg_idxw else (rf2OutVC prog s.base).regIdxw) :=`
+- **cape_comb_wbVWvd** (line 217): `theorem cape_comb_wbVWvd (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).wbVWvd = (if (fsmmComb prog s inp).wbVChoice.val = 2 then (fsmmComb prog s inp).rspTag.wfd else (rf2OutVC prog s.base).row.wvd) :=`
+- **cape_route_mul_ne_lsu** (line 223): `theorem cape_route_mul_ne_lsu : ([IssPort.MUL] == [IssPort.LSU]) = false :=`
+- **cape_route_mul_ne_vbr** (line 224): `theorem cape_route_mul_ne_vbr : ([IssPort.MUL] == [IssPort.vALU, IssPort.SIMT]) = false :=`
+- **cape_route_mul_ne_simt** (line 226): `theorem cape_route_mul_ne_simt : ([IssPort.MUL] == [IssPort.SIMT]) = false :=`
+- **cape_route_mul_any_valu** (line 227): `theorem cape_route_mul_any_valu : ([IssPort.MUL].any (fun t => decide (t = IssPort.vALU))) = false :=`
+- **cape_route_valu_ne_mul** (line 229): `theorem cape_route_valu_ne_mul : ([IssPort.vALU] == [IssPort.MUL]) = false :=`
+- **cape_route_valu_ne_lsu** (line 230): `theorem cape_route_valu_ne_lsu : ([IssPort.vALU] == [IssPort.LSU]) = false :=`
+- **cape_route_valu_ne_vbr** (line 231): `theorem cape_route_valu_ne_vbr : ([IssPort.vALU] == [IssPort.vALU, IssPort.SIMT]) = false :=`
+- **cape_route_valu_ne_simt** (line 233): `theorem cape_route_valu_ne_simt : ([IssPort.vALU] == [IssPort.SIMT]) = false :=`
+- **cape_route_valu_any_valu** (line 234): `theorem cape_route_valu_any_valu : ([IssPort.vALU].any (fun t => decide (t = IssPort.vALU))) = true :=`
+- **cape_route_ws_ne_salu** (line 236): `theorem cape_route_ws_ne_salu : ([IssPort.ws] == [IssPort.sALU]) = false :=`
+- **cape_route_ws_ne_csr** (line 237): `theorem cape_route_ws_ne_csr : ([IssPort.ws] == [IssPort.CSR]) = false :=`
+- **cape_wb_choice5** (line 240): `theorem cape_wb_choice5 : wbArbChoice (by decide) (32#6) = ⟨5, by decide⟩ ∧ wbArbOutValid (32#6) = true :=`
+- **cape_jal_beat_of_issue** (line 269): `theorem cape_jal_beat_of_issue (prog : SmProg) (s : FsmmState) (w : Fin 8) (rdB : BitVec 8) (v c : BitVec 32) (wxd : Bool) (h : capeJalIssue prog s w rdB v c wxd) : rfg2JalBeat prog s smInNop w rdB v c wxd :=`
+- **cape_sbr_beat_of_issue** (line 413): `theorem cape_sbr_beat_of_issue (prog : SmProg) (s : FsmmState) (w : Fin 8) (c : BitVec 32) (taken : Bool) (h : capeSbrIssue prog s w c taken) : rfg2SbrBeat prog s smInNop w c taken :=`
+- **cape_mul_beat_of_issue** (line 533): `theorem cape_mul_beat_of_issue (prog : SmProg) (s : FsmmState) (w : Fin 8) (rdB : BitVec 8) (v : BitVec 32) (wxd : Bool) (h : capeMulIssue prog s w rdB v wxd) : rf3SaluBeat prog s smInNop w rdB v wxd :=`
+- **cape_endprg_beat_of_issue** (line 656): `theorem cape_endprg_beat_of_issue (prog : SmProg) (s : FsmmState) (w : Fin 8) (h : capeEndprgIssue prog s w) : rfg2EndprgBeat prog s smInNop w :=`
+- **cape_valu_beat_of_issue** (line 766): `theorem cape_valu_beat_of_issue (prog : SmProg) (s : FsmmState) (w : Fin 8) (vd : Fin 32) (res : RfVRow) (wm : BitVec 32) (wvd : Bool) (h : capeValuIssue prog s w vd res wm wvd) : rfvValuBeat prog s smInNop w vd res wm wvd false :=`
+- **cape_mul_hi32_of_mod64** (line 877): `theorem cape_mul_hi32_of_mod64 (p q : BitVec 66) (p' q' : BitVec 64) (hp : p.toNat % 2^64 = p'.toNat % 2^64) (hq : q.toNat % 2^64 = q'.toNat % 2^64) : (p * q).extractLsb' 32 32 = (p' * q').extractLsb' 32 32 :=`
+- **cape_sext66_mod64** (line 894): `theorem cape_sext66_mod64 (a : BitVec 32) : (BitVec.signExtend 66 a).toNat % 2^64 = (BitVec.signExtend 64 a).toNat % 2^64 :=`
+- **cape_zext66_mod64** (line 908): `theorem cape_zext66_mod64 (a : BitVec 32) : (BitVec.zeroExtend 66 a).toNat % 2^64 = (BitVec.zeroExtend 64 a).toNat % 2^64 :=`
+- **cape_mulData_isaMul** (line 922): `theorem cape_mulData_isaMul (fn : BitVec 6) (a b c : BitVec 32) (hlo : 20 ≤ fn.toNat) (hhi : fn.toNat ≤ 27) : fsmMulData (fn.extractLsb' 0 5) a b c = isaMul fn a b c :=`
+- **cape_progOk_salu** (line 1006): `theorem cape_progOk_salu (prog : SmProg) (is : IsaState) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .salu) (hp : rf3ProgOk prog is) : rf3ProgOk prog (isaStep is) :=`
+- **cape_progOk_jal** (line 1025): `theorem cape_progOk_jal (prog : SmProg) (is : IsaState) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .jal) (hp : rf3ProgOk prog is) : rf3ProgOk prog (isaStep is) :=`
+- **cape_progOk_jalr** (line 1045): `theorem cape_progOk_jalr (prog : SmProg) (is : IsaState) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .jalr) (hp : rf3ProgOk prog is) : rf3ProgOk prog (isaStep is) :=`
+- **cape_progOk_sbr** (line 1065): `theorem cape_progOk_sbr (prog : SmProg) (is : IsaState) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .sbr) (hwxd : (decDecode (isaFetch is)).wxd = false) (hp : rf3ProgOk prog is) : rf3ProgOk prog (isaStep is) :=`
+- **cape_progOk_nop** (line 1077): `theorem cape_progOk_nop (prog : SmProg) (is : IsaState) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .illegal) (hp : rf3ProgOk prog is) : rf3ProgOk prog (isaStep is) :=`
+- **cape_progOk_endprg** (line 1084): `theorem cape_progOk_endprg (prog : SmProg) (is : IsaState) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .endprg) (hp : rf3ProgOk prog is) : rf3ProgOk prog (isaStep is) :=`
+- **cape_progOk_valu** (line 1091): `theorem cape_progOk_valu (prog : SmProg) (is : IsaState) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .valu) (hp : rf3ProgOk prog is) : rf3ProgOk prog (isaStep is) :=`
+- **cape_progOk_vload** (line 1108): `theorem cape_progOk_vload (prog : SmProg) (is : IsaState) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .vload) (hp : rf3ProgOk prog is) : rf3ProgOk prog (isaStep is) :=`
+- **cape_progOkFoot_of_progOk** (line 1131): `theorem cape_progOkFoot_of_progOk (prog : SmProg) (is : IsaState) (hp : rf3ProgOk prog is) : capeProgOkFoot prog is :=`
+- **cape_align4_add_lt4** (line 1136): `theorem cape_align4_add_lt4 (pc i : BitVec 32) (h : pc &&& 3#32 = 0#32) (hi : i < 4#32) : (pc + i) &&& 0xFFFFFFFC#32 = pc :=`
+- **cape_progOkFoot_vstore** (line 1149): `theorem cape_progOkFoot_vstore (prog : SmProg) (is : IsaState) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .vstore) (hp : capeProgOkFoot prog is) (hfp : capeProgFootStable prog is) : capeProgOkFoot prog (isaStep is) :=`
+- **cape_cuQ_of_quiesceAll** (line 1178): `theorem cape_cuQ_of_quiesceAll (prog : SmProg) (s : FsmmState) (hq : ∀ w : Fin 8, rf1Quiesce prog s.base w) (hcons : ∀ j : Fin 8, prog.imem (smPcOfTag (fsmCuAt s.base j).controlReg.tag) = (fsmCuAt s.base j).controlReg.inst) : rf2CuQ prog s.base :=`
+- **cape_salu_pack** (line 1336): `theorem cape_salu_pack (prog : SmProg) (s : FsmmState) (iss : Fin 8 → IsaState) (w j : Fin 8) (k : Nat) (hsim : capSim prog s iss) (hmq : rf3MemQ s) (hp : rf3ProgOk prog (iss w)) (hcls : isaClassify (isaFetch (iss w)) = .salu) (halu : capSaluAluOk (isaFetch (iss w))) (hsil1 : ∀ i : Nat, i < k → rf2CuQ prog (fsmmRun prog s (List.replicate i smInNop)).base) (hsvc : capeSaluSvc prog (fsmmRun prog s (List.replicate k smInNop)) (iss w) w j) : capIssuePack prog (fsmmRun prog s (List.replicate k smInNop)) (iss w) w j :=`
+- **cape_tailOk_zero** (line 1358): `theorem cape_tailOk_zero (prog : SmProg) (s : FsmmState) (b : Bool) : capmTailOk prog s 0 b :=`
+- **cape_seg_exists** (line 1372): `theorem cape_seg_exists (prog : SmProg) (s : FsmmState) (iss : Fin 8 → IsaState) (w : Fin 8) (k m : Nat) (hsim : capSim prog s iss) (hmq : rf3MemQ s) (hev : capeSegEvAt prog s (iss w) w k m) : ∃ b : Bool, capmSegsOk prog s iss [⟨w, k, m⟩] b ∧ capmTailOk prog (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) 0 b ∧ (b = true → isaClassify (isaFetch (iss w)) = .endprg) :=`
+- **cape_boundary_step** (line 1420): `theorem cape_boundary_step (prog : SmProg) (s : FsmmState) (iss : Fin 8 → IsaState) (w : Fin 8) (k m : Nat) (hev : capeSegEvAt prog s (iss w) w k m) (hne : isaClassify (isaFetch (iss w)) ≠ .endprg) (hsim : capSim prog s iss) (hmq : rf3MemQ s) (hdisp : ∀ w' : Fin 8, rf1DispOk s.base w') (hsep : ∀ w1 w2 : Fin 8, w1 ≠ w2 → mwfSep s.base w1 w2) : capSim prog (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) (mwfIsaUpd iss w (isaStep (iss w))) ∧ rf3MemQ (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) ∧ (∀ w' : Fin 8, rf1DispOk (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)).base w') ∧ (∀ w1 w2 : Fin 8, w1 ≠ w2 → mwfSep (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)).base w1 w2) :=`
+- **cape_decomp_exists_single** (line 1530): `theorem cape_decomp_exists_single (prog : SmProg) {s : FsmmState} {iss : Fin 8 → IsaState} {w : Fin 8} (ht : capeTrace prog s iss w) : capSim prog s iss → rf3MemQ s → (∀ w' : Fin 8, rf1DispOk s.base w') → (∀ w1 w2 : Fin 8, w1 ≠ w2 → mwfSep s.base w1 w2) → ∃ segs : List CapSeg, ∃ b : Bool, capmSegsOk prog s iss segs b ∧ capmTailOk prog (fsmmRun prog s (List.replicate (capSegsLen segs) smInNop)) 0 b ∧ segs.map CapSeg.w = List.replicate segs.length w ∧ ((iss w).halted = true → segs = []) :=`
+- **cape_capstone_ext_single** (line 1640): `theorem cape_capstone_ext_single (prog : SmProg) (s : FsmmState) (iss : Fin 8 → IsaState) (w : Fin 8) (hsim : capSim prog s iss) (hmq : rf3MemQ s) (hdisp : ∀ w' : Fin 8, rf1DispOk s.base w') (hsep : ∀ w1 w2 : Fin 8, w1 ≠ w2 → mwfSep s.base w1 w2) (ht : capeTrace prog s iss w) : ∃ segs : List CapSeg, ∃ b : Bool, capmSegsOk prog s iss segs b ∧ capSim prog (fsmmRun prog s (List.replicate (capSegsLen segs) smInNop)) (capIsaRun iss (segs.map CapSeg.w)) ∧ (b = false → rf3MemQ (fsmmRun prog s (List.replicate (capSegsLen segs) smInNop))) ∧ segs.map CapSeg.w = List.replicate segs.length w :=`
+- **cape_decomp_exists_multi** (line 1693): `theorem cape_decomp_exists_multi (prog : SmProg) {s : FsmmState} {iss : Fin 8 → IsaState} {ws : List (Fin 8)} (ht : capeTraceG prog s iss ws) : capSim prog s iss → rf3MemQ s → (∀ w' : Fin 8, rf1DispOk s.base w') → (∀ w1 w2 : Fin 8, w1 ≠ w2 → mwfSep s.base w1 w2) → ∃ segs : List CapSeg, ∃ b : Bool, capmSegsOk prog s iss segs b ∧ capmTailOk prog (fsmmRun prog s (List.replicate (capSegsLen segs) smInNop)) 0 b ∧ segs.map CapSeg.w = ws :=`
+- **cape_capstone_ext_multi** (line 1788): `theorem cape_capstone_ext_multi (prog : SmProg) (s : FsmmState) (iss : Fin 8 → IsaState) (ws : List (Fin 8)) (hsim : capSim prog s iss) (hmq : rf3MemQ s) (hdisp : ∀ w' : Fin 8, rf1DispOk s.base w') (hsep : ∀ w1 w2 : Fin 8, w1 ≠ w2 → mwfSep s.base w1 w2) (ht : capeTraceG prog s iss ws) : ∃ segs : List CapSeg, ∃ b : Bool, capmSegsOk prog s iss segs b ∧ capSim prog (fsmmRun prog s (List.replicate (capSegsLen segs) smInNop)) (capIsaRun iss (segs.map CapSeg.w)) ∧ (b = false → rf3MemQ (fsmmRun prog s (List.replicate (capSegsLen segs) smInNop))) ∧ segs.map CapSeg.w = ws :=`
+- **cape_isaCmp_imp** (line 1834): `theorem cape_isaCmp_imp (fn : BitVec 6) (h : isaIsCmp fn = true) : exvIsCmpFn fn = true ∧ exvIsVmNegOut fn = false ∧ fn ≠ 51#6 ∧ fn ≠ 57#6 ∧ fn ≠ 59#6 ∧ fn ≠ 58#6 ∧ fn ≠ 55#6 ∧ fn ≠ 54#6 ∧ fn ≠ 56#6 :=`
+- **cape_exvIsCmpFn_eq** (line 1844): `theorem cape_exvIsCmpFn_eq (fn : BitVec 6) : exvIsCmpFn fn = isaIsCmp fn :=`
+- **cape_saAlu_cmpLane** (line 1853): `theorem cape_saAlu_cmpLane (fn : BitVec 6) (rev : Bool) (a b c : BitVec 32) (h : isaIsCmp fn = true) : (exvLaneAlu fn rev a b c).2 = isaCmp fn (if rev then b else a) (if rev then a else b) :=`
+- **cape_laneRdV2_cmp** (line 1867): `theorem cape_laneRdV2_cmp (fn : BitVec 6) (rev m : Bool) (a b c lane : BitVec 32) (h : isaIsCmp fn = true) : exvLaneRdV2 fn rev m a b c lane = (if (exvLaneAlu fn rev a b c).2 then 1#32 else 0#32) :=`
+- **cape_exvLane_isaVLane** (line 1902): `theorem cape_exvLane_isaVLane (row : DecCtrlRow) (v0m : BitVec 32) (r1 r2 r3 : Fin 32 → BitVec 32) (t : Fin 32) (m : Bool) (hsfu : row.sfu = false) (hmul : row.mul = false) (hm : row.aluFn = 51#6 → m = (v0m.getLsbD t.val)) (hrevM : (row.aluFn = 59#6 ∨ row.aluFn = 58#6 ∨ row.aluFn = 55#6 ∨ row.aluFn = 54#6 ∨ row.aluFn = 56#6) → row.reverse = false) (hdom : row.aluFn = 51#6 ∨ row.aluFn = 57#6 ∨ row.aluFn = 59#6 ∨ row.aluFn = 58#6 ∨ row.aluFn = 55#6 ∨ row.aluFn = 54#6 ∨ row.aluFn = 56#6 ∨ isaIsCmp row.aluFn = true ∨ row.aluFn.toNat < 20) : exvLaneRdV2 row.aluFn row.reverse m (r1 t) (r2 t) (r3 t) (BitVec.ofNat 32 t.val) = isaVLane row v0m r1 r2 r3 t :=`
+- **cape_wbData_isaVLane** (line 2033): `theorem cape_wbData_isaVLane (row : DecCtrlRow) (v0m : BitVec 32) (vmask : Fin 32 → Bool) (tm : BitVec 32) (r1 r2 r3 : Fin 32 → BitVec 32) (t : Fin 32) (hsfu : row.sfu = false) (hmul : row.mul = false) (hm : row.aluFn = 51#6 → (smvMaskInit vmask tm).getLsbD t.val = (v0m.getLsbD t.val)) (hrevM : (row.aluFn = 59#6 ∨ row.aluFn = 58#6 ∨ row.aluFn = 55#6 ∨ row.aluFn = 54#6 ∨ row.aluFn = 56#6) → row.reverse = false) (hdom : row.aluFn = 51#6 ∨ row.aluFn = 57#6 ∨ row.aluFn = 59#6 ∨ row.aluFn = 58#6 ∨ row.aluFn = 55#6 ∨ row.aluFn = 54#6 ∨ row.aluFn = 56#6 ∨ isaIsCmp row.aluFn = true ∨ row.aluFn.toNat < 20) : smwWbData row.aluFn row.reverse (smvMaskInit vmask tm) r1 r2 r3 t = isaVLane row v0m r1 r2 r3 t :=`
+- **cape_one_shift_bit** (line 2054): `theorem cape_one_shift_bit (x i : Fin 32) : (1#32 <<< BitVec.ofNat 32 x.val).getLsbD i.val = (x == i) :=`
+- **cape_foldl_step_bit** (line 2077): `theorem cape_foldl_step_bit (p : Fin 32 → Bool) (acc : BitVec 32) (x i : Fin 32) : (if p x then acc ||| (1#32 <<< BitVec.ofNat 32 x.val) else acc).getLsbD i.val = (acc.getLsbD i.val || (decide (x = i) && p x)) :=`
+- **cape_foldl_bitOr** (line 2092): `theorem cape_foldl_bitOr (l : List (Fin 32)) (p : Fin 32 → Bool) (acc : BitVec 32) (i : Fin 32) : (l.foldl (fun acc x => if p x then acc ||| (1#32 <<< BitVec.ofNat 32 x.val) else acc) acc).getLsbD i.val = (acc.getLsbD i.val || l.any (fun x => decide (x = i) && p x)) :=`
+- **cape_maskInit_bit** (line 2110): `theorem cape_maskInit_bit (vmask : Fin 32 → Bool) (tm : BitVec 32) (i : Fin 32) : (smvMaskInit vmask tm).getLsbD i.val = (vmask i && tm.getLsbD i.val) :=`
+- **cape_effMask_of_latch** (line 2132): `theorem cape_effMask_of_latch (vmask : Fin 32 → Bool) (is : IsaState) (inst : BitVec 32) (row : DecCtrlRow) (t : Fin 32) (hlatch : ∀ x : Fin 32, vmask x = (isaV0Mask is).getLsbD x.val) (hmen : decMaskEn inst row.aluFn row.isvec row.disableMask = true) : (smvMaskInit vmask is.tmask).getLsbD t.val = (isaEffMask is inst row).getLsbD t.val :=`
+- **cape_vmergeMask_of_cover** (line 2144): `theorem cape_vmergeMask_of_cover (v0 tm : BitVec 32) (h : tm &&& v0 = tm) : v0 &&& tm = tm :=`
+- **cape_mshr_idle_to_out** (line 2167): `theorem cape_mshr_idle_to_out (s : Mem.MshrState) (i : Mem.MshrIn) (hidle : s.state.isIdle = true) (hcmp : Mem.mshrComplete8 s ≠ 0#8) (hdc : Mem.mshrDcFire s i = false) (hrdy : i.outReady = true) : (Mem.mshrStep s i).state = .out :=`
+- **cape_mshr_out_fire** (line 2185): `theorem cape_mshr_out_fire (s : Mem.MshrState) (i : Mem.MshrIn) (hs : s.state = .out) (hcmp : Mem.mshrComplete8 s ≠ 0#8) (hrdy : i.outReady = true) : Mem.mshrOutFire s i = true ∧ (Mem.mshrStep s i).used = s.used &&& ~~~(1#8 <<< (Mem.mshrOutputEntry s).zeroExtend 8) :=`
+- **cape_mshr_drain_entry** (line 2204): `theorem cape_mshr_drain_entry (s : Mem.MshrState) (i0 i1 : Mem.MshrIn) (hidle : s.state.isIdle = true) (hcmp : Mem.mshrComplete8 s ≠ 0#8) (hdc0 : Mem.mshrDcFire s i0 = false) (hr0 : i0.outReady = true) (hcmp1 : Mem.mshrComplete8 (Mem.mshrStep s i0) ≠ 0#8) (hr1 : i1.outReady = true) : Mem.mshrOutFire (Mem.mshrStep s i0) i1 = true ∧ (Mem.mshrStep (Mem.mshrStep s i0) i1).used = (Mem.mshrStep s i0).used &&& ~~~(1#8 <<< (Mem.mshrOutputEntry (Mem.mshrStep s i0)).zeroExtend 8) :=`
+
+### `VentusF/CapMenu.lean`
+
+- **capm_jal_beat_iso** (line 96): `theorem capm_jal_beat_iso (prog : SmProg) (s : FsmmState) (is' : IsaState) (w w' : Fin 8) (rdB : BitVec 8) (v c : BitVec 32) (wxd : Bool) (hev : rfg2JalBeat prog s smInNop w rdB v c wxd) (hne : w' ≠ w) (hrdB : rdB < 32#8) (hsep : ∀ w'' : Fin 8, w'' ≠ w' → mwfSep s.base w'' w') (hsim : rf1Sim s.base is' w') : rf1Sim (fsmmStep prog s smInNop).base is' w' :=`
+- **capm_sbr_beat_iso** (line 132): `theorem capm_sbr_beat_iso (prog : SmProg) (s : FsmmState) (is' : IsaState) (w w' : Fin 8) (c : BitVec 32) (taken : Bool) (hev : rfg2SbrBeat prog s smInNop w c taken) (hne : w' ≠ w) (hsep : ∀ w'' : Fin 8, w'' ≠ w' → mwfSep s.base w'' w') (hsim : rf1Sim s.base is' w') : rf1Sim (fsmmStep prog s smInNop).base is' w' :=`
+- **capm_endprg_beat_iso** (line 156): `theorem capm_endprg_beat_iso (prog : SmProg) (s : FsmmState) (is' : IsaState) (w w' : Fin 8) (hev : rfg2EndprgBeat prog s smInNop w) (hne : w' ≠ w) (hsep : ∀ w'' : Fin 8, w'' ≠ w' → mwfSep s.base w'' w') (hsim : rf1Sim s.base is' w') : rf1Sim (fsmmStep prog s smInNop).base is' w' :=`
+- **capm_vload_beat_iso** (line 180): `theorem capm_vload_beat_iso (prog : SmProg) (s : FsmmState) (is' : IsaState) (w w' : Fin 8) (vd : Fin 32) (res : Fin 32 → BitVec 32) (wm : BitVec 32) (hev : rfvVloadBeat prog s smInNop w vd res wm) (hne : w' ≠ w) (hsep : ∀ w'' : Fin 8, w'' ≠ w' → mwfSep s.base w'' w') (hsim : rf1Sim s.base is' w') : rf1Sim (fsmmStep prog s smInNop).base is' w' :=`
+- **capm_memStable_run** (line 202): `theorem capm_memStable_run (prog : SmProg) (n : Nat) : ∀ (s : FsmmState), (∀ i : Nat, i < n → rfvMemStable prog (fsmmRun prog s (List.replicate i smInNop)) smInNop) → ∀ a : BitVec 32, rf3RdMemB (fsmmRun prog s (List.replicate n smInNop)) a = rf3RdMemB s a :=`
+- **capm_episode_mul** (line 227): `theorem capm_episode_mul (prog : SmProg) (s : FsmmState) (iss : Fin 8 → IsaState) (w : Fin 8) (k m : Nat) (hsim : mwfSim prog s iss) (hmq : rf3MemQ s) (hdisp : ∀ w' : Fin 8, rf1DispOk s.base w') (hsep : ∀ w1 w2 : Fin 8, w1 ≠ w2 → mwfSep s.base w1 w2) (hhlt : (iss w).halted = false) (hcls : isaClassify (isaFetch (iss w)) = .salu) (hmul : (decDecode (isaFetch (iss w))).mul = true) (hpcT : rf1PcOk s.base w ((iss w).pc + 4#32)) (hsil1 : ∀ i : Nat, i < k → rf2CuQ prog (fsmmRun prog s (List.replicate i smInNop)).base) (hev : rf3SaluBeat prog (fsmmRun prog s (List.replicate k smInNop)) smInNop w (BitVec.ofNat 8 (isaRdF (isaFetch (iss w))).val) (rf3SaluOut (iss w)) (decDecode (isaFetch (iss w))).wxd) (hsil2 : ∀ i : Nat, i < m → rf2CuQ prog (fsmmRun prog s (List.replicate (k + 1 + i) smInNop)).base) : mwfSim prog (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) (mwfIsaUpd iss w (isaStep (iss w))) ∧ rf3MemQ (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) :=`
+- **capm_episode_jal** (line 308): `theorem capm_episode_jal (prog : SmProg) (s : FsmmState) (iss : Fin 8 → IsaState) (w : Fin 8) (k m : Nat) (hsim : mwfSim prog s iss) (hmq : rf3MemQ s) (hdisp : ∀ w' : Fin 8, rf1DispOk s.base w') (hsep : ∀ w1 w2 : Fin 8, w1 ≠ w2 → mwfSep s.base w1 w2) (hhlt : (iss w).halted = false) (hcls : isaClassify (isaFetch (iss w)) = .jal) (hsil1 : ∀ i : Nat, i < k → rf2CuQ prog (fsmmRun prog s (List.replicate i smInNop)).base) (hev : rfg2JalBeat prog (fsmmRun prog s (List.replicate k smInNop)) smInNop w (BitVec.ofNat 8 (isaRdF (isaFetch (iss w))).val) (rf3SaluOut (iss w)) (isaIn3Row (iss w) (isaFetch (iss w)) (decDecode (isaFetch (iss w))) 0) (decDecode (isaFetch (iss w))).wxd) (hsil2 : ∀ i : Nat, i < m → rf2CuQ prog (fsmmRun prog s (List.replicate (k + 1 + i) smInNop)).base) : mwfSim prog (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) (mwfIsaUpd iss w (isaStep (iss w))) ∧ rf3MemQ (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) :=`
+- **capm_episode_jalr** (line 386): `theorem capm_episode_jalr (prog : SmProg) (s : FsmmState) (iss : Fin 8 → IsaState) (w : Fin 8) (k m : Nat) (hsim : mwfSim prog s iss) (hmq : rf3MemQ s) (hdisp : ∀ w' : Fin 8, rf1DispOk s.base w') (hsep : ∀ w1 w2 : Fin 8, w1 ≠ w2 → mwfSep s.base w1 w2) (hhlt : (iss w).halted = false) (hcls : isaClassify (isaFetch (iss w)) = .jalr) (hsil1 : ∀ i : Nat, i < k → rf2CuQ prog (fsmmRun prog s (List.replicate i smInNop)).base) (hev : rfg2JalBeat prog (fsmmRun prog s (List.replicate k smInNop)) smInNop w (BitVec.ofNat 8 (isaRdF (isaFetch (iss w))).val) (rf3SaluOut (iss w)) (isaIn3Row (iss w) (isaFetch (iss w)) (decDecode (isaFetch (iss w))) 0) (decDecode (isaFetch (iss w))).wxd) (hsil2 : ∀ i : Nat, i < m → rf2CuQ prog (fsmmRun prog s (List.replicate (k + 1 + i) smInNop)).base) : mwfSim prog (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) (mwfIsaUpd iss w (isaStep (iss w))) ∧ rf3MemQ (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) :=`
+- **capm_episode_sbr_aux** (line 464): `theorem capm_episode_sbr_aux (prog : SmProg) (s : FsmmState) (iss : Fin 8 → IsaState) (w : Fin 8) (k m : Nat) (isN : IsaState) (pcN c : BitVec 32) (taken : Bool) (hsim : mwfSim prog s iss) (hmq : rf3MemQ s) (hdisp : ∀ w' : Fin 8, rf1DispOk s.base w') (hsep : ∀ w1 w2 : Fin 8, w1 ≠ w2 → mwfSep s.base w1 w2) (hisN : isN.xreg = (iss w).xreg ∧ isN.vreg = (iss w).vreg ∧ isN.pc = pcN ∧ isN.mem = (iss w).mem ∧ isN.tmask = (iss w).tmask ∧ isN.bjstk = (iss w).bjstk ∧ isN.csr = (iss w).csr ∧ isN.halted = (iss w).halted) (hpcT : rf1PcOk s.base w ((iss w).pc + 4#32)) (hpcN_t : taken = true → pcN = c) (hpcN_nt : taken = false → pcN = (iss w).pc + 4#32) (hsil1 : ∀ i : Nat, i < k → rf2CuQ prog (fsmmRun prog s (List.replicate i smInNop)).base) (hev : rfg2SbrBeat prog (fsmmRun prog s (List.replicate k smInNop)) smInNop w c taken) (hsil2 : ∀ i : Nat, i < m → rf2CuQ prog (fsmmRun prog s (List.replicate (k + 1 + i) smInNop)).base) : mwfSim prog (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) (mwfIsaUpd iss w isN) ∧ rf3MemQ (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) :=`
+- **capm_episode_sbr** (line 540): `theorem capm_episode_sbr (prog : SmProg) (s : FsmmState) (iss : Fin 8 → IsaState) (w : Fin 8) (k m : Nat) (taken : Bool) (hsim : mwfSim prog s iss) (hmq : rf3MemQ s) (hdisp : ∀ w' : Fin 8, rf1DispOk s.base w') (hsep : ∀ w1 w2 : Fin 8, w1 ≠ w2 → mwfSep s.base w1 w2) (hhlt : (iss w).halted = false) (hcls : isaClassify (isaFetch (iss w)) = .sbr) (hwxd : (decDecode (isaFetch (iss w))).wxd = false) (htaken : isaCmp (decDecode (isaFetch (iss w))).aluFn (isaIn1Row (iss w) (isaFetch (iss w)) (decDecode (isaFetch (iss w))) 0) (isaIn2Row (iss w) (isaFetch (iss w)) (decDecode (isaFetch (iss w))) 0) = taken) (hpcT : rf1PcOk s.base w ((iss w).pc + 4#32)) (hsil1 : ∀ i : Nat, i < k → rf2CuQ prog (fsmmRun prog s (List.replicate i smInNop)).base) (hev : rfg2SbrBeat prog (fsmmRun prog s (List.replicate k smInNop)) smInNop w (isaIn3Row (iss w) (isaFetch (iss w)) (decDecode (isaFetch (iss w))) 0) taken) (hsil2 : ∀ i : Nat, i < m → rf2CuQ prog (fsmmRun prog s (List.replicate (k + 1 + i) smInNop)).base) : mwfSim prog (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) (mwfIsaUpd iss w (isaStep (iss w))) ∧ rf3MemQ (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) :=`
+- **capm_episode_endprg** (line 580): `theorem capm_episode_endprg (prog : SmProg) (s : FsmmState) (iss : Fin 8 → IsaState) (w : Fin 8) (k m : Nat) (hsim : mwfSim prog s iss) (hmq : rf3MemQ s) (hdisp : ∀ w' : Fin 8, rf1DispOk s.base w') (hsep : ∀ w1 w2 : Fin 8, w1 ≠ w2 → mwfSep s.base w1 w2) (hhlt : (iss w).halted = false) (hcls : isaClassify (isaFetch (iss w)) = .endprg) (hsil1 : ∀ i : Nat, i < k → rf2CuQ prog (fsmmRun prog s (List.replicate i smInNop)).base) (hev : rfg2EndprgBeat prog (fsmmRun prog s (List.replicate k smInNop)) smInNop w) (hquiet : ∀ i : Nat, i < m → rfvQuietBeat prog (fsmmRun prog s (List.replicate (k + 1 + i) smInNop)) smInNop ∧ rfvMemStable prog (fsmmRun prog s (List.replicate (k + 1 + i) smInNop)) smInNop) : mwfSim prog (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) (mwfIsaUpd iss w (isaStep (iss w))) :=`
+- **capm_episode_nop** (line 663): `theorem capm_episode_nop (prog : SmProg) (s : FsmmState) (iss : Fin 8 → IsaState) (w : Fin 8) (k m : Nat) (hsim : mwfSim prog s iss) (hmq : rf3MemQ s) (hdisp : ∀ w' : Fin 8, rf1DispOk s.base w') (hsep : ∀ w1 w2 : Fin 8, w1 ≠ w2 → mwfSep s.base w1 w2) (hhlt : (iss w).halted = false) (hcls : isaClassify (isaFetch (iss w)) = .illegal) (hpcT : rf1PcOk s.base w ((iss w).pc + 4#32)) (hsil : ∀ i : Nat, i < k + 1 + m → rf2CuQ prog (fsmmRun prog s (List.replicate i smInNop)).base) : mwfSim prog (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) (mwfIsaUpd iss w (isaStep (iss w))) ∧ rf3MemQ (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) :=`
+- **capm_episode_vload** (line 714): `theorem capm_episode_vload (prog : SmProg) (s : FsmmState) (iss : Fin 8 → IsaState) (w : Fin 8) (k m : Nat) (hsim : mwfSim prog s iss) (hmq : rf3MemQ s) (hdisp : ∀ w' : Fin 8, rf1DispOk s.base w') (hsep : ∀ w1 w2 : Fin 8, w1 ≠ w2 → mwfSep s.base w1 w2) (hhlt : (iss w).halted = false) (hcls : isaClassify (isaFetch (iss w)) = .vload) (hpcT : rf1PcOk s.base w ((iss w).pc + 4#32)) (htxn : ∀ i : Nat, i < k → rfvQuietBeat prog (fsmmRun prog s (List.replicate i smInNop)) smInNop ∧ rfvMemStable prog (fsmmRun prog s (List.replicate i smInNop)) smInNop) (hev : rfvVloadBeat prog (fsmmRun prog s (List.replicate k smInNop)) smInNop w (isaRdF (isaFetch (iss w))) (fun t => isaLdData (iss w).mem (decDecode (isaFetch (iss w))).memWhb (decDecode (isaFetch (iss w))).memUnsigned (isaVAddr (iss w) (isaFetch (iss w)) (decDecode (isaFetch (iss w))) t)) (isaEffMask (iss w) (isaFetch (iss w)) (decDecode (isaFetch (iss w))))) (hmsWb : rfvMemStable prog (fsmmRun prog s (List.replicate k smInNop)) smInNop) (hfin : rf3MemQ (fsmmStep prog (fsmmRun prog s (List.replicate k smInNop)) smInNop)) (hsil2 : ∀ i : Nat, i < m → rf2CuQ prog (fsmmRun prog s (List.replicate (k + 1 + i) smInNop)).base) : mwfSim prog (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) (mwfIsaUpd iss w (isaStep (iss w))) ∧ rf3MemQ (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) :=`
+- **capm_episode_vstore** (line 812): `theorem capm_episode_vstore (prog : SmProg) (s : FsmmState) (iss : Fin 8 → IsaState) (w : Fin 8) (k m : Nat) (hsim : mwfSim prog s iss) (hmq : rf3MemQ s) (hdisp : ∀ w' : Fin 8, rf1DispOk s.base w') (hsep : ∀ w1 w2 : Fin 8, w1 ≠ w2 → mwfSep s.base w1 w2) (hhlt : (iss w).halted = false) (hcls : isaClassify (isaFetch (iss w)) = .vstore) (hpcT : rf1PcOk s.base w ((iss w).pc + 4#32)) (htxn : ∀ i : Nat, i < k → rfvQuietBeat prog (fsmmRun prog s (List.replicate i smInNop)) smInNop) (hmemAdv : ∀ a : BitVec 32, prog.imem (a &&& 0xFFFFFFFC#32) = 0#32 → rf3RdMemB (fsmmRun prog s (List.replicate k smInNop)) a = (rfvVstorePost (iss w)).mem a) (hfin : rf3MemQ (fsmmRun prog s (List.replicate k smInNop))) (hsil2 : ∀ i : Nat, i < m + 1 → rf2CuQ prog (fsmmRun prog s (List.replicate (k + i) smInNop)).base) : mwfSim prog (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) (mwfIsaUpd iss w (isaStep (iss w))) ∧ rf3MemQ (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) :=`
+- **capmSegsOk_of_capSegsOk** (line 1059): `theorem capmSegsOk_of_capSegsOk (prog : SmProg) {s : FsmmState} {iss : Fin 8 → IsaState} {segs : List CapSeg} : capSegsOk prog s iss segs → capmSegsOk prog s iss segs false :=`
+- **capm_main** (line 1079): `theorem capm_main (prog : SmProg) : ∀ {s : FsmmState} {iss : Fin 8 → IsaState} {segs : List CapSeg} {b : Bool}, capmSegsOk prog s iss segs b → capSim prog s iss → rf3MemQ s → (∀ w : Fin 8, rf1DispOk s.base w) → (∀ w1 w2 : Fin 8, w1 ≠ w2 → mwfSep s.base w1 w2) → capSim prog (fsmmRun prog s (List.replicate (capSegsLen segs) smInNop)) (capIsaRun iss (segs.map CapSeg.w)) ∧ (b = false → rf3MemQ (fsmmRun prog s (List.replicate (capSegsLen segs) smInNop))) :=`
+- **capm_main_memQ** (line 1194): `theorem capm_main_memQ (prog : SmProg) (s : FsmmState) (iss : Fin 8 → IsaState) (segs : List CapSeg) (hok : capmSegsOk prog s iss segs false) (hsim : capSim prog s iss) (hmq : rf3MemQ s) (hdisp : ∀ w : Fin 8, rf1DispOk s.base w) (hsep : ∀ w1 w2 : Fin 8, w1 ≠ w2 → mwfSep s.base w1 w2) : capSim prog (fsmmRun prog s (List.replicate (capSegsLen segs) smInNop)) (capIsaRun iss (segs.map CapSeg.w)) ∧ rf3MemQ (fsmmRun prog s (List.replicate (capSegsLen segs) smInNop)) :=`
+- **capm_tail_run** (line 1231): `theorem capm_tail_run (prog : SmProg) (iss : Fin 8 → IsaState) (t : Nat) (b : Bool) : ∀ (s : FsmmState), capSim prog s iss → (b = false → rf3MemQ s) → capmTailOk prog s t b → capSim prog (fsmmRun prog s (List.replicate t smInNop)) iss ∧ (b = false → rf3MemQ (fsmmRun prog s (List.replicate t smInNop))) :=`
+- **capm_capstone_ext** (line 1266): `theorem capm_capstone_ext (prog : SmProg) (s : FsmmState) (iss : Fin 8 → IsaState) (n : Nat) (b : Bool) (hsim : capSim prog s iss) (hmq : rf3MemQ s) (hdisp : ∀ w : Fin 8, rf1DispOk s.base w) (hsep : ∀ w1 w2 : Fin 8, w1 ≠ w2 → mwfSep s.base w1 w2) (hscope : ∀ w : Fin 8, (iss w).halted = false → isaInScope (isaFetch (iss w)) = true) (hdecomp : ∃ segs : List CapSeg, ∃ t : Nat, capSegsLen segs + t = n ∧ capmSegsOk prog s iss segs b ∧ capmTailOk prog (fsmmRun prog s (List.replicate (capSegsLen segs) smInNop)) t b) : ∃ iss' : Fin 8 → IsaState, capSim prog (fsmmRun prog s (List.replicate n smInNop)) iss' ∧ (b = false → rf3MemQ (fsmmRun prog s (List.replicate n smInNop))) ∧ ∃ sched : List (Fin 8), iss' = capIsaRun iss sched :=`
+- **capm_capstone_of_legacy** (line 1295): `theorem capm_capstone_of_legacy (prog : SmProg) (s : FsmmState) (iss : Fin 8 → IsaState) (n : Nat) (hsim : capSim prog s iss) (hmq : rf3MemQ s) (hdisp : ∀ w : Fin 8, rf1DispOk s.base w) (hsep : ∀ w1 w2 : Fin 8, w1 ≠ w2 → mwfSep s.base w1 w2) (hscope : ∀ w : Fin 8, (iss w).halted = false → isaInScope (isaFetch (iss w)) = true) (hdecomp : ∃ segs : List CapSeg, ∃ t : Nat, capSegsLen segs + t = n ∧ capSegsOk prog s iss segs ∧ (∀ k : Nat, k < t → rf2CuQ prog (fsmmRun prog s (List.replicate (capSegsLen segs + k) smInNop)).base)) : ∃ iss' : Fin 8 → IsaState, capSim prog (fsmmRun prog s (List.replicate n smInNop)) iss' ∧ rf3MemQ (fsmmRun prog s (List.replicate n smInNop)) ∧ ∃ sched : List (Fin 8), iss' = capIsaRun iss sched :=`
+
+### `VentusF/CapVSim.lean`
+
+- **capvSimBase_of_rf1Sim** (line 81): `theorem capvSimBase_of_rf1Sim (s : FsmState) (is : IsaState) (w : Fin 8) (h : rf1Sim s is w) : capvSimBase s is w :=`
+- **capvSimBase_mem** (line 87): `theorem capvSimBase_mem (s : FsmState) (is : IsaState) (w : Fin 8) (m : BitVec 32 → BitVec 8) (h : capvSimBase s is w) : capvSimBase s { is with mem :=`
+- **capvVSim_rfvSim** (line 116): `theorem capvVSim_rfvSim (prog : SmProg) (s : FsmmState) (iss : Fin 8 → IsaState) (w₀ : Fin 8) (hsim : capvVSim prog s iss w₀) : rfvSim prog s (iss w₀) w₀ :=`
+- **capvVSim_of_capSim** (line 128): `theorem capvVSim_of_capSim (prog : SmProg) (s : FsmmState) (iss : Fin 8 → IsaState) (w₀ : Fin 8) (hsim : capSim prog s iss) (hst : s.base.bj.stack = bjStackInit 4 32) : capvVSim prog s iss w₀ :=`
+- **capv_rd_ne_wr_of_pop_to_empty** (line 151): `theorem capv_rd_ne_wr_of_pop_to_empty (st : BjStackState 4 32) (pc : BitVec 32) (hinv : rfvBjInv st) (hpop : bjCanPop st pc = true) (hwr1 : st.wr.toNat = 1) : (bjStackStep st (bjJoinIn pc)).wr.toNat = 0 ∧ (bjStackStep st (bjJoinIn pc)).rd ≠ (bjStackStep st (bjJoinIn pc)).wr :=`
+- **capv_silent_step** (line 190): `theorem capv_silent_step (prog : SmProg) (s : FsmmState) (iss : Fin 8 → IsaState) (w₀ : Fin 8) (inp : SmIn) (hsim : capvVSim prog s iss w₀) (hq : rf2CuQ prog s.base) (hmq : rf3MemQ s) (hreq : inp.reqFire = false) (hpc : inp.pcReset = false) : capvVSim prog (fsmmStep prog s inp) iss w₀ ∧ rf3MemQ (fsmmStep prog s inp) :=`
+- **capv_silent_run** (line 225): `theorem capv_silent_run (prog : SmProg) (iss : Fin 8 → IsaState) (w₀ : Fin 8) (n : Nat) : ∀ (s : FsmmState), capvVSim prog s iss w₀ → rf3MemQ s → (∀ k : Nat, k < n → rf2CuQ prog (fsmmRun prog s (List.replicate k smInNop)).base) → capvVSim prog (fsmmRun prog s (List.replicate n smInNop)) iss w₀ ∧ rf3MemQ (fsmmRun prog s (List.replicate n smInNop)) :=`
+- **capv_pcOk_fwdrun** (line 252): `theorem capv_pcOk_fwdrun (prog : SmProg) (n : Nat) (w : Fin 8) (pcT : BitVec 32) : ∀ (s : FsmmState), rf1PcOk s.base w pcT → rf3MemQ s → (∀ k : Nat, k < n → rf2CuQ prog (fsmmRun prog s (List.replicate k smInNop)).base) → rf1PcOk (fsmmRun prog s (List.replicate n smInNop)).base w pcT ∧ rf3MemQ (fsmmRun prog s (List.replicate n smInNop)) :=`
+- **capv_vbr_beat_base_iso** (line 288): `theorem capv_vbr_beat_base_iso (prog : SmProg) (s : FsmmState) (is' : IsaState) (w w' : Fin 8) (bi : BjBranchIn 32) (hmq : rf3MemQ s) (hev : rfvVbrBeat prog s smInNop w bi) (hne : w' ≠ w) (hsep : ∀ w'' : Fin 8, w'' ≠ w' → mwfSep s.base w'' w') (hsim : capvSimBase s.base is' w') : capvSimBase (fsmmStep prog s smInNop).base is' w' :=`
+- **capv_join_beat_base_iso** (line 329): `theorem capv_join_beat_base_iso (prog : SmProg) (s : FsmmState) (is' : IsaState) (w w' : Fin 8) (pcE : BitVec 32) (hmq : rf3MemQ s) (hev : prjJoinBeat prog s smInNop w pcE) (hne : w' ≠ w) (hsep : ∀ w'' : Fin 8, w'' ≠ w' → mwfSep s.base w'' w') (hsim : capvSimBase s.base is' w') : capvSimBase (fsmmStep prog s smInNop).base is' w' :=`
+- **capv_episode_vbranch** (line 376): `theorem capv_episode_vbranch (prog : SmProg) (s : FsmmState) (iss : Fin 8 → IsaState) (w : Fin 8) (k m : Nat) (bi : BjBranchIn 32) (hsim : capvVSim prog s iss w) (hmq : rf3MemQ s) (hsep : ∀ w1 w2 : Fin 8, w1 ≠ w2 → mwfSep s.base w1 w2) (hhlt : (iss w).halted = false) (hcls : isaClassify (isaFetch (iss w)) = .vbr) (hpcT : rf1PcOk s.base w ((iss w).pc + 4#32)) (hsil1 : ∀ i : Nat, i < k → rf2CuQ prog (fsmmRun prog s (List.replicate i smInNop)).base) (hroom : (fsmmRun prog s (List.replicate k smInNop)).base.bj.stack.wr.toNat + 2 ≤ 4) (hm0 : (isaEffMask (iss w) (isaFetch (iss w)) (decDecode (isaFetch (iss w))) == 0#32) = false) (hbi : bi = ⟨~~~(isaCmpVec (iss w) (isaFetch (iss w)) (decDecode (isaFetch (iss w)))), isaEffMask (iss w) (isaFetch (iss w)) (decDecode (isaFetch (iss w))), (iss w).pc + isaImm (decDecode (isaFetch (iss w))) (isaFetch (iss w)), (iss w).pc, (iss w).csr.rpc⟩) (hev : rfvVbrBeat prog (fsmmRun prog s (List.replicate k smInNop)) smInNop w bi) (hsil2 : ∀ i : Nat, i < m → rf2CuQ prog (fsmmRun prog s (List.replicate (k + 1 + i) smInNop)).base) : capvVSim prog (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) (mwfIsaUpd iss w (isaStep (iss w))) w ∧ rf3MemQ (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) :=`
+- **capv_episode_join** (line 465): `theorem capv_episode_join (prog : SmProg) (s : FsmmState) (iss : Fin 8 → IsaState) (w : Fin 8) (k m : Nat) (hsim : capvVSim prog s iss w) (hmq : rf3MemQ s) (hsep : ∀ w1 w2 : Fin 8, w1 ≠ w2 → mwfSep s.base w1 w2) (hhlt : (iss w).halted = false) (hcls : isaClassify (isaFetch (iss w)) = .vjoin) (hpcT : rf1PcOk s.base w ((iss w).pc + 4#32)) (hsil1 : ∀ i : Nat, i < k → rf2CuQ prog (fsmmRun prog s (List.replicate i smInNop)).base) (hev : prjJoinBeat prog (fsmmRun prog s (List.replicate k smInNop)) smInNop w (iss w).pc) (hsil2 : ∀ i : Nat, i < m → rf2CuQ prog (fsmmRun prog s (List.replicate (k + 1 + i) smInNop)).base) : capvVSim prog (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) (mwfIsaUpd iss w (isaStep (iss w))) w ∧ rf3MemQ (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) :=`
+- **capv_main** (line 596): `theorem capv_main (prog : SmProg) (w₀ : Fin 8) : ∀ {s : FsmmState} {iss : Fin 8 → IsaState} {segs : List CapSeg}, capvSegsOk prog s iss w₀ segs → capvVSim prog s iss w₀ → rf3MemQ s → (∀ w1 w2 : Fin 8, w1 ≠ w2 → mwfSep s.base w1 w2) → capvVSim prog (fsmmRun prog s (List.replicate (capSegsLen segs) smInNop)) (capIsaRun iss (segs.map CapSeg.w)) w₀ ∧ rf3MemQ (fsmmRun prog s (List.replicate (capSegsLen segs) smInNop)) :=`
+
+### `VentusF/Capstone.lean`
+
+- **cap_lookup_memCmd_ne3** (line 40): `theorem cap_lookup_memCmd_ne3 (x : BitVec 32) (t : List DecEntry) (h : ∀ e ∈ t, e.row.memCmd ≠ 3#2) : (decLookupEntry x t).memCmd ≠ 3#2 :=`
+- **cap_memCmd_ne3_imf** (line 55): `theorem cap_memCmd_ne3_imf : ∀ e ∈ decTableIMF, e.row.memCmd ≠ 3#2 :=`
+- **cap_memCmd_ne3_v** (line 62): `theorem cap_memCmd_ne3_v : ∀ e ∈ decTableV, e.row.memCmd ≠ 3#2 :=`
+- **cap_memCmd_ne3_vl** (line 69): `theorem cap_memCmd_ne3_vl : ∀ e ∈ decTableVL, e.row.memCmd ≠ 3#2 :=`
+- **cap_memCmd_ne3_vc** (line 76): `theorem cap_memCmd_ne3_vc : ∀ e ∈ decTableVC, e.row.memCmd ≠ 3#2 :=`
+- **cap_dec_memCmd_ne3** (line 84): `theorem cap_dec_memCmd_ne3 (inst : BitVec 32) : (decDecode inst).memCmd ≠ 3#2 :=`
+- **cap_memCmd0_of_salu** (line 102): `theorem cap_memCmd0_of_salu (is : IsaState) (hcls : isaClassify (isaFetch is) = .salu) : (decDecode (isaFetch is)).memCmd = 0#2 :=`
+- **cap_prjPack_of** (line 143): `theorem cap_prjPack_of (prog : SmProg) (s : FsmmState) (is : IsaState) (w j : Fin 8) (hcls : isaClassify (isaFetch is) = .salu) (hpk : capIssuePack prog s is w j) (halu : capSaluAluOk (isaFetch is)) : prjIssuePack prog s is w j :=`
+- **cap_stmt_salu** (line 154): `theorem cap_stmt_salu (prog : SmProg) (s : FsmmState) (is : IsaState) (w j : Fin 8) (k m : Nat) (hsim : rf3Sim prog s is w) (hmq : rf3MemQ s) (hdisp : rf1DispOk s.base w) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .salu) (halu : capSaluAluOk (isaFetch is)) (hpcT : rf1PcOk s.base w (is.pc + 4#32)) (hsil1 : ∀ i : Nat, i < k → rf2CuQ prog (fsmmRun prog s (List.replicate i smInNop)).base) (hpk : capIssuePack prog (fsmmRun prog s (List.replicate k smInNop)) is w j) (hsil2 : ∀ i : Nat, i < m → rf2CuQ prog (fsmmRun prog s (List.replicate (k + 1 + i) smInNop)).base) : rf3Sim prog (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) (isaStep is) w ∧ rf3MemQ (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) :=`
+- **cap_pcOfTag_aligned** (line 173): `theorem cap_pcOfTag_aligned (t : BitVec 8) : smPcOfTag t &&& 3#32 = 0#32 :=`
+- **cap_tagPc_roundtrip** (line 177): `theorem cap_tagPc_roundtrip (t : BitVec 8) : smTagOfPc (smPcOfTag t) = t :=`
+- **cap_cuCtrl_tag** (line 189): `theorem cap_cuCtrl_tag (c : SmCtrl) : (smToCuCtrl c).tag = c.tag ∧ (smToCuCtrl c).wid = c.wid :=`
+- **cap_pack_fields_of_head** (line 195): `theorem cap_pack_fields_of_head (prog : SmProg) (s : FsmmState) (is : IsaState) (w j : Fin 8) (hp : rf3ProgOk prog is) (hctrl : (fsmCuAt s.base j).controlReg = smToCuCtrl (rf2HeadCtrl prog s.base w)) (hhead : capHeadOk s.base is w) : (rf2CuIssCtrl prog s.base j).row = decDecode (isaFetch is) ∧ (fsmCuAt s.base j).controlReg.wid = BitVec.ofNat 3 w.val ∧ (rf2CuIssCtrl prog s.base j).regIdxw = BitVec.ofNat 8 (isaRdF (isaFetch is)).val :=`
+- **capSim_rf3** (line 264): `theorem capSim_rf3 {prog : SmProg} {s : FsmmState} {iss : Fin 8 → IsaState} (hsim : capSim prog s iss) (w : Fin 8) : rf3Sim prog s (iss w) w :=`
+- **capSim_of_rf3** (line 272): `theorem capSim_of_rf3 {prog : SmProg} {s : FsmmState} {iss : Fin 8 → IsaState} (h : ∀ w : Fin 8, rf3Sim prog s (iss w) w) (hsh : mwfSharedMem iss) : capSim prog s iss :=`
+- **cap_ofNat8_lt32** (line 282): `theorem cap_ofNat8_lt32 (x : Fin 32) : BitVec.ofNat 8 x.val < 32#8 :=`
+- **cap_nop_reqFire_and** (line 289): `theorem cap_nop_reqFire_and (w : Fin 8) : (smInNop.reqFire && (smInNop.reqWid == BitVec.ofNat 3 w.val)) = false :=`
+- **cap_warpEnd_of_no_fireWs** (line 293): `theorem cap_warpEnd_of_no_fireWs (prog : SmProg) (s : FsmmState) (hws : (fsmmComb prog s smInNop).fireWs = false) : fschWarpEnd s.base.ws ⟨(fsmmComb prog s smInNop).wsIn, (fsmmComb prog s smInNop).fenceEnd⟩ = false :=`
+- **cap_salu_beat_iso** (line 309): `theorem cap_salu_beat_iso (prog : SmProg) (s : FsmmState) (is' : IsaState) (w w' : Fin 8) (rdB : BitVec 8) (v : BitVec 32) (wxd : Bool) (hev : rf3SaluBeat prog s smInNop w rdB v wxd) (hne : w' ≠ w) (hrdB : rdB < 32#8) (hsep : ∀ w'' : Fin 8, w'' ≠ w' → mwfSep s.base w'' w') (hsim : rf1Sim s.base is' w') : rf1Sim (fsmmStep prog s smInNop).base is' w' :=`
+- **cap_valu_beat_iso** (line 339): `theorem cap_valu_beat_iso (prog : SmProg) (s : FsmmState) (is' : IsaState) (w w' : Fin 8) (vd : Fin 32) (res : Fin 32 → BitVec 32) (wm : BitVec 32) (wvd wxd : Bool) (hev : rfvValuBeat prog s smInNop w vd res wm wvd wxd) (hne : w' ≠ w) (hsep : ∀ w'' : Fin 8, w'' ≠ w' → mwfSep s.base w'' w') (hsim : rf1Sim s.base is' w') : rf1Sim (fsmmStep prog s smInNop).base is' w' :=`
+- **cap_sep_run** (line 384): `theorem cap_sep_run (prog : SmProg) (n : Nat) (s : FsmmState) (h : ∀ w1 w2 : Fin 8, w1 ≠ w2 → mwfSep s.base w1 w2) : ∀ w1 w2 : Fin 8, w1 ≠ w2 → mwfSep (fsmmRun prog s (List.replicate n smInNop)).base w1 w2 :=`
+- **cap_dispOk_run** (line 398): `theorem cap_dispOk_run (prog : SmProg) (n : Nat) (s : FsmmState) (w : Fin 8) (h : rf1DispOk s.base w) : rf1DispOk (fsmmRun prog s (List.replicate n smInNop)).base w :=`
+- **cap_rf1Sim_mem** (line 414): `theorem cap_rf1Sim_mem (s : FsmState) (is : IsaState) (w : Fin 8) (m : BitVec 32 → BitVec 8) (h : rf1Sim s is w) : rf1Sim s { is with mem :=`
+- **cap_episode_salu** (line 423): `theorem cap_episode_salu (prog : SmProg) (s : FsmmState) (iss : Fin 8 → IsaState) (w j : Fin 8) (k m : Nat) (hsim : mwfSim prog s iss) (hmq : rf3MemQ s) (hdisp : ∀ w' : Fin 8, rf1DispOk s.base w') (hsep : ∀ w1 w2 : Fin 8, w1 ≠ w2 → mwfSep s.base w1 w2) (hhlt : (iss w).halted = false) (hcls : isaClassify (isaFetch (iss w)) = .salu) (halu : capSaluAluOk (isaFetch (iss w))) (hpcT : rf1PcOk s.base w ((iss w).pc + 4#32)) (hsil1 : ∀ i : Nat, i < k → rf2CuQ prog (fsmmRun prog s (List.replicate i smInNop)).base) (hpk : capIssuePack prog (fsmmRun prog s (List.replicate k smInNop)) (iss w) w j) (hsil2 : ∀ i : Nat, i < m → rf2CuQ prog (fsmmRun prog s (List.replicate (k + 1 + i) smInNop)).base) : mwfSim prog (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) (mwfIsaUpd iss w (isaStep (iss w))) ∧ rf3MemQ (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) :=`
+- **cap_episode_valu** (line 515): `theorem cap_episode_valu (prog : SmProg) (s : FsmmState) (iss : Fin 8 → IsaState) (w : Fin 8) (k m : Nat) (hsim : mwfSim prog s iss) (hmq : rf3MemQ s) (hdisp : ∀ w' : Fin 8, rf1DispOk s.base w') (hsep : ∀ w1 w2 : Fin 8, w1 ≠ w2 → mwfSep s.base w1 w2) (hhlt : (iss w).halted = false) (hcls : isaClassify (isaFetch (iss w)) = .valu) (hpcT : rf1PcOk s.base w ((iss w).pc + 4#32)) (hsil1 : ∀ i : Nat, i < k → rf2CuQ prog (fsmmRun prog s (List.replicate i smInNop)).base) (hev : rfvValuBeat prog (fsmmRun prog s (List.replicate k smInNop)) smInNop w (isaRdF (isaFetch (iss w))) (fun t => isaVLane (decDecode (isaFetch (iss w))) (isaV0Mask (iss w)) (isaIn1Row (iss w) (isaFetch (iss w)) (decDecode (isaFetch (iss w)))) (isaIn2Row (iss w) (isaFetch (iss w)) (decDecode (isaFetch (iss w)))) (isaIn3Row (iss w) (isaFetch (iss w)) (decDecode (isaFetch (iss w)))) t) (if (decDecode (isaFetch (iss w))).aluFn = 51#6 then (iss w).tmask else isaEffMask (iss w) (isaFetch (iss w)) (decDecode (isaFetch (iss w)))) (decDecode (isaFetch (iss w))).wvd (decDecode (isaFetch (iss w))).wxd) (hsil2 : ∀ i : Nat, i < m → rf2CuQ prog (fsmmRun prog s (List.replicate (k + 1 + i) smInNop)).base) : mwfSim prog (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) (mwfIsaUpd iss w (isaStep (iss w))) ∧ rf3MemQ (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) :=`
+- **cap_main** (line 705): `theorem cap_main (prog : SmProg) : ∀ {s : FsmmState} {iss : Fin 8 → IsaState} {segs : List CapSeg}, capSegsOk prog s iss segs → capSim prog s iss → rf3MemQ s → (∀ w : Fin 8, rf1DispOk s.base w) → (∀ w1 w2 : Fin 8, w1 ≠ w2 → mwfSep s.base w1 w2) → capSim prog (fsmmRun prog s (List.replicate (capSegsLen segs) smInNop)) (capIsaRun iss (segs.map CapSeg.w)) ∧ rf3MemQ (fsmmRun prog s (List.replicate (capSegsLen segs) smInNop)) :=`
+- **ventusF_capstone** (line 743): `theorem ventusF_capstone (prog : SmProg) (s : FsmmState) (iss : Fin 8 → IsaState) (n : Nat) (hsim : capSim prog s iss) (hmq : rf3MemQ s) (hdisp : ∀ w : Fin 8, rf1DispOk s.base w) (hsep : ∀ w1 w2 : Fin 8, w1 ≠ w2 → mwfSep s.base w1 w2) (hscope : ∀ w : Fin 8, (iss w).halted = false → isaInScope (isaFetch (iss w)) = true) (hdecomp : ∃ segs : List CapSeg, ∃ t : Nat, capSegsLen segs + t = n ∧ capSegsOk prog s iss segs ∧ (∀ k : Nat, k < t → rf2CuQ prog (fsmmRun prog s (List.replicate (capSegsLen segs + k) smInNop)).base)) : ∃ iss' : Fin 8 → IsaState, capSim prog (fsmmRun prog s (List.replicate n smInNop)) iss' ∧ rf3MemQ (fsmmRun prog s (List.replicate n smInNop)) ∧ ∃ sched : List (Fin 8), iss' = capIsaRun iss sched :=`
+
+### `VentusF/CtaLiveness.lean`
+
+- **ctl_cov_of_components** (line 127): `theorem ctl_cov_of_components (σ : Nat → CtasState) (ev : Nat → CtasEvent) (hinv : ∀ t, CtasInv (σ t)) (hsplit : ctlSplitLive σ ev) (hdone : ctlWfDoneLive σ ev) (hgather : ctlGatherLive σ ev) : ctlProgressCov σ ev :=`
+- **ctlStep_hostNew_live** (line 149): `theorem ctlStep_hostNew_live (s : CtasState) : (ctasStep s .hostNew).live = s.live :=`
+- **ctlStep_alloc_live** (line 152): `theorem ctlStep_alloc_live (s : CtasState) (c : Fin 2) (sl : Fin 8) (rec : CtasWgRec) : (ctasStep s (.alloc c sl rec)).live = ctasWrite s.live c sl (some rec) :=`
+- **ctlStep_wfNew_live** (line 155): `theorem ctlStep_wfNew_live (s : CtasState) (c : Fin 2) (sl : Fin 8) : (ctasStep s (.wfNew c sl)).live = ctasWrite s.live c sl ((s.live c sl).map fun w => { w with wfSent :=`
+- **ctlStep_wfDone_live** (line 159): `theorem ctlStep_wfDone_live (s : CtasState) (c : Fin 2) (sl : Fin 8) : (ctasStep s (.wfDone c sl)).live = ctasWrite s.live c sl ((s.live c sl).map fun w => { w with wfDone :=`
+- **ctlStep_dealloc_live** (line 163): `theorem ctlStep_dealloc_live (s : CtasState) (c : Fin 2) (sl : Fin 8) (w : BitVec 32) : (ctasStep s (.dealloc c sl w)).live = ctasWrite s.live c sl none :=`
+- **ctlMeasure_wfNew** (line 174): `theorem ctlMeasure_wfNew (r : CtasWgRec) (hlt : r.wfSent < r.numWf) (hle : r.wfDone ≤ r.wfSent) : ctlMeasure { r with wfSent :=`
+- **ctlMeasure_wfDone** (line 191): `theorem ctlMeasure_wfDone (r : CtasWgRec) (hlt : r.wfDone < r.wfSent) (hle : r.wfSent ≤ r.numWf) : ctlMeasure { r with wfDone :=`
+- **ctl_only_dealloc_at_zero** (line 209): `theorem ctl_only_dealloc_at_zero (s : CtasState) (cu : Fin 2) (slot : Fin 8) (r : CtasWgRec) (hlive : s.live cu slot = some r) (h0 : r.wfSent = r.numWf ∧ r.wfDone = r.numWf) : ¬ CtasEventOk s (.wfNew cu slot) ∧ ¬ CtasEventOk s (.wfDone cu slot) :=`
+- **ctl_dealloc_enabled_at_zero** (line 219): `theorem ctl_dealloc_enabled_at_zero (s : CtasState) (cu : Fin 2) (slot : Fin 8) (r : CtasWgRec) (hlive : s.live cu slot = some r) (h0 : r.wfDone = r.numWf) : CtasEventOk s (.dealloc cu slot r.wgId) :=`
+- **ctl_inv_persistent** (line 229): `theorem ctl_inv_persistent (σ : Nat → CtasState) (ev : Nat → CtasEvent) (hrun : ∀ t, σ (t + 1) = ctasStep (σ t) (ev t)) (hok : ∀ t, CtasEventOk (σ t) (ev t)) (t0 : Nat) (h0 : CtasInv (σ t0)) : ∀ k, CtasInv (σ (t0 + k)) :=`
+- **ctl_live_stable** (line 245): `theorem ctl_live_stable (σ : Nat → CtasState) (ev : Nat → CtasEvent) (hrun : ∀ t, σ (t + 1) = ctasStep (σ t) (ev t)) (hok : ∀ t, CtasEventOk (σ t) (ev t)) (cu : Fin 2) (slot : Fin 8) (r : CtasWgRec) : ∀ (t0 k : Nat), (σ t0).live cu slot = some r → (∀ j, j < k → ctlIsProgress cu slot (ev (t0 + j)) = false) → (σ (t0 + k)).live cu slot = some r :=`
+- **ctl_first_progress** (line 298): `theorem ctl_first_progress {p : Nat → Bool} (h : ∃ k, p k = true) : ∃ k, p k = true ∧ ∀ j, j < k → p j = false :=`
+- **ctl_progress_effect** (line 312): `theorem ctl_progress_effect (σ : Nat → CtasState) (ev : Nat → CtasEvent) (hrun : ∀ t, σ (t + 1) = ctasStep (σ t) (ev t)) (hok : ∀ t, CtasEventOk (σ t) (ev t)) (t : Nat) (cu : Fin 2) (slot : Fin 8) (r : CtasWgRec) (hlive : (σ t).live cu slot = some r) (hprog : ctlIsProgress cu slot (ev t) = true) : (∃ wgId, ev t = .dealloc cu slot wgId ∧ (σ (t + 1)).live cu slot = none ∧ r.wfDone = r.numWf) ∨ (ev t = .wfNew cu slot ∧ r.wfSent < r.numWf ∧ (σ (t + 1)).live cu slot = some { r with wfSent :=`
+- **ctl_wg_dealloc_aux** (line 377): `theorem ctl_wg_dealloc_aux (σ : Nat → CtasState) (ev : Nat → CtasEvent) (hrun : ∀ t, σ (t + 1) = ctasStep (σ t) (ev t)) (hok : ∀ t, CtasEventOk (σ t) (ev t)) (hcov : ctlProgressCov σ ev) : ∀ (m : Nat) (t0 : Nat) (cu : Fin 2) (slot : Fin 8) (r : CtasWgRec), CtasInv (σ t0) → (σ t0).live cu slot = some r → ctlMeasure r ≤ m → ∃ t, t0 ≤ t ∧ (σ t).live cu slot = none :=`
+- **ctl_wg_eventually_dealloc** (line 420): `theorem ctl_wg_eventually_dealloc (σ : Nat → CtasState) (ev : Nat → CtasEvent) (hrun : ∀ t, σ (t + 1) = ctasStep (σ t) (ev t)) (hok : ∀ t, CtasEventOk (σ t) (ev t)) (hcov : ctlProgressCov σ ev) (t0 : Nat) (cu : Fin 2) (slot : Fin 8) (r : CtasWgRec) (hinv : CtasInv (σ t0)) (hlive : (σ t0).live cu slot = some r) : ∃ t, t0 ≤ t ∧ (σ t).live cu slot = none :=`
+- **ctl_alloc_eventually_dealloc** (line 431): `theorem ctl_alloc_eventually_dealloc (σ : Nat → CtasState) (ev : Nat → CtasEvent) (hrun : ∀ t, σ (t + 1) = ctasStep (σ t) (ev t)) (hok : ∀ t, CtasEventOk (σ t) (ev t)) (hcov : ctlProgressCov σ ev) (t : Nat) (cu : Fin 2) (slot : Fin 8) (rec : CtasWgRec) (hinv : CtasInv (σ t)) (hev : ev t = .alloc cu slot rec) : ∃ t', t < t' ∧ (σ t').live cu slot = none :=`
+- **ctl_liveness** (line 446): `theorem ctl_liveness (σ : Nat → CtasState) (ev : Nat → CtasEvent) (hp : CtlLivenessPremises σ ev) (t0 : Nat) (cu : Fin 2) (slot : Fin 8) (r : CtasWgRec) (hlive : (σ t0).live cu slot = some r) : ∃ t, t0 ≤ t ∧ (σ t).live cu slot = none :=`
+- **ctl_none_stable** (line 469): `theorem ctl_none_stable (σ : Nat → CtasState) (ev : Nat → CtasEvent) (hrun : ∀ t, σ (t + 1) = ctasStep (σ t) (ev t)) (cu : Fin 2) (slot : Fin 8) (t : Nat) (h0 : (σ t).live cu slot = none) : ∀ k, (∀ j, j < k → ∀ (c : Fin 2) (s : Fin 8) (rec : CtasWgRec), ev (t + j) ≠ .alloc c s rec) → (σ (t + k)).live cu slot = none :=`
+- **ctl_exists_common** (line 510): `theorem ctl_exists_common {α : Type} (P : α → Nat → Prop) (hmono : ∀ a t t', P a t → t ≤ t' → P a t') : ∀ (l : List α), (∀ a, a ∈ l → ∃ t, P a t) → ∃ t, ∀ a, a ∈ l → P a t :=`
+- **ctl_allPairs_complete** (line 532): `theorem ctl_allPairs_complete (cu : Fin 2) (slot : Fin 8) : (cu, slot) ∈ ctlAllPairs :=`
+- **ctl_all_drained** (line 539): `theorem ctl_all_drained (σ : Nat → CtasState) (ev : Nat → CtasEvent) (hrun : ∀ t, σ (t + 1) = ctasStep (σ t) (ev t)) (hok : ∀ t, CtasEventOk (σ t) (ev t)) (hcov : ctlProgressCov σ ev) (T : Nat) (hinvT : CtasInv (σ T)) (hquiet : ctlQuiet ev T) : ∃ t, T ≤ t ∧ ∀ (cu : Fin 2) (slot : Fin 8), (σ t).live cu slot = none :=`
+- **ctl_drain** (line 569): `theorem ctl_drain (σ : Nat → CtasState) (ev : Nat → CtasEvent) (hp : CtlLivenessPremises σ ev) (T : Nat) (hquiet : ctlQuiet ev T) : ∃ t, T ≤ t ∧ ∀ (cu : Fin 2) (slot : Fin 8), (σ t).live cu slot = none :=`
+
+### `VentusF/Fairness.lean`
+
+- **fairElig_eq** (line 78): `theorem fairElig_eq (s : FschWsState) (i : FschWsIn) : fairElig s i = i.base.pcIbufRdy &&& s.base.warpActive :=`
+- **fairWsOut_nextWarp** (line 82): `theorem fairWsOut_nextWarp (s : FschWsState) (i : FschWsIn) : (fschWsOut s i).nextWarp = wsNextWarp (fairElig s i) s.base.currentWarp :=`
+- **fair_selected_of_min** (line 91): `theorem fair_selected_of_min (s : FschWsState) (i : FschWsIn) (w : BitVec 3) (hw : ((fairElig s i >>> w.zeroExtend 8) &&& 1#8) = 1#8) (hmin : fairElig s i &&& ((1#8 <<< w.zeroExtend 8) - 1#8) = 0#8) : (fschWsOut s i).nextWarp = w :=`
+- **fair_warp0_wins** (line 99): `theorem fair_warp0_wins (s : FschWsState) (i : FschWsIn) (h0 : ((fairElig s i >>> 0) &&& 1#8) = 1#8) : (fschWsOut s i).nextWarp = 0#3 :=`
+- **fair_selected_elig** (line 107): `theorem fair_selected_elig (s : FschWsState) (i : FschWsIn) (hne : fairElig s i ≠ 0#8) : ((fairElig s i >>> ((fschWsOut s i).nextWarp).zeroExtend 8) &&& 1#8) = 1#8 :=`
+- **fair_mem_trace** (line 122): `theorem fair_mem_trace (s : FschWsState) (pre : List FschWsIn) (i : FschWsIn) (post : List FschWsIn) (w : BitVec 3) (hw : ((fairElig (fschWsRun s pre) i >>> w.zeroExtend 8) &&& 1#8) = 1#8) (hmin : fairElig (fschWsRun s pre) i &&& ((1#8 <<< w.zeroExtend 8) - 1#8) = 0#8) : w ∈ fairTrace s (pre ++ i :: post) :=`
+- **fair_run_stable_min** (line 140): `theorem fair_run_stable_min (s : FschWsState) (ins : List FschWsIn) (w : BitVec 3) (h : ∀ (pre : List FschWsIn) (i : FschWsIn) (post : List FschWsIn), ins = pre ++ i :: post → ((fairElig (fschWsRun s pre) i >>> w.zeroExtend 8) &&& 1#8) = 1#8 ∧ fairElig (fschWsRun s pre) i &&& ((1#8 <<< w.zeroExtend 8) - 1#8) = 0#8) : ∀ (pre : List FschWsIn) (i : FschWsIn) (post : List FschWsIn), ins = pre ++ i :: post → (fschWsOut (fschWsRun s pre) i).nextWarp = w :=`
+- **fairStarveInit_active** (line 168): `theorem fairStarveInit_active : fairStarveInit.base.warpActive = 0b11#8 :=`
+- **fair_warpEnd_nop** (line 172): `theorem fair_warpEnd_nop (s : FschWsState) : fschWarpEnd s fairStarveIn = false :=`
+- **fair_stepActive_nop** (line 177): `theorem fair_stepActive_nop (act : BitVec 8) (reqWid wcWid : BitVec 3) : fschWsStepActive act false reqWid false wcWid = act :=`
+- **fairWsStep_warpActive** (line 183): `theorem fairWsStep_warpActive (s : FschWsState) (i : FschWsIn) : (fschWsStep s i).base.warpActive = fschWsStepActive s.base.warpActive i.base.warpReqFire i.base.reqWid (fschWarpEnd s i) i.base.wcWid :=`
+- **fair_nextWarp_0b11** (line 189): `theorem fair_nextWarp_0b11 (cur : BitVec 3) : wsNextWarp 0b11#8 cur = 0#3 :=`
+- **fair_starve_active_aux** (line 194): `theorem fair_starve_active_aux (s : FschWsState) (n : Nat) (hact : s.base.warpActive = 0b11#8) : (fschWsRun s (List.replicate n fairStarveIn)).base.warpActive = 0b11#8 :=`
+- **fair_starve_active** (line 207): `theorem fair_starve_active (n : Nat) : (fschWsRun fairStarveInit (List.replicate n fairStarveIn)).base.warpActive = 0b11#8 :=`
+- **fair_starve_selected** (line 212): `theorem fair_starve_selected (n : Nat) : (fschWsOut (fschWsRun fairStarveInit (List.replicate n fairStarveIn)) fairStarveIn).nextWarp = 0#3 :=`
+- **fair_starve_trace_aux** (line 221): `theorem fair_starve_trace_aux (s : FschWsState) (n : Nat) (hact : s.base.warpActive = 0b11#8) : fairTrace s (List.replicate n fairStarveIn) = List.replicate n 0#3 :=`
+- **fair_starve_trace** (line 240): `theorem fair_starve_trace (n : Nat) : fairTrace fairStarveInit (List.replicate n fairStarveIn) = List.replicate n 0#3 :=`
+- **fair_starvation** (line 249): `theorem fair_starvation (n : Nat) : ((fschWsRun fairStarveInit (List.replicate n fairStarveIn)).base.warpActive >>> 1) &&& 1#8 = 1#8 ∧ (fairStarveIn.base.pcIbufRdy >>> 1) &&& 1#8 = 1#8 ∧ fairTrace fairStarveInit (List.replicate n fairStarveIn) = List.replicate n 0#3 :=`
+- **fair_wsFin_ofNat** (line 263): `theorem fair_wsFin_ofNat (w : Fin 8) : wsFin (BitVec.ofNat 3 w.val) = w :=`
+- **fair_capeFairSched** (line 275): `theorem fair_capeFairSched (iss : Fin 8 → Ventus.Spec.IsaState) (ws : List (Fin 8)) (s : FschWsState) (ins : List FschWsIn) (hsched : ws = (fairTrace s ins).map wsFin) (hcov : ∀ w : Fin 8, (iss w).halted = false → ∃ (pre : List FschWsIn) (i : FschWsIn) (post : List FschWsIn), ins = pre ++ i :: post ∧ ((fairElig (fschWsRun s pre) i >>> (BitVec.ofNat 3 w.val).zeroExtend 8) &&& 1#8) = 1#8 ∧ fairElig (fschWsRun s pre) i &&& ((1#8 <<< (BitVec.ofNat 3 w.val).zeroExtend 8) - 1#8) = 0#8) : capeFairSched iss ws :=`
+
+### `VentusF/FixI16.lean`
+
+- **f16_route_trap** (line 65): `theorem f16_route_trap : ∀ (tc sfu fp csr mul mem isvec barrier : Bool), f16Route true tc sfu fp csr mul mem isvec barrier = F16Port.warpSched :=`
+- **f16_trap_no_func_side_effect** (line 71): `theorem f16_trap_no_func_side_effect : ∀ (tc sfu fp csr mul mem isvec barrier : Bool), f16PortIsFunc (f16Route true tc sfu fp csr mul mem isvec barrier) = false :=`
+- **f16_route_regr** (line 77): `theorem f16_route_regr : ∀ (tc sfu fp csr mul mem isvec barrier : Bool), f16Route false tc sfu fp csr mul mem isvec barrier = issueRoute tc sfu fp csr mul mem isvec barrier :=`
+- **f16_default_row_routes_salu** (line 93): `theorem f16_default_row_routes_salu : f16RowRoute decDefaultRow = F16Port.salu :=`
+- **f16_default_row_trap** (line 96): `theorem f16_default_row_trap : f16RowRouteFix decDefaultRow true = F16Port.warpSched :=`
+- **f16WsIn_id** (line 133): `theorem f16WsIn_id (i : FschWsIn) : f16WsIn i false = i :=`
+- **f16_ws_regr** (line 137): `theorem f16_ws_regr (s : F16WsState) (i : FschWsIn) : (f16WsStep s i false).base = fschWsStep s.base i :=`
+- **f16_trap_eq_endprg** (line 143): `theorem f16_trap_eq_endprg (s : F16WsState) (i : FschWsIn) : (f16WsStep s i true).base = fschWsStep s.base { i with base :=`
+- **f16_active_clear** (line 149): `theorem f16_active_clear (act : BitVec 8) (reqF : Bool) (reqWid wcWid : BitVec 3) : fschWsStepActive act reqF reqWid true wcWid &&& (1#8 <<< wcWid.zeroExtend 8) = 0#8 :=`
+- **f16_trap_clears_active** (line 158): `theorem f16_trap_clears_active (s : F16WsState) (i : FschWsIn) (h : fschWcFire s.base (f16WsIn i true) = true) : (f16WsStep s i true).base.base.warpActive &&& (1#8 <<< i.base.wcWid.zeroExtend 8) = 0#8 :=`
+- **f16_trap_barData** (line 170): `theorem f16_trap_barData (s : F16WsState) (i : FschWsIn) : (f16WsStep s i true).base.base.barData = s.base.base.barData :=`
+- **f16_trap_reported** (line 178): `theorem f16_trap_reported (s : F16WsState) (h : s.base.rspPend = false) : f16RspTrap s true = true :=`
+- **f16_trap_parked** (line 183): `theorem f16_trap_parked (s : F16WsState) (ill : Bool) (h : s.base.rspPend = true) : f16RspTrap s ill = s.rspTrap :=`
+- **f16_amoadd_end_to_end** (line 192): `theorem f16_amoadd_end_to_end : (farithDecode 0x0062A22F#32).2 = true ∧ f16RowRouteFix (farithDecode 0x0062A22F#32).1 (farithDecode 0x0062A22F#32).2 = F16Port.warpSched ∧ f16RowRoute (farithDecode 0x0062A22F#32).1 = F16Port.salu :=`
+- **f16T_trap_witness** (line 211): `theorem f16T_trap_witness : f16T0.base.base.warpActive = 0b0001000#8 ∧ f16T1.base.base.warpActive = 0#8 ∧ f16RspTrap f16T0 true = true ∧ f16T1.base.base.barData = 0#8 ∧ f16T1.base.base.endprgCnt ⟨1, by decide⟩ = 0#8 :=`
+- **f16T_regr_barrier** (line 225): `theorem f16T_regr_barrier : (f16WsStep f16T0 f16InBar false).base.base.barData = (fschWsStep f16T0.base f16InBar).base.barData :=`
+
+### `VentusF/FixI48.lean`
+
+- **f48_wb_rsp_absent** (line 54): `theorem f48_wb_rsp_absent : ∀ (pushV waitSt2 : Bool), f48WbRspEvent pushV f48HasCoreRspFix = false :=`
+- **f48_orig_wb_rsp_possible** (line 59): `theorem f48_orig_wb_rsp_possible : f48WbRspEvent true (f48HasCoreRspOrig true) = true :=`
+- **f48_regr_waitSt2_false** (line 64): `theorem f48_regr_waitSt2_false : ∀ (pushV : Bool), f48WbRspEvent pushV (f48HasCoreRspOrig false) = f48WbRspEvent pushV f48HasCoreRspFix :=`
+- **f48WbRsps_fix** (line 83): `theorem f48WbRsps_fix : ∀ wb : List Bool, f48WbRsps (wb.map (fun _ => false)) = 0 :=`
+- **f48_fix_at_most_one** (line 90): `theorem f48_fix_at_most_one (wb : List Bool) (hintAck : Bool) : f48RspCount (wb.map (fun _ => false)) hintAck ≤ 1 :=`
+- **f48_fix_exactly_one** (line 95): `theorem f48_fix_exactly_one (wb : List Bool) : f48RspCount (wb.map (fun _ => false)) true = 1 :=`
+- **f48_orig_dup** (line 100): `theorem f48_orig_dup : f48RspCount [true] true = 2 :=`
+- **f48T_dup_witness** (line 122): `theorem f48T_dup_witness : f48DupTrace.rspLog = [2#3, 2#3] :=`
+- **f48T_fix_single** (line 133): `theorem f48T_fix_single : f48FixTrace.rspLog = [2#3] :=`
+- **f48T_no_early_rsp** (line 137): `theorem f48T_no_early_rsp : (dcRun dcInit [{ dcInNop with fire :=`
+
+### `VentusF/IsaSpec.lean`
+
+- **isa_cls_add** (line 587): `theorem isa_cls_add : isaClassify 0x005201B3#32 = .salu :=`
+- **isa_cls_lw** (line 588): `theorem isa_cls_lw : isaClassify 0x02032283#32 = .sload :=`
+- **isa_cls_sw** (line 589): `theorem isa_cls_sw : isaClassify 0x02742023#32 = .sstore :=`
+- **isa_cls_bne** (line 590): `theorem isa_cls_bne : isaClassify 0x3E209063#32 = .sbr :=`
+- **isa_cls_jal** (line 591): `theorem isa_cls_jal : isaClassify 0xAA0000EF#32 = .jal :=`
+- **isa_cls_jalr** (line 592): `theorem isa_cls_jalr : isaClassify 0x000201E7#32 = .jalr :=`
+- **isa_cls_csrrw** (line 593): `theorem isa_cls_csrrw : isaClassify 0x600110F3#32 = .csr :=`
+- **isa_cls_vsetvli** (line 594): `theorem isa_cls_vsetvli : isaClassify 0x300170D7#32 = .vsetvl :=`
+- **isa_cls_setrpc** (line 595): `theorem isa_cls_setrpc : isaClassify 0x060130DB#32 = .setrpc :=`
+- **isa_cls_vadd** (line 596): `theorem isa_cls_vadd : isaClassify 0x003100D7#32 = .valu :=`
+- **isa_cls_vmerge** (line 597): `theorem isa_cls_vmerge : isaClassify 0x5C628257#32 = .valu :=`
+- **isa_cls_vmvxs** (line 598): `theorem isa_cls_vmvxs : isaClassify 0x420020D7#32 = .vmvx :=`
+- **isa_cls_vle32** (line 599): `theorem isa_cls_vle32 : isaClassify 0x80036287#32 = .vload :=`
+- **isa_cls_vse32** (line 600): `theorem isa_cls_vse32 : isaClassify 0x0200E0A7#32 = .vstore :=`
+- **isa_cls_vbne** (line 601): `theorem isa_cls_vbne : isaClassify 0x2020905B#32 = .vbr :=`
+- **isa_cls_join** (line 602): `theorem isa_cls_join : isaClassify 0x4000205B#32 = .vjoin :=`
+- **isa_cls_barrier** (line 603): `theorem isa_cls_barrier : isaClassify 0x0400400B#32 = .bar :=`
+- **isa_cls_endprg** (line 604): `theorem isa_cls_endprg : isaClassify 0x0000400B#32 = .endprg :=`
+- **isa_cls_fence** (line 605): `theorem isa_cls_fence : isaClassify 0x1E00000F#32 = .fence :=`
+- **isa_cls_amo** (line 606): `theorem isa_cls_amo : isaClassify 0x0062A22F#32 = .illegal :=`
+- **isa_cls_fadd** (line 607): `theorem isa_cls_fadd : isaClassify 0x003100D3#32 = .fpTc :=`
+- **isa_scope_add** (line 610): `theorem isa_scope_add : isaInScope 0x005201B3#32 = true :=`
+- **isa_scope_vle32** (line 611): `theorem isa_scope_vle32 : isaInScope 0x80036287#32 = true :=`
+- **isa_scope_vlw12** (line 612): `theorem isa_scope_vlw12 : isaInScope 0x0000A0FB#32 = true :=`
+- **isa_scope_amo** (line 613): `theorem isa_scope_amo : isaInScope 0x0062A22F#32 = false :=`
+- **isa_scope_fadd** (line 614): `theorem isa_scope_fadd : isaInScope 0x003100D3#32 = false :=`
+- **isa_scope_vadd12** (line 615): `theorem isa_scope_vadd12 : isaInScope 0x0801008B#32 = true :=`
+- **isa_coverage_audit** (line 619): `theorem isa_coverage_audit : decAllTables.all (fun e => e.row.fp || e.row.tc || (isaClassOfRow e.row != .fpTc && isaClassOfRow e.row != .illegal)) = true :=`
+- **isa_step_default_nop** (line 628): `theorem isa_step_default_nop (s : IsaState) (h : s.halted = false) (hf : isaFetch s = 0x00000073#32) : (isaStep s).pc = s.pc + 4#32 ∧ (isaStep s).xreg = s.xreg ∧ (isaStep s).vreg = s.vreg ∧ (isaStep s).mem = s.mem ∧ (isaStep s).tmask = s.tmask ∧ (isaStep s).bjstk = s.bjstk ∧ (isaStep s).csr = s.csr ∧ (isaStep s).halted = s.halted :=`
+- **isa_lane_vadd_match** (line 645): `theorem isa_lane_vadd_match : isaVLane (decRowOf decAllTables "VADD_VV") 0#32 (fun _ => 3#32) (fun _ => 5#32) (fun _ => 0#32) ⟨7, by decide⟩ = exvLaneRdV2 0#6 true false 3#32 5#32 0#32 7#32 :=`
+- **isa_lane_vsub_match** (line 651): `theorem isa_lane_vsub_match : isaVLane (decRowOf decAllTables "VSUB_VV") 0#32 (fun _ => 3#32) (fun _ => 5#32) (fun _ => 0#32) ⟨2, by decide⟩ = exvLaneRdV2 10#6 true false 3#32 5#32 0#32 2#32 :=`
+- **isa_lane_vmslt_match** (line 657): `theorem isa_lane_vmslt_match : isaVLane (decRowOf decAllTables "VMSLT_VV") 0#32 (fun _ => 0x80000000#32) (fun _ => 0#32) (fun _ => 0#32) ⟨0, by decide⟩ = exvLaneRdV2 12#6 true false 0x80000000#32 0#32 0#32 0#32 :=`
+- **isa_lane_vmerge_match** (line 663): `theorem isa_lane_vmerge_match : isaVLane (decRowOf decAllTables "VMERGE_VVM") 0b1010#32 (fun _ => 0xAAAA#32) (fun _ => 0xBBBB#32) (fun _ => 0#32) ⟨1, by decide⟩ = exvLaneRdV2 51#6 false true 0xAAAA#32 0xBBBB#32 0#32 0#32 :=`
+- **isa_lane_vid_match** (line 669): `theorem isa_lane_vid_match : isaVLane (decRowOf decAllTables "VID_V") 0#32 (fun _ => 0#32) (fun _ => 0#32) (fun _ => 0#32) ⟨5, by decide⟩ = exvLaneRdV2 57#6 false false 0#32 0#32 0#32 5#32 :=`
+- **isa_alu_add_sa** (line 675): `theorem isa_alu_add_sa (a b : BitVec 32) : isaAlu 0#6 a b = (saAlu saFN_ADD a b 0#32).1 :=`
+- **isa_alu_sub_sa** (line 677): `theorem isa_alu_sub_sa (a b : BitVec 32) : isaAlu 10#6 a b = (saAlu saFN_SUB a b 0#32).1 :=`
+- **isa_alu_sra_sa** (line 679): `theorem isa_alu_sra_sa (a b : BitVec 32) : isaAlu 11#6 a b = (saAlu saFN_SRA a b 0#32).1 :=`
+- **isa_alu_and_sa** (line 681): `theorem isa_alu_and_sa (a b : BitVec 32) : isaAlu 7#6 a b = (saAlu saFN_AND a b 0#32).1 :=`
+- **isa_alu_slt_sa** (line 683): `theorem isa_alu_slt_sa (a b : BitVec 32) : isaAlu 12#6 a b = (saAlu saFN_SLT a b 0#32).1 :=`
+- **isa_alu_min_sa** (line 685): `theorem isa_alu_min_sa (a b : BitVec 32) : isaAlu 17#6 a b = (saAlu saFN_MIN a b 0#32).1 :=`
+- **isa_cmp_bge_sa** (line 689): `theorem isa_cmp_bge_sa (a b : BitVec 32) : isaCmp 13#6 a b = (saAlu saFN_SGE a b 0#32).2 :=`
+- **isa_cmp_bne_sa** (line 691): `theorem isa_cmp_bne_sa (a b : BitVec 32) : isaCmp 3#6 a b = (saAlu saFN_SNE a b 0#32).2 :=`
+- **isa_div_fn_q_signed** (line 695): `theorem isa_div_fn_q_signed (a b : BitVec 32) : isaDiv 0#6 a b = divSpecQ a b true :=`
+- **isa_div_fn_r_signed** (line 699): `theorem isa_div_fn_r_signed (a b : BitVec 32) : isaDiv 1#6 a b = divSpecR a b true :=`
+- **isa_div_fn_q_unsigned** (line 703): `theorem isa_div_fn_q_unsigned (a b : BitVec 32) : isaDiv 2#6 a b = divSpecQ a b false :=`
+- **isa_div_fn_r_unsigned** (line 707): `theorem isa_div_fn_r_unsigned (a b : BitVec 32) : isaDiv 3#6 a b = divSpecR a b false :=`
+- **isa_mulhsu_fixed** (line 714): `theorem isa_mulhsu_fixed : isaMul 23#6 0xFFFFFFFF#32 0xFFFFFFFF#32 0#32 = 0xFFFFFFFF#32 ∧ isaMul 23#6 0xFFFFFFFF#32 0xFFFFFFFF#32 0#32 = VentusF.farithMulWrapOut mulFN_MULHSU 0xFFFFFFFF#32 0xFFFFFFFF#32 0#32 :=`
+- **isaT_scalar_arith** (line 758): `theorem isaT_scalar_arith : let s :=`
+- **isaT_branch_jump** (line 785): `theorem isaT_branch_jump : let s :=`
+- **isaT_scalar_mem** (line 809): `theorem isaT_scalar_mem : let s :=`
+- **isaT_muldiv_golden** (line 838): `theorem isaT_muldiv_golden : let s :=`
+- **isaT_csr** (line 865): `theorem isaT_csr : let s :=`
+- **isaT_vec_alu** (line 892): `theorem isaT_vec_alu : let s :=`
+- **isaT_vec_mem** (line 923): `theorem isaT_vec_mem : let s :=`
+- **isaT_simt_diverge_reconverge** (line 963): `theorem isaT_simt_diverge_reconverge : let s1 :=`
+- **isaT_simt_final** (line 976): `theorem isaT_simt_final : let s :=`
+- **isaT_edge** (line 993): `theorem isaT_edge : let s :=`
+- **isaT_halted_idem** (line 1000): `theorem isaT_halted_idem (s : IsaState) (h : s.halted = true) : isaStep s = s :=`
+- **isaT_run_past_halt** (line 1004): `theorem isaT_run_past_halt : let s :=`
+
+### `VentusF/Mem.lean`
+
+- **fmem_i21_witness_rows_differ** (line 45): `theorem fmem_i21_witness_rows_differ : smRowOfSetIdx (fmemSmSetIdxOfAddr smAlo) ≠ smRowOfSetIdx (fmemSmSetIdxOfAddr smAhi) ∧ smRowOfSetIdx (fmemSmSetIdxOfAddr smAlo) ≠ smRowOfSetIdx (fmemSmSetIdxOfAddr smAhi2) ∧ smRowOfSetIdx (fmemSmSetIdxOfAddr smAlo) ≠ smRowOfSetIdx (fmemSmSetIdxOfAddr smAhi3) ∧ fmemSmSetIdxOfAddr smAhi = 0x100#10 ∧ fmemSmSetIdxOfAddr smAhi2 = 0x200#10 ∧ fmemSmSetIdxOfAddr smAhi3 = 0x300#10 :=`
+- **fmem_i21_no_dead_rows** (line 56): `theorem fmem_i21_no_dead_rows (x : BitVec 10) : ∃ a : BitVec 32, fmemSmSetIdxOfAddr a = x :=`
+- **fmem_i21_regress_low32K** (line 62): `theorem fmem_i21_regress_low32K (a : BitVec 32) (h : a &&& 0x00018000#32 = 0#32) : fmemSmSetIdxOfAddr a = smSetIdxOfAddr a :=`
+- **fmem_i21_grouping_equiv** (line 69): `theorem fmem_i21_grouping_equiv (a b : BitVec 32) : (a.extractLsb' 15 17 = b.extractLsb' 15 17 ∧ a.extractLsb' 7 8 = b.extractLsb' 7 8) ↔ (a.extractLsb' 17 15 = b.extractLsb' 17 15 ∧ a.extractLsb' 7 10 = b.extractLsb' 7 10) :=`
+- **fmem_i21_req_only_setIdx** (line 84): `theorem fmem_i21_req_only_setIdx (a : BitVec 32) (wr : Bool) (iid : BitVec 3) (d : BitVec 32) : (fmemSmReqOfAddr a wr iid d).instrId = (smReqOfAddr a wr iid d).instrId ∧ (fmemSmReqOfAddr a wr iid d).isWrite = (smReqOfAddr a wr iid d).isWrite ∧ (fmemSmReqOfAddr a wr iid d).perLaneAddr = (smReqOfAddr a wr iid d).perLaneAddr ∧ (fmemSmReqOfAddr a wr iid d).data = (smReqOfAddr a wr iid d).data :=`
+- **fmem_i21_witness_green** (line 106): `theorem fmem_i21_witness_green : smRspValid fmemSmW2s8 = true ∧ (smRspBits fmemSmW2s8).isWrite = false ∧ (smRspBits fmemSmW2s8).instrId = 7#3 ∧ (smRspBits fmemSmW2s8).data ⟨0, by decide⟩ = 0x11111111#32 ∧ smBytesToWord ((fmemSmW2s8.banks ⟨16, by decide⟩).mem ⟨0x100, by decide⟩) = 0x22222222#32 :=`
+- **fmem_i24_victim_correct** (line 202): `theorem fmem_i24_victim_correct (t : IcTagState) (v : Fin 256) (h : t.wayValid v = 0b01#2) : fmemIcVictimMask t v = 0b10#2 :=`
+- **fmem_i24_regress** (line 209): `theorem fmem_i24_regress (victim wv : BitVec 2) (h : wv = 0b00#2 ∨ wv = 0b11#2) : (if wv = 0b11#2 then victim else if wv.getLsbD 0 = false then 0b01#2 else 0b10#2) = (if wv = 0b11#2 then victim else if wv.getLsbD 1 = false then 0b01#2 else 0b10#2) :=`
+- **fmem_i24_regress_state** (line 218): `theorem fmem_i24_regress_state (t : IcTagState) (v : Fin 256) (h : t.wayValid v = 0b00#2 ∨ t.wayValid v = 0b11#2) : fmemIcVictimMask t v = icVictimMask t v :=`
+- **fmem_i24_tagStep_regress** (line 224): `theorem fmem_i24_tagStep_regress (t : IcTagState) (rV : Bool) (rSet : Fin 256) (wV : Bool) (wSet : Fin 256) (wTag : BitVec 17) (inv : Bool) (h : fmemIcVictimMask t wSet = icVictimMask t wSet) : fmemIcTagStep t rV rSet wV wSet wTag inv = icTagStep t rV rSet wV wSet wTag inv :=`
+- **fmem_i23_stall_mechanism** (line 236): `theorem fmem_i23_stall_mechanism (s : IcState) (i : IcIn) (hdeq : icDeqValid s i = true) (hreq : i.reqValid = true) : (fmemIcStep s i).fire1 = false ∧ (fmemIcStep s i).paddr1 = s.paddr1 :=`
+- **fmem_i23_no_false_verdict** (line 249): `theorem fmem_i23_no_false_verdict (s : IcState) (i : IcIn) (hdeq : icDeqValid s i = true) (hreq : i.reqValid = true) : icCacheHit1 (fmemIcStep s i) = false ∧ icCacheMiss1 (fmemIcStep s i) = false :=`
+- **fmem_i23_step_regress** (line 257): `theorem fmem_i23_step_regress (s : IcState) (i : IcIn) (hdeq : icDeqValid s i = false) (hmask : fmemIcVictimMask s.tag (icRefillSet s i) = icVictimMask s.tag (icRefillSet s i)) : fmemIcStep s i = icStep s i :=`
+- **fmemIcTagStep_wayValid_refill** (line 277): `theorem fmemIcTagStep_wayValid_refill (t : IcTagState) (rV : Bool) (rSet wSet : Fin 256) (wTag : BitVec 17) (hnotfull : icSetFull t wSet = false) : (fmemIcTagStep t rV rSet true wSet wTag false).wayValid wSet = t.wayValid wSet ||| fmemIcVictimMask t wSet :=`
+- **fmem_i24_way1_reachable** (line 286): `theorem fmem_i24_way1_reachable (t : IcTagState) (rV : Bool) (rSet wSet : Fin 256) (wTag : BitVec 17) (hnotfull : icSetFull t wSet = false) (h0 : t.wayValid wSet = 0b01#2) : (fmemIcTagStep t rV rSet true wSet wTag false).wayValid wSet = 0b11#2 :=`
+- **fmem_i24_way1_used** (line 302): `theorem fmem_i24_way1_used : fmemIcTD8.tag.sram.mem ⟨3, by decide⟩ ⟨0, by decide⟩ = 0x0ABCD#17 ∧ fmemIcTD8.tag.sram.mem ⟨3, by decide⟩ ⟨1, by decide⟩ = 0x12345#17 ∧ fmemIcTD8.tag.wayValid ⟨3, by decide⟩ = 0b11#2 :=`
+- **fmem_i23_false_hit_gone** (line 325): `theorem fmem_i23_false_hit_gone : fmemIcTB4.fire1 = false ∧ icCacheHit1 fmemIcTB4 = false ∧ icCacheMiss1 fmemIcTB4 = false ∧ icRspValidOut fmemIcTB5 = false ∧ icHitSt1 fmemIcTB5 = false ∧ icCacheMiss1 fmemIcTB5 = true :=`
+- **fmem_i23_retry_hit_correct** (line 334): `theorem fmem_i23_retry_hit_correct : icHitSt1 fmemIcTB7 = true ∧ icWaymaskHitSt1 fmemIcTB7 = 0b01#2 ∧ icRspValidOut fmemIcTB8 = true ∧ icRspStatus fmemIcTB8 = 0b00#2 ∧ icRspData fmemIcTB8 = 0xDEADBEEF#64 ∧ icRspAddr fmemIcTB8 = icAddrA :=`
+- **fmem_i27_fix_eq_lru** (line 353): `theorem fmem_i27_fix_eq_lru (t0 t1 : BitVec 10) : fmemReplD2 0b11#2 t0 t1 = l1taLruSpec2 t0 t1 :=`
+- **fmem_i27_witness_gone** (line 360): `theorem fmem_i27_witness_gone : fmemReplD2 0b11#2 5#10 3#10 = 0b10#2 ∧ l1taReplD2 0b11#2 5#10 3#10 = 0b01#2 ∧ fmemReplD2 0b11#2 3#10 5#10 = 0b01#2 ∧ l1taReplD2 0b11#2 3#10 5#10 = 0b10#2 :=`
+- **fmem_i27_regress** (line 368): `theorem fmem_i27_regress (v : BitVec 2) (t0 t1 : BitVec 10) (h : v ≠ 0b11#2) : fmemReplD2 v t0 t1 = l1taReplD2 v t0 t1 :=`
+- **fmem_i28_witness_fixed** (line 383): `theorem fmem_i28_witness_fixed : fmemDmBuild ((fun i => if i = 5 then (true, 3, 0b0001#4) else if i = 27 then (true, 3, 0b0010#4) else (false, 0, 0#4)) : Fin 32 → L1taLane 32 4) = (0b0011#4).zeroExtend 128 <<< 12 :=`
+- **fmem_i28_two_lane_merge** (line 392): `theorem fmem_i28_two_lane_merge : ∀ (off : Fin 4) (m0 m1 : BitVec 4), fmemDmBuild (fun i : Fin 2 => if i = 0 then (true, off, m0) else (true, off, m1)) = ((m0 ||| m1).zeroExtend 16 <<< (off.val * 4)) :=`
+- **fmem_i28_step_regress** (line 402): `theorem fmem_i28_step_regress (acc : Fin bw → BitVec bow) (act : Bool) (off : Fin bw) (m : BitVec bow) (h : acc off = 0#bow) : (if act then sramUpd acc off (acc off ||| m) else acc) = (if act then sramUpd acc off m else acc) :=`
+- **fmem_i28_regress** (line 409): `theorem fmem_i28_regress : ∀ (off0 off1 : Fin 4) (m0 m1 : BitVec 4), off0 ≠ off1 → fmemDmBuild (fun i : Fin 2 => if i = 0 then (true, off0, m0) else (true, off1, m1)) = l1taDmBuild (fun i : Fin 2 => if i = 0 then (true, off0, m0) else (true, off1, m1)) :=`
+- **fmem_i30a_eq_hintAck** (line 426): `theorem fmem_i30a_eq_hintAck (i : DcIn) : fmemDcMemRspIsFluOrInv i = dcHintAckFire i :=`
+- **fmem_i30a_stale_rejected** (line 431): `theorem fmem_i30a_stale_rejected (i : DcIn) (h : i.memRspHeadV = false) : fmemDcMemRspIsFluOrInv i = false :=`
+- **fmem_i30a_regress** (line 436): `theorem fmem_i30a_regress (i : DcIn) (h : i.memRspHeadV = true) : fmemDcMemRspIsFluOrInv i = dcMemRspIsFluOrInv i :=`
+- **fmem_i29_guard** (line 538): `theorem fmem_i29_guard (s : DcState) (i : DcIn) (r : DcSt1) (hr : s.st1 = some r) (hw : r.ctrl.isWrite = true) (hc : i.cacheHit = true) (hv : dcDataReplaceReadV s i = true) : fmemDcSt1Ready s i = false :=`
+- **fmem_i29_collision_blocked** (line 550): `theorem fmem_i29_collision_blocked : fmemDcW1S2.st1 = some dcW1Req ∧ fmemDcW1S2.prevAllocWriteV = true ∧ dcDataReplaceReadV fmemDcW1S2 dcW1I2 = true ∧ fmemDcWriteHit fmemDcW1S2 dcW1I2 = false ∧ fmemDcCtrlFire fmemDcW1S2 dcW1I2 = false :=`
+- **fmem_i29_write_proceeds** (line 563): `theorem fmem_i29_write_proceeds : fmemDcWriteHit fmemDcW1S3 fmemDcW1I3 = true :=`
+- **fmem_i29_ready_regress** (line 568): `theorem fmem_i29_ready_regress (s : DcState) (i : DcIn) (hv : dcDataReplaceReadV s i = false) (hdeq : fmemDcRspSt2EnqRdy s i = dcRspSt2EnqRdy s i) : fmemDcSt1Ready s i = dcSt1Ready s i :=`
+- **fmem_i30_w2b_green** (line 586): `theorem fmem_i30_w2b_green : (fmemDcRun dcInit [fmemDcW2bF0, dcInStaleAck]).waitforL2flush = true ∧ fmemDcW2bTrace.rspLog = [5#3] :=`
+- **fmemDcW2c_inputs_same** (line 608): `theorem fmemDcW2c_inputs_same : dcRun dcInit fmemDcW2cInputs = dcW2cTrace :=`
+- **fmem_i30_w2c_status** (line 610): `theorem fmem_i30_w2c_status : (fmemDcRun dcInit fmemDcW2cInputs).rspLog = [3#3] :=`
+- **fmem_i30_step_regress** (line 616): `theorem fmem_i30_step_regress (s : DcState) (i : DcIn) (hop : (i.memRspHeadOp == 2#3) = false) (hv : dcDataReplaceReadV s i = false) : fmemDcStep s i = dcStep s i :=`
+- **fmem_i47_report_safe** (line 672): `theorem fmem_i47_report_safe (s : FloState) (op : FloOp) : fmemFloReportFire s op = true → s.flu.done = true :=`
+- **fmem_i47_witness_green** (line 679): `theorem fmem_i47_witness_green : floReportFireG floWG3 floOpHost = false ∧ floReportFireG floWG4 floOpHost = false ∧ floWG5.flu.done = true ∧ floReportFireG floWG5 floOpHost = true :=`
+- **fmem_i47_regress** (line 687): `theorem fmem_i47_regress (s : FloState) (op : FloOp) (hd : s.flu.done = true) : floStepG s op = floStep s op :=`
+
+### `VentusF/MemL2.lean`
+
+- **fmem_i35_flushCount_def** (line 139): `theorem fmem_i35_flushCount_def (st : L2dState) (inp : L2dIn) : (fmemL2dStep st inp).flushCount = fmemFlushCountNext (l2dWiresOf st inp).flushDone (inp.flush || inp.invalidate || (st.flushIssueReg && ((l2dWiresOf st inp).resultFire || !st.dirtyFlushReg2))) st.flushCount :=`
+- **fmem_i35_orig_flushCount_def** (line 147): `theorem fmem_i35_orig_flushCount_def (st : L2dState) (inp : L2dIn) : (l2dStep st inp).flushCount = fmemFlushCountNextOrig (inp.flush || inp.invalidate || (st.flushIssueReg && ((l2dWiresOf st inp).resultFire || !st.dirtyFlushReg2))) (l2dWiresOf st inp).flushDone st.flushCount :=`
+- **fmem_i35_fix_vs_orig** (line 157): `theorem fmem_i35_fix_vs_orig : fmemFlushCountNextOrig true true 1023#11 = 1024#11 ∧ fmemFlushCountNext true true 1023#11 = 0#11 :=`
+- **fmem_i35_regress** (line 163): `theorem fmem_i35_regress (flushDone inc : Bool) (fc : BitVec 11) (h : flushDone = false ∨ inc = false) : fmemFlushCountNext flushDone inc fc = fmemFlushCountNextOrig inc flushDone fc :=`
+- **fmem_i35_flushCount_regress** (line 169): `theorem fmem_i35_flushCount_regress (st : L2dState) (inp : L2dIn) (h : (l2dWiresOf st inp).flushDone = false ∨ (inp.flush || inp.invalidate || (st.flushIssueReg && ((l2dWiresOf st inp).resultFire || !st.dirtyFlushReg2))) = false) : (fmemL2dStep st inp).flushCount = (l2dStep st inp).flushCount :=`
+- **fmem_i35_count_returns_zero** (line 186): `theorem fmem_i35_count_returns_zero : fmemL2dAfterFlush.flushCount = 0#11 ∧ fmemL2dAfterFlush.flushIssueReg = false ∧ (l2dOut fmemL2dAfterFlush l2dInIdle).ready = true :=`
+- **fmem_i35_second_flush_in_range** (line 194): `theorem fmem_i35_second_flush_in_range : let st :=`
+- **fmem_i36_regress** (line 205): `theorem fmem_i36_regress (st : L2dState) (inp : L2dIn) (w : L2dWires) (h : w.writeFire = inp.writeValid) : fmemL2dStatusNext st inp w = l2dStatusNext st inp w :=`
+- **fmem_i36_status_regress** (line 213): `theorem fmem_i36_status_regress (st : L2dState) (inp : L2dIn) (h : (l2dWiresOf st inp).writeFire = inp.writeValid) : (fmemL2dStep st inp).statusV = (l2dStep st inp).statusV ∧ (fmemL2dStep st inp).statusD = (l2dStep st inp).statusD :=`
+- **fmem_i3536_step_regress_others** (line 226): `theorem fmem_i3536_step_regress_others (st : L2dState) (inp : L2dIn) : (fmemL2dStep st inp).sram = (l2dStep st inp).sram ∧ (fmemL2dStep st inp).wipeCount = (l2dStep st inp).wipeCount ∧ (fmemL2dStep st inp).wipeOff = (l2dStep st inp).wipeOff ∧ (fmemL2dStep st inp).flushIssueReg = (l2dStep st inp).flushIssueReg ∧ (fmemL2dStep st inp).isInvalidateReg = (l2dStep st inp).isInvalidateReg ∧ (fmemL2dStep st inp).flushSourceReg = (l2dStep st inp).flushSourceReg ∧ (fmemL2dStep st inp).replacer = (l2dStep st inp).replacer ∧ (fmemL2dStep st inp).lfsr = (l2dStep st inp).lfsr ∧ (fmemL2dStep st inp).ren1 = (l2dStep st inp).ren1 ∧ (fmemL2dStep st inp).tagReg = (l2dStep st inp).tagReg ∧ (fmemL2dStep st inp).setReg = (l2dStep st inp).setReg ∧ (fmemL2dStep st inp).setQuash = (l2dStep st inp).setQuash ∧ (fmemL2dStep st inp).tagMatchR = (l2dStep st inp).tagMatchR ∧ (fmemL2dStep st inp).writeWay1 = (l2dStep st inp).writeWay1 ∧ (fmemL2dStep st inp).validReg = (l2dStep st inp).validReg ∧ (fmemL2dStep st inp).readBitsReg = (l2dStep st inp).readBitsReg ∧ (fmemL2dStep st inp).flushIssueRegnext = (l2dStep st inp).flushIssueRegnext ∧ (fmemL2dStep st inp).dirtyFlushReg = (l2dStep st inp).dirtyFlushReg ∧ (fmemL2dStep st inp).flushWayReg = (l2dStep st inp).flushWayReg ∧ (fmemL2dStep st inp).flushSetReg = (l2dStep st inp).flushSetReg ∧ (fmemL2dStep st inp).flushSrcRegN = (l2dStep st inp).flushSrcRegN ∧ (fmemL2dStep st inp).flushTagReg = (l2dStep st inp).flushTagReg ∧ (fmemL2dStep st inp).dirtyFlushReg2 = (l2dStep st inp).dirtyFlushReg2 ∧ (fmemL2dStep st inp).flushDoneReg = (l2dStep st inp).flushDoneReg ∧ (fmemL2dStep st inp).readTagPrev = (l2dStep st inp).readTagPrev ∧ (fmemL2dStep st inp).readSetPrev = (l2dStep st inp).readSetPrev :=`
+- **fmem_i36_no_corrupt** (line 258): `theorem fmem_i36_no_corrupt : let st :=`
+- **fmem_i36_false_hit_gone** (line 272): `theorem fmem_i36_false_hit_gone : let outs :=`
+- **fmem_i3738_regress** (line 310): `theorem fmem_i3738_regress (st : L2sState) (inp : L2sIn) (w : L2sWires) (h37 : fmemI37Trig st w = false) (h38 : fmemI38Trig st inp w = false) : fmemL2sFsmNext st inp w = l2sFsmNext st inp w :=`
+- **fmem_i37_fix_faithful** (line 317): `theorem fmem_i37_fix_faithful (st : L2sState) (inp : L2sIn) (w : L2sWires) (hst : (st.stateReg == l2sStage1) = true) (hgo : (w.reqFire || st.tobedone) = true) (hhit : w.s1Req.hit = false) (hdirty : w.s1Req.dirtyB = false) (hop : (w.s1Req.base.opcode == l2opPutFull || w.s1Req.base.opcode == l2opPutPartial) = true) (hna : (w.s1ValidR && inp.bsRadrReady) = false) : l2sFsmNext st inp w = (l2sStage4, true, true, false) ∧ fmemL2sFsmNext st inp w = (l2sStage4, true, true, true) :=`
+- **fmem_i38_fix_faithful** (line 346): `theorem fmem_i38_fix_faithful (st : L2sState) (inp : L2sIn) (w : L2sWires) (hst : (st.stateReg == l2sStage1) = true) (hgo : (w.reqFire || st.tobedone) = true) (hna : (w.s1ValidR && inp.bsRadrReady) = false) (hnput : ((w.s1Req.base.opcode == l2opPutFull || w.s1Req.base.opcode == l2opPutPartial) && !w.s1Req.fromMem && w.s1Req.hit) = false) (hhint : (w.s1Req.base.opcode == l2opHint) = true) (hlast : w.s1Req.lastFlush = true) : l2sFsmNext st inp w = (l2sStage8, false, false, false) ∧ fmemL2sFsmNext st inp w = (l2sStage8, true, false, false) :=`
+- **fmem_i3738_step_regress** (line 398): `theorem fmem_i3738_step_regress (st : L2sState) (inp : L2sIn) (h37 : fmemI37Trig st (l2sWiresOf st inp) = false) (h38 : fmemI38Trig st inp (l2sWiresOf st inp) = false) : fmemL2sStep st inp = l2sStep st inp :=`
+- **fmem_i37_witness_green** (line 408): `theorem fmem_i37_witness_green : let req : L2sReq :=`
+- **fmem_i38_witness_green** (line 421): `theorem fmem_i38_witness_green : let flushReq : L2sReq :=`
+- **fmem_i39_witness_green** (line 454): `theorem fmem_i39_witness_green : let st1 :=`
+- **fmem_i39_regress** (line 465): `theorem fmem_i39_regress (st : L2mState) (inp : L2mInput) (h : inp.allocValid = false ∨ l2mAFire st inp = false) : fmemL2mStep st inp = l2mStep st inp :=`
+- **fmem_i40_read_blocked** (line 489): `theorem fmem_i40_read_blocked {M : Type} [MemLaws M L2mBsAddr (BitVec 8)] (st : L2mBsState M) (inp : L2mBsInput) (h : l2mBsCollision inp = true) : fmemL2mBsRadrReady inp = false ∧ (fmemL2mBsStep st inp).rdata = st.rdata :=`
+- **fmem_i40_regress** (line 497): `theorem fmem_i40_regress {M : Type} [MemLaws M L2mBsAddr (BitVec 8)] (st : L2mBsState M) (inp : L2mBsInput) (h : l2mBsCollision inp = false) : fmemL2mBsStep st inp = l2mBsStep st inp :=`
+- **fmem_i40_witness_green** (line 511): `theorem fmem_i40_witness_green {M : Type} [MemLaws M L2mBsAddr (BitVec 8)] (m : M) : l2mBsCollision fmemBsCollIn = true ∧ (fmemL2mBsStep ⟨m, 0#1024⟩ fmemBsCollIn).rdata = 0#1024 :=`
+- **fmem_i44_alloc_imp_fire** (line 567): `theorem fmem_i44_alloc_imp_fire (st : L2scState) (inp : L2scIn) (i : Nat) (h : fmemL2scAllocValid st inp i = true) : fmemL2scResultFire st inp = true :=`
+- **fmem_i44_e3_by_construction** (line 576): `theorem fmem_i44_e3_by_construction (st : L2scState) (inp : L2scIn) (i : Nat) (h : fmemL2scAllocValid st inp i = true) : inp.pushReady = true :=`
+- **fmem_i44_regress** (line 594): `theorem fmem_i44_regress (st : L2scState) (inp : L2scIn) (i : Nat) (h : fmemL2scResultFire st inp = true) : fmemL2scAllocValid st inp i = l2scAllocValid st inp i :=`
+- **fmem_i44_e3_witness_green** (line 605): `theorem fmem_i44_e3_witness_green : fmemL2scResultReady l2dcE3Pre l2dcE3CexIn = false ∧ fmemL2scAllocValid l2dcE3Pre l2dcE3CexIn 31 = false ∧ ((fmemL2scStep l2dcE3Pre l2dcE3CexIn).mshrs 31).scheAValid = false ∧ (fmemL2scStep l2dcE3Pre l2dcE3CexIn).valids = l2dcE3Pre.valids :=`
+- **fmem_i42_guard** (line 616): `theorem fmem_i42_guard (st : L2scState) (inp : L2scIn) (i : Nat) (h : l2scTagMatches st inp = 0#32) : fmemL2scMixedI st inp i = false :=`
+- **fmem_i42_regress** (line 622): `theorem fmem_i42_regress (st : L2scState) (inp : L2scIn) (i : Nat) (h : l2scTagMatches st inp ≠ 0#32) : fmemL2scMixedI st inp i = l2scMixedI st inp i :=`
+- **fmem_i42_witness_green** (line 633): `theorem fmem_i42_witness_green : (fmemI42St3.mshrs 0).mixedReg = false ∧ (fmemI42St3.mshrs 0).sinkDReg = true ∧ (fmemI42St3.mshrs 0).scheDirValid = true ∧ l2scDirV fmemI42St3 l2dcI42Obs 0 = true ∧ l2scSinkDAdrValid fmemI42St3 l2dcI42Obs = true :=`
+- **fmem_i43_witness_green** (line 662): `theorem fmem_i43_witness_green : fmemL2scResultReady fmemI43St1F l2dcI43In1 = false ∧ fmemL2scResultFire fmemI43St1F l2dcI43In1 = false ∧ fmemL2scAllocValid fmemI43St1F l2dcI43In1 1 = false ∧ (fmemI43St2F.mshrs 1).scheAValid = false ∧ fmemI43St2F.drbValid = true ∧ fmemI43St2F.drbBits.tag = 0x111#19 ∧ fmemI43St4F.drbBits.tag = 0x222#19 :=`
+- **fmem_i43_push_leak_residual** (line 679): `theorem fmem_i43_push_leak_residual : fmemI43St2F.valids = 3#32 ∧ (fmemI43St2F.mshrs 1).scheAValid = false ∧ (fmemI43St2F.mshrs 1).request.tag = 0#19 :=`
+- **fmem_i43s_regress** (line 707): `theorem fmem_i43s_regress (st : L2scState) (inp : L2scIn) (h : inp.dirRes.hit = true ∨ inp.dirRes.flush = true ∨ inp.dirRes.dirty = false ∨ st.drbValid = false) : fmemL2scPushFireS st inp = (l2scPushValid st inp && inp.pushReady) :=`
+- **fmem_i43s_no_leak** (line 725): `theorem fmem_i43s_no_leak : fmemI43St2S.valids = 1#32 ∧ fmemI43St4S.drbBits.tag = 0x222#19 ∧ (fmemI43St4S.mshrs 1).request.tag = 0x222#19 ∧ (fmemI43St4S.mshrs 1).scheAValid = true :=`
+- **fmem_i41a_alloc_sinkd_mutex** (line 744): `theorem fmem_i41a_alloc_sinkd_mutex (st : L2scState) (inp : L2scIn) (i : Nat) (he1 : fmemL2scEnvE1 st inp) (h : fmemL2scAllocValid st inp i = true) : l2scSinkdV st inp i = false :=`
+- **fmem_i41b_merge_sinkd_mutex** (line 763): `theorem fmem_i41b_merge_sinkd_mutex (st : L2scState) (inp : L2scIn) (i : Nat) (he1 : fmemL2scEnvE1 st inp) (h : l2scMergeValid st inp i = true) : l2scSinkdV st inp i = false :=`
+
+### `VentusF/MultiWarp.lean`
+
+- **mwf_ofNat3_inj** (line 52): `theorem mwf_ofNat3_inj (a b : Fin 8) (h : BitVec.ofNat 3 a.val = BitVec.ofNat 3 b.val) : a = b :=`
+- **mwf_bv3_ofNat_toNat** (line 60): `theorem mwf_bv3_ofNat_toNat (x : BitVec 3) : BitVec.ofNat 3 x.toNat = x :=`
+- **mwf_bv3_cases** (line 65): `theorem mwf_bv3_cases (x : BitVec 3) : x = 0#3 ∨ x = 1#3 ∨ x = 2#3 ∨ x = 3#3 ∨ x = 4#3 ∨ x = 5#3 ∨ x = 6#3 ∨ x = 7#3 :=`
+- **mwf_fin6_cases** (line 83): `theorem mwf_fin6_cases (k : Fin 6) : k = ⟨0, by decide⟩ ∨ k = ⟨1, by decide⟩ ∨ k = ⟨2, by decide⟩ ∨ k = ⟨3, by decide⟩ ∨ k = ⟨4, by decide⟩ ∨ k = ⟨5, by decide⟩ :=`
+- **mwf_wsFin_ne** (line 92): `theorem mwf_wsFin_ne (a : BitVec 3) (w : Fin 8) (h : (a == BitVec.ofNat 3 w.val) = false) : wsFin a ≠ w :=`
+- **mwf_arrAt_map8** (line 105): `theorem mwf_arrAt_map8 {α : Type} (f : Fin 8 → α) (i : Fin 8) (d : α) : smArrAt (((List.finRange 8).map f).toArray) i.val d = f i :=`
+- **mwf_cu_owner_unique** (line 118): `theorem mwf_cu_owner_unique (s : FsmmState) (j : Fin 8) (w w' : Fin 8) (hw : (fsmCuAt s.base j).controlReg.wid = BitVec.ofNat 3 w.val) (hw' : (fsmCuAt s.base j).controlReg.wid = BitVec.ofNat 3 w'.val) : w = w' :=`
+- **mwf_cuAt_step** (line 124): `theorem mwf_cuAt_step (prog : SmProg) (s : FsmmState) (inp : SmIn) (j : Fin 8) : fsmCuAt (fsmmStep prog s inp).base j = fschCuStep (fsmCuAt s.base j) ((fsmmComb prog s inp).cuIn j) :=`
+- **mwf_cu_step_controlReg** (line 134): `theorem mwf_cu_step_controlReg (prog : SmProg) (s : FsmmState) (inp : SmIn) (j : Fin 8) : (fsmCuAt (fsmmStep prog s inp).base j).controlReg = (if cuControlFire (fsmCuAt s.base j) ((fsmmComb prog s inp).cuIn j) then ((fsmmComb prog s inp).cuIn j).ctrl else (fsmCuAt s.base j).controlReg) :=`
+- **mwf_cu_alloc** (line 144): `theorem mwf_cu_alloc (prog : SmProg) (s : FsmmState) (inp : SmIn) (j : Fin 8) (hf : cuControlFire (fsmCuAt s.base j) ((fsmmComb prog s inp).cuIn j) = true) : (fsmCuAt s.base j).state = cuSIdle ∧ (fsmCuAt (fsmmStep prog s inp).base j).controlReg = ((fsmmComb prog s inp).cuIn j).ctrl :=`
+- **mwf_cu_wid_stable_step** (line 151): `theorem mwf_cu_wid_stable_step (prog : SmProg) (s : FsmmState) (inp : SmIn) (j : Fin 8) (h : (fsmCuAt s.base j).state ≠ cuSIdle) : (fsmCuAt (fsmmStep prog s inp).base j).controlReg.wid = (fsmCuAt s.base j).controlReg.wid :=`
+- **mwf_cu_wid_stable_run** (line 164): `theorem mwf_cu_wid_stable_run (prog : SmProg) (s : FsmmState) (j : Fin 8) (n : Nat) : (∀ k : Nat, k < n → (fsmCuAt (fsmmRun prog s (List.replicate k smInNop)).base j).state ≠ cuSIdle) → (fsmCuAt (fsmmRun prog s (List.replicate n smInNop)).base j).controlReg.wid = (fsmCuAt s.base j).controlReg.wid :=`
+- **mwf_demux_valid_sel** (line 186): `theorem mwf_demux_valid_sel {n : Nat} (outRdy : Fin n → Bool) (v0 v1 : Bool) (b0 b1 : CuCtrl) (j : Fin n) (h : (ocDemux outRdy v0 v1 b0 b1).valid j = true) : j.val = ocPrioLowest outRdy ∨ j.val = ocPrioLowest (ocRdy2 outRdy) :=`
+- **mwf_demux_valid_rdy** (line 199): `theorem mwf_demux_valid_rdy {n : Nat} (outRdy : Fin n → Bool) (v0 v1 : Bool) (b0 b1 : CuCtrl) (j : Fin n) (h : (ocDemux outRdy v0 v1 b0 b1).valid j = true) : outRdy j = true :=`
+- **mwf_demux_two_valid** (line 224): `theorem mwf_demux_two_valid {n : Nat} (outRdy : Fin n → Bool) (v0 v1 : Bool) (b0 b1 : CuCtrl) (j j' : Fin n) (hj : (ocDemux outRdy v0 v1 b0 b1).valid j = true) (hj' : (ocDemux outRdy v0 v1 b0 b1).valid j' = true) (hne : j ≠ j') : (j.val = ocPrioLowest outRdy ∧ j'.val = ocPrioLowest (ocRdy2 outRdy)) ∨ (j.val = ocPrioLowest (ocRdy2 outRdy) ∧ j'.val = ocPrioLowest outRdy) :=`
+- **mwf_cuQW_of_quiesce** (line 274): `theorem mwf_cuQW_of_quiesce (prog : SmProg) (s : FsmState) (w : Fin 8) (hq : rf1Quiesce prog s w) (hcons : ∀ j : Fin 8, prog.imem (smPcOfTag (fsmCuAt s j).controlReg.tag) = (fsmCuAt s j).controlReg.inst) : mwfCuQW prog s w :=`
+- **mwf_cuQW_all** (line 292): `theorem mwf_cuQW_all (prog : SmProg) (s : FsmState) : (∀ w : Fin 8, mwfCuQW prog s w) ↔ rf2CuQ prog s :=`
+- **mwfSep_symm** (line 324): `theorem mwfSep_symm (s : FsmState) (w1 w2 : Fin 8) (h : mwfSep s w1 w2) : mwfSep s w2 w1 :=`
+- **mwf_addrS_ne_bv** (line 332): `theorem mwf_addrS_ne_bv (b1 b2 : BitVec 12) (r1 r2 : BitVec 8) (ha1 : b1 &&& 3#12 = 0#12) (hl1 : b1 ≤ 992#12) (ha2 : b2 &&& 3#12 = 0#12) (hl2 : b2 ≤ 992#12) (hsep : b1 + 32#12 ≤ b2 ∨ b2 + 32#12 ≤ b1) (hr1 : r1 < 32#8) (hr2 : r2 < 32#8) : ocWbScaAddr b1 r1 ≠ ocWbScaAddr b2 r2 :=`
+- **mwf_addrV_ne_bv** (line 342): `theorem mwf_addrV_ne_bv (b1 b2 : BitVec 11) (r1 r2 : BitVec 8) (ha1 : b1 &&& 3#11 = 0#11) (hl1 : b1 ≤ 992#11) (ha2 : b2 &&& 3#11 = 0#11) (hl2 : b2 ≤ 992#11) (hsep : b1 + 32#11 ≤ b2 ∨ b2 + 32#11 ≤ b1) (hr1 : r1 < 32#8) (hr2 : r2 < 32#8) : ocWbVecAddr b1 r1 ≠ ocWbVecAddr b2 r2 :=`
+- **mwf_csr_sgpr_step** (line 361): `theorem mwf_csr_sgpr_step (prog : SmProg) (s : FsmmState) (inp : SmIn) (w : Fin 8) (hreq : (inp.reqFire && (inp.reqWid == BitVec.ofNat 3 w.val)) = false) : (fsmmStep prog s inp).base.csr.sgprBase w = s.base.csr.sgprBase w :=`
+- **mwf_csr_vgpr_step** (line 375): `theorem mwf_csr_vgpr_step (prog : SmProg) (s : FsmmState) (inp : SmIn) (w : Fin 8) (hreq : (inp.reqFire && (inp.reqWid == BitVec.ofNat 3 w.val)) = false) : (fsmmStep prog s inp).base.csr.vgprBase w = s.base.csr.vgprBase w :=`
+- **mwf_csr_rpc_step** (line 389): `theorem mwf_csr_rpc_step (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmStep prog s inp).base.csr.simtRpc = s.base.csr.simtRpc :=`
+- **mwf_srfAt_step** (line 398): `theorem mwf_srfAt_step (prog : SmProg) (s : FsmmState) (inp : SmIn) (i : Fin 4) : fsmSrfAt (fsmmStep prog s inp).base i = rfSStep (fsmSrfAt s.base i) ((fsmmComb prog s inp).rfInS i) :=`
+- **mwf_rdX_iso** (line 408): `theorem mwf_rdX_iso (prog : SmProg) (s : FsmmState) (inp : SmIn) (w : Fin 8) (x : Fin 32) (hg : ((fsmmComb prog s inp).wbXFire && ((fsmmComb prog s inp).wbXWid == BitVec.ofNat 3 w.val)) = false) (hidx : (fsmmComb prog s inp).wbXFire = true → (fsmmComb prog s inp).wbXIdxw < 32#8) (hsep : ∀ w' : Fin 8, w' ≠ w → mwfSepS s.base w' w) (hreq : (inp.reqFire && (inp.reqWid == BitVec.ofNat 3 w.val)) = false) : rf1RdX (fsmmStep prog s inp).base w x = rf1RdX s.base w x :=`
+- **mwf_rdV_iso** (line 454): `theorem mwf_rdV_iso (prog : SmProg) (s : FsmmState) (inp : SmIn) (w : Fin 8) (v t : Fin 32) (hg : ((fsmmComb prog s inp).wbVFire && ((fsmmComb prog s inp).wbVWid == BitVec.ofNat 3 w.val)) = false) (hidx : (fsmmComb prog s inp).wbVFire = true → (fsmmComb prog s inp).wbVIdxw < 32#8) (hsep : ∀ w' : Fin 8, w' ≠ w → mwfSepV s.base w' w) (hreq : (inp.reqFire && (inp.reqWid == BitVec.ofNat 3 w.val)) = false) : rf1RdV (fsmmStep prog s inp).base w v t = rf1RdV s.base w v t :=`
+- **mwf_pcOk_step_iso** (line 497): `theorem mwf_pcOk_step_iso (prog : SmProg) (s : FsmmState) (inp : SmIn) (w : Fin 8) (pc : BitVec 32) (hpc : inp.pcReset = false) (hreq : (inp.reqFire && (inp.reqWid == BitVec.ofNat 3 w.val)) = false) (hbr : ((fsmmComb prog s inp).brMFire && (fsmmComb prog s inp).brMJump && ((fsmmComb prog s inp).brMWid == BitVec.ofNat 3 w.val)) = false) (h : rf1PcOk s.base w pc) : rf1PcOk (fsmmStep prog s inp).base w pc :=`
+- **mwf_or1_shift_bit** (line 529): `theorem mwf_or1_shift_bit (a : BitVec 8) (x : BitVec 3) (w : Fin 8) (h : x ≠ BitVec.ofNat 3 w.val) : (((a ||| (1#8 <<< x.zeroExtend 8)) >>> BitVec.ofNat 8 w.val) &&& 1#8) = ((a >>> BitVec.ofNat 8 w.val) &&& 1#8) :=`
+- **mwf_andN1_shift_bit** (line 538): `theorem mwf_andN1_shift_bit (a : BitVec 8) (x : BitVec 3) (w : Fin 8) (h : x ≠ BitVec.ofNat 3 w.val) : (((a &&& ~~~(1#8 <<< x.zeroExtend 8)) >>> BitVec.ofNat 8 w.val) &&& 1#8) = ((a >>> BitVec.ofNat 8 w.val) &&& 1#8) :=`
+- **mwf_wsStepActive_bit** (line 548): `theorem mwf_wsStepActive_bit (act : BitVec 8) (reqF : Bool) (reqWid : BitVec 3) (endF : Bool) (wcWid : BitVec 3) (w : Fin 8) (hreq : (reqF && (reqWid == BitVec.ofNat 3 w.val)) = false) (hend : (endF && (wcWid == BitVec.ofNat 3 w.val)) = false) : ((fschWsStepActive act reqF reqWid endF wcWid >>> BitVec.ofNat 8 w.val) &&& 1#8) = ((act >>> BitVec.ofNat 8 w.val) &&& 1#8) :=`
+- **mwf_warpActive_step_iso** (line 602): `theorem mwf_warpActive_step_iso (prog : SmProg) (s : FsmmState) (inp : SmIn) (w : Fin 8) (hreq : (inp.reqFire && (inp.reqWid == BitVec.ofNat 3 w.val)) = false) (hend : (fschWarpEnd s.base.ws ⟨(fsmmComb prog s inp).wsIn, (fsmmComb prog s inp).fenceEnd⟩ && ((fsmmComb prog s inp).wsIn.wcWid == BitVec.ofNat 3 w.val)) = false) : rf1WarpActive (fsmmStep prog s inp).base w = rf1WarpActive s.base w :=`
+- **mwf_bj_step** (line 621): `theorem mwf_bj_step (prog : SmProg) (s : FsmmState) (inp : SmIn) (h : (fsmmComb prog s inp).bjEv = BjEvent.nop) : (fsmmStep prog s inp).base.bj = s.base.bj :=`
+- **mwf_sim_step_iso** (line 648): `theorem mwf_sim_step_iso (prog : SmProg) (s : FsmmState) (is : IsaState) (w : Fin 8) (inp : SmIn) (hsim : rf1Sim s.base is w) (hg : mwfIsoW prog s inp w) (hsep : ∀ w' : Fin 8, w' ≠ w → mwfSep s.base w' w) : rf1Sim (fsmmStep prog s inp).base is w :=`
+- **mwf_sep_step_nop** (line 670): `theorem mwf_sep_step_nop (prog : SmProg) (s : FsmmState) (inp : SmIn) (hreq : inp.reqFire = false) (w1 w2 : Fin 8) : mwfSep (fsmmStep prog s inp).base w1 w2 ↔ mwfSep s.base w1 w2 :=`
+- **mwf_sim_run_iso** (line 679): `theorem mwf_sim_run_iso (prog : SmProg) (is : IsaState) (w : Fin 8) (n : Nat) : ∀ (s : FsmmState), rf1Sim s.base is w → (∀ w' : Fin 8, w' ≠ w → mwfSep s.base w' w) → (∀ k : Nat, k < n → mwfIsoW prog (fsmmRun prog s (List.replicate k smInNop)) smInNop w) → rf1Sim (fsmmRun prog s (List.replicate n smInNop)).base is w :=`
+- **mwf_comb_wbXValids** (line 707): `theorem mwf_comb_wbXValids (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).wbXValids = ((BitVec.ofBool (rf2FireSAlu prog s.base && (rf2OutXC prog s.base).row.wxd && ((rf2OutXC prog s.base).row.branch != 1#2))).zeroExtend 6 ||| ((BitVec.ofBool (fsmmComb prog s inp).lsuWbXV).zeroExtend 6 <<< 2) ||| ((BitVec.ofBool (rf2FireCsr prog s.base && (rf2OutXC prog s.base).row.wxd)).zeroExtend 6 <<< 3) ||| ((BitVec.ofBool (rf2FireMul prog s.base && (rf2OutVC prog s.base).row.wxd)).zeroExtend 6 <<< 5)) :=`
+- **mwf_comb_wbXChoice** (line 717): `theorem mwf_comb_wbXChoice (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).wbXChoice = wbArbChoice (by decide) (fsmmComb prog s inp).wbXValids :=`
+- **mwf_comb_wbXWid** (line 721): `theorem mwf_comb_wbXWid (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).wbXWid = (if (fsmmComb prog s inp).wbXChoice.val = 2 then (fsmmComb prog s inp).rspTag.warp_id else if (fsmmComb prog s inp).wbXChoice.val = 5 then (fsmCuAt s.base (rf2OutVJ prog s.base)).controlReg.wid else (fsmCuAt s.base (rf2OutXJ prog s.base)).controlReg.wid) :=`
+- **mwf_comb_wbXIdxw** (line 728): `theorem mwf_comb_wbXIdxw (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).wbXIdxw = (if (fsmmComb prog s inp).wbXChoice.val = 2 then (fsmmComb prog s inp).rspTag.reg_idxw else if (fsmmComb prog s inp).wbXChoice.val = 5 then (rf2OutVC prog s.base).regIdxw else (rf2OutXC prog s.base).regIdxw) :=`
+- **mwf_comb_wbVValids** (line 734): `theorem mwf_comb_wbVValids (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).wbVValids = ((BitVec.ofBool ((fsmmComb prog s inp).outVV && ((issRoute (smToIssCtrl (rf2OutVC prog s.base))).any (fun t => decide (t = .vALU))) && (rf2OutVC prog s.base).row.wvd && !(rf2OutVC prog s.base).row.simtStack)).zeroExtend 6 ||| ((BitVec.ofBool (fsmmComb prog s inp).lsuWbVV).zeroExtend 6 <<< 2)) :=`
+- **mwf_comb_wbVChoice** (line 741): `theorem mwf_comb_wbVChoice (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).wbVChoice = wbArbChoice (by decide) (fsmmComb prog s inp).wbVValids :=`
+- **mwf_comb_wbVWid** (line 745): `theorem mwf_comb_wbVWid (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).wbVWid = (if (fsmmComb prog s inp).wbVChoice.val = 2 then (fsmmComb prog s inp).rspTag.warp_id else (fsmCuAt s.base (rf2OutVJ prog s.base)).controlReg.wid) :=`
+- **mwf_comb_wbVIdxw** (line 750): `theorem mwf_comb_wbVIdxw (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).wbVIdxw = (if (fsmmComb prog s inp).wbVChoice.val = 2 then (fsmmComb prog s inp).rspTag.reg_idxw else (rf2OutVC prog s.base).regIdxw) :=`
+- **mwf_comb_brWid** (line 755): `theorem mwf_comb_brWid (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).brWid = (fsmCuAt s.base (rf2OutXJ prog s.base)).controlReg.wid :=`
+- **mwf_comb_wcWid** (line 758): `theorem mwf_comb_wcWid (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).wsIn.wcWid = (fsmCuAt s.base (rf2OutXJ prog s.base)).controlReg.wid :=`
+- **mwf_comb_outVWid** (line 762): `theorem mwf_comb_outVWid (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).outVWid = (fsmCuAt s.base (rf2OutVJ prog s.base)).controlReg.wid :=`
+- **mwf_comb_fireWs** (line 765): `theorem mwf_comb_fireWs (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).fireWs = (rf2OutXV prog s.base && (issRoute (smToIssCtrl (rf2OutXC prog s.base)) == [.ws]) && fschWcReady s.base.ws ⟨(fsmmComb prog s inp).wsIn, (fsmmComb prog s inp).fenceEnd⟩) :=`
+- **mwf_comb_fireSimt** (line 770): `theorem mwf_comb_fireSimt (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).fireSimt = ((rf2OutVV prog s.base && (fsmmComb prog s inp).issueVInRdy) && ((issRoute (smToIssCtrl (rf2OutVC prog s.base)) == [.vALU, .SIMT]) || (issRoute (smToIssCtrl (rf2OutVC prog s.base)) == [.SIMT]))) :=`
+- **mwf_def_wxd** (line 778): `theorem mwf_def_wxd : decDefaultRow.wxd = false :=`
+- **mwf_def_wvd** (line 779): `theorem mwf_def_wvd : decDefaultRow.wvd = false :=`
+- **mwf_wbXValids_bit0** (line 781): `theorem mwf_wbXValids_bit0 (a b c d : Bool) : ((BitVec.ofBool a).zeroExtend 6 ||| ((BitVec.ofBool b).zeroExtend 6 <<< 2) ||| ((BitVec.ofBool c).zeroExtend 6 <<< 3) ||| ((BitVec.ofBool d).zeroExtend 6 <<< 5)).getLsbD 0 = a :=`
+- **mwf_wbXValids_bit1** (line 786): `theorem mwf_wbXValids_bit1 (a b c d : Bool) : ((BitVec.ofBool a).zeroExtend 6 ||| ((BitVec.ofBool b).zeroExtend 6 <<< 2) ||| ((BitVec.ofBool c).zeroExtend 6 <<< 3) ||| ((BitVec.ofBool d).zeroExtend 6 <<< 5)).getLsbD 1 = false :=`
+- **mwf_wbXValids_bit2** (line 791): `theorem mwf_wbXValids_bit2 (a b c d : Bool) : ((BitVec.ofBool a).zeroExtend 6 ||| ((BitVec.ofBool b).zeroExtend 6 <<< 2) ||| ((BitVec.ofBool c).zeroExtend 6 <<< 3) ||| ((BitVec.ofBool d).zeroExtend 6 <<< 5)).getLsbD 2 = b :=`
+- **mwf_wbXValids_bit3** (line 796): `theorem mwf_wbXValids_bit3 (a b c d : Bool) : ((BitVec.ofBool a).zeroExtend 6 ||| ((BitVec.ofBool b).zeroExtend 6 <<< 2) ||| ((BitVec.ofBool c).zeroExtend 6 <<< 3) ||| ((BitVec.ofBool d).zeroExtend 6 <<< 5)).getLsbD 3 = c :=`
+- **mwf_wbXValids_bit4** (line 801): `theorem mwf_wbXValids_bit4 (a b c d : Bool) : ((BitVec.ofBool a).zeroExtend 6 ||| ((BitVec.ofBool b).zeroExtend 6 <<< 2) ||| ((BitVec.ofBool c).zeroExtend 6 <<< 3) ||| ((BitVec.ofBool d).zeroExtend 6 <<< 5)).getLsbD 4 = false :=`
+- **mwf_wbXValids_bit5** (line 806): `theorem mwf_wbXValids_bit5 (a b c d : Bool) : ((BitVec.ofBool a).zeroExtend 6 ||| ((BitVec.ofBool b).zeroExtend 6 <<< 2) ||| ((BitVec.ofBool c).zeroExtend 6 <<< 3) ||| ((BitVec.ofBool d).zeroExtend 6 <<< 5)).getLsbD 5 = d :=`
+- **mwf_wbVValids_bit0** (line 811): `theorem mwf_wbVValids_bit0 (a b : Bool) : ((BitVec.ofBool a).zeroExtend 6 ||| ((BitVec.ofBool b).zeroExtend 6 <<< 2)).getLsbD 0 = a :=`
+- **mwf_wbVValids_bit1** (line 815): `theorem mwf_wbVValids_bit1 (a b : Bool) : ((BitVec.ofBool a).zeroExtend 6 ||| ((BitVec.ofBool b).zeroExtend 6 <<< 2)).getLsbD 1 = false :=`
+- **mwf_wbVValids_bit2** (line 819): `theorem mwf_wbVValids_bit2 (a b : Bool) : ((BitVec.ofBool a).zeroExtend 6 ||| ((BitVec.ofBool b).zeroExtend 6 <<< 2)).getLsbD 2 = b :=`
+- **mwf_wbVValids_bit3** (line 823): `theorem mwf_wbVValids_bit3 (a b : Bool) : ((BitVec.ofBool a).zeroExtend 6 ||| ((BitVec.ofBool b).zeroExtend 6 <<< 2)).getLsbD 3 = false :=`
+- **mwf_wbVValids_bit4** (line 827): `theorem mwf_wbVValids_bit4 (a b : Bool) : ((BitVec.ofBool a).zeroExtend 6 ||| ((BitVec.ofBool b).zeroExtend 6 <<< 2)).getLsbD 4 = false :=`
+- **mwf_wbVValids_bit5** (line 831): `theorem mwf_wbVValids_bit5 (a b : Bool) : ((BitVec.ofBool a).zeroExtend 6 ||| ((BitVec.ofBool b).zeroExtend 6 <<< 2)).getLsbD 5 = false :=`
+- **mwf_decRegIdxw_lt32** (line 836): `theorem mwf_decRegIdxw_lt32 (inst : BitVec 32) : decRegIdxw 0#3 inst < 32#8 :=`
+- **mwf_lsuWbXV_rspValid** (line 840): `theorem mwf_lsuWbXV_rspValid (prog : SmProg) (s : FsmmState) (inp : SmIn) (h : (fsmmComb prog s inp).lsuWbXV = true) : (fsmmComb prog s inp).rspValid = true :=`
+- **mwf_lsuWbVV_rspValid** (line 847): `theorem mwf_lsuWbVV_rspValid (prog : SmProg) (s : FsmmState) (inp : SmIn) (h : (fsmmComb prog s inp).lsuWbVV = true) : (fsmmComb prog s inp).rspValid = true :=`
+- **mwf_wbArbChoice_set** (line 857): `theorem mwf_wbArbChoice_set (v : BitVec 6) (h : wbArbOutValid v = true) : v.getLsbD (wbArbChoice (by decide) v).val = true :=`
+- **mwf_outXJ_issueValid** (line 877): `theorem mwf_outXJ_issueValid (prog : SmProg) (sb : FsmState) (h : rf2OutXV prog sb = true) : cuIssueValid (fsmCuAt sb (rf2OutXJ prog sb)) = true :=`
+- **mwf_outVJ_issueValid** (line 885): `theorem mwf_outVJ_issueValid (prog : SmProg) (sb : FsmState) (h : rf2OutVV prog sb = true) : cuIssueValid (fsmCuAt sb (rf2OutVJ prog sb)) = true :=`
+- **mwf_wbX_not_w** (line 897): `theorem mwf_wbX_not_w (prog : SmProg) (s : FsmmState) (inp : SmIn) (w : Fin 8) (hqW : mwfCuQW prog s.base w) (hmq : rf3MemQ s) : ((fsmmComb prog s inp).wbXFire && ((fsmmComb prog s inp).wbXWid == BitVec.ofNat 3 w.val)) = false :=`
+- **mwf_wbV_not_w** (line 978): `theorem mwf_wbV_not_w (prog : SmProg) (s : FsmmState) (inp : SmIn) (w : Fin 8) (hqW : mwfCuQW prog s.base w) (hmq : rf3MemQ s) : ((fsmmComb prog s inp).wbVFire && ((fsmmComb prog s inp).wbVWid == BitVec.ofNat 3 w.val)) = false :=`
+- **mwf_wbXIdxw_lt32** (line 1036): `theorem mwf_wbXIdxw_lt32 (prog : SmProg) (s : FsmmState) (inp : SmIn) (hmq : rf3MemQ s) (hf : (fsmmComb prog s inp).wbXFire = true) : (fsmmComb prog s inp).wbXIdxw < 32#8 :=`
+- **mwf_wbVIdxw_lt32** (line 1070): `theorem mwf_wbVIdxw_lt32 (prog : SmProg) (s : FsmmState) (inp : SmIn) (hmq : rf3MemQ s) (hf : (fsmmComb prog s inp).wbVFire = true) : (fsmmComb prog s inp).wbVIdxw < 32#8 :=`
+- **mwf_bjEv_of_fireSimt_false** (line 1106): `theorem mwf_bjEv_of_fireSimt_false (prog : SmProg) (s : FsmmState) (inp : SmIn) (hf : (fsmmComb prog s inp).fireSimt = false) : (fsmmComb prog s inp).bjEv = BjEvent.nop :=`
+- **mwf_fireSimt_of_bjEv_ne** (line 1116): `theorem mwf_fireSimt_of_bjEv_ne (prog : SmProg) (s : FsmmState) (inp : SmIn) (h : (fsmmComb prog s inp).bjEv ≠ BjEvent.nop) : (fsmmComb prog s inp).fireSimt = true :=`
+- **mwf_brM_not_w** (line 1127): `theorem mwf_brM_not_w (prog : SmProg) (s : FsmmState) (inp : SmIn) (w : Fin 8) (hqW : mwfCuQW prog s.base w) (hmq : rf3MemQ s) : (((fsmmComb prog s inp).brMFire && (fsmmComb prog s inp).brMJump) && ((fsmmComb prog s inp).brMWid == BitVec.ofNat 3 w.val)) = false :=`
+- **mwf_warpEnd_not_w** (line 1200): `theorem mwf_warpEnd_not_w (prog : SmProg) (s : FsmmState) (inp : SmIn) (w : Fin 8) (hqW : mwfCuQW prog s.base w) : (fschWarpEnd s.base.ws ⟨(fsmmComb prog s inp).wsIn, (fsmmComb prog s inp).fenceEnd⟩ && ((fsmmComb prog s inp).wsIn.wcWid == BitVec.ofNat 3 w.val)) = false :=`
+- **mwf_sim_step_of_cuQW** (line 1243): `theorem mwf_sim_step_of_cuQW (prog : SmProg) (s : FsmmState) (is : IsaState) (w : Fin 8) (inp : SmIn) (hsim : rf1Sim s.base is w) (hqW : mwfCuQW prog s.base w) (hmq : rf3MemQ s) (hbj : (fsmmComb prog s inp).bjEv = BjEvent.nop) (hreq : (inp.reqFire && (inp.reqWid == BitVec.ofNat 3 w.val)) = false) (hpc : inp.pcReset = false) (hsep : ∀ w' : Fin 8, w' ≠ w → mwfSep s.base w' w) : rf1Sim (fsmmStep prog s inp).base is w :=`
+- **mwf_sep_step** (line 1258): `theorem mwf_sep_step (prog : SmProg) (s : FsmmState) (inp : SmIn) (h : ∀ w1 w2 : Fin 8, w1 ≠ w2 → mwfSep s.base w1 w2) (hd : mwfDispSepOk s.base inp) : ∀ w1 w2 : Fin 8, w1 ≠ w2 → mwfSep (fsmmStep prog s inp).base w1 w2 :=`
+- **mwf_isaUpd_shared** (line 1352): `theorem mwf_isaUpd_shared (iss : Fin 8 → IsaState) (w : Fin 8) (is : IsaState) : mwfSharedMem (mwfIsaUpd iss w is) :=`
+- **mwf_silent_step_all** (line 1379): `theorem mwf_silent_step_all (prog : SmProg) (s : FsmmState) (iss : Fin 8 → IsaState) (inp : SmIn) (hsim : mwfSim prog s iss) (hq : ∀ w : Fin 8, mwfCuQW prog s.base w) (hmq : rf3MemQ s) (hreq : inp.reqFire = false) (hpc : inp.pcReset = false) : mwfSim prog (fsmmStep prog s inp) iss ∧ rf3MemQ (fsmmStep prog s inp) :=`
+- **mwf_silent_run_all** (line 1400): `theorem mwf_silent_run_all (prog : SmProg) (iss : Fin 8 → IsaState) (n : Nat) : ∀ (s : FsmmState), mwfSim prog s iss → rf3MemQ s → (∀ k : Nat, k < n → ∀ w : Fin 8, mwfCuQW prog (fsmmRun prog s (List.replicate k smInNop)).base w) → mwfSim prog (fsmmRun prog s (List.replicate n smInNop)) iss ∧ rf3MemQ (fsmmRun prog s (List.replicate n smInNop)) :=`
+- **mwfT_dual_pre** (line 1455): `theorem mwfT_dual_pre : (rf1SimB (mwfSAtD 2).base (rf1Isa0 [0x00500093#32]) ⟨0, by decide⟩ && rf1SimB (mwfSAtD 2).base mwfIsa1 ⟨1, by decide⟩) = true :=`
+- **mwfT_dual_post** (line 1462): `theorem mwfT_dual_post : ((List.range' 7 6).any fun n => rf1SimB (mwfSAtD n).base (isaRun 1 (rf1Isa0 [0x00500093#32])) ⟨0, by decide⟩ && rf1SimB (mwfSAtD n).base (isaRun 1 mwfIsa1) ⟨1, by decide⟩) = true :=`
+- **mwfT_dual_stable** (line 1471): `theorem mwfT_dual_stable : ((List.range' 10 3).all fun n => rf1SimB (mwfSAtD n).base (isaRun 1 (rf1Isa0 [0x00500093#32])) ⟨0, by decide⟩ && rf1SimB (mwfSAtD n).base (isaRun 1 mwfIsa1) ⟨1, by decide⟩ && rf2QuiesceB mwfProg2 (mwfSAtD n).base ⟨0, by decide⟩ && rf2QuiesceB mwfProg2 (mwfSAtD n).base ⟨1, by decide⟩) = true :=`
+- **mwfT_iso_differential** (line 1483): `theorem mwfT_iso_differential : ((List.range 12).all fun n => (List.finRange 32).all fun x => (rf1RdX (mwfSAtS n).base ⟨0, by decide⟩ x == rf1RdX (mwfSAtD n).base ⟨0, by decide⟩ x)) = true :=`
+- **mwfT_cu_wid_stable** (line 1491): `theorem mwfT_cu_wid_stable : ((List.range 12).all fun n => (List.finRange 8).all fun j => !(((fsmCuAt (mwfSAtD n).base j).state != cuSIdle) && ((fsmCuAt (mwfSAtD (n + 1)).base j).state != cuSIdle)) || ((fsmCuAt (mwfSAtD (n + 1)).base j).controlReg.wid == (fsmCuAt (mwfSAtD n).base j).controlReg.wid)) = true :=`
+- **mwfT_cu_occupied_dual** (line 1502): `theorem mwfT_cu_occupied_dual : ((List.range 12).any fun n => ((List.finRange 8).any fun j => ((fsmCuAt (mwfSAtD n).base j).state != cuSIdle) && ((fsmCuAt (mwfSAtD n).base j).controlReg.wid == 0#3)) && (List.finRange 8).any fun j' => ((fsmCuAt (mwfSAtD n).base j').state != cuSIdle) && ((fsmCuAt (mwfSAtD n).base j').controlReg.wid == 1#3)) = true :=`
+
+### `VentusF/Progress.lean`
+
+- **prg_iterate_succ** (line 45): `theorem prg_iterate_succ {α : Type} (f : α → α) (k : Nat) (s : α) : prgIter f (k + 1) s = prgIter f k (f s) :=`
+- **prg_eventual_aux** (line 49): `theorem prg_eventual_aux {α : Type} (step : α → α) (done : α → Prop) (meas : α → Nat) (hprog : ∀ s, ¬ done s → done (step s) ∨ meas (step s) < meas s) : ∀ (m : Nat) (s : α), meas s ≤ m → ∃ k, done (prgIter step k s) :=`
+- **prg_eventual** (line 71): `theorem prg_eventual {α : Type} (step : α → α) (done : α → Prop) (meas : α → Nat) (hprog : ∀ s, ¬ done s → done (step s) ∨ meas (step s) < meas s) (s : α) : ∃ k, done (prgIter step k s) :=`
+- **prg_run_replicate** (line 77): `theorem prg_run_replicate (prog : SmProg) (s : FsmmState) (k : Nat) : fsmmRun prog s (List.replicate k smInNop) = prgIter (fun st => fsmmStep prog st smInNop) k s :=`
+- **prg_wbXValids_mask1** (line 102): `theorem prg_wbXValids_mask1 (a b c d : Bool) : ((BitVec.ofBool a).zeroExtend 6 ||| ((BitVec.ofBool b).zeroExtend 6 <<< 2) ||| ((BitVec.ofBool c).zeroExtend 6 <<< 3) ||| ((BitVec.ofBool d).zeroExtend 6 <<< 5)) &&& 1#6 = (if a then 1#6 else 0#6) :=`
+- **prg_wbXValids_eq0** (line 109): `theorem prg_wbXValids_eq0 (a b c d : Bool) (ha : a = false) (hb : b = false) (hc : c = false) (hd : d = false) : (BitVec.ofBool a).zeroExtend 6 ||| ((BitVec.ofBool b).zeroExtend 6 <<< 2) ||| ((BitVec.ofBool c).zeroExtend 6 <<< 3) ||| ((BitVec.ofBool d).zeroExtend 6 <<< 5) = 0#6 :=`
+- **prg_wbVValids_eq0** (line 117): `theorem prg_wbVValids_eq0 (a b : Bool) (ha : a = false) (hb : b = false) : (BitVec.ofBool a).zeroExtend 6 ||| ((BitVec.ofBool b).zeroExtend 6 <<< 2) = 0#6 :=`
+- **prg_getLsbD0_of_mask1** (line 122): `theorem prg_getLsbD0_of_mask1 (v : BitVec 6) (h : v &&& 1#6 = 1#6) : v.getLsbD 0 = true :=`
+- **prg_wb_choice0_fire** (line 134): `theorem prg_wb_choice0_fire (v : BitVec 6) (h : v &&& 1#6 = 1#6) : wbArbChoice (by decide) v = ⟨0, by decide⟩ ∧ wbArbOutValid v = true :=`
+- **prg_rra_choice_of_unique** (line 147): `theorem prg_rra_choice_of_unique {v : BitVec 8} {j : Fin 8} (hv : v.getLsbD j.val = true) (huniq : ∀ i : Fin 8, v.getLsbD i.val = true → i = j) (lg : Fin 8) : rraChoice (by decide) v lg = j :=`
+- **prg_rra_outValid_of_unique** (line 156): `theorem prg_rra_outValid_of_unique {v : BitVec 8} {j : Fin 8} (hv : v.getLsbD j.val = true) (huniq : ∀ i : Fin 8, v.getLsbD i.val = true → i = j) (lg : Fin 8) : rraOutValid (by decide) v lg = true :=`
+- **prg_rra_inReady_of_unique** (line 166): `theorem prg_rra_inReady_of_unique {v : BitVec 8} {j : Fin 8} (hv : v.getLsbD j.val = true) (huniq : ∀ i : Fin 8, v.getLsbD i.val = true → i = j) (lg : Fin 8) (r : Bool) : rraInReady (by decide) v lg r j = r :=`
+- **prg_rra_no_starvation** (line 181): `theorem prg_rra_no_starvation (v : BitVec 8) (i lg : Fin 8) (hv : v.getLsbD i.val = true) : ∃ t, t ≤ 7 ∧ rraChoice (by decide) v (rraRunN (by decide) v true lg t) = i :=`
+- **prg_cu_out_fire** (line 202): `theorem prg_cu_out_fire (s : CuState) (i : CuInputs) (hst : s.state = cuSOut) (hrdy : i.issueReady = true) : (cuStep s i).state = cuSIdle :=`
+- **prg_cu_out_hold** (line 217): `theorem prg_cu_out_hold (s : CuState) (i : CuInputs) (hst : s.state = cuSOut) (hrdy : i.issueReady = false) : (cuStep s i).state = cuSOut :=`
+- **prg_cu_add_complete** (line 231): `theorem prg_cu_add_complete (s : CuState) (i : CuInputs) (hst : s.state = cuSAdd) (hvr : s.valid = s.ready) : (cuStep s i).state = cuSOut :=`
+- **prg_cu_add_hold** (line 240): `theorem prg_cu_add_hold (s : CuState) (i : CuInputs) (hst : s.state = cuSAdd) (hvr : s.valid ≠ s.ready) : (cuStep s i).state = cuSAdd :=`
+- **prg_cu_idle_accept** (line 250): `theorem prg_cu_idle_accept (s : CuState) (i : CuInputs) (hst : s.state = cuSIdle) (hv : s.valid = 0#4) (hcv : i.controlValid = true) : (cuStep s i).state = (if cuReadyWire i.ctrl == 0xF#4 then cuSOut else cuSAdd) ∧ (cuStep s i).valid = 0xF#4 ∧ (cuStep s i).controlReg = i.ctrl :=`
+- **prg_cuBankFireK_sadd** (line 270): `theorem prg_cuBankFireK_sadd (s : CuState) (i : CuInputs) (k : Nat) (hst : s.state = cuSAdd) : cuBankFireK s i k = (i.bankV k && !(((s.ready >>> (BitVec.ofNat 4 k)) &&& 1#4) == 1#4)) :=`
+- **prg_cu_add_collect** (line 284): `theorem prg_cu_add_collect (s : CuState) (i : CuInputs) (hst : s.state = cuSAdd) (hvr : s.valid = 0xF#4) (hx : cuXbarOk i) (hsvc : ∀ k : Nat, k < 4 → (s.ready &&& (1#4 <<< (BitVec.ofNat 4 k))) = 0#4 → i.bankV k = true) : (cuStep s i).ready = 0xF#4 :=`
+- **prg_cu_collect_terminates** (line 362): `theorem prg_cu_collect_terminates (s : CuState) (i0 i1 : CuInputs) (hst : s.state = cuSAdd) (hvr : s.valid = 0xF#4) (hx : cuXbarOk i0) (hsvc : ∀ k : Nat, k < 4 → (s.ready &&& (1#4 <<< (BitVec.ofNat 4 k))) = 0#4 → i0.bankV k = true) : (cuStep s i0).state = cuSOut ∨ (cuStep (cuStep s i0) i1).state = cuSOut :=`
+- **prg_cu_full_cycle** (line 384): `theorem prg_cu_full_cycle (s : CuState) (is0 is1 is2 is3 : CuInputs) (hst : s.state = cuSIdle) (hv : s.valid = 0#4) (hcv : is0.controlValid = true) (hx1 : cuXbarOk is1) (hsvc1 : ∀ k : Nat, k < 4 → ((cuStep s is0).ready &&& (1#4 <<< (BitVec.ofNat 4 k))) = 0#4 → is1.bankV k = true) (hr1 : is1.issueReady = true) (hr2 : is2.issueReady = true) (hr3 : is3.issueReady = true) : ∃ k : Nat, k ≤ 4 ∧ (cuRun s (List.take k [is0, is1, is2, is3])).state = cuSIdle :=`
+- **prg_ib_deq_head** (line 430): `theorem prg_ib_deq_head [Inhabited α] (s : IbLane α) (i : IbLaneIn α) (hv : s.outV = true) (hr : i.outRdy = true) (hf : i.flush = false) (he : i.enqV = false) : s.abs = s.outBits :: (s.step i).abs :=`
+- **prg_ib_promote** (line 445): `theorem prg_ib_promote [Inhabited α] (s : IbLane α) (i : IbLaneIn α) (hsd : s.sd.mask = 0#2) (hq : s.q.canDeq = true) (hhead : s.q.deqBits.mask ≠ 0#2) (hr : i.outRdy = true) (hf : i.flush = false) : (s.step i).outV = true :=`
+- **prg_comb_i2iXFire** (line 484): `theorem prg_comb_i2iXFire (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).i2iXFire = (rraOutValid (by decide) (prgXReq prog s inp) s.base.lgXi2i && (ocDemux (prgCuRdy s) (rraOutValid (by decide) (prgVReq prog s inp) s.base.lgVi2i) (rraOutValid (by decide) (prgXReq prog s inp) s.base.lgXi2i) (smToCuCtrl (rf2HeadCtrl prog s.base (rraChoice (by decide) (prgVReq prog s inp) s.base.lgVi2i))) (smToCuCtrl (rf2HeadCtrl prog s.base (rraChoice (by decide) (prgXReq prog s inp) s.base.lgXi2i)))).in1Rdy) :=`
+- **prg_comb_cuIn_controlValid** (line 496): `theorem prg_comb_cuIn_controlValid (prog : SmProg) (s : FsmmState) (inp : SmIn) (j : Fin 8) : ((fsmmComb prog s inp).cuIn j).controlValid = (ocDemux (prgCuRdy s) (rraOutValid (by decide) (prgVReq prog s inp) s.base.lgVi2i) (rraOutValid (by decide) (prgXReq prog s inp) s.base.lgXi2i) (smToCuCtrl (rf2HeadCtrl prog s.base (rraChoice (by decide) (prgVReq prog s inp) s.base.lgVi2i))) (smToCuCtrl (rf2HeadCtrl prog s.base (rraChoice (by decide) (prgXReq prog s inp) s.base.lgXi2i)))).valid j :=`
+- **prg_comb_cuIn_ctrl** (line 508): `theorem prg_comb_cuIn_ctrl (prog : SmProg) (s : FsmmState) (inp : SmIn) (j : Fin 8) : ((fsmmComb prog s inp).cuIn j).ctrl = (ocDemux (prgCuRdy s) (rraOutValid (by decide) (prgVReq prog s inp) s.base.lgVi2i) (rraOutValid (by decide) (prgXReq prog s inp) s.base.lgXi2i) (smToCuCtrl (rf2HeadCtrl prog s.base (rraChoice (by decide) (prgVReq prog s inp) s.base.lgVi2i))) (smToCuCtrl (rf2HeadCtrl prog s.base (rraChoice (by decide) (prgXReq prog s inp) s.base.lgXi2i)))).bits j :=`
+- **prg_ocOrR_ocRdy2_of_two** (line 521): `theorem prg_ocOrR_ocRdy2_of_two (f : Fin 8 → Bool) (l j : Fin 8) (hl : f l = true) (hj : f j = true) (hne : l ≠ j) : ocOrR (ocRdy2 f) = true :=`
+- **prg_i2iX_accept** (line 555): `theorem prg_i2iX_accept (prog : SmProg) (s : FsmmState) (inp : SmIn) (w l j : Fin 8) (hbit : (prgXReq prog s inp).getLsbD w.val = true) (huniq : ∀ i : Fin 8, (prgXReq prog s inp).getLsbD i.val = true → i = w) (hl : cuControlRdy (fsmCuAt s.base l) = true) (hj : cuControlRdy (fsmCuAt s.base j) = true) (hne : l ≠ j) (hsel : j.val = ocPrioLowest (ocRdy2 (prgCuRdy s))) : (fsmmComb prog s inp).i2iXFire = true ∧ cuControlFire (fsmCuAt s.base j) ((fsmmComb prog s inp).cuIn j) = true ∧ ((fsmmComb prog s inp).cuIn j).ctrl = smToCuCtrl (rf2HeadCtrl prog s.base w) :=`
+- **prg_arrAt_map8** (line 594): `theorem prg_arrAt_map8 {α : Type} (f : Fin 8 → α) (i : Fin 8) (d : α) : smArrAt (((List.finRange 8).map f).toArray) i.val d = f i :=`
+- **prg_step_cu** (line 601): `theorem prg_step_cu (prog : SmProg) (s : FsmmState) (inp : SmIn) (j : Fin 8) : fsmCuAt (fsmmStep prog s inp).base j = fschCuStep (fsmCuAt s.base j) ((fsmmComb prog s inp).cuIn j) :=`
+- **prg_comb_wbXValids** (line 632): `theorem prg_comb_wbXValids (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).wbXValids = (BitVec.ofBool (rf2FireSAlu prog s.base && (rf2OutXC prog s.base).row.wxd && ((rf2OutXC prog s.base).row.branch != 1#2))).zeroExtend 6 ||| ((BitVec.ofBool (fsmmComb prog s inp).lsuWbXV).zeroExtend 6 <<< 2) ||| ((BitVec.ofBool (rf2FireCsr prog s.base && (rf2OutXC prog s.base).row.wxd)).zeroExtend 6 <<< 3) ||| ((BitVec.ofBool (rf2FireMul prog s.base && (rf2OutVC prog s.base).row.wxd)).zeroExtend 6 <<< 5) :=`
+- **prg_comb_wbVValids** (line 643): `theorem prg_comb_wbVValids (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).wbVValids = (BitVec.ofBool (rf2OutVV prog s.base && ((issRoute (rf2IssCV prog s.base)).any (fun t => decide (t = IssPort.vALU))) && (rf2OutVC prog s.base).row.wvd && !(rf2OutVC prog s.base).row.simtStack)).zeroExtend 6 ||| ((BitVec.ofBool (fsmmComb prog s inp).lsuWbVV).zeroExtend 6 <<< 2) :=`
+- **prg_comb_wbXChoice** (line 652): `theorem prg_comb_wbXChoice (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).wbXChoice = wbArbChoice (by decide) (fsmmComb prog s inp).wbXValids :=`
+- **prg_comb_wbXFire** (line 656): `theorem prg_comb_wbXFire (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).wbXFire = wbArbOutValid (fsmmComb prog s inp).wbXValids :=`
+- **prg_comb_wbVFire** (line 660): `theorem prg_comb_wbVFire (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).wbVFire = wbArbOutValid (fsmmComb prog s inp).wbVValids :=`
+- **prg_comb_wbXWid** (line 665): `theorem prg_comb_wbXWid (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).wbXWid = (if (fsmmComb prog s inp).wbXChoice.val = 2 then (fsmmComb prog s inp).rspTag.warp_id else if (fsmmComb prog s inp).wbXChoice.val = 5 then (cuIssueBits (fsmCuAt s.base (rf2OutVJ prog s.base))).control.wid else (rf2OutXBits prog s.base).control.wid) :=`
+- **prg_comb_wbXIdxw** (line 673): `theorem prg_comb_wbXIdxw (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).wbXIdxw = (if (fsmmComb prog s inp).wbXChoice.val = 2 then (fsmmComb prog s inp).rspTag.reg_idxw else if (fsmmComb prog s inp).wbXChoice.val = 5 then (rf2OutVC prog s.base).regIdxw else (rf2OutXC prog s.base).regIdxw) :=`
+- **prg_comb_wbXWxd** (line 681): `theorem prg_comb_wbXWxd (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).wbXWxd = (if (fsmmComb prog s inp).wbXChoice.val = 2 then (fsmmComb prog s inp).rspTag.wxd else if (fsmmComb prog s inp).wbXChoice.val = 5 then (rf2OutVC prog s.base).row.wxd else (rf2OutXC prog s.base).row.wxd) :=`
+- **prg_comb_wbXData** (line 689): `theorem prg_comb_wbXData (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).wbXData = (if (fsmmComb prog s inp).wbXChoice.val = 0 then (rf2AluRes prog s.base).1 else if (fsmmComb prog s inp).wbXChoice.val = 2 then (fsmmComb prog s inp).rspData ⟨0, by decide⟩ else if (fsmmComb prog s inp).wbXChoice.val = 5 then (fsmmComb prog s inp).mulData else 0#32) :=`
+- **prg_saluBeat_of_issue** (line 700): `theorem prg_saluBeat_of_issue (prog : SmProg) (s : FsmmState) (w : Fin 8) (rdB : BitVec 8) (v : BitVec 32) (wxd : Bool) (h : prgIssueState prog s w rdB v wxd) : rf3SaluBeat prog s smInNop w rdB v wxd :=`
+- **prg_stmt_salu** (line 825): `theorem prg_stmt_salu (prog : SmProg) (s : FsmmState) (is : IsaState) (w : Fin 8) (k m : Nat) (hsim : rf3Sim prog s is w) (hmq : rf3MemQ s) (hdisp : rf1DispOk s.base w) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .salu) (hpcT : rf1PcOk s.base w (is.pc + 4#32)) (hsil1 : ∀ i : Nat, i < k → rf2CuQ prog (fsmmRun prog s (List.replicate i smInNop)).base) (hissue : prgIssueState prog (fsmmRun prog s (List.replicate k smInNop)) w (BitVec.ofNat 8 (isaRdF (isaFetch is)).val) (rf3SaluOut is) (decDecode (isaFetch is)).wxd) (hsil2 : ∀ i : Nat, i < m → rf2CuQ prog (fsmmRun prog s (List.replicate (k + 1 + i) smInNop)).base) : rf3Sim prog (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) (isaStep is) w ∧ rf3MemQ (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) :=`
+
+### `VentusF/ProgressJoin.lean`
+
+- **prj_bjStackJump_join** (line 37): `theorem prj_bjStackJump_join (st : BjStackState 4 32) (pc : BitVec 32) : bjStackJump st (bjJoinIn pc) = bjCanPop st pc :=`
+- **prj_bjStackStep_join_id** (line 41): `theorem prj_bjStackStep_join_id (st : BjStackState 4 32) (pc : BitVec 32) (h : bjCanPop st pc = false) : bjStackStep st (bjJoinIn pc) = st :=`
+- **prj_bjSys_join_id** (line 53): `theorem prj_bjSys_join_id (s : BjSysState 4 32) (pc : BitVec 32) (h : bjCanPop s.stack pc = false) : (bjSysStep s (.join pc)).1 = s :=`
+- **prj_isaExecJoin_nil** (line 67): `theorem prj_isaExecJoin_nil (is : IsaState) (h : is.bjstk = []) : isaExecJoin is = { is with pc :=`
+- **prj_isaExecJoin_cons** (line 72): `theorem prj_isaExecJoin_cons (is : IsaState) (e : IsaBjEntry) (rest : List IsaBjEntry) (h : is.bjstk = e :: rest) : isaExecJoin is = (if e.reconPC = is.pc then { is with bjstk :=`
+- **prj_join_step** (line 98): `theorem prj_join_step (prog : SmProg) (s : FsmmState) (inp : SmIn) (is : IsaState) (w : Fin 8) (pcE : BitVec 32) (hsim : rfvSim prog s is w) (hmq : rf3MemQ s) (hpcT : rf1PcOk s.base w (is.pc + 4#32)) (hpcE : pcE = is.pc) (hev : prjJoinBeat prog s inp w pcE) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .vjoin) : rfvSim prog (fsmmStep prog s inp) (isaStep is) w ∧ rf3MemQ (fsmmStep prog s inp) :=`
+- **prj_stmt_join_of_progress** (line 276): `theorem prj_stmt_join_of_progress (prog : SmProg) (s : FsmmState) (is : IsaState) (w : Fin 8) (k m : Nat) (hsim : rfvSim prog s is w) (hmq : rf3MemQ s) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .vjoin) (hpcT : rf1PcOk s.base w (is.pc + 4#32)) (hsil1 : ∀ i : Nat, i < k → rf2CuQ prog (fsmmRun prog s (List.replicate i smInNop)).base) (hev : prjJoinBeat prog (fsmmRun prog s (List.replicate k smInNop)) smInNop w is.pc) (hsil2 : ∀ i : Nat, i < m → rf2CuQ prog (fsmmRun prog s (List.replicate (k + 1 + i) smInNop)).base) : rfvSim prog (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) (isaStep is) w ∧ rf3MemQ (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) :=`
+- **prj_saAlu_in3_irrel** (line 329): `theorem prj_saAlu_in3_irrel (f : BitVec 5) (a b c : BitVec 32) : saAlu f a b c = saAlu f a b 0#32 :=`
+- **prj_isaAlu_saAlu** (line 335): `theorem prj_isaAlu_saAlu (fn : BitVec 6) (a b : BitVec 32) (hlt : fn.toNat < 20) (h13 : fn ≠ 13#6) (h15 : fn ≠ 15#6) : isaAlu fn a b = (saAlu (fn.extractLsb' 0 5) a b 0#32).1 :=`
+- **prj_aluRes_eq_of_collect** (line 424): `theorem prj_aluRes_eq_of_collect (prog : SmProg) (s : FsmState) (is : IsaState) (j : Fin 8) (hj : rf2OutXJ prog s = j) (hrow : (rf2CuIssCtrl prog s j).row = decDecode (isaFetch is)) (hsrc1 : (cuIssueBits (fsmCuAt s j)).alu_src1 ⟨0, by decide⟩ = isaIn1Row is (isaFetch is) (decDecode (isaFetch is)) 0) (hsrc2 : (cuIssueBits (fsmCuAt s j)).alu_src2 ⟨0, by decide⟩ = isaIn2Row is (isaFetch is) (decDecode (isaFetch is)) 0) (hmul : (decDecode (isaFetch is)).mul = false) (hsfu : (decDecode (isaFetch is)).sfu = false) (hfn : (decDecode (isaFetch is)).aluFn.toNat < 20) (hfn13 : (decDecode (isaFetch is)).aluFn ≠ 13#6) (hfn15 : (decDecode (isaFetch is)).aluFn ≠ 15#6) : (rf2AluRes prog s).1 = rf3SaluOut is :=`
+- **prj_fsch_idle_accept** (line 481): `theorem prj_fsch_idle_accept (s : CuState) (i : CuInputs) (hst : s.state = cuSIdle) (hv : s.valid = 0#4) (hcv : i.controlValid = true) (hnr : fschCuNoRaceIn i) : (fschCuStep s i).state = (if cuReadyWire i.ctrl == 0xF#4 then cuSOut else cuSAdd) ∧ (fschCuStep s i).valid = 0xF#4 ∧ (fschCuStep s i).controlReg = i.ctrl :=`
+- **prj_fsch_add_complete** (line 492): `theorem prj_fsch_add_complete (s : CuState) (i : CuInputs) (hst : s.state = cuSAdd) (hvr : s.valid = s.ready) (hnr : fschCuNoRaceIn i) : (fschCuStep s i).state = cuSOut :=`
+- **prj_fsch_add_hold** (line 501): `theorem prj_fsch_add_hold (s : CuState) (i : CuInputs) (hst : s.state = cuSAdd) (hvr : s.valid ≠ s.ready) (hnr : fschCuNoRaceIn i) : (fschCuStep s i).state = cuSAdd :=`
+- **prj_fsch_add_collect** (line 510): `theorem prj_fsch_add_collect (s : CuState) (i : CuInputs) (hst : s.state = cuSAdd) (hvr : s.valid = 0xF#4) (hx : cuXbarOk i) (hsvc : ∀ k : Nat, k < 4 → (s.ready &&& (1#4 <<< (BitVec.ofNat 4 k))) = 0#4 → i.bankV k = true) (hnr : fschCuNoRaceIn i) : (fschCuStep s i).ready = 0xF#4 :=`
+- **prj_fsch_collect_terminates** (line 522): `theorem prj_fsch_collect_terminates (s : CuState) (i0 i1 : CuInputs) (hst : s.state = cuSAdd) (hvr : s.valid = 0xF#4) (hx : cuXbarOk i0) (hsvc : ∀ k : Nat, k < 4 → (s.ready &&& (1#4 <<< (BitVec.ofNat 4 k))) = 0#4 → i0.bankV k = true) (hnr0 : fschCuNoRaceIn i0) (hnr1 : fschCuNoRaceIn i1) : (fschCuStep s i0).state = cuSOut ∨ (fschCuStep (fschCuStep s i0) i1).state = cuSOut :=`
+- **prj_fsch_pres_controlReg** (line 542): `theorem prj_fsch_pres_controlReg (s : CuState) (i : CuInputs) (hv : s.valid = 0xF#4) : (fschCuStep s i).controlReg = s.controlReg :=`
+- **prj_fsch_pres_valid** (line 562): `theorem prj_fsch_pres_valid (s : CuState) (i : CuInputs) (hv : s.valid = 0xF#4) (hst : s.state = cuSAdd) : (fschCuStep s i).valid = 0xF#4 :=`
+- **prj_machine_accept** (line 590): `theorem prj_machine_accept (prog : SmProg) (s : FsmmState) (inp : SmIn) (w l j : Fin 8) (hbit : (prgXReq prog s inp).getLsbD w.val = true) (huniq : ∀ i : Fin 8, (prgXReq prog s inp).getLsbD i.val = true → i = w) (hl : cuControlRdy (fsmCuAt s.base l) = true) (hj : cuControlRdy (fsmCuAt s.base j) = true) (hne : l ≠ j) (hsel : j.val = ocPrioLowest (ocRdy2 (prgCuRdy s))) (hnr : fschCuNoRaceIn ((fsmmComb prog s inp).cuIn j)) : (fsmCuAt (fsmmStep prog s inp).base j).controlReg = smToCuCtrl (rf2HeadCtrl prog s.base w) ∧ (fsmCuAt (fsmmStep prog s inp).base j).valid = 0xF#4 ∧ (fsmCuAt (fsmmStep prog s inp).base j).state = (if cuReadyWire (smToCuCtrl (rf2HeadCtrl prog s.base w)) == 0xF#4 then cuSOut else cuSAdd) :=`
+- **prj_bv2_eq0** (line 621): `theorem prj_bv2_eq0 (b : BitVec 2) (h1 : b ≠ 1#2) (h2 : b ≠ 2#2) (h3 : b ≠ 3#2) : b = 0#2 :=`
+- **prj_issRoute_salu** (line 638): `theorem prj_issRoute_salu (c : SmCtrl) (r : DecCtrlRow) (hr : c.row = r) (hfptc : (r.fp || r.tc) = false) (hbar : r.barrier = false) (hcsr : (r.csr != 0#2) = false) (hisvec : r.isvec = false) (hmul : r.mul = false) (hsfu : r.sfu = false) (hmem : r.memCmd = 0#2) : issRoute (smToIssCtrl c) = [.sALU] ∧ smInstIsVec c = false :=`
+- **prj_issueState_of_pack** (line 729): `theorem prj_issueState_of_pack (prog : SmProg) (s : FsmmState) (is : IsaState) (w j : Fin 8) (hcls : isaClassify (isaFetch is) = .salu) (hmq : rf3MemQ s) (hpk : prjIssuePack prog s is w j) : prgIssueState prog s w (BitVec.ofNat 8 (isaRdF (isaFetch is)).val) (rf3SaluOut is) (decDecode (isaFetch is)).wxd :=`
+- **prj_run_cu** (line 795): `theorem prj_run_cu (prog : SmProg) (s : FsmmState) (ins : List SmIn) (j : Fin 8) : fsmCuAt (fsmmRun prog s ins).base j = fschCuRun (fsmCuAt s.base j) (prjCuTrace prog s ins j) :=`
+- **prjCuTrace_take** (line 808): `theorem prjCuTrace_take (prog : SmProg) (s : FsmmState) (ins : List SmIn) (j : Fin 8) (k : Nat) : prjCuTrace prog s (ins.take k) j = (prjCuTrace prog s ins j).take k :=`
+- **prj_reach_cu_sOut** (line 829): `theorem prj_reach_cu_sOut (prog : SmProg) (s : FsmmState) (w l j : Fin 8) (hbit : (prgXReq prog s smInNop).getLsbD w.val = true) (huniq : ∀ i : Fin 8, (prgXReq prog s smInNop).getLsbD i.val = true → i = w) (hl : cuControlRdy (fsmCuAt s.base l) = true) (hj : cuControlRdy (fsmCuAt s.base j) = true) (hne : l ≠ j) (hsel : j.val = ocPrioLowest (ocRdy2 (prgCuRdy s))) (i0 i1 i2 : CuInputs) (htr : prjCuTrace prog s [smInNop, smInNop, smInNop] j = [i0, i1, i2]) (hnr : ∀ x ∈ [i0, i1, i2], fschCuNoRaceIn x) (hx1 : cuXbarOk i1) (hsvc1 : ∀ k : Nat, k < 4 → ((fschCuStep (fsmCuAt s.base j) i0).ready &&& (1#4 <<< (BitVec.ofNat 4 k))) = 0#4 → i1.bankV k = true) : ∃ k : Nat, k ≤ 3 ∧ (fsmCuAt (fsmmRun prog s (List.replicate k smInNop)).base j).state = cuSOut ∧ (fsmCuAt (fsmmRun prog s (List.replicate k smInNop)).base j).controlReg = smToCuCtrl (rf2HeadCtrl prog s.base w) :=`
+- **prj_stmt_salu** (line 925): `theorem prj_stmt_salu (prog : SmProg) (s : FsmmState) (is : IsaState) (w j : Fin 8) (k m : Nat) (hsim : rf3Sim prog s is w) (hmq : rf3MemQ s) (hdisp : rf1DispOk s.base w) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .salu) (hpcT : rf1PcOk s.base w (is.pc + 4#32)) (hsil1 : ∀ i : Nat, i < k → rf2CuQ prog (fsmmRun prog s (List.replicate i smInNop)).base) (hpk : prjIssuePack prog (fsmmRun prog s (List.replicate k smInNop)) is w j) (hsil2 : ∀ i : Nat, i < m → rf2CuQ prog (fsmmRun prog s (List.replicate (k + 1 + i) smInNop)).base) : rf3Sim prog (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) (isaStep is) w ∧ rf3MemQ (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) :=`
+
+### `VentusF/Refine.lean`
+
+- **rf1_rdX_zero** (line 187): `theorem rf1_rdX_zero (s : FsmState) (w : Fin 8) : rf1RdX s w 0 = 0#32 :=`
+- **rf1_rdX_unfold** (line 190): `theorem rf1_rdX_unfold (s : FsmState) (w : Fin 8) (x : Fin 32) (h : x ≠ 0) : rf1RdX s w x = rf_read (fsmSrfAt s (rf1BankS w x)).mem (rf1AddrS s w x) :=`
+- **rf1_arrAt_map4** (line 196): `theorem rf1_arrAt_map4 {α : Type} (f : Fin 4 → α) (i : Fin 4) (d : α) : smArrAt (((List.finRange 4).map f).toArray) i.val d = f i :=`
+- **rf1_srfAt_step** (line 207): `theorem rf1_srfAt_step (s : FsmState) (rin : Fin 4 → RfSInputs) (i : Fin 4) : fsmSrfAt { s with srf :=`
+- **rf1_rdX_write_hit** (line 213): `theorem rf1_rdX_write_hit (s : FsmState) (w : Fin 8) (rin : Fin 4 → RfSInputs) (y : Fin 32) (hy : y ≠ 0) (hwe : (rin (rf1BankS w y)).rdwen = true) (haddr : (rin (rf1BankS w y)).rdidx.toFin = rf1AddrS s w y) : rf1RdX { s with srf :=`
+- **rf1_rdX_write_miss** (line 224): `theorem rf1_rdX_write_miss (s : FsmState) (w : Fin 8) (rin : Fin 4 → RfSInputs) (y : Fin 32) (hy : y ≠ 0) (h : (rin (rf1BankS w y)).rdwen = false ∨ (rin (rf1BankS w y)).rdidx.toFin ≠ rf1AddrS s w y) : rf1RdX { s with srf :=`
+- **rf1_rdX_write_x0** (line 240): `theorem rf1_rdX_write_x0 (s : FsmState) (w : Fin 8) (rin : Fin 4 → RfSInputs) : rf1RdX { s with srf :=`
+- **rf1_mapS_inj** (line 246): `theorem rf1_mapS_inj : ((List.range 249).all fun b => (List.range 8).all fun w => (List.range 32).all fun x => (List.range 32).all fun y => let bk : Nat → BitVec 2 :=`
+- **rf1_mapV_inj** (line 259): `theorem rf1_mapV_inj : ((List.range 249).all fun b => (List.range 8).all fun w => (List.range 32).all fun x => (List.range 32).all fun y => let bk : Nat → BitVec 2 :=`
+- **rf1SimB_sound** (line 273): `theorem rf1SimB_sound (s : FsmState) (is : IsaState) (w : Fin 8) (h : rf1SimB s is w = true) : rf1Sim s is w :=`
+- **rf1_init_rdX** (line 300): `theorem rf1_init_rdX : ((List.finRange 32).all fun x => rf1RdX fsmInit (wsFin 0#3) x == 0#32) = true :=`
+- **rf1_cls_addi** (line 330): `theorem rf1_cls_addi : isaClassify 0x00500093#32 = .salu :=`
+- **rf1T_salu_addi_pre** (line 333): `theorem rf1T_salu_addi_pre : rf1SimB (rf1SAt rf1ProgSalu 1) (rf1Isa0 [0x00500093#32]) rf1W = true :=`
+- **rf1T_salu_addi_post** (line 339): `theorem rf1T_salu_addi_post : ((List.range' 7 3).all fun n => rf1SimB (rf1SAt rf1ProgSalu n) (isaRun 1 (rf1Isa0 [0x00500093#32])) rf1W) = true :=`
+- **rf1T_salu_addi_wb** (line 345): `theorem rf1T_salu_addi_wb : (rf1CAt rf1ProgSalu 6).wbXFire = true ∧ (rf1CAt rf1ProgSalu 6).wbXIdxw = 1#8 ∧ (rf1CAt rf1ProgSalu 6).wbXData = 5#32 :=`
+- **rf1_cls_beq** (line 360): `theorem rf1_cls_beq : isaClassify 0x00000463#32 = .sbr :=`
+- **rf1T_sbr_beq_pre** (line 363): `theorem rf1T_sbr_beq_pre : rf1SimB (rf1SAt rf1ProgBeq 1) (rf1Isa0 [0x00000463#32, 0x00900193#32, 0x00700213#32]) rf1W = true :=`
+- **rf1T_sbr_beq_resolve** (line 370): `theorem rf1T_sbr_beq_resolve : ((List.range 9).any fun k => let c :=`
+- **rf1T_sbr_beq_flush** (line 377): `theorem rf1T_sbr_beq_flush : ((List.range' 6 4).all fun n => rf1RdX (rf1SAt rf1ProgBeq n) rf1W ⟨1, by decide⟩ == 0#32) = true :=`
+- **rf1T_sbr_beq_post** (line 384): `theorem rf1T_sbr_beq_post : ((List.range' 7 3).any fun n => rf1SimB (rf1SAt rf1ProgBeq n) (isaRun 1 (rf1Isa0 [0x00000463#32, 0x00900193#32, 0x00700213#32])) rf1W) = true :=`
+- **rf1_cls_jal** (line 396): `theorem rf1_cls_jal : isaClassify 0x008002EF#32 = .jal :=`
+- **rf1T_jal_pre** (line 400): `theorem rf1T_jal_pre : rf1SimB (rf1SAt rf1ProgJal 1) (rf1Isa0 [0x008002EF#32]) rf1W = true :=`
+- **rf1T_jal_post** (line 404): `theorem rf1T_jal_post : ((List.range' 7 3).any fun n => rf1SimB (rf1SAt rf1ProgJal n) (isaRun 1 (rf1Isa0 [0x008002EF#32])) rf1W) = true :=`
+- **rf1T_jal_wb** (line 410): `theorem rf1T_jal_wb : ((List.range 9).any fun k => let c :=`
+- **rf1_cls_jalr** (line 425): `theorem rf1_cls_jalr : isaClassify 0x008002E7#32 = .jalr :=`
+- **rf1T_jalr_pre** (line 427): `theorem rf1T_jalr_pre : rf1SimB (rf1SAt rf1ProgJalr 1) (rf1Isa0 [0x008002E7#32]) rf1W = true :=`
+- **rf1T_jalr_post** (line 431): `theorem rf1T_jalr_post : ((List.range' 7 3).any fun n => rf1SimB (rf1SAt rf1ProgJalr n) (isaRun 1 (rf1Isa0 [0x008002E7#32])) rf1W) = true :=`
+- **rf1_cls_mulhsu** (line 445): `theorem rf1_cls_mulhsu : isaClassify 0x0220A1B3#32 = .salu :=`
+- **rf1T_mul_pre** (line 447): `theorem rf1T_mul_pre : rf1SimB (rf1SAt rf1ProgMul 1) (rf1Isa0 [0x0220A1B3#32]) rf1W = true :=`
+- **rf1T_mul_wb** (line 452): `theorem rf1T_mul_wb : ((List.range 9).any fun k => let c :=`
+- **rf1T_mul_post** (line 459): `theorem rf1T_mul_post : ((List.range' 7 3).any fun n => rf1SimB (rf1SAt rf1ProgMul n) (isaRun 1 (rf1Isa0 [0x0220A1B3#32])) rf1W) = true :=`
+- **rf1T_endprg_pre** (line 471): `theorem rf1T_endprg_pre : rf1SimB (rf1SAt rf1ProgEnd 1) (rf1Isa0 [0x0000400B#32]) rf1W = true :=`
+- **rf1T_endprg_ws** (line 476): `theorem rf1T_endprg_ws : ((List.range 9).any fun k => (rf1CAt rf1ProgEnd k).fireWs) = true :=`
+- **rf1T_endprg_post** (line 483): `theorem rf1T_endprg_post : ((List.range' 7 3).any fun n => rf1SimB (rf1SAt rf1ProgEnd n) (isaRun 1 (rf1Isa0 [0x0000400B#32])) rf1W) = true :=`
+- **rf1_cls_ecall** (line 494): `theorem rf1_cls_ecall : isaClassify 0x00000073#32 = .illegal :=`
+- **rf1T_nop_post** (line 498): `theorem rf1T_nop_post : ((List.range' 7 3).all fun n => rf1SimB (rf1SAt rf1ProgNop n) (isaRun 1 (rf1Isa0 [0x00000073#32])) rf1W) = true :=`
+
+### `VentusF/RefineGen.lean`
+
+- **rf2_step_bj** (line 36): `theorem rf2_step_bj (prog : SmProg) (s : FsmState) (inp : SmIn) : (fsmStep prog s inp).bj = s.bj :=`
+- **rf2_step_csr** (line 40): `theorem rf2_step_csr (prog : SmProg) (s : FsmState) (inp : SmIn) (h : inp.reqFire = false) : (fsmStep prog s inp).csr = s.csr :=`
+- **rf2_comb_rfInV_rdwen** (line 46): `theorem rf2_comb_rfInV_rdwen (prog : SmProg) (s : FsmState) (inp : SmIn) (i : Fin 4) : ((fsmComb prog s inp).rfInV i).rdwen = false :=`
+- **rf2_step_vrf_mem** (line 50): `theorem rf2_step_vrf_mem (prog : SmProg) (s : FsmState) (inp : SmIn) (i : Fin 4) : (fsmVrfAt (fsmStep prog s inp) i).mem = (fsmVrfAt s i).mem :=`
+- **rf2_rdV_step** (line 59): `theorem rf2_rdV_step (prog : SmProg) (s : FsmState) (inp : SmIn) (w : Fin 8) (v : Fin 32) (t : Fin 32) (h : inp.reqFire = false) : rf1RdV (fsmStep prog s inp) w v t = rf1RdV s w v t :=`
+- **rf2_decDecode_zero** (line 71): `theorem rf2_decDecode_zero : decDecode 0#32 = decDefaultRow :=`
+- **rf2_route_of_default** (line 74): `theorem rf2_route_of_default (c : SmCtrl) (h : c.row = decDefaultRow) : issRoute (smToIssCtrl c) = [IssPort.sALU] :=`
+- **rf2_instIsVec_of_default** (line 79): `theorem rf2_instIsVec_of_default (c : SmCtrl) (h : c.row = decDefaultRow) : smInstIsVec c = false :=`
+- **rf2_default_wxd** (line 84): `theorem rf2_default_wxd : decDefaultRow.wxd = false :=`
+- **rf2_default_branch** (line 87): `theorem rf2_default_branch : decDefaultRow.branch = 0#2 :=`
+- **rf2_route_salu_ne_ws** (line 90): `theorem rf2_route_salu_ne_ws : ([IssPort.sALU] == [IssPort.ws]) = false :=`
+- **rf2_route_salu_ne_csr** (line 91): `theorem rf2_route_salu_ne_csr : ([IssPort.sALU] == [IssPort.CSR]) = false :=`
+- **rf2_route_salu_ne_mul** (line 92): `theorem rf2_route_salu_ne_mul : ([IssPort.sALU] == [IssPort.MUL]) = false :=`
+- **rf2_comb_wbXFire** (line 201): `theorem rf2_comb_wbXFire (prog : SmProg) (s : FsmState) (inp : SmIn) : (fsmComb prog s inp).wbXFire = wbArbOutValid (rf2WbXValids prog s) :=`
+- **rf2_comb_brFire** (line 204): `theorem rf2_comb_brFire (prog : SmProg) (s : FsmState) (inp : SmIn) : (fsmComb prog s inp).brFire = rf2BrFire prog s :=`
+- **rf2_comb_fireWs** (line 207): `theorem rf2_comb_fireWs (prog : SmProg) (s : FsmState) (inp : SmIn) : (fsmComb prog s inp).fireWs = (rf2OutXV prog s && (issRoute (rf2IssC prog s) == [.ws]) && rf2WcRdyF prog s inp) :=`
+- **rf2_comb_rfInS_rdwen** (line 211): `theorem rf2_comb_rfInS_rdwen (prog : SmProg) (s : FsmState) (inp : SmIn) (i : Fin 4) : ((fsmComb prog s inp).rfInS i).rdwen = ((fsmComb prog s inp).wbXFire && (fsmComb prog s inp).wbXWxd && ((fsmComb prog s inp).wbXIdxw != 0#8) && (ocWbScaBankId (fsmComb prog s inp).wbXIdxw (fsmComb prog s inp).wbXWid == BitVec.ofNat 2 i.val)) :=`
+- **rf2_comb_pccIn** (line 218): `theorem rf2_comb_pccIn (prog : SmProg) (s : FsmState) (inp : SmIn) (w : Fin 8) : (fsmComb prog s inp).pccIn w = (if inp.pcReset then ⟨0#32, false, 1#2, 0#2⟩ else if inp.reqFire && (inp.reqWid == BitVec.ofNat 3 w.val) then ⟨inp.reqPC, false, 1#2, 0#2⟩ else if (fsmComb prog s inp).brFire && (fsmComb prog s inp).brJump && ((fsmComb prog s inp).brWid == BitVec.ofNat 3 w.val) then ⟨(fsmComb prog s inp).brTarget, false, 1#2, 0#2⟩ else if (fsmComb prog s inp).fetchV && ((fsmComb prog s inp).fetchWid == BitVec.ofNat 3 w.val) then ⟨0#32, false, 2#2, 0#2⟩ else ⟨0#32, false, 0#2, 0#2⟩) :=`
+- **rf2_comb_wsIn_reqFire** (line 231): `theorem rf2_comb_wsIn_reqFire (prog : SmProg) (s : FsmState) (inp : SmIn) : (fsmComb prog s inp).wsIn.warpReqFire = inp.reqFire :=`
+- **rf2_comb_wsIn_wcFire** (line 234): `theorem rf2_comb_wsIn_wcFire (prog : SmProg) (s : FsmState) (inp : SmIn) : (fsmComb prog s inp).wsIn.warpControlFire = (fsmComb prog s inp).fireWs :=`
+- **rf2_step_ws** (line 237): `theorem rf2_step_ws (prog : SmProg) (s : FsmState) (inp : SmIn) : (fsmStep prog s inp).ws = fschWsStep s.ws ⟨(fsmComb prog s inp).wsIn, 0xFF#8⟩ :=`
+- **rf2_step_pcc** (line 240): `theorem rf2_step_pcc (prog : SmProg) (s : FsmState) (inp : SmIn) (w : Fin 8) : (fsmStep prog s inp).pcc w = pccStep (s.pcc w) ((fsmComb prog s inp).pccIn w) :=`
+- **rf2_pack8_getLsbD** (line 246): `theorem rf2_pack8_getLsbD (f : Fin 8 → Bool) (j : Fin 8) : (smPack8 f).getLsbD j.val = f j :=`
+- **rf2_outXC_row_default** (line 253): `theorem rf2_outXC_row_default (prog : SmProg) (s : FsmState) (hq : rf2CuQ prog s) (h : rf2OutXV prog s = true) : (rf2OutXC prog s).row = decDefaultRow :=`
+- **rf2_outVC_row_default** (line 262): `theorem rf2_outVC_row_default (prog : SmProg) (s : FsmState) (hq : rf2CuQ prog s) (h : rf2OutVV prog s = true) : (rf2OutVC prog s).row = decDefaultRow :=`
+- **rf2_nop_no_wbXFire** (line 273): `theorem rf2_nop_no_wbXFire (prog : SmProg) (s : FsmState) (inp : SmIn) (hq : rf2CuQ prog s) : (fsmComb prog s inp).wbXFire = false :=`
+- **rf2_nop_no_brFire** (line 305): `theorem rf2_nop_no_brFire (prog : SmProg) (s : FsmState) (inp : SmIn) (hq : rf2CuQ prog s) : (fsmComb prog s inp).brFire = false :=`
+- **rf2_nop_no_fireWs** (line 316): `theorem rf2_nop_no_fireWs (prog : SmProg) (s : FsmState) (inp : SmIn) (hq : rf2CuQ prog s) : (fsmComb prog s inp).fireWs = false :=`
+- **rf2_nop_no_fireCsr** (line 328): `theorem rf2_nop_no_fireCsr (prog : SmProg) (s : FsmState) (inp : SmIn) (hq : rf2CuQ prog s) : (fsmComb prog s inp).fireCsr = false :=`
+- **rf2_cuIssCtrl_row** (line 343): `theorem rf2_cuIssCtrl_row (prog : SmProg) (s : FsmState) (j : Fin 8) : (rf2CuIssCtrl prog s j).row = decDecode (prog.imem (smPcOfTag (fsmCuAt s j).controlReg.tag)) :=`
+- **rf2_cuQ_of_rf1Quiesce** (line 349): `theorem rf2_cuQ_of_rf1Quiesce (prog : SmProg) (s : FsmState) (w : Fin 8) (hq : rf1Quiesce prog s w) (hcons : ∀ j : Fin 8, prog.imem (smPcOfTag (fsmCuAt s j).controlReg.tag) = (fsmCuAt s j).controlReg.inst) (honly : ∀ j : Fin 8, (fsmCuAt s j).state ≠ cuSIdle → (fsmCuAt s j).controlReg.wid = BitVec.ofNat 3 w.val) : rf2CuQ prog s :=`
+- **rf2_step_srf_mem** (line 373): `theorem rf2_step_srf_mem (prog : SmProg) (s : FsmState) (inp : SmIn) (i : Fin 4) (hwb : (fsmComb prog s inp).wbXFire = false) : (fsmSrfAt (fsmStep prog s inp) i).mem = (fsmSrfAt s i).mem :=`
+- **rf2_rdX_step** (line 383): `theorem rf2_rdX_step (prog : SmProg) (s : FsmState) (inp : SmIn) (w : Fin 8) (x : Fin 32) (hwb : (fsmComb prog s inp).wbXFire = false) (hreq : inp.reqFire = false) : rf1RdX (fsmStep prog s inp) w x = rf1RdX s w x :=`
+- **rf2_pcOk_step** (line 395): `theorem rf2_pcOk_step (prog : SmProg) (s : FsmState) (inp : SmIn) (w : Fin 8) (pc : BitVec 32) (hpc : inp.pcReset = false) (hreq : inp.reqFire = false) (hbr : (fsmComb prog s inp).brFire = false) (h : rf1PcOk s w pc) : rf1PcOk (fsmStep prog s inp) w pc :=`
+- **rf2_warpActive_step** (line 426): `theorem rf2_warpActive_step (prog : SmProg) (s : FsmState) (inp : SmIn) (w : Fin 8) (hreq : inp.reqFire = false) (hws : (fsmComb prog s inp).fireWs = false) : rf1WarpActive (fsmStep prog s inp) w = rf1WarpActive s w :=`
+- **rf2_quiesce_step_sim** (line 454): `theorem rf2_quiesce_step_sim (prog : SmProg) (s : FsmState) (is : IsaState) (w : Fin 8) (inp : SmIn) (hsim : rf1Sim s is w) (hq : rf2CuQ prog s) (hreq : inp.reqFire = false) (hpc : inp.pcReset = false) : rf1Sim (fsmStep prog s inp) is w :=`
+- **rf2_quiesce_run_sim** (line 474): `theorem rf2_quiesce_run_sim (prog : SmProg) (is : IsaState) (w : Fin 8) (n : Nat) : ∀ (s : FsmState), rf1Sim s is w → (∀ k : Nat, k < n → rf2CuQ prog (fsmRun prog s (List.replicate k smInNop))) → rf1Sim (fsmRun prog s (List.replicate n smInNop)) is w :=`
+- **rf2_enc_sanity** (line 516): `theorem rf2_enc_sanity : rf2EncI 0x005#12 0#5 0#3 1#5 0x13#7 = 0x00500093#32 ∧ rf2EncR 0x01#7 2#5 1#5 2#3 3#5 0x33#7 = 0x0220A1B3#32 ∧ rf2EncI 0x008#12 0#5 0#3 5#5 0x67#7 = 0x008002E7#32 :=`
+- **rf2T_salu_addi_grid** (line 538): `theorem rf2T_salu_addi_grid : (([⟨0, by decide⟩, ⟨1, by decide⟩, ⟨31, by decide⟩] : List (Fin 32)).all fun rd => ([0x000#12, 0x005#12, 0xFFF#12].all fun imm => rf2InstOk (rf2EncI imm 0#5 0#3 (BitVec.ofNat 5 rd.val) 0x13#7))) = true :=`
+- **rf2_enc_sanity_bj** (line 562): `theorem rf2_enc_sanity_bj : rf2EncB 0x008#13 0#5 0#5 0#3 = 0x00000463#32 ∧ rf2EncJ 0x008#21 5#5 = 0x008002EF#32 :=`
+- **rf2T_salu_itype_grid** (line 575): `theorem rf2T_salu_itype_grid : (([⟨0x000#12, 2#3, 0x13#7⟩, ⟨0x000#12, 3#3, 0x13#7⟩, ⟨0xFFF#12, 4#3, 0x13#7⟩, ⟨0x555#12, 6#3, 0x13#7⟩, ⟨0x7FF#12, 7#3, 0x13#7⟩, ⟨0x003#12, 1#3, 0x13#7⟩, ⟨0x003#12, 5#3, 0x13#7⟩, ⟨0x403#12, 5#3, 0x13#7⟩] : List (BitVec 12 × BitVec 3 × BitVec 7)).all fun ⟨imm, f3, op⟩ => ([1#5, 31#5].all fun rd => rf2InstOk (rf2EncI imm 0#5 f3 rd op))) = true :=`
+- **rf2T_salu_rtype_grid** (line 590): `theorem rf2T_salu_rtype_grid : (([⟨0x00#7, 0#3⟩, ⟨0x20#7, 0#3⟩, ⟨0x00#7, 1#3⟩, ⟨0x00#7, 2#3⟩, ⟨0x00#7, 3#3⟩, ⟨0x00#7, 4#3⟩, ⟨0x00#7, 5#3⟩, ⟨0x20#7, 5#3⟩, ⟨0x00#7, 6#3⟩, ⟨0x00#7, 7#3⟩] : List (BitVec 7 × BitVec 3)).all fun ⟨f7, f3⟩ => ([0#5, 3#5].all fun rd => rf2InstOk (rf2EncR f7 2#5 1#5 f3 rd 0x33#7))) = true :=`
+- **rf2T_mul_grid** (line 599): `theorem rf2T_mul_grid : (([0#3, 1#3, 2#3, 3#3] : List (BitVec 3)).all fun f3 => rf2InstOkAny (rf2EncR 0x01#7 2#5 1#5 f3 3#5 0x33#7)) = true :=`
+- **rf2T_sbr_beq_grid** (line 606): `theorem rf2T_sbr_beq_grid : (([0x008#13, 0x010#13, 0x1FF8#13] : List (BitVec 13)).all fun imm => rf2InstOkAny (rf2EncB imm 0#5 0#5 0#3)) = true :=`
+- **rf2T_jal_grid** (line 612): `theorem rf2T_jal_grid : (([0#5, 1#5, 31#5] : List (BitVec 5)).all fun rd => rf2InstOkAny (rf2EncJ 0x008#21 rd)) = true :=`
+- **rf2T_jalr_grid** (line 618): `theorem rf2T_jalr_grid : (([0#5, 1#5, 31#5] : List (BitVec 5)).all fun rd => rf2InstOkAny (rf2EncI 0x008#12 0#5 0#3 rd 0x67#7)) = true :=`
+- **rf2T_endprg_grid** (line 624): `theorem rf2T_endprg_grid : rf2InstOkAny 0x0000400B#32 = true :=`
+- **rf2T_nop_grid** (line 630): `theorem rf2T_nop_grid : (([0x00000073#32, 0x00100073#32, 0x00000000#32] : List (BitVec 32)).all fun inst => (isaClassify inst == .illegal) && rf2InstOk inst) = true :=`
+- **rf2T_cls_pin** (line 636): `theorem rf2T_cls_pin : (isaClassify (rf2EncI 0x005#12 0#5 0#3 1#5 0x13#7) == .salu) && (isaClassify (rf2EncR 0x00#7 2#5 1#5 0#3 3#5 0x33#7) == .salu) && (isaClassify (rf2EncR 0x01#7 2#5 1#5 2#3 3#5 0x33#7) == .salu) && (isaClassify (rf2EncB 0x008#13 0#5 0#5 0#3) == .sbr) && (isaClassify (rf2EncJ 0x008#21 5#5) == .jal) && (isaClassify (rf2EncI 0x008#12 0#5 0#3 5#5 0x67#7) == .jalr) && (isaClassify 0x0000400B#32 == .endprg) = true :=`
+- **rf2QuiesceB_sound** (line 663): `theorem rf2QuiesceB_sound (prog : SmProg) (s : FsmState) (w : Fin 8) (h : rf2QuiesceB prog s w = true) : rf1Quiesce prog s w :=`
+- **rf2StmtInstOk_sound** (line 687): `theorem rf2StmtInstOk_sound (inst : BitVec 32) (n : Nat) (h : rf2StmtInstOk inst n = true) : rf1Sim (fsmRun (rf2ProgOf inst) (rf1SAt (rf2ProgOf inst) 1) (List.replicate n smInNop)) (isaStep (rf1Isa0 [inst])) rf1W ∧ rf1Quiesce (rf2ProgOf inst) (fsmRun (rf2ProgOf inst) (rf1SAt (rf2ProgOf inst) 1) (List.replicate n smInNop)) rf1W :=`
+- **rf2_stmt_inst** (line 714): `theorem rf2_stmt_inst (inst : BitVec 32) (cls : IsaClass) (n : Nat) (h : rf2StmtInstOk inst n = true) : rf2StmtMatrix inst cls :=`
+- **rf2_stmt_inst_salu** (line 720): `theorem rf2_stmt_inst_salu : rf2StmtMatrix 0x00500093#32 .salu :=`
+- **rf2_stmt_inst_sbr** (line 723): `theorem rf2_stmt_inst_sbr : rf2StmtMatrix 0x00000463#32 .sbr :=`
+- **rf2_stmt_inst_jal** (line 726): `theorem rf2_stmt_inst_jal : rf2StmtMatrix 0x008002EF#32 .jal :=`
+- **rf2_stmt_inst_jalr** (line 729): `theorem rf2_stmt_inst_jalr : rf2StmtMatrix 0x008002E7#32 .jalr :=`
+- **rf2_stmt_inst_mul** (line 732): `theorem rf2_stmt_inst_mul : rf2StmtMatrix 0x0220A1B3#32 .salu :=`
+- **rf2_stmt_inst_endprg** (line 735): `theorem rf2_stmt_inst_endprg : rf2StmtMatrix 0x0000400B#32 .endprg :=`
+- **rf2_stmt_inst_nop** (line 738): `theorem rf2_stmt_inst_nop : rf2StmtMatrix 0x00000073#32 .illegal :=`
+
+### `VentusF/RefineGen2.lean`
+
+- **rfg2_row_default_of_illegal** (line 51): `theorem rfg2_row_default_of_illegal (row : DecCtrlRow) (h : isaClassOfRow row = .illegal) : row = decDefaultRow :=`
+- **rfg2_row_facts_of_sbr** (line 114): `theorem rfg2_row_facts_of_sbr (row : DecCtrlRow) (h : isaClassOfRow row = .sbr) : (row.fp || row.tc) = false ∧ row.barrier = false ∧ row.simtStackOp = false ∧ row.simtStack = false ∧ (row.csr != 0#2) = false ∧ ¬(row.memCmd = 1#2) ∧ ¬(row.memCmd = 2#2) ∧ row.isvec = false ∧ row.branch = 1#2 :=`
+- **rfg2_row_facts_of_jal** (line 182): `theorem rfg2_row_facts_of_jal (row : DecCtrlRow) (h : isaClassOfRow row = .jal) : (row.fp || row.tc) = false ∧ row.barrier = false ∧ row.simtStackOp = false ∧ row.simtStack = false ∧ (row.csr != 0#2) = false ∧ ¬(row.memCmd = 1#2) ∧ ¬(row.memCmd = 2#2) ∧ row.isvec = false ∧ row.branch = 2#2 :=`
+- **rfg2_row_facts_of_jalr** (line 250): `theorem rfg2_row_facts_of_jalr (row : DecCtrlRow) (h : isaClassOfRow row = .jalr) : (row.fp || row.tc) = false ∧ row.barrier = false ∧ row.simtStackOp = false ∧ row.simtStack = false ∧ (row.csr != 0#2) = false ∧ ¬(row.memCmd = 1#2) ∧ ¬(row.memCmd = 2#2) ∧ row.isvec = false ∧ row.branch = 3#2 :=`
+- **rfg2_row_facts_of_endprg** (line 319): `theorem rfg2_row_facts_of_endprg (row : DecCtrlRow) (h : isaClassOfRow row = .endprg) : (row.fp || row.tc) = false ∧ row.barrier = true ∧ row.simtStackOp = true :=`
+- **rfg2_isaStep_nop** (line 388): `theorem rfg2_isaStep_nop (is : IsaState) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .illegal) : isaStep is = { is with pc :=`
+- **rfg2_stmt_nop_of_progress** (line 401): `theorem rfg2_stmt_nop_of_progress (prog : SmProg) (s : FsmmState) (is : IsaState) (w : Fin 8) (n : Nat) (hsim : rf3Sim prog s is w) (hmq : rf3MemQ s) (hdisp : rf1DispOk s.base w) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .illegal) (hpcT : rf1PcOk s.base w (is.pc + 4#32)) (hsil : ∀ i : Nat, i < n → rf2CuQ prog (fsmmRun prog s (List.replicate i smInNop)).base) : rf3Sim prog (fsmmRun prog s (List.replicate n smInNop)) (isaStep is) w ∧ rf3MemQ (fsmmRun prog s (List.replicate n smInNop)) :=`
+- **rfg2_stmt_mul_of_progress** (line 427): `theorem rfg2_stmt_mul_of_progress (prog : SmProg) (s : FsmmState) (is : IsaState) (w : Fin 8) (k m : Nat) (hsim : rf3Sim prog s is w) (hmq : rf3MemQ s) (hdisp : rf1DispOk s.base w) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .salu) (hmul : (decDecode (isaFetch is)).mul = true) (hpcT : rf1PcOk s.base w (is.pc + 4#32)) (hsil1 : ∀ i : Nat, i < k → rf2CuQ prog (fsmmRun prog s (List.replicate i smInNop)).base) (hev : rf3SaluBeat prog (fsmmRun prog s (List.replicate k smInNop)) smInNop w (BitVec.ofNat 8 (isaRdF (isaFetch is)).val) (rf3SaluOut is) (decDecode (isaFetch is)).wxd) (hsil2 : ∀ i : Nat, i < m → rf2CuQ prog (fsmmRun prog s (List.replicate (k + 1 + i) smInNop)).base) : rf3Sim prog (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) (isaStep is) w ∧ rf3MemQ (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) :=`
+- **rfg2_pcOk_redirect** (line 477): `theorem rfg2_pcOk_redirect (prog : SmProg) (s : FsmmState) (inp : SmIn) (w : Fin 8) (tgt : BitVec 32) (hpc : inp.pcReset = false) (hreq : inp.reqFire = false) (hbrf : (fsmmComb prog s inp).brMFire = true) (hbrj : (fsmmComb prog s inp).brMJump = true) (hbrw : (fsmmComb prog s inp).brMWid = BitVec.ofNat 3 w.val) (htgt : (fsmmComb prog s inp).brMTarget = tgt) : rf1PcOk (fsmmStep prog s inp).base w tgt :=`
+- **rfg2_xreg_wb** (line 499): `theorem rfg2_xreg_wb (prog : SmProg) (s : FsmmState) (inp : SmIn) (is : IsaState) (w : Fin 8) (rd : Fin 32) (v : BitVec 32) (wxd : Bool) (hx : ∀ x : Fin 32, rf1RdX s.base w x = is.xreg x) (hdisp : rf1DispOk s.base w) (hreq : inp.reqFire = false) (hfire : (fsmmComb prog s inp).wbXFire = wxd) (hfield : wxd = true → (fsmmComb prog s inp).wbXWid = BitVec.ofNat 3 w.val ∧ (fsmmComb prog s inp).wbXWxd = true ∧ (fsmmComb prog s inp).wbXIdxw = BitVec.ofNat 8 rd.val ∧ (fsmmComb prog s inp).wbXData = v) (x : Fin 32) : rf1RdX (fsmmStep prog s inp).base w x = ((if wxd then isaWrX is rd v else is)).xreg x :=`
+- **rfg2_jalwb_step** (line 627): `theorem rfg2_jalwb_step (prog : SmProg) (s : FsmmState) (inp : SmIn) (is : IsaState) (w : Fin 8) (rd : Fin 32) (v c : BitVec 32) (wxd : Bool) (hsim : rf3Sim prog s is w) (hmq : rf3MemQ s) (hdisp : rf1DispOk s.base w) (hev : rfg2JalBeat prog s inp w (BitVec.ofNat 8 rd.val) v c wxd) : rf3Sim prog (fsmmStep prog s inp) (rfg2JalPost is rd v c wxd) w ∧ rf3MemQ (fsmmStep prog s inp) ∧ rf1PcOk (fsmmStep prog s inp).base w c :=`
+- **rfg2_jal_advance** (line 678): `theorem rfg2_jal_advance (prog : SmProg) (s : FsmmState) (is : IsaState) (w : Fin 8) (k m : Nat) (rd : Fin 32) (v c : BitVec 32) (wxd : Bool) (hsim : rf3Sim prog s is w) (hmq : rf3MemQ s) (hdisp : rf1DispOk s.base w) (hsil1 : ∀ i : Nat, i < k → rf2CuQ prog (fsmmRun prog s (List.replicate i smInNop)).base) (hev : rfg2JalBeat prog (fsmmRun prog s (List.replicate k smInNop)) smInNop w (BitVec.ofNat 8 rd.val) v c wxd) (hsil2 : ∀ i : Nat, i < m → rf2CuQ prog (fsmmRun prog s (List.replicate (k + 1 + i) smInNop)).base) : rf3Sim prog (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) (rfg2JalPost is rd v c wxd) w ∧ rf3MemQ (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) :=`
+- **rfg2_isaStep_jal** (line 717): `theorem rfg2_isaStep_jal (is : IsaState) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .jal) : isaStep is = rfg2JalPost is (isaRdF (isaFetch is)) (rf3SaluOut is) (isaIn3Row is (isaFetch is) (decDecode (isaFetch is)) 0) (decDecode (isaFetch is)).wxd :=`
+- **rfg2_isaStep_jalr** (line 746): `theorem rfg2_isaStep_jalr (is : IsaState) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .jalr) : isaStep is = rfg2JalPost is (isaRdF (isaFetch is)) (rf3SaluOut is) (isaIn3Row is (isaFetch is) (decDecode (isaFetch is)) 0) (decDecode (isaFetch is)).wxd :=`
+- **rfg2_stmt_jal_of_progress** (line 778): `theorem rfg2_stmt_jal_of_progress (prog : SmProg) (s : FsmmState) (is : IsaState) (w : Fin 8) (k m : Nat) (hsim : rf3Sim prog s is w) (hmq : rf3MemQ s) (hdisp : rf1DispOk s.base w) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .jal) (hsil1 : ∀ i : Nat, i < k → rf2CuQ prog (fsmmRun prog s (List.replicate i smInNop)).base) (hev : rfg2JalBeat prog (fsmmRun prog s (List.replicate k smInNop)) smInNop w (BitVec.ofNat 8 (isaRdF (isaFetch is)).val) (rf3SaluOut is) (isaIn3Row is (isaFetch is) (decDecode (isaFetch is)) 0) (decDecode (isaFetch is)).wxd) (hsil2 : ∀ i : Nat, i < m → rf2CuQ prog (fsmmRun prog s (List.replicate (k + 1 + i) smInNop)).base) : rf3Sim prog (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) (isaStep is) w ∧ rf3MemQ (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) :=`
+- **rfg2_stmt_jalr_of_progress** (line 796): `theorem rfg2_stmt_jalr_of_progress (prog : SmProg) (s : FsmmState) (is : IsaState) (w : Fin 8) (k m : Nat) (hsim : rf3Sim prog s is w) (hmq : rf3MemQ s) (hdisp : rf1DispOk s.base w) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .jalr) (hsil1 : ∀ i : Nat, i < k → rf2CuQ prog (fsmmRun prog s (List.replicate i smInNop)).base) (hev : rfg2JalBeat prog (fsmmRun prog s (List.replicate k smInNop)) smInNop w (BitVec.ofNat 8 (isaRdF (isaFetch is)).val) (rf3SaluOut is) (isaIn3Row is (isaFetch is) (decDecode (isaFetch is)) 0) (decDecode (isaFetch is)).wxd) (hsil2 : ∀ i : Nat, i < m → rf2CuQ prog (fsmmRun prog s (List.replicate (k + 1 + i) smInNop)).base) : rf3Sim prog (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) (isaStep is) w ∧ rf3MemQ (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) :=`
+- **rfg2_pcOk_step_noredir** (line 820): `theorem rfg2_pcOk_step_noredir (prog : SmProg) (s : FsmmState) (inp : SmIn) (w : Fin 8) (pc : BitVec 32) (hpc : inp.pcReset = false) (hreq : inp.reqFire = false) (hnoredir : ((fsmmComb prog s inp).brMFire && (fsmmComb prog s inp).brMJump && ((fsmmComb prog s inp).brMWid == BitVec.ofNat 3 w.val)) = false) (h : rf1PcOk s.base w pc) : rf1PcOk (fsmmStep prog s inp).base w pc :=`
+- **rfg2_sbr_br_step** (line 872): `theorem rfg2_sbr_br_step (prog : SmProg) (s : FsmmState) (inp : SmIn) (is isN : IsaState) (w : Fin 8) (pcN c : BitVec 32) (taken : Bool) (hsim : rf3Sim prog s is w) (hmq : rf3MemQ s) (hisN : isN.xreg = is.xreg ∧ isN.vreg = is.vreg ∧ isN.pc = pcN ∧ isN.mem = is.mem ∧ isN.tmask = is.tmask ∧ isN.bjstk = is.bjstk ∧ isN.csr = is.csr ∧ isN.halted = is.halted) (hpcT : rf1PcOk s.base w (is.pc + 4#32)) (hev : rfg2SbrBeat prog s inp w c taken) (hpcN_t : taken = true → pcN = c) (hpcN_nt : taken = false → pcN = is.pc + 4#32) : rf3Sim prog (fsmmStep prog s inp) isN w ∧ rf3MemQ (fsmmStep prog s inp) ∧ rf1PcOk (fsmmStep prog s inp).base w pcN :=`
+- **rfg2_sbr_advance** (line 916): `theorem rfg2_sbr_advance (prog : SmProg) (s : FsmmState) (is isN : IsaState) (w : Fin 8) (k m : Nat) (pcN c : BitVec 32) (taken : Bool) (hsim : rf3Sim prog s is w) (hmq : rf3MemQ s) (hisN : isN.xreg = is.xreg ∧ isN.vreg = is.vreg ∧ isN.pc = pcN ∧ isN.mem = is.mem ∧ isN.tmask = is.tmask ∧ isN.bjstk = is.bjstk ∧ isN.csr = is.csr ∧ isN.halted = is.halted) (hpcT : rf1PcOk s.base w (is.pc + 4#32)) (hpcN_t : taken = true → pcN = c) (hpcN_nt : taken = false → pcN = is.pc + 4#32) (hsil1 : ∀ i : Nat, i < k → rf2CuQ prog (fsmmRun prog s (List.replicate i smInNop)).base) (hev : rfg2SbrBeat prog (fsmmRun prog s (List.replicate k smInNop)) smInNop w c taken) (hsil2 : ∀ i : Nat, i < m → rf2CuQ prog (fsmmRun prog s (List.replicate (k + 1 + i) smInNop)).base) : rf3Sim prog (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) isN w ∧ rf3MemQ (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) :=`
+- **rfg2_isaStep_sbr** (line 960): `theorem rfg2_isaStep_sbr (is : IsaState) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .sbr) (hwxd : (decDecode (isaFetch is)).wxd = false) : isaStep is = (if isaCmp (decDecode (isaFetch is)).aluFn (isaIn1Row is (isaFetch is) (decDecode (isaFetch is)) 0) (isaIn2Row is (isaFetch is) (decDecode (isaFetch is)) 0) then { is with pc :=`
+- **rfg2_stmt_sbr_of_progress** (line 995): `theorem rfg2_stmt_sbr_of_progress (prog : SmProg) (s : FsmmState) (is : IsaState) (w : Fin 8) (k m : Nat) (taken : Bool) (hsim : rf3Sim prog s is w) (hmq : rf3MemQ s) (hdisp : rf1DispOk s.base w) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .sbr) (hwxd : (decDecode (isaFetch is)).wxd = false) (htaken : isaCmp (decDecode (isaFetch is)).aluFn (isaIn1Row is (isaFetch is) (decDecode (isaFetch is)) 0) (isaIn2Row is (isaFetch is) (decDecode (isaFetch is)) 0) = taken) (hpcT : rf1PcOk s.base w (is.pc + 4#32)) (hsil1 : ∀ i : Nat, i < k → rf2CuQ prog (fsmmRun prog s (List.replicate i smInNop)).base) (hev : rfg2SbrBeat prog (fsmmRun prog s (List.replicate k smInNop)) smInNop w (isaIn3Row is (isaFetch is) (decDecode (isaFetch is)) 0) taken) (hsil2 : ∀ i : Nat, i < m → rf2CuQ prog (fsmmRun prog s (List.replicate (k + 1 + i) smInNop)).base) : rf3Sim prog (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) (isaStep is) w ∧ rf3MemQ (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) :=`
+- **rfg2_isaStep_endprg** (line 1032): `theorem rfg2_isaStep_endprg (is : IsaState) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .endprg) : isaStep is = { is with halted :=`
+- **rfg2_warpActive_cleared** (line 1061): `theorem rfg2_warpActive_cleared (act : BitVec 8) (reqWid : BitVec 3) (w : Fin 8) : (((fschWsStepActive act false reqWid true (BitVec.ofNat 3 w.val)) >>> BitVec.ofNat 8 w.val) &&& 1#8 == 1#8) = false :=`
+- **rfg2_endprg_ws_step** (line 1074): `theorem rfg2_endprg_ws_step (prog : SmProg) (s : FsmmState) (inp : SmIn) (is : IsaState) (w : Fin 8) (hsim : rf3Sim prog s is w) (hmq : rf3MemQ s) (hev : rfg2EndprgBeat prog s inp w) : rf3Sim prog (fsmmStep prog s inp) { is with halted :=`
+- **rfg2_endprg_advance** (line 1130): `theorem rfg2_endprg_advance (prog : SmProg) (s : FsmmState) (is : IsaState) (w : Fin 8) (k m : Nat) (hsim : rf3Sim prog s is w) (hmq : rf3MemQ s) (hsil1 : ∀ i : Nat, i < k → rf2CuQ prog (fsmmRun prog s (List.replicate i smInNop)).base) (hev : rfg2EndprgBeat prog (fsmmRun prog s (List.replicate k smInNop)) smInNop w) (hquiet : ∀ i : Nat, i < m → rfvQuietBeat prog (fsmmRun prog s (List.replicate (k + 1 + i) smInNop)) smInNop ∧ rfvMemStable prog (fsmmRun prog s (List.replicate (k + 1 + i) smInNop)) smInNop) : rf3Sim prog (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) { is with halted :=`
+- **rfg2_stmt_endprg_of_progress** (line 1171): `theorem rfg2_stmt_endprg_of_progress (prog : SmProg) (s : FsmmState) (is : IsaState) (w : Fin 8) (k m : Nat) (hsim : rf3Sim prog s is w) (hmq : rf3MemQ s) (hdisp : rf1DispOk s.base w) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .endprg) (hsil1 : ∀ i : Nat, i < k → rf2CuQ prog (fsmmRun prog s (List.replicate i smInNop)).base) (hev : rfg2EndprgBeat prog (fsmmRun prog s (List.replicate k smInNop)) smInNop w) (hquiet : ∀ i : Nat, i < m → rfvQuietBeat prog (fsmmRun prog s (List.replicate (k + 1 + i) smInNop)) smInNop ∧ rfvMemStable prog (fsmmRun prog s (List.replicate (k + 1 + i) smInNop)) smInNop) : rf3Sim prog (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) (isaStep is) w :=`
+
+### `VentusF/RefineMem.lean`
+
+- **rf3_comb_outXV** (line 159): `theorem rf3_comb_outXV (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).outXV = rf2OutXV prog s.base :=`
+- **rf3_comb_outVV** (line 163): `theorem rf3_comb_outVV (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).outVV = rf2OutVV prog s.base :=`
+- **rf3_comb_fireSAlu** (line 167): `theorem rf3_comb_fireSAlu (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).fireSAlu = rf2FireSAlu prog s.base :=`
+- **rf3_comb_fireMul** (line 171): `theorem rf3_comb_fireMul (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).fireMul = rf2FireMul prog s.base :=`
+- **rf3_comb_fireCsr** (line 175): `theorem rf3_comb_fireCsr (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).fireCsr = rf2FireCsr prog s.base :=`
+- **rf3_comb_brFire** (line 179): `theorem rf3_comb_brFire (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).brFire = rf2BrFire prog s.base :=`
+- **rf3_comb_rspValid** (line 183): `theorem rf3_comb_rspValid (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).rspValid = Mem.mshrOutValid s.mshr :=`
+- **rf3_comb_shRspV** (line 187): `theorem rf3_comb_shRspV (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).shRspV = Mem.smRspValid s.shm :=`
+- **rf3_comb_dcc** (line 191): `theorem rf3_comb_dcc (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).dcc = fsmmDcCombOf s.dc (Mem.mshrDcRdy s.mshr) :=`
+- **rf3_comb_lsuOut** (line 195): `theorem rf3_comb_lsuOut (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).lsuOut = Mem.lsuOutputs s.lsu (fsmmComb prog s inp).lsuIn :=`
+- **rf3_comb_pccIn** (line 201): `theorem rf3_comb_pccIn (prog : SmProg) (s : FsmmState) (inp : SmIn) (w : Fin 8) : (fsmmComb prog s inp).pccIn w = (if inp.pcReset then ⟨0#32, false, 1#2, 0#2⟩ else if inp.reqFire && (inp.reqWid == BitVec.ofNat 3 w.val) then ⟨inp.reqPC, false, 1#2, 0#2⟩ else if (fsmmComb prog s inp).brMFire && (fsmmComb prog s inp).brMJump && ((fsmmComb prog s inp).brMWid == BitVec.ofNat 3 w.val) then ⟨(fsmmComb prog s inp).brMTarget, false, 1#2, 0#2⟩ else if (fsmmComb prog s inp).fetchV && ((fsmmComb prog s inp).fetchWid == BitVec.ofNat 3 w.val) then ⟨0#32, false, 2#2, 0#2⟩ else ⟨0#32, false, 0#2, 0#2⟩) :=`
+- **rf3_step_ws** (line 215): `theorem rf3_step_ws (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmStep prog s inp).base.ws = fschWsStep s.base.ws ⟨(fsmmComb prog s inp).wsIn, (fsmmComb prog s inp).fenceEnd⟩ :=`
+- **rf3_step_pcc** (line 219): `theorem rf3_step_pcc (prog : SmProg) (s : FsmmState) (inp : SmIn) (w : Fin 8) : (fsmmStep prog s inp).base.pcc w = pccStep (s.base.pcc w) ((fsmmComb prog s inp).pccIn w) :=`
+- **rf3_step_csr** (line 224): `theorem rf3_step_csr (prog : SmProg) (s : FsmmState) (inp : SmIn) (h : inp.reqFire = false) : (fsmmStep prog s inp).base.csr = s.base.csr :=`
+- **rf3_step_bj** (line 230): `theorem rf3_step_bj (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmStep prog s inp).base.bj = (bjSysStep s.base.bj (fsmmComb prog s inp).bjEv).1 :=`
+- **rf3_step_srf** (line 235): `theorem rf3_step_srf (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmStep prog s inp).base.srf = rf1SrfStep s.base (fsmmComb prog s inp).rfInS :=`
+- **rf3_step_vrf** (line 239): `theorem rf3_step_vrf (prog : SmProg) (s : FsmmState) (inp : SmIn) (i : Fin 4) : fsmVrfAt (fsmmStep prog s inp).base i = rfVStep (fsmVrfAt s.base i) ((fsmmComb prog s inp).rfInV i) :=`
+- **rf3_zero_ushiftRight** (line 250): `theorem rf3_zero_ushiftRight {w : Nat} (y : BitVec w) : (0#w >>> y) = 0#w :=`
+- **rf3_zero_shiftRight_nat** (line 254): `theorem rf3_zero_shiftRight_nat {w : Nat} (n : Nat) : (0#w >>> n) = 0#w :=`
+- **rf3_mshrUsedBit_of_used0** (line 258): `theorem rf3_mshrUsedBit_of_used0 (m : Mem.MshrState) (h : m.used = 0#8) (i : Fin 8) : Mem.mshrUsedBit m i = false :=`
+- **rf3_mshrComplete8_of_used0** (line 265): `theorem rf3_mshrComplete8_of_used0 (m : Mem.MshrState) (h : m.used = 0#8) : Mem.mshrComplete8 m = 0#8 :=`
+- **rf3_mshrOutValid_of_used0** (line 279): `theorem rf3_mshrOutValid_of_used0 (m : Mem.MshrState) (h : m.used = 0#8) : Mem.mshrOutValid m = false :=`
+- **rf3_comb_rspValid_false** (line 286): `theorem rf3_comb_rspValid_false (prog : SmProg) (s : FsmmState) (inp : SmIn) (hmq : rf3MemQ s) : (fsmmComb prog s inp).rspValid = false :=`
+- **rf3_comb_lsuWbXV_false** (line 294): `theorem rf3_comb_lsuWbXV_false (prog : SmProg) (s : FsmmState) (inp : SmIn) (hmq : rf3MemQ s) : (fsmmComb prog s inp).lsuWbXV = false :=`
+- **rf3_comb_lsuWbVV_false** (line 302): `theorem rf3_comb_lsuWbVV_false (prog : SmProg) (s : FsmmState) (inp : SmIn) (hmq : rf3MemQ s) : (fsmmComb prog s inp).lsuWbVV = false :=`
+- **rf3_comb_lsuRspFire_false** (line 312): `theorem rf3_comb_lsuRspFire_false (prog : SmProg) (s : FsmmState) (inp : SmIn) (hmq : rf3MemQ s) : (fsmmComb prog s inp).lsuRspFire = false :=`
+- **rf3_lsuOut_idle** (line 321): `theorem rf3_lsuOut_idle (prog : SmProg) (s : FsmmState) (inp : SmIn) (hmq : rf3MemQ s) : (fsmmComb prog s inp).lsuOut.sharedValid = false ∧ (fsmmComb prog s inp).lsuOut.dcacheValid = false ∧ (fsmmComb prog s inp).lsuOut.mshrValid = false :=`
+- **rf3_comb_shReqValid_false** (line 342): `theorem rf3_comb_shReqValid_false (prog : SmProg) (s : FsmmState) (inp : SmIn) (hmq : rf3MemQ s) : (fsmmComb prog s inp).shIn.reqValid = false :=`
+- **rf3_smRspValid_of_q** (line 350): `theorem rf3_smRspValid_of_q (sh : Mem.SmState) (hq : sh.rspQ = []) (hr2 : sh.vR2 = false) (hw2 : sh.vW2 = false) : Mem.smRspValid sh = false :=`
+- **rf3_comb_shRspV_false** (line 358): `theorem rf3_comb_shRspV_false (prog : SmProg) (s : FsmmState) (inp : SmIn) (hmq : rf3MemQ s) : (fsmmComb prog s inp).shRspV = false :=`
+- **rf3_comb_mshrDcValid_false** (line 366): `theorem rf3_comb_mshrDcValid_false (prog : SmProg) (s : FsmmState) (inp : SmIn) (hmq : rf3MemQ s) : (fsmmComb prog s inp).mshrIn.dcValid = false :=`
+- **rf3_comb_mshrAddrValid_false** (line 381): `theorem rf3_comb_mshrAddrValid_false (prog : SmProg) (s : FsmmState) (inp : SmIn) (hmq : rf3MemQ s) : (fsmmComb prog s inp).mshrIn.addrValid = false :=`
+- **rf3_comb_fifoEnqValid_false** (line 394): `theorem rf3_comb_fifoEnqValid_false (prog : SmProg) (s : FsmmState) (inp : SmIn) (h : (fsmmComb prog s inp).lsuReqV = false) : (fsmmComb prog s inp).fifoEnqValid = false :=`
+- **rf3_comb_fifoDeqValid_false** (line 404): `theorem rf3_comb_fifoDeqValid_false (prog : SmProg) (s : FsmmState) (inp : SmIn) (hmq : rf3MemQ s) (h : (fsmmComb prog s inp).lsuReqV = false) : (fsmmComb prog s inp).fifoDeqValid = false :=`
+- **rf3_comb_wsFlushDV_false** (line 414): `theorem rf3_comb_wsFlushDV_false (prog : SmProg) (s : FsmmState) (inp : SmIn) (hmq : rf3MemQ s) : (fsmmComb prog s inp).wsFlushDV = false :=`
+- **rf3_comb_lsuIn_idle** (line 424): `theorem rf3_comb_lsuIn_idle (prog : SmProg) (s : FsmmState) (inp : SmIn) (hmq : rf3MemQ s) (h : (fsmmComb prog s inp).lsuReqV = false) : (fsmmComb prog s inp).lsuIn.fifoValid = false ∧ (fsmmComb prog s inp).lsuIn.flushValid = false :=`
+- **rf3_step_lsu_idle** (line 436): `theorem rf3_step_lsu_idle (prog : SmProg) (s : FsmmState) (inp : SmIn) (hmq : rf3MemQ s) (h : (fsmmComb prog s inp).lsuReqV = false) : (fsmmStep prog s inp).lsu.state = Mem.lsuSIdle :=`
+- **rf3_step_fifo** (line 460): `theorem rf3_step_fifo (prog : SmProg) (s : FsmmState) (inp : SmIn) (hmq : rf3MemQ s) (h : (fsmmComb prog s inp).lsuReqV = false) : (fsmmStep prog s inp).fifoFull = false ∧ (fsmmStep prog s inp).fifoBits = s.fifoBits :=`
+- **rf3_step_boards** (line 487): `theorem rf3_step_boards (prog : SmProg) (s : FsmmState) (inp : SmIn) (hmq : rf3MemQ s) (hfl : (fsmmComb prog s inp).fireLsu = false) : (fsmmStep prog s inp).boards = s.boards :=`
+- **rf3_smStep_banks** (line 495): `theorem rf3_smStep_banks (sh : Mem.SmState) (i : Mem.SmIn) (b : Fin 32) : (Mem.smStep sh i).banks b = Mem.sramStep Mem.sramCfgShareMem (sh.banks b) ⟨(Mem.smVRcomb sh i && (Mem.smArbComb sh.arb (Mem.smFire sh i) (Mem.smArbInIsWrite sh i) i.req.perLaneAddr).1.dataArrayEn b), (if Mem.smFire sh i then Mem.smRowOfSetIdx i.req.setIdx else Mem.smRowOfSetIdx sh.st1Req.setIdx), (sh.vW1 && sh.daEnW b), Mem.smRowOfSetIdx sh.st1Req.setIdx, Mem.smWordToBytes (Mem.smXbar sh.selW1 sh.st1Req.data b), sh.addrW1 b⟩ :=`
+- **rf3_smStep_bank_mem** (line 511): `theorem rf3_smStep_bank_mem (sh : Mem.SmState) (i : Mem.SmIn) (hvw1 : sh.vW1 = false) (b : Fin 32) (row : Fin 1024) (j : Fin 4) : ((Mem.smStep sh i).banks b).mem row j = (sh.banks b).mem row j :=`
+- **rf3_smStep_ctrl** (line 530): `theorem rf3_smStep_ctrl (sh : Mem.SmState) (i : Mem.SmIn) (hreq : i.reqValid = false) (hvw1 : sh.vW1 = false) (hvr1 : sh.vR1 = false) (hvr2 : sh.vR2 = false) (hvw2 : sh.vW2 = false) (hq : sh.rspQ = []) : (Mem.smStep sh i).vW1 = false ∧ (Mem.smStep sh i).vR1 = false ∧ (Mem.smStep sh i).vR2 = false ∧ (Mem.smStep sh i).vW2 = false ∧ (Mem.smStep sh i).rspQ = [] :=`
+- **rf3_mshrStepB_idle** (line 548): `theorem rf3_mshrStepB_idle (m : Mem.MshrState) (i : Mem.MshrIn) (hu : m.used = 0#8) (hst : m.state.isIdle = true) (hav : i.addrValid = false) (hdv : i.dcValid = false) : fschMshrStepB m i = m :=`
+- **rf3_dcHitW_none** (line 580): `theorem rf3_dcHitW_none (dc : SmdDc) (h : dc.sh1 = none) : smdSt1Hit dc = none :=`
+- **rf3_dcGo_false** (line 583): `theorem rf3_dcGo_false (dc : SmdDc) (r : Bool) (h : dc.miss = none) : fsmmDcRefillGo dc r = false :=`
+- **rf3_dcAck_false** (line 587): `theorem rf3_dcAck_false (dc : SmdDc) (r : Bool) (h : dc.flushCnt = 0#2) : smdHintAck dc r = false :=`
+- **rf3_dcCtrlFire_false** (line 594): `theorem rf3_dcCtrlFire_false (dc : SmdDc) (i : Mem.DcIn) (h : dc.core.st1 = none) : fmemDcCtrlFire dc.core i = false :=`
+- **rf3_dcWrMissF_false** (line 600): `theorem rf3_dcWrMissF_false (dc : SmdDc) (r : Bool) (h : dc.core.st1 = none) : fsmmDcWrMissFire dc r = false :=`
+- **rf3_dcRdHit_false** (line 606): `theorem rf3_dcRdHit_false (dc : SmdDc) (i : Mem.DcIn) (h : dc.core.st1 = none) : fmemDcReadHit dc.core i = false :=`
+- **rf3_dcWrHit_false** (line 612): `theorem rf3_dcWrHit_false (dc : SmdDc) (i : Mem.DcIn) (h : dc.core.st1 = none) : fmemDcWriteHit dc.core i = false :=`
+- **rf3_dcEnqEv_none** (line 619): `theorem rf3_dcEnqEv_none (dc : SmdDc) (r : Bool) (hst1 : dc.core.st1 = none) (hvld : dc.core.rspVld = none) (hfmr : dc.core.fromMemRsp = false) (hwrM : fsmmDcWrMissFire dc r = false) (hack : smdHintAck dc r = false) : Mem.dcCoreRspEnq dc.core { fsmmDcIn0 dc r with fire :=`
+- **rf3_dcEnqEv_none_gen** (line 629): `theorem rf3_dcEnqEv_none_gen (c : Mem.DcState) (i : Mem.DcIn) (hvld : c.rspVld = none) (hfmr : c.fromMemRsp = false) (hfmrq : i.fromMemReqV = false) (hmhV : i.memRspHeadV = false) : Mem.dcCoreRspEnq c i = none :=`
+- **rf3_dcStep_eq** (line 798): `theorem rf3_dcStep_eq (dc : SmdDc) (reqV : Bool) (req : Mem.LsuDcacheReq) (mshrRdy : Bool) : fsmmDcStep dc reqV req mshrRdy = rf3DcStepOf dc req mshrRdy (rf3DcEvOf dc reqV req mshrRdy) :=`
+- **rf3_fmemDcStep_core_quiet** (line 804): `theorem rf3_fmemDcStep_core_quiet (c : Mem.DcState) (i : Mem.DcIn) (hst1 : c.st1 = none) (hst2 : c.rspSt2 = none) (hvld : c.rspVld = none) (hfmr : c.fromMemRsp = false) (hfi : i.fire = none) (hmv : i.missRspOutV = false) : (fmemDcStep c i).st1 = none ∧ (fmemDcStep c i).rspSt2 = none ∧ (fmemDcStep c i).rspVld = none ∧ (fmemDcStep c i).fromMemRsp = false :=`
+- **rf3_dcwStep_idle** (line 826): `theorem rf3_dcwStep_idle (w : Mem.DcwState) (ba : BitVec 25) (idx : Fin 4) : Mem.dcwStep w false ba false idx = w :=`
+- **rf3_dcStepOf_freeze** (line 831): `theorem rf3_dcStepOf_freeze (dc : SmdDc) (req : Mem.LsuDcacheReq) (mshrRdy : Bool) (ev : Rf3DcEv) (hfi : ev.fire = false) (hhit : ev.hitW = none) (hwm : ev.wrMissF = false) (hrm : ev.rdMissF = false) (hgo : ev.go = false) (hack : ev.ack = false) (henqF : ev.enqFire = false) (hpop : ev.wshrPopV = false) (hst1 : dc.core.st1 = none) (hst2 : dc.core.rspSt2 = none) (hvld : dc.core.rspVld = none) (hfmr : dc.core.fromMemRsp = false) (hsh1 : dc.sh1 = none) (hmiss : dc.miss = none) (hrspQ : dc.rspQ = none) (hfl : dc.flushCnt = 0#2) (hwshr : Mem.dcwEmpty dc.wshr = true) (hgoc : fsmmDcRefillGo dc mshrRdy = false) : (rf3DcStepOf dc req mshrRdy ev).line = dc.line ∧ (rf3DcStepOf dc req mshrRdy ev).l2 = dc.l2 ∧ (rf3DcStepOf dc req mshrRdy ev).core.st1 = none ∧ (rf3DcStepOf dc req mshrRdy ev).core.rspSt2 = none ∧ (rf3DcStepOf dc req mshrRdy ev).core.rspVld = none ∧ (rf3DcStepOf dc req mshrRdy ev).core.fromMemRsp = false ∧ (rf3DcStepOf dc req mshrRdy ev).sh1 = none ∧ (rf3DcStepOf dc req mshrRdy ev).miss = none ∧ (rf3DcStepOf dc req mshrRdy ev).rspQ = none ∧ (rf3DcStepOf dc req mshrRdy ev).flushCnt = 0#2 ∧ Mem.dcwEmpty (rf3DcStepOf dc req mshrRdy ev).wshr = true ∧ (rf3DcStepOf dc req mshrRdy ev).acqDone = false ∧ (rf3DcStepOf dc req mshrRdy ev).wbQ = [] :=`
+- **rf3_dcStep_freeze** (line 895): `theorem rf3_dcStep_freeze (dc : SmdDc) (req : Mem.LsuDcacheReq) (r : Bool) (hst1 : dc.core.st1 = none) (hst2 : dc.core.rspSt2 = none) (hvld : dc.core.rspVld = none) (hfmr : dc.core.fromMemRsp = false) (hsh1 : dc.sh1 = none) (hmiss : dc.miss = none) (hrspQ : dc.rspQ = none) (hfl : dc.flushCnt = 0#2) (hwshr : Mem.dcwEmpty dc.wshr = true) : (fsmmDcStep dc false req r).line = dc.line ∧ (fsmmDcStep dc false req r).l2 = dc.l2 ∧ (fsmmDcStep dc false req r).core.st1 = none ∧ (fsmmDcStep dc false req r).core.rspSt2 = none ∧ (fsmmDcStep dc false req r).core.rspVld = none ∧ (fsmmDcStep dc false req r).core.fromMemRsp = false ∧ (fsmmDcStep dc false req r).sh1 = none ∧ (fsmmDcStep dc false req r).miss = none ∧ (fsmmDcStep dc false req r).rspQ = none ∧ (fsmmDcStep dc false req r).flushCnt = 0#2 ∧ Mem.dcwEmpty (fsmmDcStep dc false req r).wshr = true ∧ (fsmmDcStep dc false req r).acqDone = false ∧ (fsmmDcStep dc false req r).wbQ = [] :=`
+- **rf3_step_shm_mem** (line 949): `theorem rf3_step_shm_mem (prog : SmProg) (s : FsmmState) (inp : SmIn) (hmq : rf3MemQ s) (b : Fin 32) (row : Fin 1024) (j : Fin 4) : ((fsmmStep prog s inp).shm.banks b).mem row j = (s.shm.banks b).mem row j :=`
+- **rf3_rdMemB_step** (line 961): `theorem rf3_rdMemB_step (prog : SmProg) (s : FsmmState) (inp : SmIn) (hmq : rf3MemQ s) (a : BitVec 32) : rf3RdMemB (fsmmStep prog s inp) a = rf3RdMemB s a :=`
+- **rf3_nop_bjEv** (line 990): `theorem rf3_nop_bjEv (prog : SmProg) (s : FsmmState) (inp : SmIn) (hq : rf2CuQ prog s.base) : (fsmmComb prog s inp).bjEv = BjEvent.nop :=`
+- **rf3_nop_fcEnqValid** (line 1019): `theorem rf3_nop_fcEnqValid (prog : SmProg) (s : FsmmState) (inp : SmIn) (hq : rf2CuQ prog s.base) : (fsmmComb prog s inp).fcEnqValid = false :=`
+- **rf3_nop_no_wbXFire** (line 1028): `theorem rf3_nop_no_wbXFire (prog : SmProg) (s : FsmmState) (inp : SmIn) (hq : rf2CuQ prog s.base) (hmq : rf3MemQ s) : (fsmmComb prog s inp).wbXFire = false :=`
+- **rf3_nop_no_wbVFire** (line 1082): `theorem rf3_nop_no_wbVFire (prog : SmProg) (s : FsmmState) (inp : SmIn) (hq : rf2CuQ prog s.base) (hmq : rf3MemQ s) : (fsmmComb prog s inp).wbVFire = false :=`
+- **rf3_nop_no_brFire** (line 1109): `theorem rf3_nop_no_brFire (prog : SmProg) (s : FsmmState) (inp : SmIn) (hq : rf2CuQ prog s.base) : (fsmmComb prog s inp).brFire = false :=`
+- **rf3_nop_no_brMFire** (line 1120): `theorem rf3_nop_no_brMFire (prog : SmProg) (s : FsmmState) (inp : SmIn) (hq : rf2CuQ prog s.base) (hmq : rf3MemQ s) : (fsmmComb prog s inp).brMFire = false :=`
+- **rf3_nop_no_fireWs** (line 1142): `theorem rf3_nop_no_fireWs (prog : SmProg) (s : FsmmState) (inp : SmIn) (hq : rf2CuQ prog s.base) : (fsmmComb prog s inp).fireWs = false :=`
+- **rf3_nop_no_lsuReqV** (line 1157): `theorem rf3_nop_no_lsuReqV (prog : SmProg) (s : FsmmState) (inp : SmIn) (hq : rf2CuQ prog s.base) : (fsmmComb prog s inp).lsuReqV = false :=`
+- **rf3_nop_no_fireLsu** (line 1170): `theorem rf3_nop_no_fireLsu (prog : SmProg) (s : FsmmState) (inp : SmIn) (hq : rf2CuQ prog s.base) : (fsmmComb prog s inp).fireLsu = false :=`
+- **rf3_step_srf_mem** (line 1188): `theorem rf3_step_srf_mem (prog : SmProg) (s : FsmmState) (inp : SmIn) (i : Fin 4) (hwb : (fsmmComb prog s inp).wbXFire = false) : (fsmSrfAt (fsmmStep prog s inp).base i).mem = (fsmSrfAt s.base i).mem :=`
+- **rf3_rdX_frozen** (line 1207): `theorem rf3_rdX_frozen (prog : SmProg) (s : FsmmState) (inp : SmIn) (w : Fin 8) (x : Fin 32) (hwb : (fsmmComb prog s inp).wbXFire = false) (hreq : inp.reqFire = false) : rf1RdX (fsmmStep prog s inp).base w x = rf1RdX s.base w x :=`
+- **rf3_step_vrf_mem** (line 1217): `theorem rf3_step_vrf_mem (prog : SmProg) (s : FsmmState) (inp : SmIn) (i : Fin 4) (hwbv : (fsmmComb prog s inp).wbVFire = false) : (fsmVrfAt (fsmmStep prog s inp).base i).mem = (fsmVrfAt s.base i).mem :=`
+- **rf3_rdV_frozen** (line 1229): `theorem rf3_rdV_frozen (prog : SmProg) (s : FsmmState) (inp : SmIn) (w : Fin 8) (v : Fin 32) (t : Fin 32) (hwbv : (fsmmComb prog s inp).wbVFire = false) (hreq : inp.reqFire = false) : rf1RdV (fsmmStep prog s inp).base w v t = rf1RdV s.base w v t :=`
+- **rf3_pcOk_step** (line 1237): `theorem rf3_pcOk_step (prog : SmProg) (s : FsmmState) (inp : SmIn) (w : Fin 8) (pc : BitVec 32) (hpc : inp.pcReset = false) (hreq : inp.reqFire = false) (hbr : (fsmmComb prog s inp).brMFire = false) (h : rf1PcOk s.base w pc) : rf1PcOk (fsmmStep prog s inp).base w pc :=`
+- **rf3_warpActive_step** (line 1266): `theorem rf3_warpActive_step (prog : SmProg) (s : FsmmState) (inp : SmIn) (w : Fin 8) (hreq : inp.reqFire = false) (hws : (fsmmComb prog s inp).fireWs = false) : rf1WarpActive (fsmmStep prog s inp).base w = rf1WarpActive s.base w :=`
+- **rf3_wsStepValid_idle** (line 1301): `theorem rf3_wsStepValid_idle (cnt : Array (BitVec 8)) (v : Array Bool) (reqF : Bool) (nwg : BitVec 3) (fr : Bool) (hreq : reqF = false) (hm0 : wsMask0 (fun j => wsRd8 cnt j) (fun j => wsRdB v j) = 0#8) : fschWsStepValid cnt v reqF nwg fr = v :=`
+- **rf3_memQ_step** (line 1312): `theorem rf3_memQ_step (prog : SmProg) (s : FsmmState) (inp : SmIn) (hmq : rf3MemQ s) (hlsuv : (fsmmComb prog s inp).lsuReqV = false) (hflsu : (fsmmComb prog s inp).fireLsu = false) (hbj : (fsmmComb prog s inp).bjEv = BjEvent.nop) (hws : (fsmmComb prog s inp).fireWs = false) (hreq : inp.reqFire = false) : rf3MemQ (fsmmStep prog s inp) :=`
+- **rf3_silent_step** (line 1418): `theorem rf3_silent_step (prog : SmProg) (s : FsmmState) (is : IsaState) (w : Fin 8) (pcT : BitVec 32) (inp : SmIn) (hsim : rf3Sim prog s is w) (hq : rf2CuQ prog s.base) (hmq : rf3MemQ s) (hpcT : rf1PcOk s.base w pcT) (hreq : inp.reqFire = false) (hpc : inp.pcReset = false) : rf3Sim prog (fsmmStep prog s inp) is w ∧ rf3MemQ (fsmmStep prog s inp) ∧ rf1PcOk (fsmmStep prog s inp).base w pcT :=`
+- **rf3_silent_run** (line 1454): `theorem rf3_silent_run (prog : SmProg) (is : IsaState) (w : Fin 8) (pcT : BitVec 32) (n : Nat) : ∀ (s : FsmmState), rf3Sim prog s is w → rf3MemQ s → rf1PcOk s.base w pcT → (∀ k : Nat, k < n → rf2CuQ prog (fsmmRun prog s (List.replicate k smInNop)).base) → rf3Sim prog (fsmmRun prog s (List.replicate n smInNop)) is w ∧ rf3MemQ (fsmmRun prog s (List.replicate n smInNop)) ∧ rf1PcOk (fsmmRun prog s (List.replicate n smInNop)).base w pcT :=`
+- **rf3_ofNat_toFin2** (line 1494): `theorem rf3_ofNat_toFin2 (b : BitVec 2) : BitVec.ofNat 2 b.toFin.val = b :=`
+- **rf3_wsFin_ofNat** (line 1499): `theorem rf3_wsFin_ofNat (w : Fin 8) : wsFin (BitVec.ofNat 3 w.val) = w :=`
+- **rf3_ofNat8_ne0** (line 1505): `theorem rf3_ofNat8_ne0 (rd : Fin 32) (h : rd ≠ 0) : (BitVec.ofNat 8 rd.val != 0#8) = true :=`
+- **rf3_mapS_inj_bv** (line 1518): `theorem rf3_mapS_inj_bv (sgpr : BitVec 12) (w3 : BitVec 3) (xb yb : BitVec 8) (hx : xb < 32#8) (hy : yb < 32#8) (hal : sgpr &&& 3#12 = 0#12) (hle : sgpr ≤ 992#12) (hb : ocWbScaBankId xb w3 = ocWbScaBankId yb w3) (ha : ocWbScaAddr sgpr xb = ocWbScaAddr sgpr yb) : xb = yb :=`
+- **rf3_mapS_inj** (line 1528): `theorem rf3_mapS_inj (sgpr : BitVec 12) (w3 : BitVec 3) (x y : Fin 32) (hal : sgpr &&& 3#12 = 0#12) (hle : sgpr ≤ 992#12) (hne : x ≠ y) : ocWbScaBankId (BitVec.ofNat 8 x.val) w3 ≠ ocWbScaBankId (BitVec.ofNat 8 y.val) w3 ∨ ocWbScaAddr sgpr (BitVec.ofNat 8 x.val) ≠ ocWbScaAddr sgpr (BitVec.ofNat 8 y.val) :=`
+- **rf3_rdX_step_form** (line 1551): `theorem rf3_rdX_step_form (prog : SmProg) (s : FsmmState) (inp : SmIn) (w : Fin 8) (x : Fin 32) (hreq : inp.reqFire = false) : rf1RdX (fsmmStep prog s inp).base w x = rf1RdX { s.base with srf :=`
+- **rf3_salu_wb_step** (line 1595): `theorem rf3_salu_wb_step (prog : SmProg) (s : FsmmState) (inp : SmIn) (is : IsaState) (w : Fin 8) (rd : Fin 32) (v : BitVec 32) (wxd : Bool) (hsim : rf3Sim prog s is w) (hmq : rf3MemQ s) (hdisp : rf1DispOk s.base w) (hpcT : rf1PcOk s.base w (is.pc + 4#32)) (hev : rf3SaluBeat prog s inp w (BitVec.ofNat 8 rd.val) v wxd) : rf3Sim prog (fsmmStep prog s inp) (rf3SaluPost is rd v wxd) w ∧ rf3MemQ (fsmmStep prog s inp) ∧ rf1PcOk (fsmmStep prog s inp).base w (is.pc + 4#32) :=`
+- **rf3_run_append** (line 1757): `theorem rf3_run_append (prog : SmProg) (s : FsmmState) (l1 l2 : List SmIn) : fsmmRun prog s (l1 ++ l2) = fsmmRun prog (fsmmRun prog s l1) l2 :=`
+- **rf3_replicate_add** (line 1762): `theorem rf3_replicate_add (a : α) (k n : Nat) : List.replicate (k + n) a = List.replicate k a ++ List.replicate n a :=`
+- **rf3_dispOk_run** (line 1773): `theorem rf3_dispOk_run (prog : SmProg) (w : Fin 8) (n : Nat) : ∀ (s : FsmmState), rf1DispOk s.base w → rf1DispOk (fsmmRun prog s (List.replicate n smInNop)).base w :=`
+- **rf3_salu_advance** (line 1792): `theorem rf3_salu_advance (prog : SmProg) (s : FsmmState) (is : IsaState) (w : Fin 8) (k m : Nat) (rd : Fin 32) (v : BitVec 32) (wxd : Bool) (hsim : rf3Sim prog s is w) (hmq : rf3MemQ s) (hdisp : rf1DispOk s.base w) (hpcT : rf1PcOk s.base w (is.pc + 4#32)) (hsil1 : ∀ i : Nat, i < k → rf2CuQ prog (fsmmRun prog s (List.replicate i smInNop)).base) (hev : rf3SaluBeat prog (fsmmRun prog s (List.replicate k smInNop)) smInNop w (BitVec.ofNat 8 rd.val) v wxd) (hsil2 : ∀ i : Nat, i < m → rf2CuQ prog (fsmmRun prog s (List.replicate (k + 1 + i) smInNop)).base) : rf3Sim prog (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) (rf3SaluPost is rd v wxd) w ∧ rf3MemQ (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) :=`
+- **rf3_row_facts_of_salu** (line 1833): `theorem rf3_row_facts_of_salu (row : DecCtrlRow) (h : isaClassOfRow row = .salu) : (row.fp || row.tc) = false ∧ row.barrier = false ∧ row.simtStackOp = false ∧ row.simtStack = false ∧ (row.csr != 0#2) = false ∧ ¬(row.memCmd = 1#2) ∧ ¬(row.memCmd = 2#2) ∧ row.isvec = false ∧ ¬(row.branch = 1#2) ∧ ¬(row.branch = 2#2) ∧ ¬(row.branch = 3#2) ∧ row.fence = false :=`
+- **rf3_isaStep_salu** (line 1902): `theorem rf3_isaStep_salu (is : IsaState) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .salu) : isaStep is = rf3SaluPost is (isaRdF (isaFetch is)) (rf3SaluOut is) (decDecode (isaFetch is)).wxd :=`
+- **rf3_stmt_salu_of_progress** (line 1947): `theorem rf3_stmt_salu_of_progress (prog : SmProg) (s : FsmmState) (is : IsaState) (w : Fin 8) (k m : Nat) (hsim : rf3Sim prog s is w) (hmq : rf3MemQ s) (hdisp : rf1DispOk s.base w) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .salu) (hpcT : rf1PcOk s.base w (is.pc + 4#32)) (hsil1 : ∀ i : Nat, i < k → rf2CuQ prog (fsmmRun prog s (List.replicate i smInNop)).base) (hev : rf3SaluBeat prog (fsmmRun prog s (List.replicate k smInNop)) smInNop w (BitVec.ofNat 8 (isaRdF (isaFetch is)).val) (rf3SaluOut is) (decDecode (isaFetch is)).wxd) (hsil2 : ∀ i : Nat, i < m → rf2CuQ prog (fsmmRun prog s (List.replicate (k + 1 + i) smInNop)).base) : rf3Sim prog (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) (isaStep is) w ∧ rf3MemQ (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) :=`
+- **rf3_sramInit_mem** (line 1978): `theorem rf3_sramInit_mem (row : Fin 1024) (j : Fin 4) : (Mem.sramInit 1024 4 8).mem row j = 0#8 :=`
+- **rf3_rdGlbW_init** (line 1984): `theorem rf3_rdGlbW_init (ba : BitVec 25) (j : Fin 32) : rf3RdGlbW rf3S0.dc ba j = 0#32 :=`
+- **rf3_rdMemB_init** (line 1989): `theorem rf3_rdMemB_init (a : BitVec 32) : rf3RdMemB rf3S0 a = 0#8 :=`
+- **rf3_memQ_init** (line 2003): `theorem rf3_memQ_init : rf3MemQ rf3S0 :=`
+- **rf3_isa0_mem** (line 2010): `theorem rf3_isa0_mem (inst : BitVec 32) : (rf1Isa0 [inst]).mem = isaWrW (fun _ => 0#8) 0#32 inst :=`
+- **rf3_progOk_single** (line 2016): `theorem rf3_progOk_single (inst : BitVec 32) : rf3ProgOk (rf2ProgOf inst) (rf1Isa0 [inst]) :=`
+- **rf3_fetch_single** (line 2047): `theorem rf3_fetch_single (inst : BitVec 32) : isaFetch (rf1Isa0 [inst]) = inst :=`
+- **rf3_memOk_pre** (line 2053): `theorem rf3_memOk_pre (inst : BitVec 32) (hne : inst ≠ 0#32) : rf3MemOk (rf2ProgOf inst) (fsmmRun (rf2ProgOf inst) rf3S0 (fsmInsDisp.take 1)) (rf1Isa0 [inst]) :=`
+- **rf3_of_not_true** (line 2083): `theorem rf3_of_not_true {b : Bool} (h : (!b) = true) : b = false :=`
+- **rf3MemQB_sound** (line 2089): `theorem rf3MemQB_sound (s : FsmmState) (h : rf3MemQB s = true) : rf3MemQ s :=`
+- **rf3CuQB_sound** (line 2136): `theorem rf3CuQB_sound (prog : SmProg) (sb : FsmState) (h : rf3CuQB prog sb = true) : rf2CuQ prog sb :=`
+- **rf3SaluBeatB_sound** (line 2157): `theorem rf3SaluBeatB_sound (prog : SmProg) (s : FsmmState) (inp : SmIn) (w : Fin 8) (rdB : BitVec 8) (v : BitVec 32) (wxd : Bool) (h : rf3SaluBeatB prog s inp w rdB v wxd = true) : rf3SaluBeat prog s inp w rdB v wxd :=`
+- **rf3T_salu_addi_grid** (line 2231): `theorem rf3T_salu_addi_grid : (([⟨0, by decide⟩, ⟨1, by decide⟩, ⟨31, by decide⟩] : List (Fin 32)).all fun rd => ([0x000#12, 0x005#12, 0xFFF#12].all fun imm => rf3InstOk (rf2EncI imm 0#5 0#3 (BitVec.ofNat 5 rd.val) 0x13#7) && rf3EventGridOk (rf2EncI imm 0#5 0#3 (BitVec.ofNat 5 rd.val) 0x13#7))) = true :=`
+- **rf3T_salu_itype_grid** (line 2239): `theorem rf3T_salu_itype_grid : (([⟨0x000#12, 2#3, 0x13#7⟩, ⟨0x000#12, 3#3, 0x13#7⟩, ⟨0xFFF#12, 4#3, 0x13#7⟩, ⟨0x555#12, 6#3, 0x13#7⟩, ⟨0x7FF#12, 7#3, 0x13#7⟩, ⟨0x003#12, 1#3, 0x13#7⟩, ⟨0x003#12, 5#3, 0x13#7⟩, ⟨0x403#12, 5#3, 0x13#7⟩] : List (BitVec 12 × BitVec 3 × BitVec 7)).all fun ⟨imm, f3, op⟩ => ([1#5, 31#5].all fun rd => rf3InstOk (rf2EncI imm 0#5 f3 rd op) && rf3EventGridOk (rf2EncI imm 0#5 f3 rd op))) = true :=`
+- **rf3T_salu_rtype_grid** (line 2251): `theorem rf3T_salu_rtype_grid : (([⟨0x00#7, 0#3⟩, ⟨0x20#7, 0#3⟩, ⟨0x00#7, 1#3⟩, ⟨0x00#7, 2#3⟩, ⟨0x00#7, 3#3⟩, ⟨0x00#7, 4#3⟩, ⟨0x00#7, 5#3⟩, ⟨0x20#7, 5#3⟩, ⟨0x00#7, 6#3⟩, ⟨0x00#7, 7#3⟩] : List (BitVec 7 × BitVec 3)).all fun ⟨f7, f3⟩ => ([0#5, 3#5].all fun rd => rf3InstOk (rf2EncR f7 2#5 1#5 f3 rd 0x33#7) && rf3EventGridOk (rf2EncR f7 2#5 1#5 f3 rd 0x33#7))) = true :=`
+- **rf3T_mul_grid** (line 2261): `theorem rf3T_mul_grid : (([0#3, 1#3, 2#3, 3#3] : List (BitVec 3)).all fun f3 => rf3InstOkAny (rf2EncR 0x01#7 2#5 1#5 f3 3#5 0x33#7) && rf3EventGridOk (rf2EncR 0x01#7 2#5 1#5 f3 3#5 0x33#7)) = true :=`
+- **rf3_stmt_inst_addi** (line 2272): `theorem rf3_stmt_inst_addi : ∃ n : Nat, rf3Sim (rf2ProgOf 0x00500093#32) (fsmmRun (rf2ProgOf 0x00500093#32) (rf3SAt (rf2ProgOf 0x00500093#32) 1) (List.replicate n smInNop)) (isaStep (rf1Isa0 [0x00500093#32])) rf1W ∧ rf3MemQ (fsmmRun (rf2ProgOf 0x00500093#32) (rf3SAt (rf2ProgOf 0x00500093#32) 1) (List.replicate n smInNop)) :=`
+
+### `VentusF/RefineVec.lean`
+
+- **rfv_rdV_step_form** (line 57): `theorem rfv_rdV_step_form (prog : SmProg) (s : FsmmState) (inp : SmIn) (w : Fin 8) (v t : Fin 32) (hreq : inp.reqFire = false) : rf1RdV (fsmmStep prog s inp).base w v t = (rfVStep (fsmVrfAt s.base (rf1BankV w v)) ((fsmmComb prog s inp).rfInV (rf1BankV w v))).mem (rf1AddrV s.base w v) t :=`
+- **rfv_rdV_write_hit** (line 70): `theorem rfv_rdV_write_hit (prog : SmProg) (s : FsmmState) (inp : SmIn) (w : Fin 8) (v t : Fin 32) (hreq : inp.reqFire = false) (hwe : ((fsmmComb prog s inp).rfInV (rf1BankV w v)).rdwen = true) (haddr : ((fsmmComb prog s inp).rfInV (rf1BankV w v)).rdidx.toFin = rf1AddrV s.base w v) : rf1RdV (fsmmStep prog s inp).base w v t = (if ((fsmmComb prog s inp).rfInV (rf1BankV w v)).rdwmask t then ((fsmmComb prog s inp).rfInV (rf1BankV w v)).rd t else rf1RdV s.base w v t) :=`
+- **rfv_rdV_write_miss** (line 87): `theorem rfv_rdV_write_miss (prog : SmProg) (s : FsmmState) (inp : SmIn) (w : Fin 8) (v t : Fin 32) (hreq : inp.reqFire = false) (h : ((fsmmComb prog s inp).rfInV (rf1BankV w v)).rdwen = false ∨ ((fsmmComb prog s inp).rfInV (rf1BankV w v)).rdidx.toFin ≠ rf1AddrV s.base w v) : rf1RdV (fsmmStep prog s inp).base w v t = rf1RdV s.base w v t :=`
+- **rfv_mapV_inj_bv** (line 108): `theorem rfv_mapV_inj_bv (vgpr : BitVec 11) (w3 : BitVec 3) (xb yb : BitVec 8) (hx : xb < 32#8) (hy : yb < 32#8) (hal : vgpr &&& 3#11 = 0#11) (hle : vgpr ≤ 992#11) (hb : ocWbVecBankId xb w3 = ocWbVecBankId yb w3) (ha : ocWbVecAddr vgpr xb = ocWbVecAddr vgpr yb) : xb = yb :=`
+- **rfv_mapV_inj** (line 118): `theorem rfv_mapV_inj (vgpr : BitVec 11) (w3 : BitVec 3) (x y : Fin 32) (hal : vgpr &&& 3#11 = 0#11) (hle : vgpr ≤ 992#11) (hne : x ≠ y) : ocWbVecBankId (BitVec.ofNat 8 x.val) w3 ≠ ocWbVecBankId (BitVec.ofNat 8 y.val) w3 ∨ ocWbVecAddr vgpr (BitVec.ofNat 8 x.val) ≠ ocWbVecAddr vgpr (BitVec.ofNat 8 y.val) :=`
+- **rfv_wrX_vreg** (line 176): `theorem rfv_wrX_vreg (is : IsaState) (i : Fin 32) (x : BitVec 32) : (isaWrX is i x).vreg = is.vreg :=`
+- **rfv_valuPost_xreg** (line 181): `theorem rfv_valuPost_xreg (is : IsaState) (vd : Fin 32) (res : Fin 32 → BitVec 32) (wm : BitVec 32) (wvd wxd : Bool) (x : Fin 32) : (rfvValuPost is vd res wm wvd wxd).xreg x = (if wxd then isaWrX is vd (res 0) else is).xreg x :=`
+- **rfv_valuPost_vreg** (line 188): `theorem rfv_valuPost_vreg (is : IsaState) (vd : Fin 32) (res : Fin 32 → BitVec 32) (wm : BitVec 32) (wvd wxd : Bool) (v t : Fin 32) : (rfvValuPost is vd res wm wvd wxd).vreg v t = (if wvd then (if v = vd then (if wm.getLsbD t.val then res t else is.vreg v t) else is.vreg v t) else is.vreg v t) :=`
+- **rfv_valuPost_fields** (line 198): `theorem rfv_valuPost_fields (is : IsaState) (vd : Fin 32) (res : Fin 32 → BitVec 32) (wm : BitVec 32) (wvd wxd : Bool) : (rfvValuPost is vd res wm wvd wxd).mem = is.mem ∧ (rfvValuPost is vd res wm wvd wxd).tmask = is.tmask ∧ (rfvValuPost is vd res wm wvd wxd).bjstk = is.bjstk ∧ (rfvValuPost is vd res wm wvd wxd).csr = is.csr ∧ (rfvValuPost is vd res wm wvd wxd).halted = is.halted ∧ (rfvValuPost is vd res wm wvd wxd).pc = is.pc + 4#32 :=`
+- **rfv_row_facts_of_valu** (line 211): `theorem rfv_row_facts_of_valu (row : DecCtrlRow) (h : isaClassOfRow row = .valu) : (row.fp || row.tc) = false ∧ row.barrier = false ∧ row.simtStackOp = false ∧ row.simtStack = false ∧ (row.csr != 0#2) = false ∧ ¬(row.memCmd = 1#2) ∧ ¬(row.memCmd = 2#2) ∧ row.isvec = true ∧ (row.wxd && !row.wvd) = false :=`
+- **rfv_isaStep_valu** (line 279): `theorem rfv_isaStep_valu (is : IsaState) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .valu) : isaStep is = rfvValuPost is (isaRdF (isaFetch is)) (fun t => isaVLane (decDecode (isaFetch is)) (isaV0Mask is) (isaIn1Row is (isaFetch is) (decDecode (isaFetch is))) (isaIn2Row is (isaFetch is) (decDecode (isaFetch is))) (isaIn3Row is (isaFetch is) (decDecode (isaFetch is))) t) (if (decDecode (isaFetch is)).aluFn = 51#6 then is.tmask else isaEffMask is (isaFetch is) (decDecode (isaFetch is))) (decDecode (isaFetch is)).wvd (decDecode (isaFetch is)).wxd :=`
+- **rfv_valu_wb_step** (line 311): `theorem rfv_valu_wb_step (prog : SmProg) (s : FsmmState) (inp : SmIn) (is : IsaState) (w : Fin 8) (vd : Fin 32) (res : Fin 32 → BitVec 32) (wm : BitVec 32) (wvd wxd : Bool) (hsim : rf3Sim prog s is w) (hmq : rf3MemQ s) (hdisp : rf1DispOk s.base w) (hpcT : rf1PcOk s.base w (is.pc + 4#32)) (hev : rfvValuBeat prog s inp w vd res wm wvd wxd) : rf3Sim prog (fsmmStep prog s inp) (rfvValuPost is vd res wm wvd wxd) w ∧ rf3MemQ (fsmmStep prog s inp) ∧ rf1PcOk (fsmmStep prog s inp).base w (is.pc + 4#32) :=`
+- **rfv_valu_advance** (line 575): `theorem rfv_valu_advance (prog : SmProg) (s : FsmmState) (is : IsaState) (w : Fin 8) (k m : Nat) (vd : Fin 32) (res : Fin 32 → BitVec 32) (wm : BitVec 32) (wvd wxd : Bool) (hsim : rf3Sim prog s is w) (hmq : rf3MemQ s) (hdisp : rf1DispOk s.base w) (hpcT : rf1PcOk s.base w (is.pc + 4#32)) (hsil1 : ∀ i : Nat, i < k → rf2CuQ prog (fsmmRun prog s (List.replicate i smInNop)).base) (hev : rfvValuBeat prog (fsmmRun prog s (List.replicate k smInNop)) smInNop w vd res wm wvd wxd) (hsil2 : ∀ i : Nat, i < m → rf2CuQ prog (fsmmRun prog s (List.replicate (k + 1 + i) smInNop)).base) : rf3Sim prog (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) (rfvValuPost is vd res wm wvd wxd) w ∧ rf3MemQ (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) :=`
+- **rfv_stmt_valu_of_progress** (line 619): `theorem rfv_stmt_valu_of_progress (prog : SmProg) (s : FsmmState) (is : IsaState) (w : Fin 8) (k m : Nat) (hsim : rf3Sim prog s is w) (hmq : rf3MemQ s) (hdisp : rf1DispOk s.base w) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .valu) (hpcT : rf1PcOk s.base w (is.pc + 4#32)) (hsil1 : ∀ i : Nat, i < k → rf2CuQ prog (fsmmRun prog s (List.replicate i smInNop)).base) (hev : rfvValuBeat prog (fsmmRun prog s (List.replicate k smInNop)) smInNop w (isaRdF (isaFetch is)) (fun t => isaVLane (decDecode (isaFetch is)) (isaV0Mask is) (isaIn1Row is (isaFetch is) (decDecode (isaFetch is))) (isaIn2Row is (isaFetch is) (decDecode (isaFetch is))) (isaIn3Row is (isaFetch is) (decDecode (isaFetch is))) t) (if (decDecode (isaFetch is)).aluFn = 51#6 then is.tmask else isaEffMask is (isaFetch is) (decDecode (isaFetch is))) (decDecode (isaFetch is)).wvd (decDecode (isaFetch is)).wxd) (hsil2 : ∀ i : Nat, i < m → rf2CuQ prog (fsmmRun prog s (List.replicate (k + 1 + i) smInNop)).base) : rf3Sim prog (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) (isaStep is) w ∧ rf3MemQ (fsmmRun prog s (List.replicate (k + 1 + m) smInNop)) :=`
+- **rfv_quiet_step_base** (line 663): `theorem rfv_quiet_step_base (prog : SmProg) (s : FsmmState) (is : IsaState) (w : Fin 8) (pcT : BitVec 32) (inp : SmIn) (hsim : rf1Sim s.base is w) (hq : rfvQuietBeat prog s inp) (hpcT : rf1PcOk s.base w pcT) : rf1Sim (fsmmStep prog s inp).base is w ∧ rf1PcOk (fsmmStep prog s inp).base w pcT :=`
+- **rfv_quiet_step** (line 686): `theorem rfv_quiet_step (prog : SmProg) (s : FsmmState) (is : IsaState) (w : Fin 8) (pcT : BitVec 32) (inp : SmIn) (hsim : rf3Sim prog s is w) (hq : rfvQuietBeat prog s inp) (hms : rfvMemStable prog s inp) (hpcT : rf1PcOk s.base w pcT) : rf3Sim prog (fsmmStep prog s inp) is w ∧ rf1PcOk (fsmmStep prog s inp).base w pcT :=`
+- **rfv_quiet_run** (line 699): `theorem rfv_quiet_run (prog : SmProg) (is : IsaState) (w : Fin 8) (pcT : BitVec 32) (n : Nat) : ∀ (s : FsmmState), rf3Sim prog s is w → rf1PcOk s.base w pcT → (∀ k : Nat, k < n → rfvQuietBeat prog (fsmmRun prog s (List.replicate k smInNop)) smInNop ∧ rfvMemStable prog (fsmmRun prog s (List.replicate k smInNop)) smInNop) → rf3Sim prog (fsmmRun prog s (List.replicate n smInNop)) is w ∧ rf1PcOk (fsmmRun prog s (List.replicate n smInNop)).base w pcT :=`
+- **rfv_run_succ_append** (line 728): `theorem rfv_run_succ_append (prog : SmProg) (s : FsmmState) (n : Nat) : fsmmRun prog s (List.replicate (n + 1) smInNop) = fsmmStep prog (fsmmRun prog s (List.replicate n smInNop)) smInNop :=`
+- **rfv_vload_wb_step** (line 763): `theorem rfv_vload_wb_step (prog : SmProg) (s : FsmmState) (inp : SmIn) (is : IsaState) (w : Fin 8) (vd : Fin 32) (res : Fin 32 → BitVec 32) (wm : BitVec 32) (hsim : rf3Sim prog s is w) (hdisp : rf1DispOk s.base w) (hpcT : rf1PcOk s.base w (is.pc + 4#32)) (hev : rfvVloadBeat prog s inp w vd res wm) (hms : rfvMemStable prog s inp) : rf3Sim prog (fsmmStep prog s inp) (rfvVloadPost is vd res wm) w ∧ rf1PcOk (fsmmStep prog s inp).base w (is.pc + 4#32) :=`
+- **rfv_row_facts_of_vload** (line 876): `theorem rfv_row_facts_of_vload (row : DecCtrlRow) (h : isaClassOfRow row = .vload) : (row.fp || row.tc) = false ∧ row.barrier = false ∧ row.simtStackOp = false ∧ row.simtStack = false ∧ (row.csr != 0#2) = false ∧ row.memCmd = 1#2 ∧ row.isvec = true :=`
+- **rfv_isaStep_vload** (line 944): `theorem rfv_isaStep_vload (is : IsaState) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .vload) : isaStep is = rfvVloadPost is (isaRdF (isaFetch is)) (fun t => isaLdData is.mem (decDecode (isaFetch is)).memWhb (decDecode (isaFetch is)).memUnsigned (isaVAddr is (isaFetch is) (decDecode (isaFetch is)) t)) (isaEffMask is (isaFetch is) (decDecode (isaFetch is))) :=`
+- **rfv_stmt_vload_of_progress** (line 976): `theorem rfv_stmt_vload_of_progress (prog : SmProg) (s : FsmmState) (is : IsaState) (w : Fin 8) (k j m : Nat) (hsim : rf3Sim prog s is w) (hmq : rf3MemQ s) (hdisp : rf1DispOk s.base w) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .vload) (hpcT : rf1PcOk s.base w (is.pc + 4#32)) (hsil1 : ∀ i : Nat, i < k → rf2CuQ prog (fsmmRun prog s (List.replicate i smInNop)).base) (htxn : ∀ i : Nat, i < j → rfvQuietBeat prog (fsmmRun prog s (List.replicate (k + i) smInNop)) smInNop ∧ rfvMemStable prog (fsmmRun prog s (List.replicate (k + i) smInNop)) smInNop) (hev : rfvVloadBeat prog (fsmmRun prog s (List.replicate (k + j) smInNop)) smInNop w (isaRdF (isaFetch is)) (fun t => isaLdData is.mem (decDecode (isaFetch is)).memWhb (decDecode (isaFetch is)).memUnsigned (isaVAddr is (isaFetch is) (decDecode (isaFetch is)) t)) (isaEffMask is (isaFetch is) (decDecode (isaFetch is)))) (hmsWb : rfvMemStable prog (fsmmRun prog s (List.replicate (k + j) smInNop)) smInNop) (hfin : rf3MemQ (fsmmRun prog s (List.replicate (k + j + 1) smInNop))) (hsil2 : ∀ i : Nat, i < m → rf2CuQ prog (fsmmRun prog s (List.replicate (k + j + 1 + i) smInNop)).base) : rf3Sim prog (fsmmRun prog s (List.replicate (k + j + 1 + m) smInNop)) (isaStep is) w ∧ rf3MemQ (fsmmRun prog s (List.replicate (k + j + 1 + m) smInNop)) :=`
+- **rfv_row_facts_of_vstore** (line 1055): `theorem rfv_row_facts_of_vstore (row : DecCtrlRow) (h : isaClassOfRow row = .vstore) : (row.fp || row.tc) = false ∧ row.barrier = false ∧ row.simtStackOp = false ∧ row.simtStack = false ∧ (row.csr != 0#2) = false ∧ row.memCmd = 2#2 ∧ row.isvec = true :=`
+- **rfv_isaStep_vstore** (line 1122): `theorem rfv_isaStep_vstore (is : IsaState) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .vstore) : isaStep is = rfvVstorePost is :=`
+- **rfv_vstorePost_fields** (line 1146): `theorem rfv_vstorePost_fields (is : IsaState) (hcls : isaClassify (isaFetch is) = .vstore) : (rfvVstorePost is).xreg = is.xreg ∧ (rfvVstorePost is).vreg = is.vreg ∧ (rfvVstorePost is).tmask = is.tmask ∧ (rfvVstorePost is).bjstk = is.bjstk ∧ (rfvVstorePost is).csr = is.csr ∧ (rfvVstorePost is).halted = is.halted ∧ (rfvVstorePost is).pc = is.pc + 4#32 :=`
+- **rfv_quiet_run_base** (line 1160): `theorem rfv_quiet_run_base (prog : SmProg) (is : IsaState) (w : Fin 8) (pcT : BitVec 32) (n : Nat) : ∀ (s : FsmmState), rf1Sim s.base is w → rf1PcOk s.base w pcT → (∀ k : Nat, k < n → rfvQuietBeat prog (fsmmRun prog s (List.replicate k smInNop)) smInNop) → rf1Sim (fsmmRun prog s (List.replicate n smInNop)).base is w ∧ rf1PcOk (fsmmRun prog s (List.replicate n smInNop)).base w pcT :=`
+- **rfv_stmt_vstore_of_progress** (line 1193): `theorem rfv_stmt_vstore_of_progress (prog : SmProg) (s : FsmmState) (is : IsaState) (w : Fin 8) (k j m : Nat) (hsim : rf3Sim prog s is w) (hmq : rf3MemQ s) (hdisp : rf1DispOk s.base w) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .vstore) (hpcT : rf1PcOk s.base w (is.pc + 4#32)) (hsil1 : ∀ i : Nat, i < k → rf2CuQ prog (fsmmRun prog s (List.replicate i smInNop)).base) (htxn : ∀ i : Nat, i < j → rfvQuietBeat prog (fsmmRun prog s (List.replicate (k + i) smInNop)) smInNop) (hmemAdv : ∀ a : BitVec 32, prog.imem (a &&& 0xFFFFFFFC#32) = 0#32 → rf3RdMemB (fsmmRun prog s (List.replicate (k + j) smInNop)) a = (rfvVstorePost is).mem a) (hfin : rf3MemQ (fsmmRun prog s (List.replicate (k + j) smInNop))) (hsil2 : ∀ i : Nat, i < m → rf2CuQ prog (fsmmRun prog s (List.replicate (k + j + i) smInNop)).base) : rf3Sim prog (fsmmRun prog s (List.replicate (k + j + m) smInNop)) (isaStep is) w ∧ rf3MemQ (fsmmRun prog s (List.replicate (k + j + m) smInNop)) :=`
+- **rfvBjList_length** (line 1292): `theorem rfvBjList_length (st : BjStackState 4 32) : (rfvBjList st).length = st.wr.toNat :=`
+- **rfvBjList_of_wr0** (line 1297): `theorem rfvBjList_of_wr0 (st : BjStackState 4 32) (h : st.wr = 0#3) : rfvBjList st = [] :=`
+- **rfvBjList_eq_nil** (line 1304): `theorem rfvBjList_eq_nil (st : BjStackState 4 32) : rfvBjList st = [] ↔ st.wr = 0#3 :=`
+- **rfv_range_succ_reverse** (line 1315): `theorem rfv_range_succ_reverse (n : Nat) : (List.range (n + 1)).reverse = n :: (List.range n).reverse :=`
+- **rfv_map_congr** (line 1321): `theorem rfv_map_congr {α β : Type} (l : List α) (f g : α → β) (h : ∀ a ∈ l, f a = g a) : l.map f = l.map g :=`
+- **rfv_bjPtrWidth4** (line 1331): `theorem rfv_bjPtrWidth4 : bjPtrWidth 4 = 3 :=`
+- **rfvBjList_cons** (line 1334): `theorem rfvBjList_cons (st : BjStackState 4 32) (hinv : rfvBjInv st) (hne : st.wr ≠ 0#3) : rfvBjList st = st.mem (bjIdx st.rd) :: (rfvBjList st).tail :=`
+- **rfvBjList_push** (line 1366): `theorem rfvBjList_push (st : BjStackState 4 32) (i : BjStackIn 32) (hinv : rfvBjInv st) (hroom : st.wr.toNat + 2 ≤ 4) (hpush : i.push = true) : rfvBjList (bjStackStep st i) = i.pushData :: ⟨i.pushData.reconPC, i.pushData.reconPC, i.threadMask⟩ :: rfvBjList st :=`
+- **rfvBjList_pop** (line 1436): `theorem rfvBjList_pop (st : BjStackState 4 32) (pc : BitVec 32) (hinv : rfvBjInv st) (hpop : bjCanPop st pc = true) : rfvBjList (bjStackStep st (bjJoinIn pc)) = (rfvBjList st).tail :=`
+- **rfvBjInv_pop** (line 1469): `theorem rfvBjInv_pop (st : BjStackState 4 32) (pc : BitVec 32) (hinv : rfvBjInv st) (hpop : bjCanPop st pc = true) : rfvBjInv (bjStackStep st (bjJoinIn pc)) :=`
+- **rfvBjInv_push** (line 1503): `theorem rfvBjInv_push (st : BjStackState 4 32) (i : BjStackIn 32) (hinv : rfvBjInv st) (hroom : st.wr.toNat + 2 ≤ 4) (hpush : i.push = true) : rfvBjInv (bjStackStep st i) :=`
+- **rfv_bjSys_branch_list** (line 1528): `theorem rfv_bjSys_branch_list (s : BjSysState 4 32) (bi : BjBranchIn 32) (hinv : rfvBjInv s.stack) (hroom : s.stack.wr.toNat + 2 ≤ 4) (hdiv : bjDivOccur bi = true) : rfvBjList (bjSysStep s (.branch bi)).1.stack = bjPushentry bi :: ⟨bi.PCreconv, bi.PCreconv, s.tmask⟩ :: rfvBjList s.stack :=`
+- **rfv_bjSys_branch_tmask** (line 1538): `theorem rfv_bjSys_branch_tmask (s : BjSysState 4 32) (bi : BjBranchIn 32) : (bjSysStep s (.branch bi)).1.tmask = (if bjDivOccur bi then (if bjTakeif bi then bjIfMask bi else bjElseMask bi) else s.tmask) :=`
+- **rfv_bjSys_branch_fetch** (line 1544): `theorem rfv_bjSys_branch_fetch (s : BjSysState 4 32) (bi : BjBranchIn 32) : (bjSysStep s (.branch bi)).2.fetchValid = (!bjTakeif bi || bjElseOnly bi) ∧ (bjSysStep s (.branch bi)).2.fetchJump = (!bjTakeif bi || bjElseOnly bi) ∧ (bjSysStep s (.branch bi)).2.fetchPC = (if (!bjTakeif bi || bjElseOnly bi) then bi.PCbranch else 0#32) :=`
+- **rfv_bjSys_join_list** (line 1552): `theorem rfv_bjSys_join_list (s : BjSysState 4 32) (pc : BitVec 32) (hinv : rfvBjInv s.stack) (hpop : bjCanPop s.stack pc = true) : rfvBjList (bjSysStep s (.join pc)).1.stack = (rfvBjList s.stack).tail :=`
+- **rfv_bjSys_join_out** (line 1559): `theorem rfv_bjSys_join_out (s : BjSysState 4 32) (pc : BitVec 32) : (bjSysStep s (.join pc)).2.fetchValid = true ∧ (bjSysStep s (.join pc)).2.fetchJump = bjStackJump s.stack (bjJoinIn pc) ∧ ((bjSysStep s (.join pc)).2.fetchPC = (if bjStackJump s.stack (bjJoinIn pc) then bjStackNewPC s.stack else 0#32)) ∧ (bjSysStep s (.join pc)).1.tmask = (if bjStackJump s.stack (bjJoinIn pc) then bjStackNewMask s.stack else s.tmask) :=`
+- **rfv_bjCanPop_false_of_wr0** (line 1569): `theorem rfv_bjCanPop_false_of_wr0 (st : BjStackState 4 32) (pc : BitVec 32) (h : st.wr = 0#3) : bjCanPop st pc = false :=`
+- **rfv_foldl_finRange_range** (line 1578): `theorem rfv_foldl_finRange_range (g : Nat → Nat → Nat) : ∀ (n : Nat) (x : Nat), (List.finRange n).foldl (fun acc i => g acc i.val) x = (List.range n).foldl g x :=`
+- **rfv_popcount_eq** (line 1593): `theorem rfv_popcount_eq (m : BitVec 32) : bjPopcount m = isaPopcount32 m :=`
+- **rfv_row_facts_of_vbr** (line 1600): `theorem rfv_row_facts_of_vbr (row : DecCtrlRow) (h : isaClassOfRow row = .vbr) : (row.fp || row.tc) = false ∧ row.barrier = false ∧ row.simtStackOp = false ∧ row.simtStack = true :=`
+- **rfv_row_facts_of_vjoin** (line 1665): `theorem rfv_row_facts_of_vjoin (row : DecCtrlRow) (h : isaClassOfRow row = .vjoin) : (row.fp || row.tc) = false ∧ row.barrier = false ∧ row.simtStackOp = true :=`
+- **rfv_isaStep_vbr** (line 1728): `theorem rfv_isaStep_vbr (is : IsaState) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .vbr) : isaStep is = isaExecVBranch is (isaFetch is) (decDecode (isaFetch is)) :=`
+- **rfv_isaStep_join** (line 1744): `theorem rfv_isaStep_join (is : IsaState) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .vjoin) : isaStep is = isaExecJoin is :=`
+- **rfv_divOccur_eq** (line 1758): `theorem rfv_divOccur_eq (cond mInit target pcE rpc : BitVec 32) : bjDivOccur ⟨~~~cond, mInit, target, pcE, rpc⟩ = (((~~~cond &&& mInit) != 0#32) && ((cond &&& mInit) != 0#32)) :=`
+- **rfv_takeif_eq** (line 1769): `theorem rfv_takeif_eq (cond mInit target pcE rpc : BitVec 32) : bjTakeif ⟨~~~cond, mInit, target, pcE, rpc⟩ = ((decide (isaPopcount32 (~~~cond &&& mInit) < isaPopcount32 (cond &&& mInit)) && bjDivOccur ⟨~~~cond, mInit, target, pcE, rpc⟩) || ((cond &&& mInit) == 0#32)) :=`
+- **rfv_vbrPost_eq** (line 1778): `theorem rfv_vbrPost_eq (is : IsaState) (inst : BitVec 32) (row : DecCtrlRow) : isaExecVBranch is inst row = (let cond :=`
+- **rfv_comb_fcEnqValid** (line 1804): `theorem rfv_comb_fcEnqValid (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).fcEnqValid = (bjSysStep s.base.bj (fsmmComb prog s inp).bjEv).2.fetchValid :=`
+- **rfv_comb_fcDeqValid** (line 1808): `theorem rfv_comb_fcDeqValid (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).fcDeqValid = (s.fcV || (fsmmComb prog s inp).fcEnqValid) :=`
+- **rfv_comb_fcDeqFire** (line 1812): `theorem rfv_comb_fcDeqFire (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).fcDeqFire = ((fsmmComb prog s inp).fcDeqValid && !(fsmmComb prog s inp).brFire) :=`
+- **rfv_comb_fcDeqJump** (line 1816): `theorem rfv_comb_fcDeqJump (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).fcDeqJump = (if s.fcV then s.fcJ else (fsmmComb prog s inp).bjOut.fetchJump) :=`
+- **rfv_comb_fcDeqPC** (line 1820): `theorem rfv_comb_fcDeqPC (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).fcDeqPC = (if s.fcV then s.fcPC else (fsmmComb prog s inp).bjOut.fetchPC) :=`
+- **rfv_comb_fcDeqWid** (line 1824): `theorem rfv_comb_fcDeqWid (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).fcDeqWid = (if s.fcV then s.fcWid else (fsmmComb prog s inp).outVWid) :=`
+- **rfv_comb_brMFire** (line 1828): `theorem rfv_comb_brMFire (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).brMFire = ((fsmmComb prog s inp).brFire || (fsmmComb prog s inp).fcDeqFire) :=`
+- **rfv_comb_brMJump** (line 1832): `theorem rfv_comb_brMJump (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).brMJump = (if (fsmmComb prog s inp).brFire then (fsmmComb prog s inp).brJump else (fsmmComb prog s inp).fcDeqJump) :=`
+- **rfv_comb_brMTarget** (line 1837): `theorem rfv_comb_brMTarget (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).brMTarget = (if (fsmmComb prog s inp).brFire then (fsmmComb prog s inp).brTarget else (fsmmComb prog s inp).fcDeqPC) :=`
+- **rfv_comb_brMWid** (line 1842): `theorem rfv_comb_brMWid (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).brMWid = (if (fsmmComb prog s inp).brFire then (fsmmComb prog s inp).brWid else (fsmmComb prog s inp).fcDeqWid) :=`
+- **rfv_comb_bjOut** (line 1847): `theorem rfv_comb_bjOut (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).bjOut = (bjSysStep s.base.bj (fsmmComb prog s inp).bjEv).2 :=`
+- **rfv_memQ_step_fc** (line 1853): `theorem rfv_memQ_step_fc (prog : SmProg) (s : FsmmState) (inp : SmIn) (hmq : rf3MemQ s) (hlsuv : (fsmmComb prog s inp).lsuReqV = false) (hflsu : (fsmmComb prog s inp).fireLsu = false) (hws : (fsmmComb prog s inp).fireWs = false) (hreq : inp.reqFire = false) (hfcN : ((fsmmComb prog s inp).fcEnqValid && !(fsmmComb prog s inp).fcDeqFire) = false) : rf3MemQ (fsmmStep prog s inp) :=`
+- **rfv_pcOk_step_brcomb** (line 1956): `theorem rfv_pcOk_step_brcomb (prog : SmProg) (s : FsmmState) (inp : SmIn) (w : Fin 8) (pc : BitVec 32) (hpc : inp.pcReset = false) (hreq : inp.reqFire = false) (hbr : ((fsmmComb prog s inp).brMFire && (fsmmComb prog s inp).brMJump && ((fsmmComb prog s inp).brMWid == BitVec.ofNat 3 w.val)) = false) (h : rf1PcOk s.base w pc) : rf1PcOk (fsmmStep prog s inp).base w pc :=`
+- **rfv_pc_redirect** (line 1987): `theorem rfv_pc_redirect (prog : SmProg) (s : FsmmState) (inp : SmIn) (w : Fin 8) (tgt : BitVec 32) (hpc : inp.pcReset = false) (hreq : inp.reqFire = false) (hbr : ((fsmmComb prog s inp).brMFire && (fsmmComb prog s inp).brMJump && ((fsmmComb prog s inp).brMWid == BitVec.ofNat 3 w.val)) = true) (htgt : (fsmmComb prog s inp).brMTarget = tgt) : rf1Pc (fsmmStep prog s inp).base w = tgt &&& 0xFFFFFFF8#32 :=`
+- **rfv_pcOk_redirect** (line 2003): `theorem rfv_pcOk_redirect (prog : SmProg) (s : FsmmState) (inp : SmIn) (w : Fin 8) (tgt : BitVec 32) (hpc : inp.pcReset = false) (hreq : inp.reqFire = false) (hbr : ((fsmmComb prog s inp).brMFire && (fsmmComb prog s inp).brMJump && ((fsmmComb prog s inp).brMWid == BitVec.ofNat 3 w.val)) = true) (htgt : (fsmmComb prog s inp).brMTarget = tgt) : rf1PcOk (fsmmStep prog s inp).base w tgt :=`
+- **rfvSim_of_rf3Sim** (line 2028): `theorem rfvSim_of_rf3Sim (prog : SmProg) (s : FsmmState) (is : IsaState) (w : Fin 8) (h : rf3Sim prog s is w) (hst : s.base.bj.stack = bjStackInit 4 32) : rfvSim prog s is w :=`
+- **rfv_silent_step** (line 2042): `theorem rfv_silent_step (prog : SmProg) (s : FsmmState) (is : IsaState) (w : Fin 8) (pcT : BitVec 32) (inp : SmIn) (hsim : rfvSim prog s is w) (hq : rf2CuQ prog s.base) (hmq : rf3MemQ s) (hpcT : rf1PcOk s.base w pcT) (hreq : inp.reqFire = false) (hpc : inp.pcReset = false) : rfvSim prog (fsmmStep prog s inp) is w ∧ rf3MemQ (fsmmStep prog s inp) ∧ rf1PcOk (fsmmStep prog s inp).base w pcT :=`
+- **rfv_silent_run** (line 2076): `theorem rfv_silent_run (prog : SmProg) (is : IsaState) (w : Fin 8) (pcT : BitVec 32) (n : Nat) : ∀ (s : FsmmState), rfvSim prog s is w → rf3MemQ s → rf1PcOk s.base w pcT → (∀ k : Nat, k < n → rf2CuQ prog (fsmmRun prog s (List.replicate k smInNop)).base) → rfvSim prog (fsmmRun prog s (List.replicate n smInNop)) is w ∧ rf3MemQ (fsmmRun prog s (List.replicate n smInNop)) ∧ rf1PcOk (fsmmRun prog s (List.replicate n smInNop)).base w pcT :=`
+- **rfv_mask_split** (line 2121): `theorem rfv_mask_split (cond mInit : BitVec 32) : (~~~cond &&& mInit) ||| (cond &&& mInit) = mInit :=`
+- **rfv_vbr_step** (line 2129): `theorem rfv_vbr_step (prog : SmProg) (s : FsmmState) (inp : SmIn) (is : IsaState) (w : Fin 8) (bi : BjBranchIn 32) (hsim : rfvSim prog s is w) (hmq : rf3MemQ s) (hroom : s.base.bj.stack.wr.toNat + 2 ≤ 4) (hpcT : rf1PcOk s.base w (is.pc + 4#32)) (hm0 : (isaEffMask is (isaFetch is) (decDecode (isaFetch is)) == 0#32) = false) (hbi : bi = ⟨~~~(isaCmpVec is (isaFetch is) (decDecode (isaFetch is))), isaEffMask is (isaFetch is) (decDecode (isaFetch is)), is.pc + isaImm (decDecode (isaFetch is)) (isaFetch is), is.pc, is.csr.rpc⟩) (hev : rfvVbrBeat prog s inp w bi) (hhlt : is.halted = false) (hcls : isaClassify (isaFetch is) = .vbr) : rfvSim prog (fsmmStep prog s inp) (isaStep is) w ∧ rf3MemQ (fsmmStep prog s inp) :=`
+
+### `VentusF/RefineVecGrid.lean`
+
+- **rfvgValuBeatB_sound** (line 143): `theorem rfvgValuBeatB_sound (prog : SmProg) (s : FsmmState) (inp : SmIn) (w : Fin 8) (vd : Fin 32) (res : RfVRow) (wm : BitVec 32) (wvd wxd : Bool) (h : rfvgValuBeatB prog s inp w vd res wm wvd wxd = true) : rfvValuBeat prog s inp w vd res wm wvd wxd :=`
+- **rfvgVloadBeatB_sound** (line 199): `theorem rfvgVloadBeatB_sound (prog : SmProg) (s : FsmmState) (inp : SmIn) (w : Fin 8) (vd : Fin 32) (res : RfVRow) (wm : BitVec 32) (h : rfvgVloadBeatB prog s inp w vd res wm = true) : rfvVloadBeat prog s inp w vd res wm :=`
+- **rfvgVbrBeatB_sound** (line 242): `theorem rfvgVbrBeatB_sound (prog : SmProg) (s : FsmmState) (inp : SmIn) (w : Fin 8) (bi : BjBranchIn 32) (h : rfvgVbrBeatB prog s inp w bi = true) : rfvVbrBeat prog s inp w bi :=`
+- **rfvgJoinBeatB_sound** (line 299): `theorem rfvgJoinBeatB_sound (prog : SmProg) (s : FsmmState) (inp : SmIn) (w : Fin 8) (pcE : BitVec 32) (h : rfvgJoinBeatB prog s inp w pcE = true) : rfvgJoinBeat prog s inp w pcE :=`
+- **rfvgVstoreFireB_sound** (line 339): `theorem rfvgVstoreFireB_sound (prog : SmProg) (s : FsmmState) (inp : SmIn) (w : Fin 8) (h : rfvgVstoreFireB prog s inp w = true) : rfvgVstoreFire prog s inp w :=`
+- **rfvgQuietBeatB_sound** (line 357): `theorem rfvgQuietBeatB_sound (prog : SmProg) (s : FsmmState) (inp : SmIn) (h : rfvgQuietBeatB prog s inp = true) : rfvQuietBeat prog s inp :=`
+- **rfvg_dec_vadd** (line 392): `theorem rfvg_dec_vadd : let c :=`
+- **rfvg_dec_vaddM** (line 398): `theorem rfvg_dec_vaddM : let c :=`
+- **rfvg_cls_vadd** (line 403): `theorem rfvg_cls_vadd : isaClassify 0x022180D7#32 = .valu :=`
+- **rfvg_cls_vaddD** (line 404): `theorem rfvg_cls_vaddD : isaClassify 0x022081D7#32 = .valu :=`
+- **rfvg_cls_vaddM** (line 405): `theorem rfvg_cls_vaddM : isaClassify 0x002180D7#32 = .valu :=`
+- **rfvgT_valu_grid_vadd** (line 432): `theorem rfvgT_valu_grid_vadd : rfvgValuGridOk rfvgProgVadd rf3S0 rfvgIsVadd 12 = true :=`
+- **rfvg_valu_beat_vadd** (line 436): `theorem rfvg_valu_beat_vadd : rfvValuBeat rfvgProgVadd (rfvgSAt rfvgProgVadd rf3S0 6) (rfvgInAt 6) rf1W (isaRdF (isaFetch rfvgIsVadd)) (rfvgResOf rfvgIsVadd) (rfvgWmOf rfvgIsVadd) (decDecode (isaFetch rfvgIsVadd)).wvd (decDecode (isaFetch rfvgIsVadd)).wxd :=`
+- **rfvgT_valu_grid_vaddD** (line 449): `theorem rfvgT_valu_grid_vaddD : rfvgValuGridOk rfvgProgVaddD rfvgS0data rfvgIsVaddD 12 = true :=`
+- **rfvg_valu_beat_vaddD** (line 454): `theorem rfvg_valu_beat_vaddD : rfvValuBeat rfvgProgVaddD (rfvgSAt rfvgProgVaddD rfvgS0data 6) (rfvgInAt 6) rf1W (isaRdF (isaFetch rfvgIsVaddD)) (rfvgResOf rfvgIsVaddD) (rfvgWmOf rfvgIsVaddD) (decDecode (isaFetch rfvgIsVaddD)).wvd (decDecode (isaFetch rfvgIsVaddD)).wxd :=`
+- **rfvgT_valu_grid_vaddM** (line 466): `theorem rfvgT_valu_grid_vaddM : rfvgValuGridOk rfvgProgVaddM rfvgS0mask rfvgIsVaddM 12 = true :=`
+- **rfvg_valu_beat_vaddM** (line 472): `theorem rfvg_valu_beat_vaddM : rfvValuBeat rfvgProgVaddM (rfvgSAt rfvgProgVaddM rfvgS0mask 6) (rfvgInAt 6) rf1W (isaRdF (isaFetch rfvgIsVaddM)) (rfvgResOf rfvgIsVaddM) (rfvgWmOf rfvgIsVaddM) (decDecode (isaFetch rfvgIsVaddM)).wvd (decDecode (isaFetch rfvgIsVaddM)).wxd :=`
+- **rfvg_cls_vle32** (line 494): `theorem rfvg_cls_vle32 : isaClassify 0x0200E107#32 = .vload :=`
+- **rfvg_cls_vle32_3** (line 495): `theorem rfvg_cls_vle32_3 : isaClassify 0x0200E187#32 = .vload :=`
+- **rfvgT_vload_grid_vle32** (line 518): `theorem rfvgT_vload_grid_vle32 : rfvgVloadGridOk rfvgProgVload rf3S0 rfvgIsVload 20 = true :=`
+- **rfvg_vload_beat_vle32** (line 524): `theorem rfvg_vload_beat_vle32 : rfvVloadBeat rfvgProgVload (rfvgSAt rfvgProgVload rf3S0 13) (rfvgInAt 13) rf1W (isaRdF (isaFetch rfvgIsVload)) (rfvgResVloadOf rfvgIsVload) (isaEffMask rfvgIsVload (isaFetch rfvgIsVload) (decDecode (isaFetch rfvgIsVload))) :=`
+- **rfvgT_vload_grid_vle32_3** (line 531): `theorem rfvgT_vload_grid_vle32_3 : rfvgVloadGridOk rfvgProgVload3 rf3S0 rfvgIsVload3 20 = true :=`
+- **rfvg_vload_beat_vle32_3** (line 536): `theorem rfvg_vload_beat_vle32_3 : rfvVloadBeat rfvgProgVload3 (rfvgSAt rfvgProgVload3 rf3S0 13) (rfvgInAt 13) rf1W (isaRdF (isaFetch rfvgIsVload3)) (rfvgResVloadOf rfvgIsVload3) (isaEffMask rfvgIsVload3 (isaFetch rfvgIsVload3) (decDecode (isaFetch rfvgIsVload3))) :=`
+- **rfvg_cls_vse32** (line 560): `theorem rfvg_cls_vse32 : isaClassify 0x0200E0A7#32 = .vstore :=`
+- **rfvg_cls_vse32_2** (line 561): `theorem rfvg_cls_vse32_2 : isaClassify 0x0200E127#32 = .vstore :=`
+- **rfvgT_vstore_grid_vse32** (line 591): `theorem rfvgT_vstore_grid_vse32 : rfvgVstoreGridOk rfvgProgVstore rfvgS0store 12 = true :=`
+- **rfvg_vstore_fire_vse32** (line 596): `theorem rfvg_vstore_fire_vse32 : rfvgVstoreFire rfvgProgVstore (rfvgSAt rfvgProgVstore rfvgS0store 8) (rfvgInAt 8) rf1W :=`
+- **rfvg_vstore_memAdv** (line 604): `theorem rfvg_vstore_memAdv : ∀ a : BitVec 32, a ∈ rfvgVstoreSamples → rf3RdMemB (rfvgSAt rfvgProgVstore rfvgS0store 14) a = (rfvVstorePost rfvgIsVstore).mem a :=`
+- **rfvg_vstore_memQ** (line 616): `theorem rfvg_vstore_memQ : rf3MemQ (rfvgSAt rfvgProgVstore rfvgS0store 14) :=`
+- **rfvg_vstore_quiet_txn** (line 622): `theorem rfvg_vstore_quiet_txn : ∀ k : Nat, k ∈ [9, 10, 11, 12, 13] → rfvQuietBeat rfvgProgVstore (rfvgSAt rfvgProgVstore rfvgS0store k) (rfvgInAt k) :=`
+- **rfvgT_vstore_grid_vse32_2** (line 633): `theorem rfvgT_vstore_grid_vse32_2 : rfvgVstoreGridOk rfvgProgVstore2 rfvgS0store2 12 = true :=`
+- **rfvg_vstore_fire_vse32_2** (line 638): `theorem rfvg_vstore_fire_vse32_2 : rfvgVstoreFire rfvgProgVstore2 (rfvgSAt rfvgProgVstore2 rfvgS0store2 8) (rfvgInAt 8) rf1W :=`
+- **rfvg_vstore_memAdv_2** (line 644): `theorem rfvg_vstore_memAdv_2 : ∀ a : BitVec 32, a ∈ rfvgVstoreSamples → rf3RdMemB (rfvgSAt rfvgProgVstore2 rfvgS0store2 14) a = (rfvVstorePost rfvgIsVstore2).mem a :=`
+- **rfvg_cls_vbeq** (line 662): `theorem rfvg_cls_vbeq : isaClassify 0x0420805B#32 = .vbr :=`
+- **rfvgT_vbr_grid_diverge** (line 689): `theorem rfvgT_vbr_grid_diverge : rfvgVbrGridOk rfvgProgVbr rfvgS0pre rfvgIsVbr 10 = true :=`
+- **rfvg_vbr_beat_diverge** (line 696): `theorem rfvg_vbr_beat_diverge : rfvVbrBeat rfvgProgVbr (rfvgSAt rfvgProgVbr rfvgS0pre 6) (rfvgInAt 6) rf1W (rfvgBiOf rfvgIsVbr) :=`
+- **rfvgT_vbr_grid_elseOnly** (line 703): `theorem rfvgT_vbr_grid_elseOnly : rfvgVbrGridOk rfvgProgVbr rfvgS0eq rfvgIsVbrEq 10 = true :=`
+- **rfvg_vbr_beat_elseOnly** (line 708): `theorem rfvg_vbr_beat_elseOnly : rfvVbrBeat rfvgProgVbr (rfvgSAt rfvgProgVbr rfvgS0eq 6) (rfvgInAt 6) rf1W (rfvgBiOf rfvgIsVbrEq) :=`
+- **rfvg_cls_join** (line 728): `theorem rfvg_cls_join : isaClassify 0x0000205B#32 = .vjoin :=`
+- **rfvgT_join_grid_after_vbr** (line 737): `theorem rfvgT_join_grid_after_vbr : rfvgJoinGridOk rfvgProgJoin rfvgS0pre 4#32 14 = true :=`
+- **rfvg_join_beat_after_vbr** (line 743): `theorem rfvg_join_beat_after_vbr : rfvgJoinBeat rfvgProgJoin (rfvgSAt rfvgProgJoin rfvgS0pre 8) (rfvgInAt 8) rf1W 4#32 :=`
+- **rfvgT_join_grid_empty** (line 749): `theorem rfvgT_join_grid_empty : rfvgJoinGridOk rfvgProgJoinOnly rf3S0 0#32 8 = true :=`
+- **rfvg_join_beat_empty** (line 755): `theorem rfvg_join_beat_empty : rfvgJoinBeat rfvgProgJoinOnly (rfvgSAt rfvgProgJoinOnly rf3S0 4) (rfvgInAt 4) rf1W 0#32 :=`
+
+### `VentusF/SM.lean`
+
+- **fsmT1_fetch_enq** (line 460): `theorem fsmT1_fetch_enq : (fsmRCAt 1).fetchV = true ∧ (fsmRCAt 1).ibEnqFire = true :=`
+- **fsmT2_fetch_grp** (line 465): `theorem fsmT2_fetch_grp : (fsmRCAt 1).fetchWid = 0#3 ∧ (fsmRCAt 1).fetchGrp.mask = 3#2 :=`
+- **fsmT3_ib_queue** (line 470): `theorem fsmT3_ib_queue : ((fsmRSAt 2).ib.lanes 0).absTags = [0#8, 1#8] :=`
+- **fsmT4_cu_accept** (line 475): `theorem fsmT4_cu_accept : (fsmRCAt 3).i2iXFire = true ∧ (fsmRCAt 3).i2iXWid = 0#3 :=`
+- **fsmT5_cu_collect** (line 480): `theorem fsmT5_cu_collect : (fsmCuAt (fsmRSAt 4) 1).state = 1#2 :=`
+- **fsmT6_wb_x1** (line 485): `theorem fsmT6_wb_x1 : (fsmRCAt 6).wbXFire = true ∧ (fsmRCAt 6).wbXIdxw = 1#8 ∧ (fsmRCAt 6).wbXData = 1#32 :=`
+- **fsm_regr_obs** (line 508): `theorem fsm_regr_obs : ((List.range 7).all fun k => fsmObsEq (fsmRCAt k) (smCAt k)) = true :=`
+- **fsm_regr_no_illegal** (line 513): `theorem fsm_regr_no_illegal : ((List.range 7).all fun k => (fsmRCAt k).fetchIllegal == false) = true :=`
+- **fsm_regr_no_mul** (line 518): `theorem fsm_regr_no_mul : ((List.range 7).all fun k => (fsmRCAt k).fireMul == false) = true :=`
+- **fsm_wsOut_regr** (line 532): `theorem fsm_wsOut_regr (s : FschWsState) (i : WsInputs) (hpend : s.rspPend = false) (hD : fschWsDom s.base ⟨i, 0xFF#8⟩) : fschWsOut s ⟨i, 0xFF#8⟩ = wsOut s.base i :=`
+- **fsm_wsStep_regr** (line 538): `theorem fsm_wsStep_regr (s : FschWsState) (i : WsInputs) (hpend : s.rspPend = false) (hD : fschWsDom s.base ⟨i, 0xFF#8⟩) : (fschWsStep s ⟨i, 0xFF#8⟩).base = wsStep s.base i ∧ (fschWsStep s ⟨i, 0xFF#8⟩).rspPend = false :=`
+- **fsm_cuArb_regr** (line 545): `theorem fsm_cuArb_regr (s : CuState) (i : CuInputs) (k : Nat) (hk : k ≠ 3) : fschCuOutArbBits s i k = cuOutArbBits s i k :=`
+- **fsm_sbStep_regr** (line 550): `theorem fsm_sbStep_regr (s : SbState) (i : SbInputs) (hV : (i.opColV_in && i.opColV_out) = false) (hX : (i.opColX_in && i.opColX_out) = false) : i4fSbStepFix s i = sbStep s i :=`
+- **fsm_decode_regr** (line 557): `theorem fsm_decode_regr (inst : BitVec 32) : (farithDecode inst).1 = decDecode inst :=`
+- **fsmT_i12_v_fire** (line 600): `theorem fsmT_i12_v_fire : ((List.range 6).any fun k => (fsmMCAt k).i2iVFire) = true :=`
+- **fsmT_i12_cu_accept** (line 605): `theorem fsmT_i12_cu_accept : ((List.range 6).any fun k => (List.finRange 8).any fun j => (fsmCuAt (fsmMSAt k) j).controlReg.inst == 0x002180D7#32) = true :=`
+- **fsmT_i12_port3_vector** (line 613): `theorem fsmT_i12_port3_vector : ((List.range 8).any fun k => (List.finRange 32).any fun p => (p.val % 4 == 3) && (fsmMCAt k).arbV p && (((fsmMCAt k).arbBits p).rsType == 2#2)) = true :=`
+- **fsmT_i12_mask_returns** (line 620): `theorem fsmT_i12_mask_returns : ((List.range 8).any fsmMaskRetAt) = true :=`
+- **fsmT_i12_orig_never** (line 626): `theorem fsmT_i12_orig_never : ((List.range 8).all fun k => !smMaskRetAt k) = true :=`
+- **fsmT_i12_cu_collected** (line 632): `theorem fsmT_i12_cu_collected : ((List.range 9).any fun k => (List.finRange 8).any fun j => let cu :=`
+- **fsmT_i15_mulhsu_wb** (line 661): `theorem fsmT_i15_mulhsu_wb : ((List.range 8).any fun k => let c :=`
+- **fsm_mulhsu_correct** (line 673): `theorem fsm_mulhsu_correct (a b c : BitVec 32) : fsmMulData mulFN_MULHSU a b c = ((BitVec.signExtend 66 a) * (BitVec.zeroExtend 66 b)).extractLsb' 32 32 :=`
+- **fsm_i15_witness_green** (line 680): `theorem fsm_i15_witness_green : fsmMulData mulFN_MULHSU 0xFFFFFFFF#32 0xFFFFFFFF#32 0#32 = 0xFFFFFFFF#32 ∧ mulWrapOut mulFN_MULHSU 0xFFFFFFFF#32 0xFFFFFFFF#32 0#32 = 1#32 :=`
+- **fsm_mul_regr** (line 686): `theorem fsm_mul_regr (func : BitVec 5) (a b c : BitVec 32) (h : func ≠ mulFN_MULHSU) : fsmMulData func a b c = mulWrapOut func a b c :=`
+- **fsmT_i16_amo_flagged** (line 705): `theorem fsmT_i16_amo_flagged : (fsmCAtP fsmProgAmo fsmInsDisp 1).fetchIllegal = true ∧ (fsmCAtP fsmProgAmo fsmInsDisp 1).fetchV = true :=`
+
+### `VentusF/SMMem.lean`
+
+- **fsmmT_shreq_setidx_wire** (line 880): `theorem fsmmT_shreq_setidx_wire (prog : SmProg) (s : FsmmState) (inp : SmIn) : ((fsmmComb prog s inp).shIn.req.setIdx) = fsmmShSetIdx s.lsu :=`
+- **fsmmT_shreq_only_setIdx** (line 884): `theorem fsmmT_shreq_only_setIdx (lsu : Mem.LsuState) (r : Mem.LsuSharedReq) : (fsmmShReqOf lsu r).instrId = (smmShReqOf r).instrId ∧ (fsmmShReqOf lsu r).isWrite = (smmShReqOf r).isWrite ∧ (fsmmShReqOf lsu r).perLaneAddr = (smmShReqOf r).perLaneAddr ∧ (fsmmShReqOf lsu r).data = (smmShReqOf r).data :=`
+- **fsmm_shSetIdx_regr** (line 894): `theorem fsmm_shSetIdx_regr (lsu : Mem.LsuState) (h : (Mem.lsuAddrWire lsu.regSave 0#32 0#32 0#32) &&& 0x00018000#32 = 0#32) : fsmmShSetIdx lsu = (Mem.lsuSetW lsu.regSave 0#32 0#32 0#32).zeroExtend 10 :=`
+- **fsmm_shSetIdx_hi_witness** (line 913): `theorem fsmm_shSetIdx_hi_witness : fsmmShSetIdx fsmmLsuHiState = 0x100#10 ∧ (Mem.lsuSetW fsmmLsuHiState.regSave 0#32 0#32 0#32).zeroExtend 10 = 0#10 ∧ (Mem.lsuAddrWire fsmmLsuHiState.regSave 0#32 0#32 0#32) = 0x70008000#32 :=`
+- **fsmmT_mshr_addrTag_wire** (line 920): `theorem fsmmT_mshr_addrTag_wire (prog : SmProg) (s : FsmmState) (inp : SmIn) : ((fsmmComb prog s inp).mshrIn.addrTag) = smmMshrTagOf ((fsmmComb prog s inp).lsuOut.mshrTag) :=`
+- **fsmmT_mshr_step_wire** (line 925): `theorem fsmmT_mshr_step_wire (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmStep prog s inp).mshr = fschMshrStepB s.mshr (fsmmComb prog s inp).mshrIn :=`
+- **fsmm_mshrStep_regr** (line 931): `theorem fsmm_mshrStep_regr (s : Mem.MshrState) (i : Mem.MshrIn) (hD : s.state.isOut = true → (Mem.mshrComplete8 s ≠ 0#8 ∧ i.outReady = true ∧ Mem.mshrValidEntry s = Mem.mshrOutputEntry s)) : fschMshrStepB s i = Mem.mshrStep s i :=`
+- **fsmmT_dcacheReady_wire** (line 940): `theorem fsmmT_dcacheReady_wire (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).lsuIn.dcacheReady = (fsmmDcCombOf s.dc (Mem.mshrDcRdy s.mshr)).reqRdy :=`
+- **fsmmT_shRspRdy_wire** (line 946): `theorem fsmmT_shRspRdy_wire (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).shIn.rspReady = (Mem.mshrDcRdy s.mshr && !(fsmmDcCombOf s.dc (Mem.mshrDcRdy s.mshr)).rspV) :=`
+- **fsmmT_arb_mux_wire** (line 952): `theorem fsmmT_arb_mux_wire (prog : SmProg) (s : FsmmState) (inp : SmIn) : let dcc :=`
+- **fsmmT_dcstep_wire** (line 962): `theorem fsmmT_dcstep_wire (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmStep prog s inp).dc = fsmmDcStep s.dc (fsmmComb prog s inp).lsuOut.dcacheValid (fsmmComb prog s inp).lsuOut.dcacheBits (Mem.mshrDcRdy s.mshr) :=`
+- **fsmm_dcCore_regr** (line 969): `theorem fsmm_dcCore_regr (s : Mem.DcState) (i : Mem.DcIn) (hop : (i.memRspHeadOp == 2#3) = false) (hv : Mem.dcDataReplaceReadV s i = false) : fmemDcStep s i = Mem.dcStep s i :=`
+- **fsmmT_fenceEnd_wire** (line 977): `theorem fsmmT_fenceEnd_wire (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmComb prog s inp).fenceEnd = smPack8 (fun w => Mem.lsuSbEmpty (s.boards (BitVec.ofNat 3 w.val)) (Mem.lsuSbLeftOf (fsmmComb prog s inp).fireLsu (fsmmComb prog s inp).lsuReqWid (BitVec.ofNat 3 w.val)) (Mem.lsuSbRightOf (fsmmComb prog s inp).lsuRspFire (fsmmComb prog s inp).rspWid (BitVec.ofNat 3 w.val))) :=`
+- **fsmmT_sbFence_wire** (line 987): `theorem fsmmT_sbFence_wire (prog : SmProg) (s : FsmmState) (inp : SmIn) (w : Fin 8) : ((fsmmComb prog s inp).sbIn w).fence_end = Mem.lsuSbEmpty (s.boards (BitVec.ofNat 3 w.val)) (Mem.lsuSbLeftOf (fsmmComb prog s inp).fireLsu (fsmmComb prog s inp).lsuReqWid (BitVec.ofNat 3 w.val)) (Mem.lsuSbRightOf (fsmmComb prog s inp).lsuRspFire (fsmmComb prog s inp).rspWid (BitVec.ofNat 3 w.val)) :=`
+- **fsmmT_boards_step_wire** (line 997): `theorem fsmmT_boards_step_wire (prog : SmProg) (s : FsmmState) (inp : SmIn) : (fsmmStep prog s inp).boards = Mem.lsuSbStepAll s.boards (fsmmComb prog s inp).fireLsu (fsmmComb prog s inp).lsuReqWid (fsmmComb prog s inp).lsuRspFire (fsmmComb prog s inp).rspWid :=`
+- **fsmmT_wbValids_bit2** (line 1004): `theorem fsmmT_wbValids_bit2 (a l c m : Bool) : (((BitVec.ofBool a).zeroExtend 6 ||| ((BitVec.ofBool l).zeroExtend 6 <<< 2) ||| ((BitVec.ofBool c).zeroExtend 6 <<< 3) ||| ((BitVec.ofBool m).zeroExtend 6 <<< 5)) &&& 4#6) = ((BitVec.ofBool l).zeroExtend 6 <<< 2) :=`
+- **fsmmT_wbValids_bit5** (line 1012): `theorem fsmmT_wbValids_bit5 (a l c m : Bool) : (((BitVec.ofBool a).zeroExtend 6 ||| ((BitVec.ofBool l).zeroExtend 6 <<< 2) ||| ((BitVec.ofBool c).zeroExtend 6 <<< 3) ||| ((BitVec.ofBool m).zeroExtend 6 <<< 5)) &&& 32#6) = ((BitVec.ofBool m).zeroExtend 6 <<< 5) :=`
+- **fsmmT_wbXValids_lsu_wire** (line 1020): `theorem fsmmT_wbXValids_lsu_wire (prog : SmProg) (s : FsmmState) (inp : SmIn) : ((fsmmComb prog s inp).wbXValids &&& (1#6 <<< 2)) = ((BitVec.ofBool (fsmmComb prog s inp).lsuWbXV).zeroExtend 6 <<< 2) :=`
+- **fsmmTraceA_ok** (line 1199): `theorem fsmmTraceA_ok : fsmmRunChkA = fsmmExpA :=`
+- **fsmmTraceB_ok** (line 1258): `theorem fsmmTraceB_ok : fsmmRunChkB = fsmmExpB :=`
+- **fsmmTraceC_ok** (line 1319): `theorem fsmmTraceC_ok : fsmmRunChkC = fsmmExpC :=`
+- **fsmm_regr_orig_chainA** (line 1339): `theorem fsmm_regr_orig_chainA : let f :=`
+- **fsmm_regr_orig_chainC** (line 1354): `theorem fsmm_regr_orig_chainC : let f :=`
+- **fsmmT_i46_endprg_after_drain** (line 1371): `theorem fsmmT_i46_endprg_after_drain : (fsmmRunChkA.endT == fsmmRunChkA.ldWbT) && (fsmmRunChkB.endT == fsmmRunChkB.ldWbT) && (fsmmRunChkC.endT == fsmmRunChkC.ldWbT) = true :=`
+
+### `VentusF/Schedule.lean`
+
+- **fschCu_accept_port3_rsType2** (line 151): `theorem fschCu_accept_port3_rsType2 (s : CuState) (i : CuInputs) (h : cuControlFire s i = true) : (fschCuOutArbBits s i 3).rsType = 2#2 :=`
+- **fschCu_mask_req_admissible** (line 158): `theorem fschCu_mask_req_admissible (s : CuState) (i : CuInputs) (h : cuControlFire s i = true) (hm : i.ctrl.mask = true) : cuOutArbValidK s i 3 = true ∧ (fschCuOutArbBits s i 3).rsType = 2#2 :=`
+- **fschCuT_mask_accept** (line 186): `theorem fschCuT_mask_accept : fschCuM1.state = cuSAdd ∧ (fschCuOutArbBits cuInit fschCuInMasked0 3).rsType = 2#2 ∧ cuOutArbValidK cuInit fschCuInMasked0 3 = true :=`
+- **fschCuT_masked_collects** (line 192): `theorem fschCuT_masked_collects : fschCuM3.ready = 0xF#4 ∧ fschCuM3.vMask ⟨0, by decide⟩ = true ∧ fschCuM3.vMask ⟨1, by decide⟩ = false ∧ fschCuM3.vMask ⟨7, by decide⟩ = true ∧ fschCuM3.vMask ⟨31, by decide⟩ = true :=`
+- **fschCuT_masked_issues** (line 201): `theorem fschCuT_masked_issues : fschCuM4.state = cuSOut ∧ (cuIssueBits fschCuM4).control = cuCtrlMasked ∧ (cuIssueBits fschCuM4).vmask ⟨0, by decide⟩ = true ∧ (cuIssueBits fschCuM4).vmask ⟨1, by decide⟩ = false ∧ fschCuM5.state = cuSIdle ∧ cuControlRdy fschCuM5 = true :=`
+- **fschCuT_i13_orig_stale** (line 222): `theorem fschCuT_i13_orig_stale : (cuStep cuInit fschCuIn13).rsReg2 ⟨3, by decide⟩ = 0x2005#32 :=`
+- **fschCuT_i13_fix_fresh** (line 227): `theorem fschCuT_i13_fix_fresh : (fschCuStep cuInit fschCuIn13).rsReg2 ⟨3, by decide⟩ = 0x2003#32 :=`
+- **fschCu_i13_uses_new_decode** (line 232): `theorem fschCu_i13_uses_new_decode (s : CuState) (i : CuInputs) (st : CuState) (k : Nat) (hf : cuControlFire s i = true) (hb : cuBankFireK s i k = true) (hr : (i.bankB k).regOrder = 2#2) : (fschCuBankPort s i st k).rsReg2 = fschCuRsReg2Fix s i (i.bankB k) :=`
+- **fschCu_controlFire_blind3** (line 251): `theorem fschCu_controlFire_blind3 (s : CuState) (i : CuInputs) : cuControlFire (fschCuMod3 s) i = cuControlFire s i :=`
+- **fschCu_bankFire_blind3** (line 253): `theorem fschCu_bankFire_blind3 (s : CuState) (i : CuInputs) (k : Nat) : cuBankFireK (fschCuMod3 s) i k = cuBankFireK s i k :=`
+- **fschCu_stateTrans_blind3** (line 255): `theorem fschCu_stateTrans_blind3 (s : CuState) (i : CuInputs) : cuStateTrans (fschCuMod3 s) i = cuStateTrans s i :=`
+- **fschBv2_01** (line 259): `private theorem fschBv2_01 : ((0#2 : BitVec 2) == 1#2) = false :=`
+- **fschBv2_02** (line 260): `private theorem fschBv2_02 : ((0#2 : BitVec 2) == 2#2) = false :=`
+- **fschBv2_03** (line 261): `private theorem fschBv2_03 : ((0#2 : BitVec 2) == 3#2) = false :=`
+- **fschBv2_10** (line 262): `private theorem fschBv2_10 : ((1#2 : BitVec 2) == 0#2) = false :=`
+- **fschBv2_12** (line 263): `private theorem fschBv2_12 : ((1#2 : BitVec 2) == 2#2) = false :=`
+- **fschBv2_13** (line 264): `private theorem fschBv2_13 : ((1#2 : BitVec 2) == 3#2) = false :=`
+- **fschBv2_20** (line 265): `private theorem fschBv2_20 : ((2#2 : BitVec 2) == 0#2) = false :=`
+- **fschBv2_21** (line 266): `private theorem fschBv2_21 : ((2#2 : BitVec 2) == 1#2) = false :=`
+- **fschBv2_23** (line 267): `private theorem fschBv2_23 : ((2#2 : BitVec 2) == 3#2) = false :=`
+- **fschBv2_30** (line 268): `private theorem fschBv2_30 : ((3#2 : BitVec 2) == 0#2) = false :=`
+- **fschBv2_31** (line 269): `private theorem fschBv2_31 : ((3#2 : BitVec 2) == 1#2) = false :=`
+- **fschBv2_32** (line 270): `private theorem fschBv2_32 : ((3#2 : BitVec 2) == 2#2) = false :=`
+- **fschCu_congr_of_mod3** (line 273): `theorem fschCu_congr_of_mod3 {a b : CuState} (h : fschCuMod3 a = fschCuMod3 b) : a.state = b.state ∧ a.valid = b.valid ∧ a.ready = b.ready ∧ a.controlReg = b.controlReg ∧ a.rsType0 = b.rsType0 ∧ a.rsType1 = b.rsType1 ∧ a.rsType2 = b.rsType2 ∧ a.regIdx0 = b.regIdx0 ∧ a.regIdx1 = b.regIdx1 ∧ a.regIdx2 = b.regIdx2 ∧ a.regIdx3 = b.regIdx3 ∧ a.rsReg0 = b.rsReg0 ∧ a.rsReg1 = b.rsReg1 ∧ a.rsReg2 = b.rsReg2 ∧ a.vMask = b.vMask ∧ a.customCtrlReg = b.customCtrlReg :=`
+- **fschCu_stateTrans_congr** (line 299): `theorem fschCu_stateTrans_congr {a b : CuState} (h : fschCuMod3 a = fschCuMod3 b) (i : CuInputs) : cuStateTrans a i = cuStateTrans b i :=`
+- **fschCu_immOut_congr** (line 307): `theorem fschCu_immOut_congr {a b : CuState} (h : fschCuMod3 a = fschCuMod3 b) (c : CuCtrl) : cuImmOut a c = cuImmOut b c :=`
+- **fschCu_controlFire_congr** (line 314): `theorem fschCu_controlFire_congr {a b : CuState} (h : fschCuMod3 a = fschCuMod3 b) (i : CuInputs) : cuControlFire a i = cuControlFire b i :=`
+- **fschCu_accept_congr** (line 321): `theorem fschCu_accept_congr {a b : CuState} (h : fschCuMod3 a = fschCuMod3 b) (i : CuInputs) : fschCuMod3 (cuAccept a i) = fschCuMod3 (cuAccept b i) :=`
+- **fschCu_accept_valid_congr** (line 339): `theorem fschCu_accept_valid_congr {a b : CuState} (h : fschCuMod3 a = fschCuMod3 b) (i : CuInputs) : (cuAccept a i).valid = (cuAccept b i).valid :=`
+- **fschCu_accept_ready_congr** (line 354): `theorem fschCu_accept_ready_congr {a b : CuState} (h : fschCuMod3 a = fschCuMod3 b) (i : CuInputs) : (cuAccept a i).ready = (cuAccept b i).ready :=`
+- **fschCuMod3_cuPreBank** (line 369): `theorem fschCuMod3_cuPreBank (s : CuState) (i : CuInputs) : fschCuMod3 (cuPreBank s i) = { fschCuMod3 (cuAccept s i) with state :=`
+- **fschCu_preBank_congr** (line 378): `theorem fschCu_preBank_congr {a b : CuState} (h : fschCuMod3 a = fschCuMod3 b) (i : CuInputs) : fschCuMod3 (cuPreBank a i) = fschCuMod3 (cuPreBank b i) :=`
+- **fschCu_bankPort_congr_pre** (line 387): `theorem fschCu_bankPort_congr_pre {a b : CuState} (h : fschCuMod3 a = fschCuMod3 b) (st : CuState) (i : CuInputs) (k : Nat) : cuBankPort a i st k = cuBankPort b i st k :=`
+- **fschCu_bankPort_congr_st** (line 408): `theorem fschCu_bankPort_congr_st {st st' : CuState} (hst : fschCuMod3 st = fschCuMod3 st') (pre : CuState) (i : CuInputs) (k : Nat) : fschCuMod3 (cuBankPort pre i st k) = fschCuMod3 (cuBankPort pre i st' k) :=`
+- **fschCu_bankPort_congr** (line 420): `theorem fschCu_bankPort_congr {a b st st' : CuState} (h : fschCuMod3 a = fschCuMod3 b) (hst : fschCuMod3 st = fschCuMod3 st') (i : CuInputs) (k : Nat) : fschCuMod3 (cuBankPort a i st k) = fschCuMod3 (cuBankPort b i st' k) :=`
+- **fschCuStep_congr** (line 427): `theorem fschCuStep_congr {a b : CuState} (h : fschCuMod3 a = fschCuMod3 b) (i : CuInputs) : fschCuMod3 (cuStep a i) = fschCuMod3 (cuStep b i) :=`
+- **fschCuRun_congr** (line 436): `theorem fschCuRun_congr {a b : CuState} (h : fschCuMod3 a = fschCuMod3 b) (ins : List CuInputs) : fschCuMod3 (cuRun a ins) = fschCuMod3 (cuRun b ins) :=`
+- **fschCu_domOfIn** (line 453): `theorem fschCu_domOfIn (s : CuState) (j : CuInputs) (h : fschCuNoRaceIn j) : (∀ k, cuBankFireK s j k = true → (j.bankB k).regOrder ≠ 3#2) ∧ (cuControlFire s j = true → ∀ k, cuBankFireK s j k = true → (j.bankB k).regOrder ≠ 2#2) :=`
+- **fschCu_bankPort_eq_orig** (line 461): `theorem fschCu_bankPort_eq_orig (pre st : CuState) (i : CuInputs) (k : Nat) (h3 : cuBankFireK pre i k = true → (i.bankB k).regOrder ≠ 3#2) (h2 : cuControlFire pre i = true → cuBankFireK pre i k = true → (i.bankB k).regOrder ≠ 2#2) : fschCuBankPort pre i st k = cuBankPort pre i st k :=`
+- **fschCu_accept_mod3_self** (line 478): `theorem fschCu_accept_mod3_self (s : CuState) (i : CuInputs) : fschCuMod3 (fschCuAccept s i) = fschCuMod3 (cuAccept s i) :=`
+- **fschCu_preBank_mod3_self** (line 483): `theorem fschCu_preBank_mod3_self (s : CuState) (i : CuInputs) : fschCuMod3 (fschCuPreBank s i) = fschCuMod3 (cuPreBank s i) :=`
+- **fschCuStep_mod3** (line 491): `theorem fschCuStep_mod3 (s : CuState) (i : CuInputs) (h3 : ∀ k, cuBankFireK s i k = true → (i.bankB k).regOrder ≠ 3#2) (h2 : cuControlFire s i = true → ∀ k, cuBankFireK s i k = true → (i.bankB k).regOrder ≠ 2#2) : fschCuMod3 (fschCuStep s i) = fschCuMod3 (cuStep s i) :=`
+- **fschCuRun_mod3** (line 511): `theorem fschCuRun_mod3 (s : CuState) (ins : List CuInputs) (hD : ∀ j ∈ ins, fschCuNoRaceIn j) : fschCuMod3 (fschCuRun s ins) = fschCuMod3 (cuRun s ins) :=`
+- **fschCu_outArb_eq_orig_of_ne3** (line 525): `theorem fschCu_outArb_eq_orig_of_ne3 (s : CuState) (i : CuInputs) (k : Nat) (hk : k ≠ 3) : fschCuOutArbBits s i k = cuOutArbBits s i k :=`
+- **fschCuBankPort_state** (line 531): `theorem fschCuBankPort_state (pre st : CuState) (i : CuInputs) (k : Nat) : (fschCuBankPort pre i st k).state = st.state :=`
+- **fschCuBankPort_valid** (line 538): `theorem fschCuBankPort_valid (pre st : CuState) (i : CuInputs) (k : Nat) : (fschCuBankPort pre i st k).valid = st.valid :=`
+- **fschCuBankPort_controlReg** (line 545): `theorem fschCuBankPort_controlReg (pre st : CuState) (i : CuInputs) (k : Nat) : (fschCuBankPort pre i st k).controlReg = st.controlReg :=`
+- **fschCuBankPort_ready'** (line 553): `theorem fschCuBankPort_ready' (pre : CuState) (i : CuInputs) (a b : CuState) (k : Nat) (h : a.ready = b.ready) : (fschCuBankPort pre i a k).ready = (cuBankPort pre i b k).ready :=`
+- **fschCuPreBank_state** (line 561): `theorem fschCuPreBank_state (s : CuState) (i : CuInputs) : (fschCuPreBank s i).state = cuStateTrans s i :=`
+- **fschCuPreBank_valid** (line 565): `theorem fschCuPreBank_valid (s : CuState) (i : CuInputs) : (fschCuPreBank s i).valid = (cuPreBank s i).valid :=`
+- **fschCuPreBank_ready** (line 569): `theorem fschCuPreBank_ready (s : CuState) (i : CuInputs) : (fschCuPreBank s i).ready = (cuPreBank s i).ready :=`
+- **fschCuPreBank_controlReg** (line 573): `theorem fschCuPreBank_controlReg (s : CuState) (i : CuInputs) : (fschCuPreBank s i).controlReg = (cuPreBank s i).controlReg :=`
+- **fschCuStep_ctrl_iface** (line 580): `theorem fschCuStep_ctrl_iface (s : CuState) (i : CuInputs) : (fschCuStep s i).state = (cuStep s i).state ∧ (fschCuStep s i).valid = (cuStep s i).valid ∧ (fschCuStep s i).ready = (cuStep s i).ready ∧ (fschCuStep s i).controlReg = (cuStep s i).controlReg :=`
+- **fschCu_i4_dock** (line 604): `theorem fschCu_i4_dock (s : CuState) (i : CuInputs) : cuControlRdy (fschCuStep s i) = cuControlRdy (cuStep s i) ∧ cuIssueFire (fschCuStep s i) i = cuIssueFire (cuStep s i) i ∧ i4fCuBusy (fschCuStep s i) = i4fCuBusy (cuStep s i) ∧ (cuInv (fschCuStep s i) ↔ cuInv (cuStep s i)) :=`
+- **fschCuInv_run** (line 617): `theorem fschCuInv_run (s : CuState) (ins : List CuInputs) (h : cuInv s) : cuInv (fschCuRun s ins) :=`
+- **fschWs_priEnc_hit** (line 819): `theorem fschWs_priEnc_hit (m : BitVec 8) (h : m ≠ 0#8) : ((m >>> (fschWsPriEnc m).zeroExtend 8) &&& 1#8) = 1#8 :=`
+- **fschWs_priEnc_min** (line 824): `theorem fschWs_priEnc_min (m : BitVec 8) : (m &&& ((1#8 <<< (fschWsPriEnc m).zeroExtend 8) - 1#8)) = 0#8 :=`
+- **fschWs_priEnc_progress** (line 829): `theorem fschWs_priEnc_progress (m : BitVec 8) (h : m ≠ 0#8) : m &&& ~~~(1#8 <<< (fschWsPriEnc m).zeroExtend 8) ≠ m :=`
+- **fschWs_priEnc_eq_oh_of_onehot** (line 834): `theorem fschWs_priEnc_eq_oh_of_onehot (m : BitVec 8) (h : m &&& (m - 1#8) = 0#8) : fschWsPriEnc m = wsOHToUInt m :=`
+- **fschWs_step_clears_selected** (line 841): `theorem fschWs_step_clears_selected (cnt : Array (BitVec 8)) (v : Array Bool) (reqF : Bool) (nwg : BitVec 3) (flushRdy : Bool) (hm : wsMask0 (fun j => wsRd8 cnt j) (fun j => wsRdB v j) ≠ 0#8) (hrdy : flushRdy = true) : wsRdB (fschWsStepValid cnt v reqF nwg flushRdy) (wsFin (fschWsPriEnc (wsMask0 (fun j => wsRd8 cnt j) (fun j => wsRdB v j)))) = false :=`
+- **fschWsT_i5_drains** (line 865): `theorem fschWsT_i5_drains : wsMask0 fschWsF4.base.endprgCnt fschWsF4.base.wgValid = 0b00000110#8 ∧ fschWsF5.base.wgValid (wsFin 1#3) = false ∧ fschWsF5.base.wgValid (wsFin 2#3) = true ∧ fschWsF6.base.wgValid (wsFin 2#3) = false ∧ wsMask0 fschWsF6.base.endprgCnt fschWsF6.base.wgValid = 0#8 ∧ (fschWsOut fschWsF6 (fschWsInOf wsInNop)).flushDCacheValid = false :=`
+- **fschWs_rsp_holds** (line 878): `theorem fschWs_rsp_holds (s : FschWsState) (i i' : FschWsIn) (hv : fschRspValid s i = true) (hr : i.base.warpRspReady = false) : fschRspValid (fschWsStep s i) i' = true :=`
+- **fschWs_rsp_stable** (line 894): `theorem fschWs_rsp_stable (s : FschWsState) (i i' : FschWsIn) (hp : s.rspPend = true) (hr : i.base.warpRspReady = false) : (fschWsStep s i).rspPend = true ∧ (fschWsStep s i).rspWid = s.rspWid ∧ (fschWsStep s i).rspWg = s.rspWg ∧ fschRspWid (fschWsStep s i) i' = s.rspWid :=`
+- **fschWsT_i6_rsp_held** (line 912): `theorem fschWsT_i6_rsp_held : fschWsD2.rspPend = true ∧ fschWsD2.rspWid = 3#3 ∧ fschWsD2.rspWg = 1#3 ∧ fschWsD2.base.endprgCnt (wsFin 1#3) = 8#8 ∧ fschWsD2.base.barBelong (wsFin 1#3) = 8#8 ∧ (fschWsOut fschWsD2 (fschWsInOf wsInNop)).warpRspValid = true :=`
+- **fschWsT_i6_completes** (line 921): `theorem fschWsT_i6_completes : fschWsD3.base.endprgCnt (wsFin 1#3) = 0#8 ∧ fschWsD3.base.barBelong (wsFin 1#3) = 0#8 ∧ fschWsD3.rspPend = false ∧ fschWsD4.base.wgValid (wsFin 1#3) = false :=`
+- **fschWs_belong_req_set** (line 933): `theorem fschWs_belong_req_set (bel : Array (BitVec 8)) (nwg reqWid : BitVec 3) (rspF : Bool) (rspWg rspWidV : BitVec 3) (hsz : bel.size = 8) : ((wsRd8 (fschWsStepBelong bel true nwg reqWid rspF rspWg rspWidV) (wsFin nwg) >>> reqWid.zeroExtend 8) &&& 1#8) = 1#8 :=`
+- **fschWs_cnt_req_set** (line 955): `theorem fschWs_cnt_req_set (cnt : Array (BitVec 8)) (nwg reqWid : BitVec 3) (rspF : Bool) (rspWg rspWidV : BitVec 3) (hsz : cnt.size = 8) : ((wsRd8 (fschWsStepCnt cnt true nwg reqWid rspF rspWg rspWidV) (wsFin nwg) >>> reqWid.zeroExtend 8) &&& 1#8) = 1#8 :=`
+- **fschWsT_i7_req_survives** (line 981): `theorem fschWsT_i7_req_survives : fschWsC2.base.barBelong (wsFin 3#3) = 0x30#8 ∧ fschWsC2.base.endprgCnt (wsFin 3#3) = 0x30#8 ∧ ((fschWsC2.base.warpActive >>> 5) &&& 1#8) = 1#8 ∧ ((fschWsC2.base.warpActive >>> 4) &&& 1#8) = 0#8 :=`
+- **fschWs_endprg_gated** (line 994): `theorem fschWs_endprg_gated (s : FschWsState) (i : FschWsIn) (hsimt : i.base.simtStackOp = true) (hfence : fschWsFenceBit i.fenceEnd i.base.wcWid = false) : fschWcReady s i = false ∧ fschWarpEnd s i = false :=`
+- **fschWs_i46_gate_clean** (line 1004): `theorem fschWs_i46_gate_clean (s : FschWsState) (i : FschWsIn) (hfire : fschWcFire s i = false) (hnoreq : i.base.warpReqFire = false) (hpend : s.rspPend = false) : (fschWsStep s i).base.warpActive = s.base.warpActive ∧ (fschWsStep s i).base.barBelongArr = s.base.barBelongArr ∧ (fschWsStep s i).base.endprgCntArr = s.base.endprgCntArr ∧ (fschWsStep s i).rspPend = false :=`
+- **fschWsT_i46_blocked** (line 1023): `theorem fschWsT_i46_blocked : fschWsE2.base.warpActive = 0b00000001#8 ∧ fschWsE2.base.endprgCnt (wsFin 0#3) = 0b00000001#8 ∧ fschWsE2.base.barBelong (wsFin 0#3) = 0b00000001#8 ∧ fschWsE2.rspPend = false ∧ (fschWsOut fschWsE1 ⟨wsInEndprg 0#3 0#3 0#3 true, 0#8⟩).warpControlReady = false :=`
+- **fschWsT_i46_released** (line 1031): `theorem fschWsT_i46_released : fschWsE3.base.warpActive = 0#8 ∧ fschWsE3.base.endprgCnt (wsFin 0#3) = 0#8 ∧ fschWsE3.base.barBelong (wsFin 0#3) = 0#8 ∧ fschWsE3.rspPend = false :=`
+- **fschWs_wr8_comm** (line 1041): `theorem fschWs_wr8_comm (a : Array (BitVec 8)) (i j : Fin 8) (v w : BitVec 8) (h : i ≠ j) : wsWr8 (wsWr8 a i v) j w = wsWr8 (wsWr8 a j w) i v :=`
+- **fschWs_cur_rfl** (line 1067): `theorem fschWs_cur_rfl (cur exp bel : Array (BitVec 8)) (i : WsInputs) : fschWsStepCur cur exp bel i.warpReqFire i.newWgId (wsBarFire i) i.wgIdTag = wsStepCur cur exp bel i :=`
+- **fschWs_exp_rfl** (line 1070): `theorem fschWs_exp_rfl (exp bel : Array (BitVec 8)) (i : WsInputs) : fschWsStepExp exp bel i.warpReqFire i.newWgId i.newWfCount = wsStepExp exp bel i :=`
+- **fschWs_data_rfl** (line 1072): `theorem fschWs_data_rfl (data : BitVec 8) (cur exp bel : Fin 8 → BitVec 8) (i : WsInputs) : fschWsStepData data cur exp bel (wsBarFire i) i.wgIdTag i.wcWid = wsStepData data cur exp bel i :=`
+- **fschWs_active_rfl** (line 1075): `theorem fschWs_active_rfl (act : BitVec 8) (i : WsInputs) : fschWsStepActive act i.warpReqFire i.reqWid (wsWarpEnd i) i.wcWid = wsStepActive act i :=`
+- **fschWs_belong_equiv** (line 1080): `theorem fschWs_belong_equiv (bel : Array (BitVec 8)) (i : WsInputs) (h : i.warpReqFire = true → wsRspFire i = true → i.newWgId ≠ wsEndWgId i.wgIdTag) : fschWsStepBelong bel i.warpReqFire i.newWgId i.reqWid (wsRspFire i) (wsEndWgId i.wgIdTag) i.wcWid = wsStepBelong bel i :=`
+- **fschWs_cnt_equiv** (line 1098): `theorem fschWs_cnt_equiv (cnt : Array (BitVec 8)) (i : WsInputs) (h : i.warpReqFire = true → wsRspFire i = true → i.newWgId ≠ wsEndWgId i.wgIdTag) : fschWsStepCnt cnt i.warpReqFire i.newWgId i.reqWid (wsRspFire i) (wsEndWgId i.wgIdTag) i.wcWid = wsStepCnt cnt i :=`
+- **fschWs_valid_equiv** (line 1116): `theorem fschWs_valid_equiv (cnt : Array (BitVec 8)) (v : Array Bool) (i : WsInputs) (h1hot : wsMask0 (fun j => wsRd8 cnt j) (fun j => wsRdB v j) &&& (wsMask0 (fun j => wsRd8 cnt j) (fun j => wsRdB v j) - 1#8) = 0#8 ∨ i.flushDCacheReady = false) : fschWsStepValid cnt v i.warpReqFire i.newWgId i.flushDCacheReady = wsStepValid cnt v i :=`
+- **fschWs_fenceBit_allOnes** (line 1145): `theorem fschWs_fenceBit_allOnes (w : BitVec 3) : fschWsFenceBit 0xFF#8 w = true :=`
+- **fschWs_wcReady_eq** (line 1149): `theorem fschWs_wcReady_eq (sF : FschWsState) (i : FschWsIn) (hpend : sF.rspPend = false) (hfe : i.fenceEnd = 0xFF#8) : fschWcReady sF i = (!i.base.branchFire && !(i.base.pcRspValid && i.base.pcRspMiss)) :=`
+- **fschWs_wcFire_eq** (line 1157): `theorem fschWs_wcFire_eq (sF : FschWsState) (i : FschWsIn) (hpend : sF.rspPend = false) (hfe : i.fenceEnd = 0xFF#8) (hwc : i.base.warpControlFire = true → i.base.branchFire = false ∧ (i.base.pcRspValid && i.base.pcRspMiss) = false) : fschWcFire sF i = i.base.warpControlFire :=`
+- **fschWs_step_equiv** (line 1169): `theorem fschWs_step_equiv (sF : FschWsState) (sO : WsState) (i : FschWsIn) (hbase : sF.base = sO) (hpend : sF.rspPend = false) (hD : fschWsDom sO i) : (fschWsStep sF i).base = wsStep sO i.base ∧ (fschWsStep sF i).rspPend = false :=`
+- **fschWs_wsRun_nil** (line 1203): `theorem fschWs_wsRun_nil (s : WsState) : wsRun s [] = s :=`
+- **fschWs_wsRun_cons** (line 1204): `theorem fschWs_wsRun_cons (s : WsState) (x : WsInputs) (xs : List WsInputs) : wsRun s (x :: xs) = wsRun (wsStep s x) xs :=`
+- **fschWs_run_equiv** (line 1209): `theorem fschWs_run_equiv (sF : FschWsState) (ins : List FschWsIn) (hpend : sF.rspPend = false) (hD : ∀ t (ht : t < ins.length), fschWsDom (wsRun sF.base ((ins.take t).map FschWsIn.base)) ins[t]) : (fschWsRun sF ins).base = wsRun sF.base (ins.map FschWsIn.base) ∧ (fschWsRun sF ins).rspPend = false :=`
+- **fschWs_out_equiv** (line 1237): `theorem fschWs_out_equiv (sF : FschWsState) (sO : WsState) (i : FschWsIn) (hbase : sF.base = sO) (hpend : sF.rspPend = false) (hD : fschWsDom sO i) : fschWsOut sF i = wsOut sO i.base :=`
+- **fschC2wAbs_fifo** (line 1311): `theorem fschC2wAbs_fifo (s : FschC2wState) : (fschC2wAbs s).fifo = s.fifo.map Prod.fst :=`
+- **fschC2wAbs_idxUsing** (line 1313): `theorem fschC2wAbs_idxUsing (s : FschC2wState) : (fschC2wAbs s).idxUsing = s.idxUsing :=`
+- **fschC2wAbs_data** (line 1315): `theorem fschC2wAbs_data (s : FschC2wState) : (fschC2wAbs s).data = s.data :=`
+- **fschC2w_rsp_tag_of_head** (line 1319): `theorem fschC2w_rsp_tag_of_head (s : FschC2wState) (i : C2wInputs) (w : BitVec 3) (t : BitVec 6) (rest : List (BitVec 3 × BitVec 6)) (h : s.fifo = (w, t) :: rest) : (fschC2wOut s i).ctaRspTag = t :=`
+- **fschC2w_no_late_read** (line 1328): `theorem fschC2w_no_late_read (s : FschC2wState) (d' : Fin 8 → BitVec 6) (i : C2wInputs) : (fschC2wOut { s with data :=`
+- **fschC2w_enq_tag_sampled** (line 1333): `theorem fschC2w_enq_tag_sampled (s : FschC2wState) (i : C2wInputs) (h : fschC2wEnqFire s i = true) : (i.warpRspWid, s.data (c2wFin i.warpRspWid)) ∈ (fschC2wStep s i).fifo :=`
+- **fschC2w_abs_step** (line 1349): `theorem fschC2w_abs_step (s : FschC2wState) (i : C2wInputs) : fschC2wAbs (fschC2wStep s i) = c2wStep (fschC2wAbs s) i :=`
+- **fschC2w_out_abs** (line 1388): `theorem fschC2w_out_abs (s : FschC2wState) (i : C2wInputs) : (fschC2wOut s i).ctaReqReady = (c2wOut (fschC2wAbs s) i).ctaReqReady ∧ (fschC2wOut s i).warpReqValid = (c2wOut (fschC2wAbs s) i).warpReqValid ∧ (fschC2wOut s i).warpReqWid = (c2wOut (fschC2wAbs s) i).warpReqWid ∧ (fschC2wOut s i).warpRspReady = (c2wOut (fschC2wAbs s) i).warpRspReady ∧ (fschC2wOut s i).ctaRspValid = (c2wOut (fschC2wAbs s) i).ctaRspValid ∧ (fschC2wOut s i).wgIdTag = (c2wOut (fschC2wAbs s) i).wgIdTag :=`
+- **fschC2wT_i25_tag_correct** (line 1404): `theorem fschC2wT_i25_tag_correct : (fschC2wOut fschC2wT3 c2wInConsume).ctaRspValid = true ∧ (fschC2wOut fschC2wT3 c2wInConsume).ctaRspTag = 0x08#6 ∧ (c2wOut (fschC2wAbs fschC2wT3) c2wInConsume).ctaRspTag = 0x11#6 :=`
+- **fschFin8_cases** (line 1426): `theorem fschFin8_cases (k : Fin 8) : k = ⟨0, by decide⟩ ∨ k = ⟨1, by decide⟩ ∨ k = ⟨2, by decide⟩ ∨ k = ⟨3, by decide⟩ ∨ k = ⟨4, by decide⟩ ∨ k = ⟨5, by decide⟩ ∨ k = ⟨6, by decide⟩ ∨ k = ⟨7, by decide⟩ :=`
+- **fschMshrStepA_state** (line 1483): `theorem fschMshrStepA_state (s : MshrState) (i : MshrIn) : (fschMshrStepA s i).state = fschMshrStateNA s i :=`
+- **fschMshrStepA_cm** (line 1485): `theorem fschMshrStepA_cm (s : MshrState) (i : MshrIn) : (fschMshrStepA s i).currentMask = mshrCmN s i :=`
+- **fschMshrStepA_used** (line 1487): `theorem fschMshrStepA_used (s : MshrState) (i : MshrIn) : (fschMshrStepA s i).used = mshrUsedN s i :=`
+- **fschMshrStepB_state** (line 1489): `theorem fschMshrStepB_state (s : MshrState) (i : MshrIn) : (fschMshrStepB s i).state = fschMshrStateNB s i :=`
+- **fschMshrStepB_cm** (line 1491): `theorem fschMshrStepB_cm (s : MshrState) (i : MshrIn) : (fschMshrStepB s i).currentMask = mshrCmN s i :=`
+- **fschMshrStepB_used** (line 1493): `theorem fschMshrStepB_used (s : MshrState) (i : MshrIn) : (fschMshrStepB s i).used = mshrUsedN s i :=`
+- **fschMshr_complete8_congr** (line 1497): `theorem fschMshr_complete8_congr (s s' : MshrState) (hcm : s'.currentMask = s.currentMask) (hu : s'.used = s.used) : mshrComplete8 s' = mshrComplete8 s :=`
+- **fschMshr_cm_unchanged_of_out** (line 1504): `theorem fschMshr_cm_unchanged_of_out (s : MshrState) (i : MshrIn) (hso : s.state.isOut = true) : mshrCmN s i = s.currentMask :=`
+- **fschMshr_used_unchanged_of_out_nofire** (line 1509): `theorem fschMshr_used_unchanged_of_out_nofire (s : MshrState) (i : MshrIn) (hso : s.state.isOut = true) (hf : mshrOutFire s i = false) : mshrUsedN s i = s.used :=`
+- **fschMshrA_no_withdraw** (line 1517): `theorem fschMshrA_no_withdraw (s : MshrState) (i : MshrIn) (hv : mshrOutValid s = true) (hr : i.outReady = false) : mshrOutValid (fschMshrStepA s i) = true :=`
+- **fschMshrB_no_withdraw** (line 1537): `theorem fschMshrB_no_withdraw (s : MshrState) (i : MshrIn) (hv : mshrOutValid s = true) (hr : i.outReady = false) : mshrOutValid (fschMshrStepB s i) = true :=`
+- **fschMshrA_sink** (line 1560): `theorem fschMshrA_sink (s : MshrState) (i : MshrIn) (hso : s.state = .out) (hc : mshrComplete8 s = 0#8) : (fschMshrStepA s i).state = .out ∧ mshrComplete8 (fschMshrStepA s i) = 0#8 ∧ mshrAddrRdy (fschMshrStepA s i) = false ∧ mshrDcRdy (fschMshrStepA s i) = false :=`
+- **fschMshrA_sink_run** (line 1586): `theorem fschMshrA_sink_run (s : MshrState) (ins : List MshrIn) (hso : s.state = .out) (hc : mshrComplete8 s = 0#8) : (fschMshrRunA s ins).state = .out ∧ mshrComplete8 (fschMshrRunA s ins) = 0#8 :=`
+- **fschMshrAT_deadlock** (line 1597): `theorem fschMshrAT_deadlock : (fschMshrRunA mshrInit [mshrTrWAlloc, mshrTrWRsp, mshrT1I2]).state = .out ∧ mshrComplete8 (fschMshrRunA mshrInit [mshrTrWAlloc, mshrTrWRsp, mshrT1I2]) = 0#8 ∧ (fschMshrRunA mshrInit [mshrTrWAlloc, mshrTrWRsp, mshrT1I2, mshrTrWAlloc, mshrTrWAlloc]).state = .out ∧ mshrAddrRdy (fschMshrRunA mshrInit [mshrTrWAlloc, mshrTrWRsp, mshrT1I2, mshrTrWAlloc, mshrTrWAlloc]) = false :=`
+- **fschMshrBT_normal_flow** (line 1607): `theorem fschMshrBT_normal_flow : (fschMshrRunB mshrInit [mshrTrWAlloc, mshrTrWRsp, mshrT1I2]).state = .idle ∧ (fschMshrRunB mshrInit [mshrTrWAlloc, mshrTrWRsp, mshrT1I2]).used = 0#8 :=`
+- **fschMshrBT_withdraw_blocked** (line 1615): `theorem fschMshrBT_withdraw_blocked : (fschMshrRunB mshrInit (mshrTrWithdraw.take 3)).state = .out ∧ mshrOutValid (fschMshrRunB mshrInit (mshrTrWithdraw.take 3)) = true ∧ mshrOutValid (fschMshrRunB mshrInit (mshrTrWithdraw.take 4)) = true :=`
+- **fschBv3_cases** (line 1624): `theorem fschBv3_cases (x : BitVec 3) : x = 0#3 ∨ x = 1#3 ∨ x = 2#3 ∨ x = 3#3 ∨ x = 4#3 ∨ x = 5#3 ∨ x = 6#3 ∨ x = 7#3 :=`
+- **fschMshr_complete8_bit3** (line 1631): `theorem fschMshr_complete8_bit3 (s : MshrState) (e : BitVec 3) : ((mshrComplete8 s >>> e.zeroExtend 8) &&& 1#8 == 1#8) = mshrEntryComplete s (mshrIdx3 e) :=`
+- **fschMshr_exists_bit3_of_ne_zero** (line 1733): `theorem fschMshr_exists_bit3_of_ne_zero (m : BitVec 8) (h : m ≠ 0#8) : ∃ e : BitVec 3, ((m >>> e.zeroExtend 8) &&& 1#8 == 1#8) = true :=`
+- **fschMshr_complete8_ne_zero_of_entry3** (line 1756): `theorem fschMshr_complete8_ne_zero_of_entry3 (s : MshrState) (e : BitVec 3) (h : mshrEntryComplete s (mshrIdx3 e) = true) : mshrComplete8 s ≠ 0#8 :=`
+- **fschMshr_usedBit_idx3** (line 1766): `theorem fschMshr_usedBit_idx3 (s : MshrState) (e : BitVec 3) : mshrUsedBit s (mshrIdx3 e) = mshrUsedBit3 s e :=`
+- **fschMshr_idx3_inj3** (line 1771): `theorem fschMshr_idx3_inj3 {a b : BitVec 3} (h : mshrIdx3 a = mshrIdx3 b) : a = b :=`
+- **fschMshr_complete8_out_fire** (line 1775): `theorem fschMshr_complete8_out_fire (s : MshrState) (i : MshrIn) (hso : s.state = .out) (hf : mshrOutFire s i = true) : mshrComplete8 (fschMshrStepB s i) = mshrComplete8 s &&& ~~~(1#8 <<< (mshrOutputEntry s).zeroExtend 8) :=`
+- **fschMshrB_no_sink_entry** (line 1809): `theorem fschMshrB_no_sink_entry (s : MshrState) (i : MshrIn) (hinv : s.state.isOut = true → mshrComplete8 s ≠ 0#8) (henv : mshrDcFire s i = true → mshrUsedBit3 s i.rspId = true) (hadd : s.state.isAdd = true → s.used ≠ 0xFF#8) : (fschMshrStepB s i).state.isOut = true → mshrComplete8 (fschMshrStepB s i) ≠ 0#8 :=`
+- **fschMshr_run_cons** (line 1995): `theorem fschMshr_run_cons (s : MshrState) (x : MshrIn) (xs : List MshrIn) : mshrRun s (x :: xs) = mshrRun (mshrStep s x) xs :=`
+- **fschMshrB_step_eq_orig** (line 2001): `theorem fschMshrB_step_eq_orig (s : MshrState) (i : MshrIn) (hD : s.state.isOut = true → (mshrComplete8 s ≠ 0#8 ∧ i.outReady = true ∧ mshrValidEntry s = mshrOutputEntry s)) : fschMshrStepB s i = mshrStep s i :=`
+- **fschMshrB_run_eq_orig** (line 2020): `theorem fschMshrB_run_eq_orig (s : MshrState) (ins : List MshrIn) (hD : ∀ t (ht : t < ins.length), (mshrRun s (ins.take t)).state.isOut = true → (mshrComplete8 (mshrRun s (ins.take t)) ≠ 0#8 ∧ (ins[t]).outReady = true ∧ mshrValidEntry (mshrRun s (ins.take t)) = mshrOutputEntry (mshrRun s (ins.take t)))) : fschMshrRunB s ins = mshrRun s ins :=`
+- **fschMshrA_step_eq_orig** (line 2044): `theorem fschMshrA_step_eq_orig (s : MshrState) (i : MshrIn) (hD : s.state.isOut = true → (mshrComplete8 s ≠ 0#8 ∧ i.outReady = true)) : fschMshrStepA s i = mshrStep s i :=`
+- **fschMshrA_run_eq_orig** (line 2062): `theorem fschMshrA_run_eq_orig (s : MshrState) (ins : List MshrIn) (hD : ∀ t (ht : t < ins.length), (mshrRun s (ins.take t)).state.isOut = true → (mshrComplete8 (mshrRun s (ins.take t)) ≠ 0#8 ∧ (ins[t]).outReady = true)) : fschMshrRunA s ins = mshrRun s ins :=`
+- **fschL1m_q1_ready_consistent** (line 2160): `theorem fschL1m_q1_ready_consistent (s : L1mState) (i : L1mIn) (hsr : s.statusR = 2#3) (hsec : l1mSecondary s i = true) (hprim0 : l1mPrimarySt0 s i = false) (hfull : l1mSubFull s i = true) : fschL1mReqReady s i = false ∧ l1mStatusSt0 s i = 3#3 :=`
+- **fschL1m_fire_eq_iff** (line 2168): `theorem fschL1m_fire_eq_iff (s : L1mState) (i : L1mIn) : (fschL1mReqFire s i = l1mReqFire s i) ↔ ¬(i.reqV = true ∧ l1mReqReady s i = true ∧ l1mSecondary s i = true ∧ l1mSubFull s i = true) :=`
+- **fschL1m_noFire_ti_preserved** (line 2178): `theorem fschL1m_noFire_ti_preserved (s : L1mState) (i : L1mIn) (hf : fschL1mReqFire s i = false) : (fschL1mStep s i).ti = s.ti ∧ (fschL1mStep s i).blockAddr = s.blockAddr ∧ (fschL1mStep s i).instrId = s.instrId :=`
+- **fschL1mStep_eq_orig** (line 2185): `theorem fschL1mStep_eq_orig (s : L1mState) (i : L1mIn) (hf : fschL1mReqFire s i = l1mReqFire s i) : fschL1mStep s i = l1mStep s i :=`
+- **fschL1m_run_cons** (line 2193): `theorem fschL1m_run_cons (s : L1mState) (x : L1mIn) (xs : List L1mIn) : l1mRun s (x :: xs) = l1mRun (l1mStep s x) xs :=`
+- **fschL1mRun_eq_orig** (line 2198): `theorem fschL1mRun_eq_orig (s : L1mState) (ins : List L1mIn) (hD : ∀ t (ht : t < ins.length), ¬((ins[t]).reqV = true ∧ l1mReqReady (l1mRun s (ins.take t)) (ins[t]) = true ∧ l1mSecondary (l1mRun s (ins.take t)) (ins[t]) = true ∧ l1mSubFull (l1mRun s (ins.take t)) (ins[t]) = true)) : fschL1mRun s ins = l1mRun s ins :=`
+- **fschL1mT_i26_noFire_ready** (line 2224): `theorem fschL1mT_i26_noFire_ready : fschL1mReqReady fschL1mS2 l1mI3 = false :=`
+- **fschL1mT_i26_noFire_fire** (line 2225): `theorem fschL1mT_i26_noFire_fire : fschL1mReqFire fschL1mS2 l1mI3 = false :=`
+- **fschL1mT_i26_noFire_ti** (line 2226): `theorem fschL1mT_i26_noFire_ti : fschL1mS3.ti ⟨0, by decide⟩ ⟨0, by decide⟩ = 0xBEEF#323 :=`
+- **fschL1mT_i26_noFire_sv0** (line 2227): `theorem fschL1mT_i26_noFire_sv0 : fschL1mS3.subValid ⟨0, by decide⟩ ⟨0, by decide⟩ = true :=`
+- **fschL1mT_i26_noFire_sv1** (line 2228): `theorem fschL1mT_i26_noFire_sv1 : fschL1mS3.subValid ⟨0, by decide⟩ ⟨1, by decide⟩ = true :=`
+- **fschL1mT_i26_noFire_statusR** (line 2229): `theorem fschL1mT_i26_noFire_statusR : fschL1mS3.statusR = 3#3 :=`
+- **fschL1mT_i26_noFire** (line 2232): `theorem fschL1mT_i26_noFire : fschL1mReqReady fschL1mS2 l1mI3 = false ∧ fschL1mReqFire fschL1mS2 l1mI3 = false ∧ fschL1mS3.ti ⟨0, by decide⟩ ⟨0, by decide⟩ = 0xBEEF#323 ∧ fschL1mS3.subValid ⟨0, by decide⟩ ⟨0, by decide⟩ = true ∧ fschL1mS3.subValid ⟨0, by decide⟩ ⟨1, by decide⟩ = true ∧ fschL1mS3.statusR = 3#3 :=`

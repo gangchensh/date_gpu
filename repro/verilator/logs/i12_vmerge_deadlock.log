@@ -1,0 +1,35 @@
+[RTL     info]@0 SNAPSHOT created, pid=114258
+[RTL    trace]@20 Hardware reset ok
+[2026-09-07 04:33:52.587] [trace] kernel0 Žb–âa data loaded from file
+[RTL    trace]@30 kernel 0 i12_vmerge_deadlock activate
+[RTL    debug]@185 block0  dispatched to GPU (kernel0  i12_vmerge_deadlock block0 )
+[L1C] #     65 SM 0 CACHE 0 ADDR 80000000
+sm   0 warp 0 0x80000000 0x90000fb7 x 31  90000000
+sm   0 warp 0 0x80000004 0xdead00b7 x  1  dead0000
+sm   0 warp 0 0x80000008 0x00108093 x  1  dead0001
+sm   0 warp 0 0x8000000c 0x001fa023 lsu.w x   1 op 0 dead0001 @ 90000000+00000000
+[L1C] #    260 SM 0 CACHE 1 ADDR 90000000
+sm   0 warp 0 0x8000000c 0x001fa023 lsu.w finish
+[RTL    debug]@10000 
+[RTL    debug]@20000 
+dump-mem: mem[0x90000000 +: 4] = 0xDEAD0001
+dump-mem: mem[0x90000004 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000008 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x9000000C +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000010 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000014 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000018 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x9000001C +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000020 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000024 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000028 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x9000002C +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000030 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000034 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x90000038 +: 4] = 0xEEEEEEEE
+dump-mem: mem[0x9000003C +: 4] = 0xEEEEEEEE
+[RTL     info]@20000 Simulation finished in 20000 unit time
+- S i m u l a t i o n   R e p o r t: Verilator 5.034 2025-02-24
+- Verilator: end at 20ns; walltime 0.217 s; speed 15.497 ns/s
+- Verilator: cpu 1.291 s on 8 threads; alloced 123 MB
+[RTL    debug]@20000 All snapshot process are cleared, OK

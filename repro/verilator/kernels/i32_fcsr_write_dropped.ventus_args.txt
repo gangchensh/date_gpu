@@ -1,0 +1,4 @@
+# i32_fcsr_write_dropped — sim-VentusRTL command-line arguments (cmdarg.cpp parse_arg format, everything after '#' is ignored)
+--kernel name=i32_fcsr_write_dropped,metafile=i32_fcsr_write_dropped.metadata,datafile=i32_fcsr_write_dropped.data
+--sim-time-max 200000
+--dump-mem 0x90000000,0x9000003F

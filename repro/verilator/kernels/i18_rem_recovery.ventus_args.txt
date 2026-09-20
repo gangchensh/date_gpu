@@ -1,0 +1,4 @@
+# i18_rem_recovery — sim-VentusRTL command-line arguments (cmdarg.cpp parse_arg format, everything after '#' is ignored)
+--kernel name=i18_rem_recovery,metafile=i18_rem_recovery.metadata,datafile=i18_rem_recovery.data
+--sim-time-max 200000
+--dump-mem 0x90000000,0x9000003F
